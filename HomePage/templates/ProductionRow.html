@@ -1,0 +1,7 @@
+<td ng-click="openProduction(job.DocketNumber)">{{job.DocketNumber}}</td>
+<td ng-click="openProduction(job.DocketNumber)">{{job.Customer}}</td>
+<td ng-click="openProduction(job.DocketNumber)">{{job.JobName}}</td>
+<td>
+	<input type="date" ng-model="job.DueDate" ng-change="setDueDate()">
+</td>
+<td ng-click="rotateMemo()" class="icon" ng-class="job.Memo"></td>

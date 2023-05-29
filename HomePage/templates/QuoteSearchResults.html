@@ -1,0 +1,52 @@
+<table border="1px solid black">
+    <tr>
+        <td colspan="4">
+            <button class="search-100" ng-click="quoteSearchPrevious()"><< 100</button>
+        </td>
+        <td colspan="4">
+            <button class="search-100" ng-click="quoteSearchNext()">100 >></button>
+        </td>
+    </tr>
+    <tr>
+        <th>Quote Number</th>
+        <th>Customer</th>
+        <th>Attention</th>
+        <th>Job Name</th>
+        <th>Description</th>
+        <th>Notes</th>
+        <th width="30%">Units + Sheets + Per M + Total</th>
+        <th>Date</th>
+    </tr>
+    <tr ng-repeat="result in quoteSearchResults | orderBy:result.quote_number">
+        <td>
+            <a href="../QT/?quote_number={{result.quote_number}}">{{result.quote_number}}</a><br/>
+            <a href="../QT/clientsheet.php?quote_number={{result.quote_number}}">Client Sheet</a><br/>
+            <a href="../QT/worksheet.php?quote_number={{result.quote_number}}">Work Sheet</a><br/>
+            <a ng-click="setAsNew(result.quote_number)">Set As New</a><br/>
+        </td>
+        <td>{{result.customer}}</td>
+        <td>{{result.attention}}</td>
+        <td>{{result.job_name}}</td>
+        <td ng-bind-html="result.description | to_trusted"></td>
+        <td ng-bind-html="result.notes | to_trusted"></td>
+        <td>
+            <table>
+                <tr ng-repeat="quantity in result.quantities">
+                    <td>{{quantity.units | number}}</td>
+                    <td>{{quantity.sheets | number}}</td>
+                    <td>{{quantity.total_per_m | currency}}</td>
+                    <td>{{quantity.total | currency}}</td>
+                </tr>
+            </table>
+        </td>
+        <td>{{result.date}}</td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <button class="search-100" ng-click="quoteSearchPrevious()"><< 100</button>
+        </td>
+        <td colspan="4">
+            <button class="search-100" ng-click="quoteSearchNext()">100 >></button>
+        </td>
+    </tr>
+</table>

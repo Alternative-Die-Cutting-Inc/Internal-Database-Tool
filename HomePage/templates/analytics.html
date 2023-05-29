@@ -1,0 +1,125 @@
+<div ng-controller="Analytics">
+	<div class="row">
+		<div class="columns large-6">
+			<select ng-change="getData()" ng-model="selectedMonth" >
+				<option ng-selected="month.id == selectedMonth" value="{{month.id}}" ng-repeat="month in Months">{{month.name}}</option>
+			</select>
+		</div>
+		<div class="columns large-6">
+			<select ng-change="getData()" ng-model="selectedYear" >
+				<option ng-selected="year == selectedYear" value="{{year}}" ng-repeat="year in Years">{{year}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-12 analytics">
+			<table>
+				<thead>
+					<tr>
+						<th colspan="4">
+							<h4>Closed Jobs in the above month.</h4>
+						</th>
+					</tr>
+				</thead>
+				<thead>
+					<tr>
+						<th>Docket Number</th>
+						<th>Job Name</th>
+						<th>Company</th>
+						<th ng-click="sortClosingDataBySales()">Sold For</th>
+					</tr>
+				</thead>
+				<tbody class="rows">				
+					<tr ng-repeat="job in closing_data track by $index">
+						<td>{{job.DocketNumber}}</td>
+						<td>{{job.JobName}}</td>
+						<td>{{job.Customer}}</td>
+						<td>{{job.FinalPrice}}</td>
+					</tr>
+				</tbody>
+				<tr>
+					<th colspan="3">Total</th>
+					<th>{{totalPrice() | currency}}</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-12">
+			<table>
+				<tr>
+					<th colspan="2">
+						<h4>Average days from quote to job.</h4>
+					</th>
+				</tr>
+				<tr>
+					<th>Customer</th>
+					<th ng-click="sortCustomerByAverage()">Average</th>
+				</tr>
+				<tr ng-repeat="customer in customers_average">
+					<td>{{customer.Customer}}</td>
+					<td>{{customer.Difference}}</td>
+				</tr>
+				<tr>
+					<th>Total</th>
+					<th>{{averageQuoteDays}} </th>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-12">
+			<table>
+				<tr>
+					<th colspan="5">
+						<h4>Quoting Hit Rate</h4>
+					</th>
+				</tr>
+				<tr>
+					<th>Customer</th>
+					<th ng-click="sortByJobs()">Jobs</th>
+					<th ng-click="sortByQuotes()">Quotes</th>
+					<th ng-click="sortByHitRate()">Hit Rate</th>
+					<th ng-click="sortBySales()">Sales</th>
+				</tr>
+				<tr ng-repeat="Customer in customer_hits">
+					<td>{{Customer.Customer}}</td>
+					<td>{{Customer.hits}}</td>
+					<td>{{Customer.quotes}}</td>
+					<td>{{Customer.hit_rate}}</td>
+					<td>{{Customer.sold}}</td>
+				</tr>
+				<tr>
+					<th>Total</th>
+					<th>{{total_hits}}</th>
+					<th>{{total_quotes}}</th>
+					<th>{{(total_hits/total_quotes)*100 | number:0}}</th>
+					<th>{{total_sales}}
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-12">
+			<table>
+				<tr>
+					<th colspan="5">
+						<h4>Daily Counts</h4>
+					</th>
+				</tr>
+				<tr>
+					<th>Date</th>
+					<th>Quotes Created</th>
+					<th>Jobs Opened</th>
+					<th>Jobs Closed</th>
+				</tr>
+				<tr ng-repeat="counts in dailycounts">
+					<td>{{counts.date | date:'MMM d'}}</td>
+					<td>{{counts.quotes}}</td>
+					<td>{{counts.opened}}</td>
+					<td>{{counts.closed}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

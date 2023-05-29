@@ -1,0 +1,54 @@
+/* 
+    Document   : DepartmentProgressBar
+    Created on : Sep 26, 2012, 12:58:37 PM
+    Author     : Peter
+    Description:
+       
+The table and cells styled below are part of the progress bar. The multiple
+classes allow for the changes in the progress bar as it changes from one stage
+to the next.
+*/
+
+
+table {
+    width: 100%;
+    table-layout:fixed;
+    cellspacing:0;
+}
+
+td.DieMaking{
+    border: 2px solid #CC0033;
+}
+td.DieMakingComplete{
+    background-color: #CC0033;
+    border: 2px solid #CC0033;
+}
+td.Press{
+    border: 2px solid #FF9900;
+}
+td.PressComplete {
+    background-color: #FF9900;
+    border: 2px solid #FF9900;
+}
+td.Stripping {
+    border: 2px solid #FFFF00;
+}
+td.StrippingComplete {
+    background-color: #FFFF00;
+    border: 2px solid #FFFF00;
+}
+td.Gluing{
+    border: 2px solid #009900;
+}
+td.GluingComplete {
+    background-color: #009900;
+    border: 2px solid #009900;
+}
+td.HandWork{
+    border: 2px solid #003399;
+}
+td.HandWorkComplete {
+    background-color: #003399;
+    border: 2px solid #003399;
+}
+

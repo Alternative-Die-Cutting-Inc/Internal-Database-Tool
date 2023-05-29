@@ -1,0 +1,57 @@
+<table width="100%" border="1px solid black">
+	<tr>
+        <td>
+            <button class="search-100" ng-click="oldQuoteSearchPrevious()"><< 100</button>
+        </td>
+        <td>
+            <button class="search-100" ng-click="oldQuoteSearchNext()">100 >></button>
+        </td>
+    </tr>
+</table>
+<table border="1px solid black">
+    <tr>
+        <th>Quote Number</th>
+        <th>Customer</th>
+        <th>Attention</th>
+        <th>Job Name</th>
+        <th>Description</th>
+        <th>Notes</th>
+        <th>Number of Units</th>
+        <th>Total</th>
+        <th>Date</th>
+        <th>Links</th>
+    </tr>
+    <tr ng-repeat="result in oldQuoteSearchResults">
+        <td>
+        	<a href="../QuoteTool/?QuoteNumber={{result.Quote_Number}}">{{result.Quote_Number}}</a>
+        </td>
+        <td>{{result.Customer}}</td>
+        <td>{{result.Attention}}</td>
+        <td>{{result.Job_Name}}</td>
+        <td>{{result.Description}}</td>
+        <td>{{result.Notes}}</td>
+        <td>{{result.Number_of_Units}}</td>
+        <td>{{result.Total}}</td>
+        <td>{{result.Date}}</td>
+        <td>
+        	<ul class="no-bullet">
+        		<li>
+		        	<a href="../QuoteTool/indexClone1.php?QuoteNumber={{result.Quote_Number}}">Client Sheet</a>
+		        </li>
+		        <li>
+					<a href="../QuoteTool/indexClone2.php?QuoteNumber={{result.Quote_Number}}">Work Sheet</a>
+				</li>       		
+        	</ul>
+        </td>
+    </tr>
+</table>
+<table width="100%" border="1px solid black">
+	<tr>
+        <td>
+            <button class="search-100" ng-click="oldQuoteSearchPrevious()"><< 100</button>
+        </td>
+        <td>
+            <button class="search-100" ng-click="oldQuoteSearchNext()">100 >></button>
+        </td>
+    </tr>
+</table>

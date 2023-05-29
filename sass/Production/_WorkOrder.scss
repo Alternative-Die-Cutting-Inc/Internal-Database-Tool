@@ -1,0 +1,46 @@
+@media print {
+
+	div.large-6{
+	  float:left!important;
+	  padding-left:0.9375em!important;
+	  padding-right:0.9375em!important;
+	  width:50%!important;
+	}
+	div.large-3{
+	  float:left!important;
+	  padding-left:0.9375em!important;
+	  padding-right:0.9375em!important;
+	  width:25%!important;
+	}
+	div.large-8{
+	  float:left!important;
+	  padding-left:0.9375em!important;
+	  padding-right:0.9375em!important;
+	  width:66.66667%!important;
+	}
+	div.large-2{
+	  float:left!important;
+	  padding-left:0.9375em!important;
+	  padding-right:0.9375em!important;
+	  width:16.66667%!important;
+	}
+}
+
+.docket-number {
+	margin-right: 1em;
+}
+.header-info {
+	margin-bottom: 0em;
+}
+.job-info {
+	border: 1px solid black;
+	text-align: center;
+}
+.runtimes-table {
+	margin-top: 2em;
+
+}
+
+.forms-table {
+	width: 100%;
+}

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO add comments here -->
+
+<footer>
+    <area>
+        <name>Order Information</name>
+        <textfield>Number of Units</textfield>
+        <textfield>Units per Sheet</textfield>
+        <output default="0" cost="false">Number of Sheets</output>
+    </area>
+       
+    <area>
+        <name>Press Information</name>
+        <dropdown2>
+            <option>Press</option>
+            <option>Stock</option>
+        </dropdown2>
+<!--        <dropdown>Press</dropdown>
+        <dropdown>Stock</dropdown>-->
+            
+    </area>
+
+    <area headings="run">
+        <name>Run Information</name>
+        <textfield cost="run" perM="true">Run Speed</textfield>
+    </area>
+       
+    <area headings="hourly">
+        <name>Hourly Costs</name>
+        <textfield cost="hourly">Setup</textfield>
+        <textfield cost="hourly">Gluer Setup</textfield>
+        <textfield cost="hourly">Die</textfield>
+        <textfield cost="hourly">Cutter</textfield>
+    </area>
+       
+    <area headings="speed">
+        <name>Speed Costs</name>
+        <textfield cost="speed" perM="true">Glue</textfield>
+        <textfield cost="speed" perM="true">Tape</textfield>
+        <textfield cost="speed" perM="true">Strip</textfield>
+        <textfield cost="speed" perM="true">Final Fold</textfield>
+    </area>
+       
+    <area headings="packaging">
+        <name>Packaging Info</name>
+        <textfield cost="packaging">Packaging</textfield>
+    </area>
+       
+    <area>
+        <name>Shipping</name>
+        <dropdown2>
+            <option>Shipping Type</option>
+            <option>Method</option>
+        </dropdown2>
+<!--        <dropdown>Shipping Type</dropdown>
+        <dropdown>Method</dropdown>-->
+    </area>
+    
+    <area headings="shipping">
+        <name>Shipping Cost</name>
+        <textfield cost="shipping">Pickup</textfield>
+        <textfield cost="shipping">Delivery</textfield>
+    </area>
+       
+    <area>
+        <name>Totals</name>
+        <total>Total</total>
+        <total>Total per Thousand</total>
+        <total>Subtotal</total>
+        <total>Discount</total>
+    </area>
+    <area>
+        <name>Notes</name>
+        <textarea display="private">Private Notes</textarea>
+        <textarea display="public">Public Notes</textarea>
+    </area>
+       
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

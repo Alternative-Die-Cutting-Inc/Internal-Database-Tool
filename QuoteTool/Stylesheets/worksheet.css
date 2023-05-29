@@ -1,0 +1,106 @@
+/* 
+    Document   : worksheet
+    Created on : Aug 16, 2012, 9:49:31 AM
+    Author     : Peter Tran
+    Description:
+        This style sheet was created to format the work sheet.
+        The objective is to make the worksheet fit on one page for every two
+        quotes. Styling is minimized to keep the sheet easy on the eyes and to
+        make it easy to see important information quickly. Appearance is
+        compromised in order to display only pertinent information in as little
+        room as possible.
+*/
+
+/*
+    This represents the div that holds the three sectioned header divs
+    generalInfo.
+*/
+#generalInfoContainer {
+    border: 1px solid black;
+    width: 90%;
+}
+
+/*
+    This represents the three sectioned header divs that are at the top of the 
+    work sheet.
+*/
+.generalInfo { 
+    /*    Allows the 3 divs to fit in one row. */
+    width: 30%;
+    /*    Sets the divs to line up at the top and not centered vertically within
+        #generalInfoContainer. */
+    vertical-align:text-top;
+    /*    Sets the divs to line up horizontally. */
+    display: inline-block;
+}
+
+/*
+    These are headers within .generalInfo. Set them larger for an easier read.
+*/
+#Quote_Number, #Job_Name, #Customer {
+    font-size: 1.0em;
+    font-weight: bold;
+}
+
+/*
+    The title for the page.
+*/
+#workSheetTitle {
+    text-align: center;
+}
+
+/*
+    Styling for the entire page for uniformity.
+*/
+body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: Calibri, Helvetica;
+}
+
+/*
+    We want a new page after every pair of quotes so each page will have two
+    quotes.
+*/
+#quotePair {
+    page-break-after: always;
+}
+
+/*
+    This div contains an individual quote. Set width smaller so that two can fit
+    in a row.
+*/
+.quote {
+    width: 40%;
+    margin: 10px;
+    padding: 10px;
+    border-style: solid;
+
+    /*    Sets the divs to line up horizontally. */
+    display: inline-block;
+}
+
+/*
+    This is a table that holds all the values of the quote
+*/
+table {
+    width: 100%;  
+    padding: 0px;
+    border-bottom: solid 1px #000;
+
+}
+
+.tdHeader {
+    width: 25%;
+}
+
+.col1, .col2, .col3 {
+    width: 25%;
+    text-align: right;
+}
+
+body {
+    margin: 2mm 2mm 2mm 2mm;
+
+}

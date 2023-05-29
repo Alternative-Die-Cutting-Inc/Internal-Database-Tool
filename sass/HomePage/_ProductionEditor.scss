@@ -1,0 +1,27 @@
+.production-table {
+	border-collapse: collapse;
+	td {
+		padding: 0 !important;
+	}
+	input[type="text"], input[type="date"] {
+		margin-bottom: 0 !important;
+		font-size: 1em;
+		height: 4em;
+	}
+}
+
+.production-name {
+	width:25%;
+	text-align: right;
+}
+
+.production-save {
+	form {
+		margin-bottom:0 !important;
+	}
+	width: 10%;
+	.button {
+		margin-bottom:0 !important;
+		height: 4em;
+	}
+}

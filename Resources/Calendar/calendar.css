@@ -1,0 +1,85 @@
+/*******************************************************************************
+* Written by Daniel Kats for Alternative Die Cutting, Inc.
+* Last updated on August 15, 2011
+********************************************************************************
+* Styling for the calendar.
+*******************************************************************************/
+
+.calendar {
+    display: inline-block;
+}
+
+.calendar .calendarScroller {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.calendar .calendarMonth, .calendar .calendarYear {
+    /*    font-weight: bold;*/
+    font-size: 1.1em;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.prevButton, .nextButton {
+    color: #F224A7; /** red-pink */
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.calendar .dayHeader {
+    font-weight: bold;
+}
+
+.calendar table td, .calendar table th {
+    margin: 0 auto;
+    text-align: center;
+    padding-left: 3px;
+    padding-right: 3px;
+    border: none;
+}
+
+.calendar span.date {
+    color: #1B7EE0; /** light blue */
+    cursor: pointer;
+}
+
+.calendar span.date:hover, .calendar span.date.selected {
+    color: #F2579D; /** red-pink */
+}
+
+.calendar span.date.selected {
+    /*    font-weight: bold;*/
+    font-size: 1.1em;
+    border-color: #1B7EE0; /** light blue */
+    border-style: solid;
+    border-width: 1px;
+}
+
+.calendar .todayButtonContainer {
+    display: block;
+    text-align: center;
+}
+
+.calendar .todayButtonContainer .todayButton {
+    background-color: #f5f5f5;
+    display: inline-block;
+
+    border: 1px solid #dedede;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+
+    text-decoration: none;
+    font-weight: bold;
+    color: #565656;
+    cursor: pointer;
+    padding: 4px 10px 3px 7px; 
+
+    font-family: Calibri, Helvetica, sans-serif;
+    font-size: 0.9em;
+    text-align: center;
+    
+    margin: 0 auto;
+    text-align: center;
+}

@@ -1,0 +1,51 @@
+@CHARSET "ISO-8859-1";
+
+/*******************************************************************************
+*
+* Styling for the login page of the internal website.                        
+* ------------------------------------------------------------------------------                                                                            
+* Written by Daniel Kats for Alternative Die Cutting, Inc.                   
+* June 21, 2011                                                              
+*                                                                            
+*******************************************************************************/
+
+
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    font: 100% calibri, helvetica;
+    color: #000066;
+}
+
+#wrapper {
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/** Container for text linking to feedback page. Style link hyperlink */
+#feedbackPane {
+    text-decoration: underline;
+    color: #000066; /* dark blue */
+}
+
+#feedbackPane:hover {
+    cursor: pointer;
+}
+
+/** Container for the username and password form */
+#loginPane {
+    width: 40%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#logo {
+    float: left;
+}
+
+#loginError {
+    color: #E01B4C; /* deep red */
+}

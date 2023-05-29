@@ -1,0 +1,35 @@
+$date-colour: #D41E5D;
+.shipped-date, .shipped-time {
+	color: $date-colour;
+}
+
+.ship-in {
+	text-align: left;
+}
+.ship-out {
+	text-align: right;
+}
+
+.shipped {
+	background-color: #E5E5E5;
+}
+
+.ship-feed-container {
+	border: 1px solid black;
+}
+
+.shipment {
+	border-bottom: 1px solid black;
+}
+
+.job-details {
+	text-align: left;
+}
+
+.ship-filter {
+	padding-left: 0px;
+	padding-right: 0px;
+	input[type="text"] {
+		margin-bottom: 0;
+	}
+}

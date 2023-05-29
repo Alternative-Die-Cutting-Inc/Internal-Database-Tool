@@ -1,0 +1,85 @@
+<table width="100%" border="1px solid black">
+	<tr>
+        <td>
+            <button class="search-100" ng-click="jobSearchPrevious()"><< 100</button>
+        </td>
+        <td>
+            <button class="search-100" ng-click="jobSearchNext()">100 >></button>
+        </td>
+    </tr>
+</table>
+<table border="1px solid black" class="job-search-table">
+    <tr>
+        <th>Docket Number</th>
+        <th>Quote Number</th>
+        <th>Customer PO</th>
+        <th>Customer</th>
+        <th>Production Person</th>
+        <th>Job Name</th>
+        <th>Finishing</th>
+        <th>Special Instructions</th>
+        <th>Number of Units</th>
+        <th>Sold For</th>
+        <th>Date</th>
+        <th>Shipping</th>
+    </tr>
+    <tr class="open">
+        <td colspan="12">Open Jobs</td>
+    </tr>
+    <tr class="closed">
+        <td colspan="12">Closed Jobs</td>
+    </tr>
+    <tr ng-repeat="result in jobSearchResults" class="{{result.Status}}">
+        <td>
+        	<ul class="no-bullet">
+        		<li>
+        			<a href="../Production/?docket_number={{result.DocketNumber}}">{{result.DocketNumber}}</a>
+        		</li>
+				<li>					
+					<a href="../Production/WorkOrder.php?docket_number={{result.DocketNumber}}">Work Order</a>
+				</li>
+			</ul>        
+		</td>
+        <td ng-show="result.QuoteNumber > 150000">
+            <a ng-click="setAsNew(result.QuoteNumber)">Set As New</a><br/>
+        	<a href="../QT/?quote_number={{result.QuoteNumber}}">{{result.QuoteNumber}}</a>
+            <span class="requote-memo" ng-show="result.RequoteMemo !==''">{{result.RequoteMemo}}</span>
+        </td>
+        <td ng-show="result.QuoteNumber < 150000">
+        	<a href="../QuoteTool/?QuoteNumber={{result.QuoteNumber}}">{{result.QuoteNumber}}</a>
+            <span class="requote-memo" ng-show="result.RequoteMemo !==''">{{result.RequoteMemo}}</span>
+        </td>
+        <td>{{result.CustomerPoNo}}</td>
+        <td>{{result.Customer}}</td>
+        <td>{{result.ProductionPerson}}</td>
+        <td>{{result.JobName}}</td>
+        <td>{{result.Finishing}}</td>
+        <td>{{result.SpecialInstructions}}</td>
+        <td>{{result.Quantity}}</td>
+        <td>{{result.FinalPrice}}</td>
+        <td>{{result.Date}}</td>
+        <td>
+        	<ul class="no-bullet">
+        		<li>
+		        	<a href="../ShippingTool/shipping.php?DocketNumber={{result.DocketNumber}}">Shipping</a>
+		        </li>
+		        <li>
+					<a href="../ShippingTool/shipmentHistory.php?DocketNumber={{result.DocketNumber}}">Shipment History</a>
+				</li>
+				<li>
+					<a href="../Shipping/DeliveryReport.php?docket_number={{result.DocketNumber}}">Delivery Report</a>
+				</li>        		
+        	</ul>
+        </td>
+    </tr>
+</table>
+<table width="100%" border="1px solid black">
+	<tr>
+        <td>
+            <button class="search-100" ng-click="jobSearchPrevious()"><< 100</button>
+        </td>
+        <td>
+            <button class="search-100" ng-click="jobSearchNext()">100 >></button>
+        </td>
+    </tr>
+</table>

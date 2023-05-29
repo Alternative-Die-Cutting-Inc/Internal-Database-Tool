@@ -1,0 +1,38 @@
+<h4>Quick Links</h4>
+<div id="shipDocket" class="contentContainer">
+    <form method="get" action="../ShippingTool/shipping.php">
+        <input placeholder="New Delivery Slip" type="tel" name="DocketNumber"/>
+    </form>
+</div><!--end of ship docket -->
+<div id="shipOut" class="contentContainer">
+    <form method="post" action="../ShippingTool/Backend/shippingHelper.php">
+        <input placeholder="Shipped Out" type="tel" id="SessId" name="SessId"/>
+        <input type="hidden" name="setDate" value="true"/>
+        <input id="shipOut" class="shipOut" value ="shipOut" name="type" type="hidden"/><!--Hidden input to direct php-->
+    </form>
+</div><!--end of ship docket -->
+<div id="orderSummary" class="contentContainer">
+    <form method="get" action="../ShippingTool/JobSummary.php">
+        <input placeholder="Order Summary" type="tel" name="DocketNumber"/>
+    </form>
+</div><!--end of job summary -->
+<div id="closeDocket" class="contentContainer">
+    <form method="get" action="../ShippingTool/shipmentHistory.php">
+        <input placeholder="Shipment History" type="tel" name="DocketNumber"/>
+    </form>
+</div> <!-- end of close docket -->
+<div id="searchDie" class="contentContainer">
+    <form method="get" action="Search/searchDie.php">
+        <input placeholder="Search Die" type="tel" name="DocketNumber"/>
+    </form>
+</div> <!-- end of search die -->
+<div id="expiredDies" class="contentContainer">
+    <form method="get" action="Search/expiredDies.php">
+        <input placeholder="Expired(years)" type="tel" name="years"/>
+    </form>
+</div> <!-- end of search die -->
+<div id="variance" class="contentContainer">
+    <form method="get" action="../Production/DocketVariance.php">
+        <input placeholder="Variance" type="tel" name="docket_number"/>
+    </form>
+</div> <!-- end of variance -->

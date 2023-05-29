@@ -1,0 +1,80 @@
+/* 
+    Document   : workOrder
+    Created on : Aug 17, 2012, 5:57:41 PM
+    Author     : Peter Tran
+    Description:
+        This style sheet formats the workorder.
+*/
+
+
+#productionTable td {
+    border: 1px solid #000;
+}
+
+#Job_Name {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.Quote_Number {
+    font-size: 1.5em;
+}
+
+.Customer {
+    font-size: 1.4em;
+}
+
+#jobInfo {
+    border: 1px solid #000;
+}
+
+#jobInfo, #orderDetails {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.quoteInfo {
+    margin-top: 30px;
+    font-weight: bold;
+    font-size: 1.4em;
+    display: inline-block;
+    float: right;
+}
+
+#banner {
+    float: left;
+    display: inline-block;
+}
+
+h2 {
+    width: 100%;
+    text-align: center;
+}
+
+.input {
+    /*                border-bottom: 2px solid black;*/
+}
+
+#productionTable td, #productionTable th {
+    text-align: center;
+}
+
+#dueDate {
+    text-align: left;
+    font-size: 30px;
+    border-style:solid;
+    border-width:5px;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+    padding-left: 10px;
+}
+
+#dieNumber, #memo {
+        padding-top: 10px;
+    padding-bottom: 10px; 
+    padding-left: 10px;
+    margin-top: 20px;
+    border-style: solid;
+    border-width: 1px;
+}
+

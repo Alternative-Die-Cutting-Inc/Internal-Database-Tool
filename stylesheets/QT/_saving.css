@@ -1,0 +1,1 @@
+.quantity-container{-webkit-transition:border 0.1s ease-in-out, box-shadow 0.1s ease-in-out;-moz-transition:border 0.1s ease-in-out, box-shadow 0.1s ease-in-out;transition:border 0.1s ease-in-out, box-shadow 0.1s ease-in-out}.quantity-container.active table{border-color:green;-webkit-box-shadow:0 0 5px green;-moz-box-shadow:0 0 5px green;box-shadow:0 0 5px green}

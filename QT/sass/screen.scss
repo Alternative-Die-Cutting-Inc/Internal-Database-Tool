@@ -1,0 +1,125 @@
+.quantity-container {
+	background-color: #2ba6cb;
+	padding-bottom: 0.3em;
+	margin-bottom: 0.5em;
+}
+
+table {
+	margin-bottom: 0.25em;
+}
+
+input[type="text"] {
+	margin-bottom: 0em;
+	&.left-align {
+		text-align: left;
+	}
+	text-align: right;
+	&[readonly] {
+		background-color: #d1d1d1;
+	}
+	height: 2em;
+	font-size: 1em;
+	padding: {
+		right: 0.3em;
+		left: 0.3em;
+		top: 0.1em;
+		bottom: 0.1em;
+	}
+}
+
+.read-only {
+	display: block;
+	background-color: #d1d1d1;
+	margin-bottom: 0em;
+	text-align: right;
+	height: 2em;
+	font-size: 1em;
+	padding-right: 0.3em;
+	padding-left: 0.3em;
+	padding-top: 0.4em;
+	padding-bottom: 0.1em;
+}
+
+form {
+	margin-bottom: 0;
+	&.custom .custom.dropdown {
+		margin-bottom: 0;
+	}
+}
+
+.press-table {
+	border: none;
+	margin-bottom: 0;
+}
+
+.add-extra-button {
+	margin-bottom: 0;
+	width:100%;
+	padding-bottom: 0em;
+	padding-top: 0em;
+	padding-left: 0em !important;
+	padding-right: 0em !important;
+	border-color: #C0C0C0;
+	background-color:#C0C0C0;
+	&:hover {
+		background-color: #2F4851;
+	}
+}
+
+.width-5 {
+	width: 5%;
+}
+
+.width-15 {
+	width: 15%;
+}
+
+.width-40 {
+	width: 40%;
+}
+.width-25 {
+	width: 25%;
+}
+
+.width-20 {
+	width: 20%;
+}
+
+.top-table {
+	margin-top: 0.6em;
+	width: 100%;
+	border: none;
+}
+
+.quote-number {
+	font-size: 2em !important;
+	padding-right: 1.5em !important;
+	padding-left: 1.5em !important;
+}
+
+.total-table {
+	width: 100%;
+}
+
+.delete-button {
+	&:hover {
+		color: red;
+	}
+}
+
+.quantity-notes {
+	margin-bottom: 0;
+	max-width: 100%;
+}
+
+textarea.modal-input {
+	margin-bottom: 0;
+	text-align: right;
+	max-width: 100%;
+}
+
+.set-button {
+	padding-right: 0;
+	padding-left: 0;
+}
+

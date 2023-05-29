@@ -1,0 +1,93 @@
+.Total {
+    font-weight: bold;
+}
+
+#Job_Name {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.quoteInfo {
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+.Quote_Number {
+    font-size: 1.3em;
+}
+
+#Customer {
+    font-weight: bold;
+}
+
+#jobInfo {
+    font-size: 1.1em;
+}
+
+#propaganda {
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.bar {
+    background-color: #fff;
+    color: #000;
+}
+
+#jobInfo, #orderDetails table {
+    border: 1px solid #000;
+}
+
+#jobInfo {
+    margin-bottom: 0px;
+    
+}
+
+#contentPane {
+    padding-top: 0px;
+    clear: both;
+}
+
+.header {
+    height: 100%;
+    font-style: italic;
+/*    padding-bottom: 160px;*/
+}
+
+body {
+/*    font-family: brush script mt;*/
+/*    font-style: italic;*/
+
+}
+
+#attention {
+    clear: both;
+    display: block;
+    padding-top: 10px;
+/*    font-style:italic;*/
+/*    float: left;*/
+}
+
+#wrapper {
+/*    width: 70%;*/
+}
+
+.ClientSheetBar {
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 0 0px;
+}
+
+/*******************************************************************************
+*********************************** PRINTING ***********************************
+*******************************************************************************/
+
+@media print {
+    .continued {page-break-before: always; }
+    .header {display: block !important; }
+/*    #*/
+}

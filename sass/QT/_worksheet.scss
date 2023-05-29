@@ -1,0 +1,14 @@
+.quantity-container {
+	background-color: #ffffff;
+	border: 1px solid black;
+}
+
+table tr {
+	background-color: #ffffff !important;
+}
+
+@media print {
+  div:not(.reveal-modal) {
+    display: block !important;
+  }
+}

@@ -1,0 +1,417 @@
+<div class="row">
+  <div class="columns large-12">
+      <table class="top-table">
+        <tr>
+          <td align="center">
+            <span>#{{quantity.quantity_id}}</span>
+          </td>
+          <td class="width-40">
+            <button class="add-extra-button" ng-click="setAll(quantity.quantity_id)">Set All</button>
+          </td>
+          <td class="width-40">
+            <button class="add-extra-button set-button" ng-click="setChecked(quantity.quantity_id)">Set Checked</button>
+          </td>
+          <td>
+            <input type="checkbox" ng-click="check(quantity.quantity_id)"/>
+          </td>
+          <th>
+            <span class="delete-button" ng-click="deleteQuantity(quantity.quantity_id)" class="delete-quantity">[x]</span>
+          </th>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <th>Units</th>
+          <th>Per Sheet</th>
+          <th>Sheets</th>
+        </tr>
+        <tr>
+          <td>
+            <input 
+              quantity-id="{{quantity.quantity_id}}" 
+              user-input column="units" 
+              type="text"
+              ng-model="quoteQuantities[quantity.quantity_id].units"
+              select-on-click/>
+          </td>
+          <td>
+            <input 
+              quantity-id="{{quantity.quantity_id}}" 
+              user-input 
+              column="units_per_sheet" 
+              type="text" 
+              ng-model="quoteQuantities[quantity.quantity_id].units_per_sheet"
+              select-on-click/>
+          </td>
+          <td align="right">
+            <span class="read-only">{{quoteQuantities[quantity.quantity_id].sheets | number}}</span>
+          </td>
+        </tr>
+      </table>
+  </div>
+</div>
+<div class="row">
+  <div class="columns large-12">
+    <table class="large-12">
+      <tr>
+        <th colspan="3">
+          <table class=" press-table">
+            <tr>
+              <td>
+                <form class="dropdown">
+                  <select class="press-dropdown"
+                  ng-model="selectedPress"
+                  ng-change="pressChange({{quantity.quantity_id}})">
+                    <option 
+                    ng-repeat="press in presses" 
+                    value="{{press.press_id}}"    
+                    ng-selected="press.press_id==quantity.press_id">{{press.name}}</option>
+                  </select>
+                </form>
+              </td>
+              <td>
+                <form class="dropdown">
+                  <select class="press-dropdown"
+                  ng-model="selectedStock"
+                  ng-change="stockChange({{quantity.quantity_id}})">
+                    <option 
+                    ng-repeat="stock in stocks"
+                    ng-selected="stock.stock_id==quantity.stock_id"
+                    value="{{stock.stock_id}}">{{stock.name}}</option>
+                  </select>
+                </form>
+              </td>
+              <th>M</th>
+            </tr>
+          </table>
+          </th>
+        <th>Total</th>
+      </tr>
+      <tr>
+        <td class="width-25">Die</td>
+        <td>
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="die"  
+            ng-model="quoteQuantities[quantity.quantity_id].die"
+            type="text"
+            select-on-click/>
+        </td>
+        <td class="width-25"></td>
+        <td align="right" class="width-25">
+          <span class="read-only">{{quoteQuantities[quantity.quantity_id].die_total | number}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="width-25">Cutter</td>
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="cutter"  
+            ng-model="quoteQuantities[quantity.quantity_id].cutter"
+            type="text"
+            select-on-click/>
+        </td>
+        <td class="width-25"></td>
+        <td class="width-25" align="right">
+          <span class="read-only">{{quoteQuantities[quantity.quantity_id].cutter_total | number}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="width-25">Setup</td>
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="press_setup"
+            ng-model="quoteQuantities[quantity.quantity_id].press_setup" 
+            type="text"
+            select-on-click/>
+        </td>
+        <td class="width-25"></td>
+        <td class="width-25" align="right">
+            <span class="read-only">{{quoteQuantities[quantity.quantity_id].press_setup_total | number}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="width-25">Run</td>
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="press_runspeed"  
+            ng-model="quoteQuantities[quantity.quantity_id].press_runspeed" 
+            type="text"
+            select-on-click/>
+        </td>
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="press_per_m"
+            ng-model="quoteQuantities[quantity.quantity_id].press_per_m"
+            type="text"
+            tabindex = "-1" 
+            select-on-click/>
+        </td>
+        <td class="width-25" align="right">
+          <span class="read-only">{{quoteQuantities[quantity.quantity_id].press_runspeed_total | number}}</span>
+        </td>
+      </tr>
+    </table>    
+  </div>        
+</div><!-- Press -->
+<div class="row">
+  <div class="columns large-12">
+    <table class="large-12">
+      <tr>
+        <th colspan="2">
+          <form class="dropdown">
+            <select 
+            ng-model="selectedGluer"
+            ng-change="gluerChange({{quantity.quantity_id}})">
+              <option 
+              ng-repeat="gluer in gluers" 
+              value="{{gluer.gluer_id}}"
+              ng-selected="gluer.gluer_id==quantity.gluer_id"   
+              >{{gluer.name}}</option>
+            </select>
+          </form>
+        </th>
+        <th>M</th>
+        <th>Total</th>
+      </tr>
+      <tr>
+        <td class="width-25">Setup</td>
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="gluer_setup"
+            ng-model="quoteQuantities[quantity.quantity_id].gluer_setup"
+            type="text"
+            select-on-click/>
+        </td>
+        <td class="width-25"></td>
+        <td class="width-25" align="right">
+          <span class="read-only">{{quoteQuantities[quantity.quantity_id].gluer_setup_total | number}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="width-25">Gluer</td>
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="gluer_runspeed"
+            ng-model="quoteQuantities[quantity.quantity_id].gluer_runspeed"
+            type="text"
+            select-on-click/>
+        </td>
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="gluer_per_m"  
+            ng-model="quoteQuantities[quantity.quantity_id].gluer_per_m" 
+            type="text"
+            tabindex = "-1" 
+            select-on-click/>
+        </td>
+        <td class="width-25" align="right">
+          <span class="read-only">{{quoteQuantities[quantity.quantity_id].gluer_runspeed_total | number}}</span>
+        </td>
+      </tr>
+    </table>    
+  </div>        
+</div><!-- Gluer -->
+<div class="row">
+  <div class="columns large-12">
+    <table>
+      <tr>
+        <td class="width-25">Strip</td>
+        <td>
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="strip_runspeed"  
+            ng-model="quoteQuantities[quantity.quantity_id].strip_runspeed"
+            type="text"
+            select-on-click/>
+        </td>
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="strip_per_m"
+            ng-model="quoteQuantities[quantity.quantity_id].strip_per_m"
+            type="text"
+            tabindex = "-1" 
+            select-on-click/>
+        </td>
+        <td class="width-25" align="right">
+          <span class="read-only">{{quoteQuantities[quantity.quantity_id].strip_runspeed_total | number}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="width-25">Handwork</td>
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="handwork_runspeed"  
+            ng-model="quoteQuantities[quantity.quantity_id].handwork_runspeed"
+            type="text"
+            select-on-click/>
+        </td>
+
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="handwork_per_m"  
+            ng-model="quoteQuantities[quantity.quantity_id].handwork_per_m"
+            type="text"
+            tabindex = "-1" 
+            select-on-click/>
+        </td>
+        <td class="width-25" align="right">
+            <span class="read-only">{{quoteQuantities[quantity.quantity_id].handwork_runspeed_total | number}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="width-25">Fold</td>
+        <td class="width-25">
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="fold_per_m_units"  
+            ng-model="quoteQuantities[quantity.quantity_id].fold_per_m_units"
+            type="text"
+            select-on-click/>
+        </td>
+        <td class="width-25" align="right">
+            <span class="read-only">{{quoteQuantities[quantity.quantity_id].fold_total | number}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="width-25">Packaging</td>
+        <td class="width-25"></td>
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="package_per_m_units"
+            ng-model="quoteQuantities[quantity.quantity_id].package_per_m_units"
+            type="text"
+            select-on-click/>
+        </td>
+        <td class="width-25" align="right">
+          <span class="read-only">{{quoteQuantities[quantity.quantity_id].package_total | number}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="width-25">Pickup (skids)</td>
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="pickup_skids"
+            ng-model="quoteQuantities[quantity.quantity_id].pickup_skids"
+            type="text"
+            select-on-click/>
+        </td>
+        <td class="width-25"></td>
+        <td class="width-25" align="right">
+          <span class="read-only">{{quoteQuantities[quantity.quantity_id].pickup_skids_total | number}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="width-25">Delivery (skids)</td>
+        <td class="width-25">
+          <input 
+            quantity-id="{{quantity.quantity_id}}" 
+            user-input column="delivery_skids"  
+            ng-model="quoteQuantities[quantity.quantity_id].delivery_skids"
+            type="text"
+            select-on-click/>
+        </td>
+        <td class="width-25"></td>
+        <td class="width-25" align="right">
+          <span class="read-only">{{quoteQuantities[quantity.quantity_id].delivery_skids_total | number}}</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div><!-- Stripping / Handwork / Shipping -->
+<div class="row">
+  <div class="columns large-12">
+    <button class="add-extra-button" ng-click="addExtra(quantity.quantity_id)">Add Extra</button>
+    <table>
+      <tr ng-repeat="extra in quantityExtras[quantity.quantity_id]">
+        <td ng-click="deleteExtra(extra.extra_id, quantity.quantity_id)"  class="delete-button">
+        [x]
+        </td>
+        <td>
+          <input quantity-id="{{quantity.quantity_id}}" 
+          extra-id="{{extra.extra_id}}"
+          some="{{extra.extra_id}}"
+          extra-field column="name"
+          ng-model="extra.name"
+          type="text"
+          select-on-click/>
+        </td>
+        <td class="width-25">
+          <input quantity-id="{{quantity.quantity_id}}"
+          extra-id="{{extra.extra_id}}"
+          extra-field column="cost_per_m"
+          ng-model="extra.cost_per_m"
+          type="text"
+          select-on-click/>
+        </td>
+        <td class="width-25">
+          <input quantity-id="{{quantity.quantity_id}}" 
+          extra-id="{{extra.extra_id}}"
+          extra-field column="cost"
+          ng-model="extra.cost"
+            tabindex = "-1" 
+          type="text"
+          select-on-click/>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div><!-- Extras -->
+<div class="row">
+  <div class="columns large-12">
+    <table class="total-table">
+      <tr>
+        <th>Subtotal</th>
+        <th>Premium</th>
+        <th>Per M</th>
+      </tr>
+      <tr>
+        <td class="width-25" align="right">
+          <span class="read-only">{{quoteQuantities[quantity.quantity_id].subtotal | currency}}</span>
+        </td>
+        <td class="width-25" align="right">
+          <span class="read-only">{{quoteQuantities[quantity.quantity_id].premium | currency}}</span>
+        </td>
+        <td class="width-25" align="right">
+          <span class="read-only">{{quoteQuantities[quantity.quantity_id].total_per_m | currency}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" lass="width-25" align="center">
+          <h3>{{quoteQuantities[quantity.quantity_id].total | currency}}</h3>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="columns large-12">  
+    <textarea 
+     quantity-id="{{quantity.quantity_id}}"
+     user-input column="private_notes"
+     class="quantity-notes" 
+     placeholder="Private Notes">{{quoteQuantities[quantity.quantity_id].private_notes}}</textarea>
+  </div>
+</div><!-- Private Notes -->
+<div class="row">
+  <div class="columns large-12">    
+    <textarea 
+     quantity-id="{{quantity.quantity_id}}"
+     user-input column="public_notes"
+     class="quantity-notes" 
+     placeholder="Public Notes">{{quoteQuantities[quantity.quantity_id].public_notes}}</textarea>
+  </div>
+</div><!-- Public Notes -->

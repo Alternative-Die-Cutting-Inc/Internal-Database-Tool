@@ -1,0 +1,122 @@
+<div class="columns large-4">
+	<h4>Shop Rates</h4>
+	<ul class="shop-rates">
+	    <li>
+	      <span>Die</span>
+	      <input 
+	      	type="text" 
+	      	name="die_per_hour" 
+	      	value="{{rates.die_per_hour}}" 
+	     	ng-Table="QT_MasterRates" 
+	      	ng-model-onblur 
+	      	select-on-click/>
+	    </li>
+	    <li>
+	      <span>Cutter</spam>
+	      <input 
+	      	type="text" 
+	      	name="cutter_per_hour" 
+	      	value="{{rates.cutter_per_hour}}" 
+	      	ng-Table="QT_MasterRates" 
+	      	ng-model-onblur 
+	      	select-on-click/>
+	    </li>
+	    <li>
+	      <span>Stripping</span>
+	      <input 
+	      	type="text" 
+	      	name="strip_per_hour" 
+	      	value="{{rates.strip_per_hour}}"  
+	      	ng-Table="QT_MasterRates" 
+	      	ng-model-onblur 
+	      	select-on-click/>
+	    </li>
+	    <li>
+	      <span>Handwork</span>
+	      <input 
+	      	type="text" name="handwork_per_hour" 
+	      	value="{{rates.handwork_per_hour}}"  
+	      	ng-Table="QT_MasterRates" 
+	      	ng-model-onblur 
+	      	select-on-click/>
+	    </li>
+	    <li>
+	      <span>Pick Up First Skid</span>
+	      <input 
+	      	type="text" 
+	      	name="pickup_first_skid" 
+	      	value="{{rates.pickup_first_skid}}"  
+	      	ng-Table="QT_MasterRates" 
+	      	ng-model-onblur 
+	      	select-on-click/>
+	    </li>
+	    <li>
+	      <span>Pick Up Per Skid </span>
+	      <input 
+	      	type="text" 
+	      	name="pickup_per_skid" 
+	      	value="{{rates.pickup_per_skid}}"  
+	      	ng-Table="QT_MasterRates" 
+	      	ng-model-onblur 
+	      	select-on-click/>
+	    </li>
+	    <li>
+	      <span>Delivery First Skid</span>
+	      <input 
+	      	type="text" 
+	      	name="delivery_first_skid" 
+	      	value="{{rates.delivery_first_skid}}"  
+	      	ng-Table="QT_MasterRates" 
+	      	ng-model-onblur 
+	      	select-on-click/>
+	    </li>
+	    <li>
+	      <span>Delivery Per Skid </span>
+	      <input 
+	      	type="text" 
+	      	name="delivery_per_skid" 
+	      	value="{{rates.delivery_per_skid}}"  
+	      	ng-Table="QT_MasterRates" 
+	      	ng-model-onblur 
+	      	select-on-click/>
+	    </li>
+	    <li>
+	      <span>Global Premium </span>
+	      <input 
+	      	type="text" 
+	      	name="global_premium" 
+	      	value="{{rates.global_premium}}"  
+	      	ng-Table="QT_MasterRates" 
+	      	ng-model-onblur 
+	      	select-on-click/>
+	    </li>
+	</ul>
+</div>
+<div class="columns large-4">
+  <h4>Press Rates</h4>
+  <ul class="press-rates">
+    <li ng-repeat="press in press_rates">
+      {{press.name}}<input 
+      	type="text" 
+      	name="{{press.name}}" 
+      	value="{{press.rate}}" 
+      	ng-Table="QT_Press" 
+      	ng-model-onblur 
+      	select-on-click/>
+    </li>
+  </ul>
+</div>
+<div class="columns large-4">
+  <h4>Gluer Rates</h4>
+  <ul class="gluer-rates">
+    <li ng-repeat="gluer in gluer_rates">
+      {{gluer.name}}<input 
+      	type="text" 
+      	name="{{gluer.name}}" 
+      	value="{{gluer.rate}}" 
+      	ng-Table="QT_Gluer" 
+      	ng-model-onblur 
+      	select-on-click/>
+    </li>
+  </ul>
+</div>

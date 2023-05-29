@@ -1,0 +1,114 @@
+/*******************************************************************************
+* Style sheet for the job feed.
+* --------------------------------
+* Written by Daniel Kats for Alternative Die Cutting, Inc.
+* July 4, 2011
+*
+*******************************************************************************/
+
+#jobFrame {
+    height: 100%;
+    background-color: #fff;
+    font-family: calibri, helvetica, arial, sans-serif;
+    margin: 5px;
+}
+
+.job {
+    clear: both;
+    height: 100%;
+    display: block;
+}
+
+.leftPane {
+    float: left;
+    padding: 0;
+    margin: 0;
+    width: 30%;
+    text-align: left;
+
+    color: #D41E5D; /* pink-red */
+}
+.rightPane {
+    float: right;
+    padding: 0;
+    margin: 0;
+    width: 30%;
+    text-align: left;
+
+    color: #D41E5D; /* pink-red */
+}
+
+.date {
+    font-size: 1.5em;
+}
+
+.leftPane a:link, .leftPane a:visited, .leftPane a:active {
+    font-size: 1.1em;
+    text-decoration: none;
+    color: #1B8EE0;
+    /*    color: inherit;*/
+}
+
+.jobContent {
+    float: right;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+    width: 70%;
+}
+
+.time, .jobContent {
+    display: inline-block;
+    position: relative;
+}
+
+.jobName {
+    display: block;
+    font-weight: bold;
+}
+
+hr {
+    width: 100%;
+    display: block;
+    color: #005B94;
+    background-color: #005B94; /* dark blue */
+    height: 2px;
+    clear: both;
+}
+
+#jobs h2 {
+    text-align: center;
+}
+
+#jobFeed {
+    position: relative;
+}
+
+#jobFeed:after {
+    background-color:#C5E8ED;
+    content: " ";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+};
+
+#frameInfo {
+    clear: both;
+    text-align: center;
+    font-size: 0.8em;
+    color: #9E9899; /* grey */
+}
+/*
+.subTable {
+    text-align: center;
+}*/
+
+span.subSpan:hover {
+    color: #D41E5D;
+}
+span.subSpan:active {
+    color: #7E2024;
+}

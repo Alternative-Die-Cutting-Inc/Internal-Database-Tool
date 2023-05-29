@@ -1,0 +1,46 @@
+.production-info {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	padding-top: 10px;
+	background-color: #eaeaea;
+	margin-bottom: 1.875em;
+
+}
+
+.form-info {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	padding-top: 10px;
+	background-color: #eaeaea;
+	margin-bottom: 1.875em;
+}
+
+.add-form {
+	background-color: #cccccc;
+	margin-bottom: 15px;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+
+.add-form {
+	&:hover {
+		background-color: #7a7a7a;
+	}
+}
+
+.icon-cancel-circle {
+	font-size: 1.3em;
+	margin-top: 0.2em;
+	margin-left: -0.5em !important;
+	&:hover {
+		color: #910000;
+	}
+}
+
+.shipment-table {
+	width:100%;
+}

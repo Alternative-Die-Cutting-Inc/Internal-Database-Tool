@@ -1,0 +1,44 @@
+<div class="row">
+	<div class="columns large-12">
+		<h5 ng-click="job.hovered =!job.hovered">#{{job.DocketNumber}} - {{job.Customer}}</h5>
+		<a href="../ShippingTool/Production.php?DocketNumber={{job.DocketNumber}}">	
+			<h5>{{job.JobName}}</h5>
+		</a>
+		{{job.Finishing}}
+		<br/>
+		{{job.SpecialInstructions}}
+	</div>
+</div>
+<div class="row">
+	<div class="columns large-12">
+		<table class="production-table" width="100%">
+			<tr>
+				<td class="production-name">Due Date:</td>
+				<td colspan="2">
+					<input type="date" 
+					     ng-model="job.DueDate"
+					     ng-change="setDueDate()"
+					     /> 
+				</td>
+			</tr>
+			<tr ng-repeat="field in fields">
+				<td class="production-name">
+					<a ng-show="field.link && job.QuoteNumber > 150000" href="{{field.link}}{{job.QuoteNumber}}">{{field.name}}</a>
+					<a ng-show="field.link && job.QuoteNumber < 150000" href="../QuoteTool/?QuoteNumber={{job.QuoteNumber}}">{{field.name}}</a>
+					<label ng-hide="field.link">{{field.name}}</label>
+				</td>
+				<td ng-click="field.show='true'">
+					<input type="text" ng-model="job[field.value]"/>
+				</td>
+				<td ng-show="field.show" class="production-save">
+					<form ng-submit="saveField()">
+						<input type="submit" value="save" class="button" ng-click="field.show='false'"></input>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="row" ng-controller="FormEditor" ng-include="'templates/FormEditor.html'"></div>
+<div class="row" ng-controller="ExtrasEditor" ng-include="'templates/ExtrasEditor.html'"></div>
+

@@ -1,0 +1,37 @@
+<table border="1px solid black">
+    <tr ng-include="'templates/SearchButtons.html'"></tr>
+    <tr>
+        <th>Quote Number</th>
+        <th>Customer</th>
+        <th>Attention</th>
+        <th>Job Name</th>
+        <th>Description</th>
+        <th>Notes</th>
+        <th width="30%">Units + Sheets + Per M + Total</th>
+        <th>Date</th>
+    </tr>
+    <tr ng-repeat="result in quoteSearchResults">
+        <td>
+            <a href="../QT/?quote_number={{result.quote_number}}">{{result.quote_number}}</a><br/>
+            <a href="../QT/clientsheet.php?quote_number={{result.quote_number}}">Client Sheet</a><br/>
+            <a href="../QT/worksheet.php?quote_number={{result.quote_number}}">Work Sheet</a><br/>
+        </td>
+        <td>{{result.customer}}</td>
+        <td>{{result.attention}}</td>
+        <td>{{result.job_name}}</td>
+        <td>{{result.description}}</td>
+        <td>{{result.notes}}</td>
+        <td>
+            <table>
+                <tr ng-repeat="quantity in result.quantities">
+                    <td>{{quantity.units | number}}</td>
+                    <td>{{quantity.sheets | number}}</td>
+                    <td>{{quantity.total_per_m | currency}}</td>
+                    <td>{{quantity.total | currency}}</td>
+                </tr>
+            </table>
+        </td>
+        <td>{{result.date}}</td>
+    </tr>
+    <tr ng-include="'templates/SearchButtons.html'"></tr>
+</table>

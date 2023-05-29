@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+********************************************************************************
+* This file governs how the information to be displayed by the Javascript is   *
+* organized, and what information is displayed. In this case, this file is the *
+* header for the Quote Tool.                                                   *
+*                                                                              *
+* Written by Daniel Kats for Alternative Die Cutting, Inc.                     *
+*  June 21, 2011                                                               *
+********************************************************************************
+-->
+
+
+<header>
+         <area>
+               <name>Job Information</name>
+               <textfield>Quote Number</textfield>
+               <textfield>Author</textfield>
+               <textfield>Attention</textfield>
+               <textfield>Job Name</textfield>
+               <textfield>Description</textfield>
+         </area>
+         
+         <area>
+               <name>Customer Information</name>
+               <textarea default="1.00" cost="false">Rate</textarea>
+               <dropdown>Customer</dropdown>
+         </area>
+         
+         <area>
+               <name>Main Notes</name>
+               <textarea display="public">Notes</textarea>
+         </area>
+</header>
+
+
+
+
+
+
+

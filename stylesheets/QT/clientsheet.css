@@ -1,0 +1,202 @@
+/* line 3, ../../sass/QT/clientsheet.scss */
+header {
+  width: 100%;
+  display: inline-block;
+}
+/* line 6, ../../sass/QT/clientsheet.scss */
+header div {
+  display: inline-block;
+  vertical-align: top;
+}
+/* line 10, ../../sass/QT/clientsheet.scss */
+header div.quote-info h1 {
+  margin-bottom: 0;
+}
+/* line 13, ../../sass/QT/clientsheet.scss */
+header div.quote-info h3 {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+/* line 20, ../../sass/QT/clientsheet.scss */
+header .company-logo {
+  width: 20%;
+}
+/* line 24, ../../sass/QT/clientsheet.scss */
+header .company-header {
+  width: 34%;
+}
+/* line 26, ../../sass/QT/clientsheet.scss */
+header .company-header h4 {
+  margin-bottom: 0.2em;
+}
+/* line 29, ../../sass/QT/clientsheet.scss */
+header .company-header p {
+  margin-top: 0.2em;
+}
+/* line 34, ../../sass/QT/clientsheet.scss */
+header .quote-info {
+  width: 44%;
+}
+
+/* line 39, ../../sass/QT/clientsheet.scss */
+.quote-container {
+  margin-top: 1em;
+  width: 100%;
+  border: 1px solid black;
+}
+
+/* line 45, ../../sass/QT/clientsheet.scss */
+.summary {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+/* line 54, ../../sass/QT/clientsheet.scss */
+.quantity-container {
+  width: 30%;
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid black;
+  padding-top: 3px;
+  padding-right: 3px;
+  padding-bottom: 3px;
+  padding-left: 3px;
+  margin-top: 3px;
+  margin-right: 3px;
+  margin-bottom: 3px;
+  margin-left: 3px;
+}
+/* line 56, ../../sass/QT/clientsheet.scss */
+.quantity-container:nth-child(6) {
+  page-break-after: always;
+}
+
+/* line 76, ../../sass/QT/clientsheet.scss */
+.quote-container td {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+/* line 81, ../../sass/QT/clientsheet.scss */
+.quote-container tr:nth-child(2n) {
+  background-color: #ededed;
+}
+
+/* line 86, ../../sass/QT/clientsheet.scss */
+.total {
+  font-weight: bold;
+}
+
+/* line 90, ../../sass/QT/clientsheet.scss */
+.quantity_id {
+  width: 10%;
+}
+
+/* line 93, ../../sass/QT/clientsheet.scss */
+.units {
+  width: 10%;
+}
+
+/* line 96, ../../sass/QT/clientsheet.scss */
+.units_per_sheet {
+  width: 10%;
+}
+
+/* line 100, ../../sass/QT/clientsheet.scss */
+.total_per_m {
+  width: 10%;
+}
+
+/* line 104, ../../sass/QT/clientsheet.scss */
+.total {
+  width: 10%;
+}
+
+/* line 107, ../../sass/QT/clientsheet.scss */
+.notes {
+  width: 50%;
+}
+
+@media print {
+  /* line 114, ../../sass/QT/clientsheet.scss */
+  #emailer {
+    display: none;
+  }
+}
+/* line 121, ../../sass/QT/clientsheet.scss */
+.loader {
+  width: 50px;
+  height: 50px;
+  border-right: 8px solid #4D4D4D;
+  border-bottom: 8px solid #4D4D4D;
+  margin: auto;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-animation: rotate 2s infinite linear;
+  -moz-animation: rotate 2s infinite linear;
+  -ms-animation: rotate 2s infinite linear;
+  animation: rotate 2s infinite linear;
+}
+
+/* line 139, ../../sass/QT/clientsheet.scss */
+.loader.yellow {
+  border-left: 8px solid #CCC366;
+  border-top: 8px solid #CCC366;
+}
+
+@-webkit-keyframes rotate {
+  /* line 144, ../../sass/QT/clientsheet.scss */
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  /* line 145, ../../sass/QT/clientsheet.scss */
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes rotate {
+  /* line 148, ../../sass/QT/clientsheet.scss */
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  /* line 149, ../../sass/QT/clientsheet.scss */
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-ms-keyframes rotate {
+  /* line 152, ../../sass/QT/clientsheet.scss */
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  /* line 153, ../../sass/QT/clientsheet.scss */
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  /* line 156, ../../sass/QT/clientsheet.scss */
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  /* line 157, ../../sass/QT/clientsheet.scss */
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+/* line 160, ../../sass/QT/clientsheet.scss */
+.message {
+  border: 1px solid black;
+  padding-left: 3em;
+  padding-right: 3em;
+}

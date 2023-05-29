@@ -1,0 +1,13 @@
+<div ng-click="getExtras()" ng-hide="showExtras" class="columns large-12">
+	<h5 align="center">Extras</h5>
+</div>
+<div ng-show="showExtras" class="columns large-12">
+	<h5 ng-click="showExtras =!showExtras" align="center">Extras</h5>
+	<table class="extras-table">
+		<tr ng-repeat="extra in extras">
+			<td>{{extra.Subject}}</td>
+			<td>{{extra.Cost}}</td>
+			<td>{{extra.Description}}</td>
+		</tr>
+	</table>
+</div>

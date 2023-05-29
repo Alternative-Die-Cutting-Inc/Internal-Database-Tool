@@ -1,0 +1,13 @@
+<div ng-click="getForms()" ng-hide="showForms" class="columns large-12">
+	<h5 align="center">Forms</h5>
+</div>
+<div ng-show="showForms" class="columns large-12">
+	<h5 ng-click="showForms =!showForms" align="center">Forms</h5>
+	<table class="forms-table">
+		<tr ng-repeat="form in forms">
+			<td>{{form.Form}}</td>
+			<td>{{form.Quantity}}</td>
+			<td>{{form.Notes}}</td>
+		</tr>
+	</table>
+</div>

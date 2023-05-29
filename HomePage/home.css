@@ -1,0 +1,154 @@
+/*******************************************************************************
+* Style sheet for the home page.
+* TODO generalize it for use on other pages.
+* --------------------------------
+* Written by Daniel Kats for Alternative Die Cutting, Inc.
+* June 23, 2011
+*
+*******************************************************************************/
+
+body {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: #C5E8ED; /* Pastel teal */
+    font: 0.9em calibri, helvetica, arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.warning {
+    text-align: center;
+    font-size: 1.4em;
+    color: #E04169; /** red */
+    font-weight: bold;
+}
+
+/**
+* Wraps around all elements on the page (except possibly the toolbar).
+*/
+#wrapper {
+    clear: both;
+    margin: 0 auto;
+    width: 95%;
+    text-align: center;
+    display: block;
+}
+
+/**
+* Container for content - excludes nav bar, side bar, banner, feeds
+*/
+#contentPane {
+    width: 48%;
+    float: left;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+
+/*******************************************************************************
+**************************** DEVELOPER UPDATES *********************************
+*******************************************************************************/
+
+#updates  {
+    color: #993399;
+}
+
+#updates h1 {
+    font-size: 2em;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+#updates ol {
+    padding-right: 10px;
+}
+
+#updates ul, #updates ol, #updates li {
+    font-size: 1em;
+    text-align: left;
+}
+
+/*******************************************************************************
+**************************** END DEV UPDATES ***********************************
+*******************************************************************************/
+
+#topPane {
+    height: 100px;
+}
+
+#topLeftPane {
+    width: 40%;
+    float: left;
+    font-weight: bold;
+    display: inline-block;
+    padding: 2px;
+    margin: 0px;
+}
+#topRightPane {
+    width: 55%;
+    float: right;
+    font-weight: bold;
+    display: inline-block;
+    padding: 2px;
+    margin: 0px;
+}
+
+#bottomLeftPane {
+    width: 49%;
+    float: left;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+#bottomRightPane {
+    float: right;
+    font-weight: bold;
+    width: 49%;
+    padding: 2px;
+}
+#bottomPane {clear:both;}
+
+
+.contentContainer {
+    display: block;
+    background-color: #fff;
+    border-style: none;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#results {
+    clear: both;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#hiddenLinks, #upArrows, #personalFeed, #personalUpArrows{
+    display: none;
+}
+
+.advancedSearchContainer, .advancedQuoteSearchContainer {
+    //display: none;
+}
+
+.sumDockNum {
+    width: 50px;
+}
+.sumDate{
+    width: 70px;
+}
+.sumAmount {
+    width: 50px;
+}
+.totalsTable {
+    line-height: 0%;
+}
+
+#totalBox {
+    display: none;
+}

@@ -1,0 +1,27 @@
+/*******************************************************************************
+* Styling for the docket login page.
+* --------------------------------------------------------
+* Written by Daniel Kats for Alternative Die Cutting, Inc.
+* Updated on July 12, 2011
+*******************************************************************************/
+
+body {
+    width: 100%;
+    font-size: 1em;
+    font-family: Calibri, Helvetica, Arial, sans-serif;
+}
+
+#wrapper {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+table {
+    margin: 0 auto;
+    text-align: left;
+}
+
+.dueDateMemo {
+    
+}

@@ -1,0 +1,20 @@
+<div ng-controller="DocketChat" class="row">
+	<div class="columns production-info large-12 small-12 small-centered large-centered">
+		<div ng-mouseenter="toggleLog()" ng-mouseleave="toggleLog()" ng-repeat="log in conversation_logs track by $index" class="row">
+			<div class="columns large-11">
+				<div ng-click="toggleStatus(log.Status, log.Chat_ID)" class="log-icon {{log.Status}}"></div>
+				{{log.User}}[{{log.modified_date}}]:<span class="message
+				">{{log.Message}}</span>
+			</div>
+			<div ng-hide="log.hover" class="columns large-1">
+			</div>
+			<div ng-click="deleteLog()" ng-show="log.hover" class="columns large-1 icon-cancel-circle">
+			</div>
+		</div>
+		<form class="row" ng-submit="logMessage(message)">
+			<div class="columns large-12">
+			<input type="text" ng-model="message"></input>
+			<input class="button" type="submit" ></input>
+		</form>
+	</div>
+</div>

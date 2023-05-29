@@ -1,0 +1,1 @@
+HomePageModule.controller("SearchDisplay",["$scope","$http","searchService",function(e,t,n){e.quoteSearchResults={};e.$on("searchResultsAvailable",function(){e.quoteSearchResults=n.getResults();e.resultsAvailable=!0;console.log(e.quoteSearchResults)});e.resultsAvailable=!1}]);

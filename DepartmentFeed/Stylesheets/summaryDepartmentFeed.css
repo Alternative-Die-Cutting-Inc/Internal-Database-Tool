@@ -1,0 +1,60 @@
+/* 
+    Document   : departmentFeed
+    Created on : Sep 28, 2012, 10:23:39 AM
+    Author     : Peter
+    Description:
+        This style sheet is meant to be used for the department feeds on the
+        index page. The feeds are all displayed beside each other so they can't
+        be as big.
+*/
+table {
+    width: 100%;
+}
+/* The docket number is large so the departments can identify the job
+    they are about to start or finish.
+*/
+.docketNumber {
+    font-size: 75px;
+}
+/* The bars breaking up the jobs within the feed.
+*/
+hr {
+    height: 30px;
+    background-color: #000000;
+}
+
+/*
+ This is the button that will log the job time.
+*/
+.statusButton {
+    height: 100px;
+    width: 100%;
+    font-size: 75px;
+}
+
+
+.DepartmentFeed {
+    width: 300px;
+    float: left;
+    display: inline-block;
+    margin: 10px;
+    height: 550px;
+    overflow: auto;
+}
+
+#DieMakingFeed {    
+    border: 2px solid #CC0033;
+}
+#PressFeed {    
+    border: 1px solid #FF9900;
+}
+#StrippingFeed {    
+    border: 1px solid #FFFF00;
+}
+#GluingFeed {    
+    border: 1px solid #009900;
+}
+#HandWorkFeed {    
+    border: 1px solid #003399;
+}
+

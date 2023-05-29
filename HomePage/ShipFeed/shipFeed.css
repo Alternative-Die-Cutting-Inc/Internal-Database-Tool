@@ -1,0 +1,115 @@
+/*******************************************************************************
+* Style sheet for the job feed.
+* --------------------------------
+* Written by Daniel Kats for Alternative Die Cutting, Inc.
+* July 4, 2011
+*
+*******************************************************************************/
+
+#shipFrame {
+    height: 100%;
+    background-color: #fff;
+    font-family: calibri, helvetica, arial, sans-serif;
+    margin: 5px;
+}
+
+.ship {
+    clear: both;
+    height: 100%;
+    display: block;
+}
+.shipDone {
+    clear: both;
+    height: 100%;
+    display: block;
+    background-color: #E5E5E5;
+}
+.prepareSlip {
+    clear: both;
+    height: 100%;
+    display: block;
+    background-color: #F6CCDA;
+}
+
+.leftPane {
+    float: left;
+    padding: 0;
+    margin: 0;
+    width: 20%;
+    text-align: left;
+
+    color: #D41E5D; /* pink-red */
+}
+
+.rightPane {
+    color: #D41E5D; 
+}
+
+.time {
+    font-size: 2em;
+}
+
+.leftPane a:link, .leftPane a:visited, .leftPane a:active {
+    font-size: 1.1em;
+    text-decoration: none;
+    color: #1B8EE0;
+    /*    color: inherit;*/
+}
+
+.time, .shipContent {
+    display: inline-block;
+    position: relative;
+}
+
+.shipDone div.shipContent {
+    float: left;
+    width: 75%;
+}
+
+.jobInfoPickedUp {
+    float: left;
+    width: 50%
+}
+
+.jobInfoReady {
+    float: left;
+    width: 75%;
+}
+
+.shipName {
+    display: block;
+    font-weight: bold;
+}
+
+hr {
+    width: 100%;
+    display: block;
+    color: #005B94;
+    background-color: #005B94; /* dark blue */
+    height: 2px;
+    clear: both;
+}
+
+#jobs h2 {
+    text-align: center;
+}
+
+#frameInfo {
+    clear: both;
+    text-align: center;
+    font-size: 0.8em;
+    color: #9E9899; /* grey */
+}
+
+.shipThisDivOut {
+    float: left;
+    background-color: #E5E5E5;
+    width:5%;
+    float: left;
+    height: 80px;
+}
+
+.ShipmentHolder {
+    display: inline-block;
+    width: 100%;
+}

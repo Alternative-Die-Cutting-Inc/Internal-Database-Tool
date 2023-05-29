@@ -1,0 +1,37 @@
+[06-Sep-2018 13:52:39 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[25-Oct-2018 14:04:35 UTC] PHP Notice:  Undefined variable: returnVal in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 206
+[02-Jan-2019 20:40:45 UTC] PHP Notice:  Undefined variable: returnVal in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 206
+[10-Jan-2019 20:43:41 UTC] PHP Notice:  Undefined variable: returnVal in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 206
+[15-Feb-2019 16:53:02 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[15-Feb-2019 16:53:06 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[20-Feb-2019 15:23:55 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[20-Feb-2019 15:24:00 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[20-Feb-2019 15:24:02 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[13-Mar-2019 15:24:05 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 204
+[15-Apr-2019 17:02:58 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[15-Apr-2019 19:27:24 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[14-May-2019 14:55:42 UTC] PHP Notice:  Undefined variable: returnVal in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 206
+[17-May-2019 15:54:25 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[11-Sep-2019 14:15:36 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[11-Sep-2019 14:15:43 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[11-Sep-2019 14:15:44 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[02-Dec-2019 13:56:18 UTC] PHP Notice:  Undefined variable: returnVal in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 206
+[19-Mar-2020 19:18:21 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[10-Sep-2020 14:37:19 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[20-Oct-2020 13:47:49 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[26-Nov-2020 17:52:47 UTC] PHP Notice:  Undefined variable: returnVal in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 206
+[07-Jan-2021 16:34:50 UTC] PHP Notice:  Undefined variable: returnVal in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 206
+[17-Mar-2021 17:45:57 UTC] PHP Notice:  Undefined variable: returnVal in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 206
+[22-Mar-2021 15:54:06 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 176
+[07-Jul-2021 14:16:41 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[09-Jul-2021 15:44:13 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[16-Aug-2021 15:08:12 UTC] PHP Notice:  Undefined variable: returnVal in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 206
+[22-Feb-2022 19:57:22 UTC] PHP Notice:  Undefined variable: returnVal in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 206
+[29-Mar-2022 20:20:31 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[05-Apr-2022 18:20:03 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[05-Apr-2022 18:20:08 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[08-Apr-2022 19:05:17 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[12-Apr-2022 15:50:43 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[17-Aug-2022 17:26:24 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[02-Nov-2022 19:31:29 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200
+[29-Nov-2022 18:00:02 UTC] PHP Fatal error:  Call to undefined function fail() in /home/alterna/public_html/Intranet/Resources/phpmailer/mailHelper.php on line 200

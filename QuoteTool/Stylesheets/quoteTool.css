@@ -1,0 +1,259 @@
+@charset "iso-8859-1";
+
+/******************************************************************************
+*  quoteTool.css : Last update 2011-07-20
+*  Written by Daniel Kats
+*  ---------------------------------------------------------------------------
+*  General layout for the quote tool and sub-pages. For layout use only.
+*******************************************************************************/
+
+/** XXX once this gets general enough, move to a new file in Intranet resources
+
+/*******************************************************************************
+******************************** GENERAL STYLING *******************************
+*******************************************************************************/
+
+body {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: #C5E8ED; /* Pastel teal */
+    font: 0.9em calibri, helvetica, arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#header td {
+    text-align: left;
+}
+
+#header #Rate {
+    text-align: center;
+}
+
+table td {
+    height: 100%;
+}
+
+.quote table tbody {
+    width: 100%;
+}
+
+.quote table th {
+    text-align: left;
+}
+
+.extraFields table {
+    width: 100px;
+}
+
+.extraFields th {
+    /*    text-align: center;*/
+}
+
+.extraFields live {
+    float: none;
+}
+
+.extraFields .cost {
+    text-align: center;
+}
+
+#progMsg {
+    display: inline-block;
+    /*    float: left;*/
+}
+
+#loadingImage {
+    display: inline-block;
+    /*    float: right;*/
+}
+
+/* Company logo, etc. */
+#banner {
+    clear: both;
+    display: block;
+    padding: 10px 0 0 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.contentContainer {
+    border-style: ridge;
+}
+
+hr {
+    width: 85%;
+    border: 0;
+    height: 2px;
+    background-color: #005B94;
+    color: #005B94;
+}
+
+textarea {
+    resize: none;
+}
+
+textarea.private {
+    background-color: #CCC4C6;
+}
+
+/*******************************************************************************
+************************* END GENERAL STYLING **********************************
+*******************************************************************************/
+
+#headerContainer {
+    text-align: center;
+    clear: both;
+    border-style: ridge;
+    margin-top: 80px;
+    bottom:0;
+    width: 600px;
+}
+
+#header table {
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Area with buttons. Generate quotes, etc. */
+#controlPanel {
+
+    position: fixed; 
+    top: 45px;
+
+    margin: 0;
+    padding: 0;
+    width: 48%;
+
+    text-align: center;
+    border-style: ridge;
+    background-color: #E8F5FA;
+}
+
+#emailer {
+    position: fixed; 
+    top: 45px;
+    right: 0px;
+    width: 48%;
+/*    text-align: center;*/
+    border-style: ridge;
+    background-color: #E8F5FA;
+}
+
+/* Area where each quote is filled in. Press, Die, etc. */
+.quote {
+    height: 90%;
+    display: inline-block;
+}
+
+.quote, #headerContainer {
+    background-color: #E8F5FA;  /* blue-off-white */
+}
+
+.quote .input {
+    width: 80px;
+}
+
+.quote table td {
+    text-align: left;
+}
+
+/** 
+* A field which is submitted to all forms, but which the user cannot 
+* directly edit.
+*/
+.costField {
+    width: 80px;
+    border-style: none;
+    background-color: inherit;
+}
+
+/* Buttons for individual quotes. Set-All, etc. */
+.controlArea {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.area0, .area1 {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#quoteContainer {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+#quoteContainer .area0 {
+    background-color: #E8F5FA; /* off-white */
+}
+
+#quoteContainer .area1 {
+    background-color: #CCCCCC; /* grey*/
+}
+
+input#Description, input#Job_Name {
+    width: 300px;
+}
+
+textarea {
+    width: 290px;
+    height: 120px;
+}
+
+textarea#Rate{
+    width: 100px;
+    height: 20px;
+}
+
+.cost, .cost td, .perM, .perM td {
+    font-weight: bold;
+    color: #137526;
+    text-align: left;
+}
+
+.total, td.total, label.total{
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #000;
+    width: 200px;
+}
+
+.Subtotal, .Discount {
+    font-size: 0.9em;
+    color: #8A8A8A;
+    width: 200px;
+}
+
+/**
+* live is the class of injected quotes from quoteTool.js.
+* Change width to 100/x where x is the number of columns you want the quotes
+* to line up in.
+**/
+.live {
+    margin-top: 60px;
+    width: 30%;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.extraRow, live {
+    float: none;
+    width:100%;
+}
+
+.quoteHR {
+    width: 85%;
+}
+
+select {
+    width: 170px;
+}

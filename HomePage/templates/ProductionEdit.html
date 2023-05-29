@@ -1,0 +1,16 @@
+<a href="../ShippingTool/Production.php?DocketNumber={{job.DocketNumber}}">
+    <h3>#{{job.DocketNumber}} - {{job.JobName}}</h3>
+</a>
+{{job.Customer}}
+<input type="text" ng-model="job.QuoteNumber"/>
+<input type="text" ng-model="job.FinalPrice"/>
+<input type="text" ng-model="job.CustomerPoNo"/>
+<input type="text" ng-model="job.Die"/>
+<input type="text" ng-model="job.Finishing"/>
+<input type="text" ng-model="job.SpecialInstructions"/>
+
+<input 
+     type="date" 
+     ng-model="job.DueDate"
+     ng-change="setDueDate()"
+     /> 

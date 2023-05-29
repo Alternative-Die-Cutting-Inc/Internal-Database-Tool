@@ -1,0 +1,64 @@
+/* 
+    Document   : sortable
+    Created on : Oct 26, 2012, 8:25:25 AM
+    Author     : Peter
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   This CSS styles the job priority queue
+*/
+
+body {
+    width: 100%;
+    height: 100%;
+    /*    text-align: center;*/
+    background-color: white; /* Pastel teal */
+    font: 0.9em calibri, helvetica, arial, sans-serif;
+
+}
+
+.sortableJob { 
+    margin: 2px auto;
+    width: 140px;
+    background-color: white;
+}
+
+.sortableDay {
+    background-color: #C5E8ED;
+    width: 148px;
+    display: inline-block;
+    float: left;
+    padding: 2px;
+    height: 300px;
+    margin: 5px;
+}
+
+#jobBank {
+    /* Helps keep the inner divs inside the border */
+    float: left;
+    width: 942px;
+    padding: 10px;
+    background-color: #C5E8ED;
+    margin: 5px;
+    margin-right: 1000px;
+}
+
+#jobBank>.sortableJob {
+    float:left;
+    margin: 2px;
+}
+
+.dismiss {
+    float:right;
+    color: red;
+}
+
+.dismiss:hover {
+    color: #3B99D9;
+}
+
+.dismiss:active { 
+    color: #7E2024;
+}

@@ -1,0 +1,39 @@
+<div class="row">
+	<div class="columns large-12 ship-filter">
+		<input ng-model="customerFilter" type="text" placeholder="Filter by Customer"/>
+	</div>
+</div>
+<div ng-controller="ShipFeed">
+    <div ng-repeat="shipment in shipFeed | filter:customerFilter" class="row shipment {{shipment.shipclass}}">
+    	<div class="columns large-12">
+			<a href="../ShippingTool/shipmentHistory.php?DocketNumber={{shipment.DocketNumber}}">
+	    		<div class="row job-details">
+	    			<div class="columns large-3">
+		                <h5>#{{shipment.DocketNumber}}</h5>
+		                <h5>PO:{{shipment.CustomerPoNo}}</h5>   		
+				    </div>
+				    <div class="columns large-9">
+		                <h5>{{shipment.JobName}}</h5>
+		                <h6>{{shipment.Customer}}</h6>
+				    </div>
+				</div>
+			</a>
+	        <div class="row shipped">
+                <div class="columns large-6 ship-in">
+                    <span class="shipped-date">{{shipment.DateIn | date:'EEE, MMM d'}}</span>
+                    <span class="shipped-time">{{shipment.TimeIn}}</span>
+                </div><!--      Date in information -->
+                <div class="columns ship-out large-6 icon-forward" 
+                	ng-hide="shipment.DateOut != NULL"
+                	ng-click="shipOut()"
+                	ng-mouseenter="shipment.shipclass='shipped'"
+                	ng-mouseleave="shipment.shipclass=''">
+		        </div><!-- Ship out button displayed when DateOut is null. -->
+                <div class="columns large-6 ship-out" ng-show="shipment.DateOut != NULL">
+                    <span class="shipped-date">{{shipment.DateOut | date:'EEE, MMM d'}}</span>
+                    <span class="shipped-time">{{shipment.TimeOut}}</span>
+                </div><!-- Date out information -->
+            </div>
+	    </div>
+    </div><!-- One row representing the ship feed. -->
+</div><!-- end ship feed -->

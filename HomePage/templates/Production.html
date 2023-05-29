@@ -1,0 +1,288 @@
+<div ng-controller="Production">
+	<div class="row">
+		<div class="columns large-12 small-12">
+			<ul class="inline-list">
+			  <li><a href='#' ng-click="saveProduction()">Save</a></li>
+			  <li><a href='#' ng-click="closeJob()">Close</a></li>
+			  <li><a href='#' ng-click="deleteJob()">Delete</a></li>
+			  <li><a target="_blank" href='/Intranet/ShippingTool/shipping.php?DocketNumber={{production_info.DocketNumber}}'>New Shipment</a></li>
+			  <li><a target="_blank" href="/Intranet/ShippingTool/shipmentHistory.php?DocketNumber={{production_info.DocketNumber}}">Shipment History</a></li>
+			  <li><a target="_blank" href="/Intranet/Shipping/DeliveryReport.php?docket_number={{production_info.DocketNumber}}">Delivery Report</a></li>
+			  <li><a target="_blank" href="/Intranet/Production/Billing.php?docket_number={{production_info.DocketNumber}}">Billing</a></li>
+			  <li><a target="_blank" href="/Intranet/Production/WorkOrder.php?docket_number={{production_info.DocketNumber}}">Work Order</a></li>
+			</ul>
+		</div>
+	</div>
+	<div ng-include="'templates/DocketChat.html'"></div>
+	<div class="row">
+		<div class="columns production-info large-12 small-12 small-centered large-centered">
+	    	<div class="row">
+		        <div class="large-3 small-3 columns">
+		        	<label for="right-label" class="right inline">Docket Number</label>
+		        </div>
+		        <div class="large-9 small-9 columns">
+		        	<input type="text" id="right-label" ng-model="docket_number">
+		        </div>
+		    </div>
+	    	<div class="row">
+		        <div class="large-3 small-3 columns">
+		        	<label for="right-label" class="right inline">Quote Number</label>
+		        </div>
+		        <div class="large-9 small-9 columns">
+		        	<input ng-change="getQuantities()" type="text" id="right-label" ng-model="QuoteNumber"/>
+		        </div>
+		    </div>
+	    	<div class="row">
+		        <div class="large-3 small-3 columns">
+		        	<label for="right-label" class="right inline">Sold For</label>
+		        </div>
+		        <div class="large-9 small-9 columns">
+		        	<input type="text" id="right-label" ng-change="saveProduction()" ng-model="FinalPrice">
+		        </div>
+		    </div>
+	    	<div class="row">
+		        <div class="large-3 small-3 columns">
+		        	<label for="right-label" class="right inline">Production Person</label>
+		        </div>
+		        <div class="large-9 small-9 columns">
+		        	<input type="text" id="right-label" ng-change="saveProduction()" ng-model="ProductionPerson">
+		        </div>
+		    </div>
+	    	<div class="row">
+		        <div class="large-3 small-3 columns">
+		        	<label for="right-label" class="right inline">Customer PO</label>
+		        </div>
+		        <div class="large-9 small-9 columns">
+		        	<input type="text" id="right-label" ng-change="saveProduction()" ng-model="CustomerPoNo">
+		        </div>
+		    </div>
+	    	<div class="row">
+		        <div class="large-3 small-3 columns">
+		        	<label for="right-label" class="right inline">Customer</label>
+		        </div>
+		        <div class="large-9 small-9 columns">
+		        	<datalist id="customerList">
+	                    <option ng-repeat="customer in customers track by $index" value="{{customer}}" >
+	                </datalist>
+	               	<input type="text" id="right-label" ng-change="saveProduction()" ng-model="Customer" list="customerList">
+		        </div>
+		    </div>
+	    	<div class="row">
+		        <div class="large-3 small-3 columns">
+		        	<label for="right-label" class="right inline">Job Name</label>
+		        </div>
+		        <div class="large-9 small-9 columns">
+		        	<input type="text" id="right-label" ng-change="saveProduction()" ng-model="JobName">
+		        </div>
+		    </div>
+	    	<div class="row">
+		        <div class="large-3 small-3 columns">
+		        	<label for="right-label" class="right inline">Finishing</label>
+		        </div>
+		        <div class="large-9 small-9 columns">
+		        	<textarea type="text" id="right-label" ng-change="saveProduction()" ng-model="Finishing"></textarea>
+		        </div>
+		    </div>
+	    	<div class="row">
+		        <div class="large-3 small-3 columns">
+		        	<label for="right-label" class="right inline">Special Instructions</label>
+		        </div>
+		        <div class="large-9 small-9 columns">
+		        	<textarea type="text" id="right-label" ng-change="saveProduction()" ng-model="SpecialInstructions"></textarea>
+		        </div>
+		    </div>
+		    <div class="row">
+		    	<div class="large-3 small-3 columns">
+		        	<label for="right-label" class="right inline">Per M</label>
+		    	</div>
+		    	<div class="large-9 small-9 columns">
+				    <select ng-model="QuoteQuantityID" ng-change="saveProduction()" name="QuoteQuantityID">
+	                    <option ng-selected="QuoteQuantityID == QuantityID.quantity_id"  value="{{QuantityID.quantity_id}}" ng-repeat="QuantityID in QuoteQuantities">{{QuantityID.units}} units,  ${{QuantityID.total }} at ${{QuantityID.total_per_m}}/M</option>
+	                </select>
+		    	</div>
+		    </div>
+		    <div class="row">
+		    	<div class="large-3 small-3 columns">
+		        	<label for="right-label" class="right inline">Type</label>
+		    	</div>
+		    	<div class="large-9 small-9 columns">
+					    <select ng-model="jobtype" ng-change="saveProduction()" name="jobtype">
+		                    <option ng-selected="job == jobtype" ng-repeat="job in jobtypes">{{job}}</option>
+		                </select>
+		    	</div>
+		    </div>
+		</div>
+	</div><!-- Main production info -->
+	<div class="row">
+		<div class="columns large-12 small-12 form-info small-centered large-centered">
+			<div class="row">
+				<div class="columns small-12 large-12">
+					<h3>Forms</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns small-12 large-12 add-form icon-plus" ng-click="addForm()">
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns  small-4 large-4">
+		        	<label for="right-label center" class="">Name</label>
+				</div>
+				<div class="columns large-3 small-3">						
+		        	<label for="right-label" class="">Quantity</label>
+				</div>
+				<div class="columns large-5 small-5">						
+		        	<label for="right-label" class="">Notes</label>
+				</div>
+			</div>
+			<div class="row" ng-repeat="form in forms_info">
+				<div class="columns large-4  small-4">
+		        	<input type="text" id="right-label" ng-change="saveProduction()" ng-model="form.Form">
+				</div>
+				<div class="columns large-3 small-3">						
+		        	<input type="text" id="right-label" ng-change="addForms()" ng-model="form.Quantity">
+				</div>
+				<div class="columns large-4 small-4">					
+		        	<input type="text" id="right-label" ng-change="saveProduction()" ng-model="form.Notes">
+				</div>
+				<div class="columns large-1 small-1 icon-cancel-circle"  ng-click="deleteForm($index)">			
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns large-4 small-4">
+		        	<label for="right-label" class="right inline">Total Quantity</label>
+				</div>
+				<div class="columns large-3 small-3">						
+		        	<input type="text" id="right-label" ng-model="Quantity">
+				</div>
+				<div class="columns large-5 small-5">
+		        	<label for="left-label" class="left inline"></label>
+				</div>
+			</div>
+		</div>
+	</div><!-- Forms -->
+	<div class="row">
+		<div class="columns large-12 small-12 form-info small-centered large-centered">
+			<div class="row">
+				<div class="columns large-12 small-12">
+					<h3>Extras</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns large-12 small-12 add-form icon-plus" ng-click="addExtra()">
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns large-4 small-4">
+		        	<label for="right-label center" class="">Charge</label>
+				</div>
+				<div class="columns large-3 small-3">						
+		        	<label for="right-label" class="">Cost</label>
+				</div>
+				<div class="columns large-5 small-5">						
+		        	<label for="right-label" class="">Notes</label>
+				</div>
+			</div>
+			<div class="row" ng-repeat="extra in extras_info">
+				<div class="columns large-4 small-4">
+		        	<input type="text" id="right-label" ng-change="saveProduction()" ng-model="extra.Subject">
+				</div>
+				<div class="columns large-3 small-3">						
+		        	<input type="text" id="right-label" ng-model="extra.Cost" ng-change="addExtras()">
+				</div>
+				<div class="columns large-4 small-4">					
+		        	<input type="text" id="right-label" ng-change="saveProduction()" ng-model="extra.Description">
+				</div>
+				<div class="columns large-1 small-1 icon-cancel-circle" ng-click="deleteExtra($index)">			
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns large-4 small-4">
+		        	<label for="right-label" class="right inline">Total Cost</label>
+				</div>
+				<div class="columns large-3 small-3">						
+		        	<input type="text" id="right-label" ng-model="ExtrasTotal">
+				</div>
+				<div class="columns large-5 small-5">
+		        	<label for="left-label" class="left inline"></label>
+				</div>
+			</div>
+		</div>
+	</div><!-- Extras -->
+	<div class="row">
+		<div class="columns large-12 small-12 small-centered large-centered form-info">
+			<div class="row">
+				<div class="columns large-6 small-6">
+					<h3>Shipping</h3>
+				</div>
+				<a href="/Intranet/ShippingTool/shipping.php?DocketNumber={{production_info.DocketNumber}}">			
+					<div style="font-color:black" class="add-form columns large-6 small-6 icon-plus">
+					</div>
+				</a>
+			</div><!-- Shipping Summary -->
+			<div class="row">
+				<div class="columns large-12">
+				  <h5>Shipment Summary</h5>
+				  <table class="shipment-table shipment-summary">
+				    <tr>
+				      <th>Form</th>
+				      <th>Last Ship Date</th>
+				      <th>Quantity Requested</th>
+				      <th>Quantity Shipped</th>
+				      <th>Difference</th>
+				    </tr>
+				    <tr ng-repeat="form in summary_info">
+				      <td>{{form.Name}}</td>
+				      <td>{{form.Date | date:'medium'}}</td>
+				      <td>{{form.Quantity}}</td>
+				      <td>{{form.Sent}}</td>
+				      <td>{{form.Sent - form.Quantity}}</td>
+				    </tr>
+				  </table>
+				</div>
+				</div><!-- Summary -->
+				<div class="row">
+				<div class="columns large-12">
+				  <h5>Shipment History</h5>
+				  <table class="shipment-table shipment-summary">
+				    <tbody ng-repeat="slip in history_info">
+				      <tr>
+				        <th colspan="3">{{slip[0].Date}}</th>
+				      </tr>
+				      <tr>
+				        <th>Form</th>
+				        <th>Quantity</th>
+				        <th>Skids</th>
+				      </tr>
+				      <tr ng-repeat="form in slip">
+				        <td>{{form.Form}}</td>
+				        <td>{{form.Total}}</td>
+				        <td>{{form.NoOfSkids}}</td>
+				      </tr>
+				    </tbody>
+				  </table>
+				</div>
+			</div><!-- History -->
+		</div>
+	</div><!-- Shipping -->
+	<div class="row">
+		<div class="columns large-12 small-12 small-centered large-centered form-info">
+			<div class="row">
+				<div class="columns large-4 small-4">
+		        	<label for="right-label" class="right inline">Requote Memo</label>
+				</div>
+				<div class="columns large-8 small-8">						
+		        	<textarea type="text" id="right-label" ng-change="saveProduction()" ng-model="RequoteMemo"></textarea>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns large-4 small-4">
+		        	<label for="right-label" class="right inline">Close Date</label>
+				</div>
+				<div class="columns large-8 small-8">						
+		        	<input type="date" id="right-label" ng-change="closeJob()" ng-model="CloseDate"></input>
+				</div>
+			</div>
+		</div>
+	</div><!-- Requote Memo -->
+</div>

@@ -1,0 +1,49 @@
+@font-face {
+	font-family: 'iconic';
+	src:url('fonts/iconic.eot');
+	src:url('fonts/iconic.eot?#iefix') format('embedded-opentype'),
+		url('fonts/iconic.svg#iconic') format('svg'),
+		url('fonts/iconic.woff') format('woff'),
+		url('fonts/iconic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'iconic';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+[class^="icon-"]:before, [class*=" icon-"]:before {
+	font-family: 'iconic';
+	font-style: normal;
+	speak: none;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-untitled:before {
+	content: "\e001";
+}
+.icon-untitled-2:before {
+	content: "\e002";
+}
+.icon-untitled-3:before {
+	content: "\e003";
+}
+.icon-untitled-4:before {
+	content: "\e005";
+}
+.icon-untitled-5:before {
+	content: "\e004";
+}
+.icon-fullscreen:before {
+	content: "\e006";
+}
+.icon-untitled-6:before {
+	content: "\e000";
+}

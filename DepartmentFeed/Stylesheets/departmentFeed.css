@@ -1,0 +1,38 @@
+/* 
+    Document   : departmentFeed
+    Created on : Sep 28, 2012, 10:23:39 AM
+    Author     : Peter
+    Description:
+        This style sheet is meant to be used for the department feed
+        on individual department pages. These pages will
+        be primarily viewed on tablets so everything is
+        excessively large.
+        (May create a parallel style sheet with smaller things
+        for viewing all the department feeds at once from desktop).
+*/
+
+table {
+    width: 100%;
+}
+/* The docket number is large so the departments can identify the job
+    they are about to start or finish.
+*/
+.docketNumber {
+    font-size: 200px;
+}
+/* The bars breaking up the jobs within the feed.
+*/
+hr {
+    height: 30px;
+    background-color: #000000;
+}
+
+/*
+ This is the button that will log the job time.
+*/
+.statusButton {
+    height: 250px;
+    width: 100%;
+    font-size: 200px;
+}
+

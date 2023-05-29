@@ -1,0 +1,45 @@
+/* 
+    Document   : departmentPages
+    Created on : Sep 26, 2012, 9:41:58 AM
+    Author     : Peter
+    Description:
+        This file is the general styling for the pages within the DepartmentFeed
+        directory.
+*/
+
+/*
+    The body styling is uniform throughout the whole webpage. It encompases 
+    colours and font.
+*/
+
+body {
+/*    Setting a wider widths allow for horizontal scrolling */
+    
+    height: 100%;
+    text-align: center;
+    background-color: #C5E8ED; /* Pastel teal */
+    font: 0.9em calibri, helvetica, arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.DieMakingObject {
+    color: #CC0033;
+}
+
+.PressObject {
+    color: #FF9900;
+}
+
+.StrippingObject {
+    color: #FFFF00;
+}
+
+.GluingObject {
+    color: #009900;
+}
+
+.HandWorkObject {
+    color: #003399;
+}

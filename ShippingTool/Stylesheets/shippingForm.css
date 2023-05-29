@@ -1,0 +1,56 @@
+/*******************************************************************************
+* Styling for the shipping forms.
+*******************************************************************************/
+
+#wrapper {
+    margin: 20px auto;
+    width: 1000px;
+}
+
+.panelContainer {
+    margin: 0 auto;
+    text-align: center;
+    width: 90%;
+    clear: both;
+}
+
+
+.leftPanel, .centerPanel, .rightPanel {
+    float: left;
+    display: inline-block;
+}
+
+.leftPanel, .centerPanel {
+    margin-right: 20px;
+}
+
+.leftPanel {
+    width: 130px;
+}
+
+#shipmentTable {
+    width: 100%;
+}
+
+.Form, .Date {
+    margin-left: 50px;
+}
+
+.Form {
+    width: 400px;
+}
+.FormHistory {
+    width: 200px;
+}
+
+.topRightPanel {
+    float: right;
+}
+
+.topMiddlePanel {
+    float: left;
+}
+
+.ShipmentNumber {
+    width: 60px;
+}

@@ -1,0 +1,47 @@
+/* 
+    Document   : previewEmailer
+    Created on : Oct 19, 2012, 8:50:32 AM
+    Author     : Peter
+    Description:
+        This styles the div/contents of the preview of any files that need to be
+        PDFed and emailed out.
+*/
+
+#emailer {
+    position: fixed; 
+    top: 0;
+
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #0C99F7; /* blue */
+
+    z-index: 20;
+    
+    /*Font*/
+    font-family: calibri, helvetica, arial, sans-serif;
+  
+    font-size: 1.1em;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+}
+
+.messageTextArea {
+    height: 150px;
+    width: 300px;
+    margin-top: 10px;
+    margin-bottom:10px;
+   
+}
+
+.addMessageSpan:hover {
+    color: red;
+}
+.addMessageSpan:active {
+    color: #7E2024;
+}
+
+@media print{
+  #emailer{ display:none }
+}

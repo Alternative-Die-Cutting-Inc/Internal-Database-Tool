@@ -1,0 +1,165 @@
+<div class="row">
+  <div class="columns large-12">
+      <table class="top-table width-100 south-border">
+        <tr>
+          <th>Units</th>
+          <th>Per Sheet</th>
+          <th>Sheets</th>
+        </tr>
+        <tr>
+          <td align="center">{{quoteQuantities[quantity.quantity_id].units | number}} </td>
+          <td align="center">{{quoteQuantities[quantity.quantity_id].units_per_sheet | number}}</td>
+          <td align="center">{{quoteQuantities[quantity.quantity_id].sheets | number}}</td>
+          <td align="center" class="quantity-id">
+            <span>#{{quantity.quantity_id}}</span>
+          </td>
+        </tr>
+      </table>
+  </div>
+</div>
+<div class="row">
+  <div class="columns large-12">
+    <table class="large-12 width-100 south-border">
+      <tr>
+      	<th><span ng-repeat="press in presses | filter:{press_id: quantity.press_id}">{{press.name}}</span></th>
+      	<th>{{stocks[quantity.stock_id].name}}</th>
+        <th>M</th>
+        <th>Total</th>
+      </tr>
+      <tr ng-class="hideOnZero(quoteQuantities[quantity.quantity_id].die_total)">
+        <td class="width-25">Die</td>
+        <td align="right">{{quoteQuantities[quantity.quantity_id].die | number}}</td>
+        <td class="width-25"></td>
+        <td align="right" class="width-25">{{quoteQuantities[quantity.quantity_id].die_total | number}}</td>
+      </tr>
+      <tr ng-class="hideOnZero(quoteQuantities[quantity.quantity_id].cutter_total)">
+        <td class="width-25">Cutter</td>
+        <td align="right" class="width-25">{{quoteQuantities[quantity.quantity_id].cutter | number}}</td>
+        <td class="width-25"></td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].cutter_total | number}}</td>
+      </tr>
+      <tr ng-class="hideOnZero(quoteQuantities[quantity.quantity_id].press_setup_total)">
+        <td class="width-25">Setup</td>
+        <td align="right" class="width-25">{{quoteQuantities[quantity.quantity_id].press_setup | number}}</td>
+        <td class="width-25"></td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].press_setup_total | number}}</td>
+      </tr>
+      <tr ng-class="hideOnZero(quoteQuantities[quantity.quantity_id].press_runspeed_total)">
+        <td class="width-25">Run</td>
+        <td align="right" class="width-25">{{quoteQuantities[quantity.quantity_id].press_runspeed | number}}</td>
+        <td  align="right" class="width-25">{{quoteQuantities[quantity.quantity_id].press_per_m | number}}</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].press_runspeed_total | number}}</td>
+      </tr>
+    </table>    
+  </div>        
+</div><!-- Press -->
+<div class="row">
+  <div class="columns large-12">
+    <table class="large-12 width-100 south-border">
+      <tr>
+        <th class="width-25">
+          {{gluers[quantity.quantity_id].name}}
+        </th>
+        <th class="width-25"></th>
+        <th class="width-25">M</th>
+        <th class="width-25">Total</th>
+      </tr>
+      <tr ng-class="hideOnZero(quoteQuantities[quantity.quantity_id].gluer_setup_total)">
+        <td class="width-25">Setup</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].gluer_setup | number}}</td>
+        <td class="width-25" align="right"></td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].gluer_setup_total | number}}</td>
+      </tr>
+      <tr ng-class="hideOnZero(quoteQuantities[quantity.quantity_id].gluer_runspeed_total)">
+        <td class="width-25">Gluer</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].gluer_runspeed | number}}</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].gluer_per_m | number}}</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].gluer_runspeed_total | number}}</td>
+      </tr>
+    </table>    
+  </div>        
+</div><!-- Gluer -->
+<div class="row">
+  <div class="columns large-12">
+    <table class="width-100 south-border">
+      <tr ng-class="hideOnZero(quoteQuantities[quantity.quantity_id].strip_runspeed_total)">
+        <td class="width-25">Strip</td>
+        <td align="right">{{quoteQuantities[quantity.quantity_id].strip_runspeed | number}}</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].strip_per_m | number}}</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].strip_runspeed_total | number}}</td>
+      </tr>
+  	</table>
+    <table class="width-100 south-border">
+      <tr ng-class="hideOnZero(quoteQuantities[quantity.quantity_id].handwork_runspeed_total)">
+        <td class="width-25">Handwork</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].handwork_runspeed | number}}</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].handwork_per_m | number}}</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].handwork_runspeed_total | number}}</td>
+      </tr>
+      <tr ng-class="hideOnZero(quoteQuantities[quantity.quantity_id].fold_total)">
+        <td class="width-25">Fold</td>
+        <td class="width-25">
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].fold_per_m_units | number}}</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].fold_total | number}}</td>
+      </tr>
+  	</table>
+    <table class="width-100 south-border">
+      <tr ng-class="hideOnZero(quoteQuantities[quantity.quantity_id].package_total)">
+        <td class="width-25">Packaging</td>
+        <td class="width-25"></td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].package_per_m_units | number}}</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].package_total | number}}</td>
+      </tr>
+      <tr ng-class="hideOnZero(quoteQuantities[quantity.quantity_id].pickup_skids_total)">
+        <td class="width-25">Pickup (skids)</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].pickup_skids | number}}</td>
+        <td class="width-25"></td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].pickup_skids_total | number}}</td>
+      </tr>
+      <tr ng-class="hideOnZero(quoteQuantities[quantity.quantity_id].delivery_skids_total)">
+        <td class="width-25">Delivery (skids)</td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].delivery_skids | number}}</td>
+        <td class="width-25"></td>
+        <td class="width-25" align="right">{{quoteQuantities[quantity.quantity_id].delivery_skids_total | number}}</td>
+      </tr>
+    </table>
+  </div>
+</div><!-- Stripping / Handwork / Shipping -->
+<div class="row">
+  <div class="columns large-12">
+    <table class="width-100 south-border">
+      <tr ng-repeat="extra in quantityExtras[quantity.quantity_id]">
+        <td>{{extra.name}}</td>
+        <td align="right" class="width-25">{{extra.cost_per_m | number}}</td>
+        <td align="right" class="width-25">{{extra.cost | number}}</td>
+      </tr>
+    </table>
+  </div>
+</div><!-- Extras -->
+<div class="row">
+  <div class="columns large-12">
+    <table class="total-table width-100">
+      <tr>
+        <th>Subtotal</th>
+        <th>Premium</th>
+        <th>Per M</th>
+      </tr>
+      <tr>
+        <td class="width-25" align="center">{{quoteQuantities[quantity.quantity_id].subtotal | currency}}</td>
+        <td class="width-25" align="center">{{quoteQuantities[quantity.quantity_id].premium | currency}}</td>
+        <td class="width-25" align="center">{{quoteQuantities[quantity.quantity_id].total_per_m | currency}}</td>
+      </tr>
+      <tr>
+        <td colspan="3" lass="width-25" align="center"><h3>{{quoteQuantities[quantity.quantity_id].total | currency}}</h3></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="row south-border">
+  <div class="columns large-12">
+    <span ng-bind-html-unsafe="quoteQuantities[quantity.quantity_id].private_notes"></span></div>
+</div><!-- Private Notes -->
+<div class="row">
+  <div class="columns large-12">
+    <span ng-bind-html-unsafe="quoteQuantities[quantity.quantity_id].public_notes"></span></div>
+</div><!-- Public Notes -->

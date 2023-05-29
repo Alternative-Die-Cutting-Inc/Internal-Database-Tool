@@ -1,0 +1,1 @@
+HomePageModule.controller(ShipFeed);var ShipFeed=["$scope","$http",function(e,t){e.shipFeed=null;t.post("php/ShipFeedHelper.php",{data:{request:"get_ship_feed"}}).success(function(t,n){if(!t.ERROR){e.shipFeed=t;console.log(t)}else console.log(t)}).error(function(e,t){console.log("Post failed.")})}];

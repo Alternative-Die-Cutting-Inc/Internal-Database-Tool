@@ -1,0 +1,13 @@
+<td align="center" class="quantity_id">{{quantity.quantity_id}}</td>
+<td align="center" class="units">{{quantity.units | number}}</td>
+<td align="center" class="units_per_sheet">{{quantity.units_per_sheet | number}}</td>
+<td align="center" class="sheets">{{quantity.sheets | number}}</td>
+<td align="center" class="total_per_m">{{quantity.total_per_m | currency}}</td>
+<td align="center" class="total">{{quantity.total | currency}}</td>
+<td align="center" class="notes">
+	<span ng-bind-html-unsafe="quantity.public_notes"></span></td>
+<div ng-bind-html-unsafe="expression"></div>
+<td ng-show="quantity.pickup_skids != 0 && quantity.delivery_skids !=0">Two way</td>
+<td ng-show="quantity.pickup_skids != 0 && quantity.delivery_skids == 0">Pickup</td>
+<td ng-show="quantity.delivery_skids != 0 && quantity.pickup_skids == 0">Delivery</td>
+<td ng-show="quantity.delivery_skids == 0 && quantity.pickup_skids==0"></td>

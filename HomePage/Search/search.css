@@ -1,0 +1,160 @@
+/*******************************************************************************
+* Written by Daniel Kats for Alternative Die Cutting, Inc.
+* Updated July 29, 2011
+* --------------------------------
+* The stylesheet for the search.
+*******************************************************************************/
+
+#search {
+    background-color: #fff;
+/*    margin-top: 3%;*/
+    padding: 2% 0;
+    margin-bottom: 2%;
+}
+
+#logo {
+    height: 40px;
+    display: inline-block;
+}
+
+#title {
+    display: inline-block;
+}
+
+#penguinPane {
+    visibility: hidden;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #ED3260; /* bright red */
+}
+
+/*******************************************************************************
+**************************** SEARCH SELECTION **********************************
+*******************************************************************************/
+
+.searchListContainer {
+    display: block;
+    margin: 0.25% auto;
+    text-align: center;
+    padding: 0;
+}
+
+#searchTableContainer {
+    width: 50%;
+}
+
+#searchFieldContainer {
+    width: 70%;
+}
+
+.searchList {
+    display: inline-block;
+    width: 100%;
+}
+
+.searchList li {
+    width: 30%;
+    display: inline-block;
+    float: left;
+}
+
+.searchOpt {
+    font-size: 1em;
+    text-align: center;
+    padding: 0 2%;
+    display: inline-block;
+    color: #005B94; /* blue */
+}
+
+.searchOpt:hover {
+    color: #D41E5D; /* pink-red */
+    cursor: pointer;
+}
+
+.searchOptSel {
+    color: #D41E5D; /* pink-red */
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/*******************************************************************************
+*********************** END SEARCH SELECTION ***********************************
+*******************************************************************************/
+
+#searchBarContainer {
+    clear: both; 
+    display: block; 
+    margin: 0 auto;
+}
+
+
+/*******************************************************************************
+*********************** SEARCH RESULT TABLE ************************************
+*******************************************************************************/
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+tr.searchRow0 td {
+    background-color: #51ABDB; /* Light blue */
+}
+
+tr.searchRow1 td {
+    background-color: #ABD6ED /* very light blue */
+}
+
+/*******************************************************************************
+****************** END SEARCH RESULT TABLE *************************************
+*******************************************************************************/
+
+#searchFooter {
+    color: #A1A1A1;
+    font-size: 0.8em;
+}
+
+.pageContainer {
+    margin: 2% auto;
+}
+
+.pageButton {
+    font-size: 1em;
+    text-align: center;
+    padding: 0 1%;
+    display: inline-block;
+    color: #005B94; /* blue */
+}
+
+.pageButton:hover {
+    color: #D41E5D; /* pink-red */
+    cursor: pointer;
+}
+
+.pageIndex:hover {
+    color: red;
+}
+.pageIndex:active {
+    color: #7E2024;
+}
+
+.searchPages {
+    width: 400px;
+    margin-left: auto ;
+  margin-right: auto ;
+    overflow-x: scroll; 
+}
+
+/*******************************************************************************
+****************** PROGRESS REPORT *********************************************
+*******************************************************************************/
+
+#progMsg {
+    display: inline-block;
+/*    float: left;*/
+}
+
+/*******************************************************************************
+****************** END PROGRESS REPORT *****************************************
+*******************************************************************************/

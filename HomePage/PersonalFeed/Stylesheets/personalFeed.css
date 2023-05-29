@@ -1,0 +1,84 @@
+/* 
+    Document   : personalFeed
+    Created on : Oct 15, 2012, 11:15:23 AM
+    Author     : Peter
+    Description:
+        This file dictates the layout of the divs of the personal feed
+*/
+
+/* 
+    This class holds the information for a job a user is subscribed to.
+*/
+.personalJob {
+    display: inline-block;
+    width: 100%;
+}
+
+/*
+    This class holds the basic job information such as name, customer etc.
+*/
+.personalFeedJobInfo {
+    width: 30%;
+    float: left;
+    display: inline-block;
+}
+
+/*
+    This class holds the shipping information. It displays smalls summaries of 
+the delivery slips and the time they were created (and picked up).
+*/
+.shippingInformation {
+    width: 68%;
+    float: left;
+    display: inline-block;
+}
+
+
+/*
+    This class holds the unsubscribe button.
+*/
+.unsubscribeDiv {
+    width: 2%;
+    float: left;
+    display: inline-block;
+    color: red;
+}
+
+/*
+    Holds the information about the slip (form and totals + skids)
+*/
+.slipInfo {
+    width: 60%;
+    /*    float: left;*/
+    display: inline-block;
+}
+
+/*
+    Holds the in/out time of the shipment.
+*/
+.shipmentTime {
+    width: 30%;
+    display: inline-block;
+    color: #D41E5D;
+}
+
+.shipmentOut {
+    background-color: #E5E5E5;
+    width:95%;
+}
+.shipReady {
+    width: 95%;
+}
+
+.deliverySlipPreview {
+    vertical-align:text-top;
+}
+
+div.unsubscribeDiv:hover, div.deliverySlipPreview:hover {
+    color: #3B99D9;
+}
+
+div.unsubscribeDiv:active, div.deliverySlipPreview:active {
+    color: #7E2024;
+}
+

@@ -1,0 +1,70 @@
+/* line 1, ../sass/worksheet.scss */
+.quote-info {
+  border: 1px solid black;
+  width: 90%;
+  display: block;
+  overflow-x: auto;
+  margin-bottom: 1em;
+  padding-left: 1px;
+  padding-right: 1px;
+  margin-left: 1px;
+}
+/* line 8, ../sass/worksheet.scss */
+.quote-info .quote-details {
+  width: 30%;
+  float: left;
+}
+/* line 13, ../sass/worksheet.scss */
+.quote-info .quote-describe {
+  width: 65%;
+  float: right;
+}
+/* line 17, ../sass/worksheet.scss */
+.quote-info p {
+  word-wrap: normal;
+}
+
+/* line 25, ../sass/worksheet.scss */
+.quantity-container {
+  border: 1px solid black;
+  width: 30%;
+  margin-left: 2px;
+  margin-right: 2px;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 10px;
+}
+/* line 32, ../sass/worksheet.scss */
+.quantity-container:nth-child(3n + 1) {
+  clear: left;
+}
+/* line 35, ../sass/worksheet.scss */
+.quantity-container:nth-child(3) {
+  page-break-after: always;
+}
+/* line 39, ../sass/worksheet.scss */
+.quantity-container .quantity-id {
+  border: 1px solid black;
+}
+
+/* line 45, ../sass/worksheet.scss */
+.width-25 {
+  width: 25%;
+  align: center;
+}
+
+/* line 50, ../sass/worksheet.scss */
+.width-100 {
+  width: 100%;
+}
+
+/* line 54, ../sass/worksheet.scss */
+.south-border {
+  border-bottom: 1px solid black;
+}
+
+/* line 59, ../sass/worksheet.scss */
+h3 {
+  margin-bottom: 0.5em;
+  margin-top: 0.1em;
+}

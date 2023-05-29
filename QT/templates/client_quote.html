@@ -1,0 +1,16 @@
+<table>
+	<tr>
+		<th></th>
+		<th>Units</th>
+		<th>Units per Sheet</th>
+		<th>Sheets</th>
+		<th>Cost per Thousand</th>
+		<th>Total</th>
+		<th>Notes</th>
+		<th>Shipping</th>
+	</tr>
+	<tr class="columns twelve"
+	  ng-repeat="quantity in row track by $index" 
+	   ng-include="'templates/client_quantity.html'">
+	</tr>
+</table>

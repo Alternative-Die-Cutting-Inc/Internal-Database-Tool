@@ -1,0 +1,62 @@
+.quote-info {
+	border: 1px solid black;
+	width: 90%;
+	display: block;
+	overflow-x: auto;
+	margin-bottom: 1em;
+
+	.quote-details {
+		width: 30%;
+		float:left;
+	}
+
+	.quote-describe {
+		width: 65%;
+		float:right;
+	}
+	p {
+		word-wrap: normal;
+	}
+	padding-left: 1px;
+	padding-right: 1px;
+	margin-left: 1px;
+}
+
+.quantity-container {
+	border: 1px solid black;
+	width: 30%;
+	margin-left: 2px;
+	margin-right: 2px;
+	display: inline-block;
+	vertical-align:top;
+	&:nth-child(3n + 1) {
+		clear: left;
+	}
+	&:nth-child(3) {
+		page-break-after: always; 
+	}
+
+	.quantity-id {
+		border: 1px solid black;
+	}
+	margin-bottom: 10px;
+}
+
+.width-25 {
+	width: 25%;
+	align: center;
+}
+
+.width-100 {
+	width: 100%;
+}
+
+.south-border {
+	border-bottom: 1px solid black;
+}
+
+
+h3 {
+  margin-bottom: 0.5em;
+  margin-top: 0.1em;
+}

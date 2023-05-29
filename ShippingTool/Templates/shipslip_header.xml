@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<header>
+        <area>
+              <name>Order Information</name>
+              <textfield auto="auto">Docket Number</textfield>
+              <textfield auto="auto">Quote Number</textfield>
+              <dropdown  auto="auto">Customer</dropdown>
+              <textfield auto="auto">Job Name</textfield>
+              <textfield auto="auto">Customer PO Number</textfield>
+        </area>
+
+</header>
+
+
+

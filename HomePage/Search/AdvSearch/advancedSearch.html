@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Advanced Search</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!--        <meta http-equiv="Content-Style-Type" content="text/css" />-->
+
+        <link rel="stylesheet" type="text/css" href="advancedSearch.css" />
+        <!--        <link rel="stylesheet" type="text/css" href="calendar.css" />-->
+
+        <!-- Google repository for JQuery -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+        <!--        <script type="text/javascript" src="calendar.js"></script>-->
+        <script type="text/javascript" src="advSearch.js"></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <h2>Advanced Search</h2>
+
+            <h4 class="alert">Note: this does not search quotes done with the old
+                quoting system (yet).</h4>
+
+            <button type="button" onclick="AdvancedSearch.addFilter()">
+                Add Search Option
+            </button>
+
+            <div id="filterPane">
+                <select class="prototype searchFilter" style="display: none;">
+                    <option>None</option>
+                    <option>Customer</option>
+                    <option>Author</option>
+                    <option>Sort</option>
+                </select>
+
+                <select class="prototype searchSort" style="display: none;">
+                    <option>Date - Newest First</option>
+                    <option>Date - Oldest First</option>
+                    <option>Quote Number - Largest First</option>
+                    <option>Quote Number - Smallest First</option>
+                </select>
+            </div>
+
+            <div id="controlPanel">
+                <button type="button" id="buildButton" onclick="AdvancedSearch.buildQuery()" style="display: none;">
+                    Build Query
+                </button>
+
+                <button type="button" onclick="window.close()">Cancel</button>
+                <button type="button" id="goButton" disabled="disabled" style="display: none;">Go!</button>
+            </div>
+
+            <!-- Now the home page has to listen for the magic words... -->
+            
+                <div id="queryPane">
+                </div>
+        </div>
+    </body>
+</html>

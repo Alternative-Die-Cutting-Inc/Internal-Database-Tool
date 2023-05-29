@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<header>
+        <area>
+              <name>Order Information</name>
+              <textfield auto="auto">Date Received</textfield>
+              <textfield>Docket Number</textfield>
+              <textfield>Job Name</textfield>
+              <textfield>Customer</textfield>
+              <textfield>Customer PO Number</textfield>
+              <textfield>Quote Number</textfield>
+              <textfield>Sold For</textfield>
+        </area>
+
+        <area>
+              <name>Production Information</name>
+              <textfield>Production Person</textfield>
+              <textarea display="public">Finishing</textarea>
+              <textarea display="public">Special Instructions</textarea>
+        </area>
+</header>
+
+
+
+

@@ -1,0 +1,45 @@
+/*******************************************************************************
+
+* Style sheet for feedback popup.
+* --------------------------------------------------------
+* Written by Daniel Kats for Alternative Die Cutting, Inc.
+* Updated July 11, 2011
+
+*******************************************************************************/
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 95%;
+}
+
+#content {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-family: Calibri, Helvetica, sans-serif;
+}
+
+.bar {
+    background-color: #3B99D9; /* Light blue */
+    color: #fff;
+}
+
+#commentPane {
+    height: 120px;
+    width: 300px;
+}
+
+#commentPane textarea {
+    font-size: 1em;
+    font-family: Arial, Calibri;
+}
+
+.confirm {
+    color: #6E9C4F; /* green */
+}
+
+.error {
+    color: #E01B4C; /* red */
+}

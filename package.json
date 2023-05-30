@@ -1,0 +1,18 @@
+{
+  "name": "alternative-die-cutting-inc-internal-database-tool",
+  "version": "1.0.0",
+  "description": "The internal database tool used at alternative die cutting inc.",
+  "repository": "https://github.com/Alternative-Die-Cutting-Inc/Internal-Database-Tool.git",
+  "author": "Farbod Mohammadzadeh",
+  "license": "MIT",
+  "scripts": {
+    "start:dev": "concurrently \"cd backend && nodemon ./server.js localhost 8080\" \"cd frontend && yarn dev\"",
+    "dev": "cd client && yarn dev",
+    "start": "cd server && nodemon ./server.js localhost 8080"
+},
+
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}

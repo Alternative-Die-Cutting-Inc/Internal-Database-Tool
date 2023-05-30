@@ -1,0 +1,17 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "internal tool backend server",
+  "main": "server.js",
+  "author": "Farbod Mohammadzadeh",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon ./server.js localhost 8080"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mysql2": "^3.3.3"
+  }
+}

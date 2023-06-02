@@ -22,29 +22,26 @@ const Navbar = () => {
               alt="frosh logo"
             ></img>
           </Link>
-          {pages.hidden.map((page, index) => {
+          {pages.functions[pathname.replace("/", "")].map((page, index) => {
             return (
-              <>
-                {page.parent === pathname ? (
-                  <div
-                    className="navbar-sub-container"
-                    key={page.path}
-                    style={
-                      index == 0
-                        ? {
-                            "border-width": "0px 1px 0px 1px",
-                            "border-style": "solid",
-                            "border-color": "#000000",
-                          }
-                        : {}
-                    }
-                  >
-                    <div className="navbar-link-label"> {page.label} </div>
-                  </div>
-                ) : (
-                  <></>
-                )}
-              </>
+              <div
+                className="navbar-sub-container"
+                key={page.label}
+                style={
+                  index == 0
+                    ? {
+                        borderWidth: "0px 1px 0px 1px",
+                        borderStyle: "solid",
+                        borderColor: "#000000",
+                      }
+                    : {}
+                }
+                onClick={page.function}
+              >
+                <nav className="navbar-link-label">
+                  <h3>{page.label}</h3>
+                </nav>
+              </div>
             );
           })}
         </div>
@@ -66,20 +63,25 @@ const Navbar = () => {
                   style={
                     index == 0
                       ? {
-                          "border-width": "0px 1px 0px 1px",
-                          "border-style": "solid",
-                          "border-color": "#000000",
+                          borderWidth: "0px 1px 0px 1px",
+                          borderStyle: "solid",
+                          borderColor: "#000000",
                         }
                       : {}
                   }
                 >
-                  <nav className="navbar-link-label"> {page.label} </nav>
+                  <nav className="navbar-link-label">
+                    <h3>{page.label}</h3>{" "}
+                  </nav>
                 </div>
               </Link>
             );
           })}
           <div className="navbar-sub-container" key={"logout"}>
-            <div className="navbar-link-label"> Logout </div>
+            <div className="navbar-link-label">
+              {" "}
+              <h3>Logout</h3>{" "}
+            </div>
           </div>
         </div>
       </div>

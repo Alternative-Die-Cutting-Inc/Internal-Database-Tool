@@ -1,0 +1,156 @@
+@import "./scssStyles/_mixins.scss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica";
+  @include devices(tablet) {
+    user-select: none;
+  }
+}
+
+:root {
+  --dark-mode: false;
+}
+
+html {
+  background-color: var(--dark-blue);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Inter-Bold", sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-link);
+  transition: text-decoration-color 250ms;
+  cursor: pointer;
+  background: linear-gradient(to left, var(--text-link), var(--text-link));
+  background-size: 100% 2px, 0 2px;
+  background-position: 0% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms;
+}
+
+input {
+  background-color: (--faq-searchbar-bg);
+}
+input[type="text"] {
+  color: var(--black);
+}
+::placeholder {
+  color: var(--placeholder-text);
+}
+
+a:hover {
+  transition: background-size 400ms;
+  background-size: 0% 2px, 100% 2px;
+}
+
+.no-link-style {
+  background: none !important;
+  text-decoration: none !important;
+  color: unset;
+}
+
+.page {
+  position: absolute;
+  left: 15px;
+  right: 15px;
+}
+
+.page-enter {
+  opacity: 0;
+  transform: scale(1.08);
+  @include devices(tablet) {
+    transform: unset;
+  }
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
+  @include devices(tablet) {
+    transform: unset;
+    transition: opacity 300ms;
+  }
+}
+
+.page-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 300ms, transform 300ms;
+  @include devices(tablet) {
+    transform: unset;
+    transition: opacity 300ms;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 3px;
+}
+
+.navbar-space-top {
+  height: 45px;
+  @include devices(tablet) {
+    height: 0px;
+  }
+}
+
+.error-success-box-snackbar-fixed {
+  position: fixed;
+  bottom: 20px;
+  left: 0px;
+  z-index: 100;
+  @include devices(tablet) {
+    bottom: 65px;
+  }
+}
+
+.display-only-tablet {
+  display: none;
+  @include devices(tablet) {
+    display: unset;
+  }
+}
+
+.display-only-desktop {
+  display: unset;
+  @include devices(tablet) {
+    display: none;
+  }
+}

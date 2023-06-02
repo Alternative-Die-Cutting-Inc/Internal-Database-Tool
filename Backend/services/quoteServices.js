@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 const pool = require("../util/dbconfig");
 
 const quoteServices = {

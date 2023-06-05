@@ -22,7 +22,7 @@ const Navbar = () => {
               alt="frosh logo"
             ></img>
           </Link>
-          {pages.functions[pathname.replace("/", "")].map((page, index) => {
+          {pages.functions[pathname.replace("/", "")]?.map((page, index) => {
             return (
               <div
                 className="navbar-sub-container"

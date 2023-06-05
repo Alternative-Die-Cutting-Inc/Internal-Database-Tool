@@ -18,8 +18,12 @@ html {
   background-color: var(--dark-blue);
   scroll-behavior: smooth;
   overflow-x: hidden;
-  overflow-y: hidden;
   font-family: "Inter", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
 }
 
 h1,
@@ -102,26 +106,6 @@ a:hover {
     transform: unset;
     transition: opacity 300ms;
   }
-}
-
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover);
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar-thumb);
-  background: var(--scrollbar-thumb);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--scrollbar-track);
-  border-radius: 3px;
 }
 
 .navbar-space-top {

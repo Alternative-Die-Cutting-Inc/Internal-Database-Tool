@@ -1,3 +1,57 @@
 .homepage-container {
   height: 150vh;
 }
+
+.search-menu {
+  margin-top: 2vh;
+  margin: 2vh 1vw;
+  background: var(--dark-grey);
+  border-radius: 15px;
+}
+
+.job-search-container {
+  .search-header {
+    border-radius: 15px 15px 0px 0px;
+  }
+}
+.quote-search-container {
+  .search-header {
+    border-radius: 0px 0px 15px 15px;
+  }
+}
+
+.search-header {
+  padding: 1vh 1vw;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  width: 25vw;
+  justify-content: space-between;
+
+  cursor: pointer;
+  &:hover {
+    background-color: var(--light-accent);
+    transition: background-color 200ms;
+    h2,
+    .expansion-icon {
+      color: black;
+    }
+  }
+}
+
+.search-title {
+  h2 {
+    color: var(--light-accent);
+    font-weight: 200;
+    font-size: 24px;
+  }
+}
+.expansion-icon {
+  color: var(--light-accent);
+  font-size: 24px;
+  display: contents;
+}
+
+.search-field {
+  height: 20px;
+}

@@ -29,7 +29,18 @@ export const pages = {
       path: "/reports",
     },
   ],
-
+  hidden: [
+    {
+      label: "Home",
+      component: <PageHome />,
+      path: "/",
+    },
+    {
+      label: "Login",
+      component: <PageLogin />,
+      path: "/login",
+    },
+  ],
   functions: {
     quotes: [...PageQuotesFunctions],
     dockets: [...PageDocketsFunctions],

@@ -1,3 +1,12 @@
+/**
+ * @fileOverview App component. This is the main component of the project. All pages are rendered here.
+ * @author Farbod Mohammadzadeh - https://github.com/Freeassassin
+ * @version 1.0
+ * @date 2023-06-07
+ * @description This component is responsible for rendering all pages. It also handles page transitions. 
+ * @resources  
+ */
+
 import "./App.scss";
 import { pages } from "./util/pages";
 import { Navbar } from "./components/Navbar/Navbar";
@@ -39,7 +48,6 @@ const TransitionRoutes = () => {
                   <div
                     className="content-container"
                     style={{
-                      minHeight: "100vh",
                       marginTop: "45px",
                       position: "absolute",
                       right: 0,

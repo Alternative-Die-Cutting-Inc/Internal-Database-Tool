@@ -1,4 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+/**
+ * @fileOverview Confetti component.
+ * @author Farbod Mohammadzadeh - https://github.com/Freeassassin
+ * @version 1.0
+ * @date 2023-06-07
+ * @description This component is used to show confetti animation.
+ * @resource https://www.npmjs.com/package/react-canvas-confetti
+ */
+
+import { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 

@@ -1522,6 +1522,11 @@ ms@2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
+multiselect-react-dropdown@^2.0.25:
+  version "2.0.25"
+  resolved "https://registry.yarnpkg.com/multiselect-react-dropdown/-/multiselect-react-dropdown-2.0.25.tgz#0c8d16f20d78023d5be2f3af4f15a4a164b6b427"
+  integrity sha512-z8kUSyBNOuV7vn4Dk35snzXWtIfTdSEEXhgDdLMvOmR+xJFx35vc1voUlSuOvrk3khb+hXC219Qs9szOvNm25Q==
+
 nanoid@^3.3.6:
   version "3.3.6"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.6.tgz#443380c856d6e9f9824267d960b4236ad583ea4c"
@@ -1742,6 +1747,11 @@ react-router@6.11.2:
   integrity sha512-74z9xUSaSX07t3LM+pS6Un0T55ibUE/79CzfZpy5wsPDZaea1F8QkrsiyRnA2YQ7LwE/umaydzXZV80iDCPkMg==
   dependencies:
     "@remix-run/router" "1.6.2"
+
+react-table@^7.8.0:
+  version "7.8.0"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.8.0.tgz#07858c01c1718c09f7f1aed7034fcfd7bda907d2"
+  integrity sha512-hNaz4ygkZO4bESeFfnfOft73iBUj8K5oKi1EcSHPAibEydfsX2MyU6Z8KCr3mv3C9Kqqh71U+DhZkFvibbnPbA==
 
 react-transition-group@^4.4.5:
   version "4.4.5"

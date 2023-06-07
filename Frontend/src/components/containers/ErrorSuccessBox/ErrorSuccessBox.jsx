@@ -1,4 +1,12 @@
-import React from 'react';
+/**
+ * @fileOverview ErrorSuccessBox component.
+ * @author Farbod Mohammadzadeh - https://github.com/Freeassassin
+ * @version 1.0
+ * @date 2023-06-07
+ * @description This component is used to show error or success messages to user. This component is used in all pages.
+ * @resource 
+ */
+
 import PropTypes from 'prop-types';
 import './ErrorSuccessBox.scss';
 

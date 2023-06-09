@@ -48,14 +48,8 @@ a {
   transition: background-size 400ms;
 }
 
-input {
-  background-color: (--faq-searchbar-bg);
-}
-input[type="text"] {
-  color: var(--black);
-}
 ::placeholder {
-  color: var(--placeholder-text);
+  color: #000;
 }
 
 a:hover {

@@ -1,0 +1,46 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+  }
+  
+  th,
+  td {
+    padding: 1.5vh 1vw;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #000;
+  }
+  th {
+    text-align: left;
+  }
+  thead {
+    background-color: var(--light-grey);
+    tr {
+      border-bottom: 1px solid #000000;
+    }
+    th {
+      border-right: 1px solid #000000;
+    }
+  }
+  tbody {
+    background-color: var(--light-grey);
+  
+    tr {
+      border-bottom: 1px solid #000000;
+      &:hover {
+        background-color: rgba(135, 135, 135, 0.714);
+      }
+      .badge {
+        background-color: var(--light-accent);
+        color: #fff;
+        margin: 5px;
+        padding: 10px;
+        border-radius: 15px;
+      }
+    }
+    td {
+      position: relative;
+      border-right: 1px solid #000000;
+    }
+  }
+  

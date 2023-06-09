@@ -14,6 +14,7 @@
     "multiselect-react-dropdown": "^2.0.25",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
+    "react-datepicker": "^4.12.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.9.0",
     "react-router-dom": "^6.11.2",
@@ -21,6 +22,7 @@
     "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^4.0.0",

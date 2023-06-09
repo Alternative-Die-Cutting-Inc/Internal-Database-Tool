@@ -1,0 +1,47 @@
+.filter-sort-container {
+  padding: 1.25vh 1vw 1.25vh 1vw;
+
+  display: flex;
+  background-color: var(--dark-grey);
+  justify-content: space-between;
+  border-radius: 0 15px 0 0;
+  ::placeholder {
+    color: var(--light-accent);
+  }
+}
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sort-field,
+.filter-field {
+  height: 5vh;
+  background-color: var(--dark-grey);
+  border: 1px solid var(--light-accent);
+  border-radius: 15px;
+  color: var(--light-accent);
+  padding: 0 1vw;
+  font-size: 16px;
+}
+
+.filter-field {
+  margin-right: 1vw;
+}
+
+.react-datepicker__close-icon {
+  right: 1.5vw !important;
+}
+
+.react-datepicker-wrapper {
+  width: max-content !important;
+}
+
+.sorter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}

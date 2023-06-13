@@ -7,7 +7,6 @@ import { useState } from "react";
 
 const TableControls = ({
   filterCustomers,
-  customersArray,
   filterStatus,
   filterDate,
   statusArray,
@@ -22,15 +21,12 @@ const TableControls = ({
       <div className="filter-sort-container">
         <div className="filters">
           {filterCustomers ? (
-            <select className="filter-field" name="customer-name">
-              {customersArray.map((customer, index) => {
-                return (
-                  <option key={customer.name + index} value={customer.name}>
-                    {customer.name}
-                  </option>
-                );
-              })}
-            </select>
+            <input
+              className="filter-field"
+              type="search"
+              name="customer-name"
+              placeholder="Customer Name:"
+            />
           ) : (
             <></>
           )}
@@ -119,7 +115,6 @@ const TableControls = ({
 
 TableControls.propTypes = {
   filterCustomers: PropTypes.bool,
-  customersArray: PropTypes.array,
   filterStatus: PropTypes.bool,
   statusArray: PropTypes.array,
   filterDate: PropTypes.bool,

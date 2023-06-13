@@ -30,11 +30,14 @@ const StatusLabels = ({ values }) => {
             </span>
           );
         } else {
+          let color = Math.floor(Math.random() * 16777215).toString(16);
           return (
             <span
               className="badge"
               key={idx}
-              style={{ backgroundColor: "blue" }}
+              style={{
+                backgroundColor: "#" + color,
+              }}
             >
               {status}
             </span>

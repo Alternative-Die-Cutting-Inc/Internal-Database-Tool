@@ -62,7 +62,24 @@
   border-radius: 15px;
   padding: 10px;
   border: none;
-  margin: 0vh 1vw;
+  margin-left: 1vw;
+}
+
+.search-submit {
+  height: 5vh;
+  border: 1px solid #000;
+  border-radius: 15px;
+  padding: 0 1vw;
+  margin-left: 1vw;
+  font-size: 16px;
+  background-color: #728ef4;
+  color: var(--light-accent);
+  cursor: pointer;
+  &:hover {
+    background-color: var(--light-accent);
+    color: var(--dark-grey);
+    transition: background-color 200ms;
+  }
 }
 
 // ITEMS CONTAINER

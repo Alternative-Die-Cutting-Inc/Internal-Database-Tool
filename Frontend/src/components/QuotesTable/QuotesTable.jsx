@@ -2,9 +2,9 @@ import { PaginationControls } from "../PaginationControls/PaginationControls";
 import "./QuotesTable.scss";
 import { StatusLabels } from "../StatusLabels/StatusLabels";
 import { useTable, useSortBy, usePagination } from "react-table";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import "../../scssStyles/tableStyle.scss";
-
+import { Link } from "react-router-dom";
 import { faker } from "@faker-js/faker";
 
 /** The quotes table component.
@@ -28,7 +28,17 @@ const QuotesTable = () => {
 
   const columns = useMemo(
     () => [
-      { Header: "Quote Number", accessor: "quoteNumber" },
+      {
+        Header: "Quote Number",
+        accessor: "quoteNumber",
+        // eslint-disable-next-line react/prop-types
+        Cell: ({ cell: { value } }) => (
+          <Link to={`/quotetool?quoteNumber=${value}`}>
+            <a>{value}</a>
+          </Link>
+        ),
+        width: "auto",
+      },
       { Header: "Customer", accessor: "customer" },
       { Header: "Job Name", accessor: "jobName" },
       { Header: "Description", accessor: "description" },

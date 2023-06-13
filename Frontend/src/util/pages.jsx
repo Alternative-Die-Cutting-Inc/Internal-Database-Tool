@@ -6,6 +6,10 @@ import { PageQuotesFunctions } from "../pages/Quotes/functions";
 import { PageDockets } from "../pages/Dockets/Dockets";
 import { PageDocketsFunctions } from "../pages/Dockets/functions";
 import { PageReports } from "../pages/Reports/Reports";
+import { PageQuoteTool } from "../pages/QuoteTool/QuoteTool";
+import { PageQuoteToolFunctions } from "../pages/QuoteTool/functions";
+import { PageDocketTool } from "../pages/DocketTool/DocketTool";
+import { PageDocketToolFunctions } from "../pages/DocketTool/functions";
 
 export const pages = {
   404: {
@@ -36,6 +40,16 @@ export const pages = {
       path: "/",
     },
     {
+      label: "Quote Tool",
+      component: <PageQuoteTool />,
+      path: "/quotetool/*",
+    },
+    {
+      label: "Docket Tool",
+      component: <PageDocketTool />,
+      path: "/dockettool/*",
+    },
+    {
       label: "Login",
       component: <PageLogin />,
       path: "/login",
@@ -44,6 +58,8 @@ export const pages = {
   functions: {
     quotes: [...PageQuotesFunctions],
     dockets: [...PageDocketsFunctions],
+    quotetool: [...PageQuoteToolFunctions],
+    dockettool: [...PageDocketToolFunctions],
     reports: [],
   },
 };

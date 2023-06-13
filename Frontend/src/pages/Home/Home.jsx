@@ -60,19 +60,18 @@ const PageHome = () => {
                   name="docker-number"
                   placeholder="Docket Number:"
                 />
-                <select className="search-field" name="customer-name">
-                  {customers.map((customer, index) => {
-                    return (
-                      <option
-                        className="search-field"
-                        key={customer.name + index}
-                        value={customer.name}
-                      >
-                        {customer.name}
-                      </option>
-                    );
-                  })}
-                </select>
+                <input
+                  className="search-field"
+                  type="search"
+                  name="customer-name"
+                  placeholder="Customer:"
+                />
+                <input
+                  className="search-field"
+                  type="search"
+                  name="quote-number"
+                  placeholder="Quote Number:"
+                />
                 <input
                   className="search-field"
                   type="search"
@@ -85,7 +84,7 @@ const PageHome = () => {
                   name="quote-number"
                   placeholder="Quote Number:"
                 />
-                <input className="filter-field" type="submit" value="Search" />
+                <input className="search-submit" type="submit" value="Search" />
               </form>
             </div>
           </div>
@@ -112,18 +111,15 @@ const PageHome = () => {
                 <input
                   className="search-field"
                   type="search"
-                  name="docker-number"
-                  placeholder="Docket Number:"
+                  name="quote-number"
+                  placeholder="Quote Number:"
                 />
-                <select className="search-field" name="customer-name">
-                  {customers.map((customer, index) => {
-                    return (
-                      <option key={customer.name + index} value={customer.name}>
-                        {customer.name}
-                      </option>
-                    );
-                  })}
-                </select>
+                <input
+                  className="search-field"
+                  type="search"
+                  name="customer-name"
+                  placeholder="Customer:"
+                />
                 <input
                   className="search-field"
                   type="search"
@@ -136,7 +132,7 @@ const PageHome = () => {
                   name="quote-number"
                   placeholder="Quote Number:"
                 />
-                <input className="filter-field" type="submit" value="Search" />
+                <input className="search-submit" type="submit" value="Search" />
               </form>
             </div>
           </div>

@@ -1,46 +1,48 @@
 table {
-    width: 100%;
-    border-collapse: collapse;
-    overflow: hidden;
-  }
-  
-  th,
-  td {
-    padding: 1.5vh 1vw;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #000;
+  width: 100%;
+  border-collapse: collapse;
+  overflow: auto;
+  font-size: 1rem;
+}
+
+th,
+td {
+  padding: 1.5vh 0.5vw;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #000;
+}
+th {
+  text-align: center;
+}
+thead {
+  background-color: var(--light-grey);
+  tr {
+    border-bottom: 1px solid #000000;
   }
   th {
-    text-align: left;
+    border-right: 1px solid #000000;
   }
-  thead {
-    background-color: var(--light-grey);
-    tr {
-      border-bottom: 1px solid #000000;
+}
+tbody {
+  background-color: var(--light-grey);
+
+  tr {
+    border-bottom: 1px solid #000000;
+    &:hover {
+      background-color: rgba(135, 135, 135, 0.714);
     }
-    th {
-      border-right: 1px solid #000000;
-    }
-  }
-  tbody {
-    background-color: var(--light-grey);
-  
-    tr {
-      border-bottom: 1px solid #000000;
-      &:hover {
-        background-color: rgba(135, 135, 135, 0.714);
-      }
-      .badge {
-        background-color: var(--light-accent);
-        color: #fff;
-        margin: 5px;
-        padding: 10px;
-        border-radius: 15px;
-      }
-    }
-    td {
-      position: relative;
-      border-right: 1px solid #000000;
+    .badge {
+      display: block;
+      text-align: center;
+      background-color: var(--light-accent);
+      color: #fff;
+      margin: 0.25rem;
+      padding: 0.5rem;
+      border-radius: 15px;
     }
   }
-  
+  td {
+    position: relative;
+    border-right: 1px solid #000000;
+  }
+}

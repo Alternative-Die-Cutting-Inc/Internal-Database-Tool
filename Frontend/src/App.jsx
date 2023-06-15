@@ -3,8 +3,8 @@
  * @author Farbod Mohammadzadeh - https://github.com/Freeassassin
  * @version 1.0
  * @date 2023-06-07
- * @description This component is responsible for rendering all pages. It also handles page transitions. 
- * @resources  
+ * @description This component is responsible for rendering all pages. It also handles page transitions.
+ * @resources
  */
 
 import "./App.scss";
@@ -49,6 +49,7 @@ const TransitionRoutes = () => {
                     className="content-container"
                     style={{
                       marginTop: "45px",
+                      height: "fit-content",
                       position: "absolute",
                       right: 0,
                       left: 0,

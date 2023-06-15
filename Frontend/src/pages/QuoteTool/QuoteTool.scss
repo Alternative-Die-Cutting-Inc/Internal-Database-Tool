@@ -1,0 +1,127 @@
+.quote-tool-container {
+  min-height: 90vh;
+  background-color: var(--light-grey);
+  margin: 1rem;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.job-item-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 0.25rem 0.5rem 0.25rem;
+  justify-content: space-between;
+}
+
+.job-notes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 7.5rem;
+
+  textarea {
+    height: 3.75rem;
+    width: 20.5vw;
+    max-width: 20.5vw;
+    border-radius: 5px;
+    padding-top: 5px;
+    font-size: 1rem;
+  }
+}
+
+.job-input-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 7.5rem;
+  background-color: var(--dark-grey);
+  border-radius: 5px;
+  padding: 0 0.25rem;
+}
+
+.job-input-label {
+  color: var(--light-accent);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: unset;
+}
+
+.job-input {
+  width: 4.75vw;
+  height: 3.5vh;
+  margin: 0rem 0rem 0rem 0.5rem;
+  text-align: center;
+}
+
+.job-input,
+.job-input-label {
+  font-size: 1rem;
+}
+
+.small {
+  width: 2.75vw;
+}
+
+.input-break {
+  width: 2.75vw;
+}
+
+.job-input-table {
+  border-collapse: collapse;
+  overflow: auto;
+  height: inherit;
+  min-height: inherit;
+  td {
+    font-size: 1rem;
+
+    background-color: unset;
+    padding: unset;
+    color: var(--light-accent);
+    vertical-align: middle;
+    .job-input-label {
+      display: unset;
+    }
+  }
+}
+
+#job-cost-table {
+  text-align: center;
+  .job-input {
+    margin: unset;
+    text-align: center;
+  }
+  td {
+    padding: 0.25rem;
+  }
+}
+
+.job-input-button {
+  width: 80%;
+  font-size: 1rem;
+  height: 80%;
+}
+
+#extras-table {
+  .job-input {
+    width: 3.25vw;
+  }
+}
+
+.add-job-button {
+  text-align: center;
+  width: 30vw;
+  height: 7.5vh;
+  margin-bottom: 1vh;
+  border-radius: 15px;
+  background-color: var(--dark-grey);
+  color: var(--light-accent);
+  font-size: 2rem;
+  
+  &:hover {
+    background-color: var(--light-accent);
+    color: var(--dark-grey);
+  }
+}

@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "start:dev": "concurrently \"cd backend && nodemon ./server.js localhost 8080\" \"cd frontend && yarn dev\"",
-    "dev": "cd client && yarn dev",
-    "start": "cd server && nodemon ./server.js localhost 8080"
+    "dev": "cd frontend && yarn dev",
+    "start": "cd backend && nodemon ./server.js localhost 8080"
 },
 
   "devDependencies": {

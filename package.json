@@ -8,7 +8,8 @@
   "scripts": {
     "start:dev": "concurrently \"cd backend && nodemon ./server.js localhost 8080\" \"cd frontend && yarn dev\"",
     "dev": "cd frontend && yarn dev",
-    "start": "cd backend && nodemon ./server.js localhost 8080"
+    "start": "cd backend && nodemon ./server.js localhost 8080",
+    "download": "concurrently \"cd backend && yarn install\" \"cd frontend && yarn install\""
 },
 
   "devDependencies": {

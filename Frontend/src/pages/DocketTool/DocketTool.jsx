@@ -37,6 +37,7 @@ const PageDocketTool = () => {
       <div className="docket-tool-container">
         <div className="docket-info">
           <table className="docket-info-table" id="docket-info-table">
+            <tbody>
             <tr>
               <td>Docket #:</td>
               <td>
@@ -77,6 +78,7 @@ const PageDocketTool = () => {
                 <input type="text" className="docket-info-input" />
               </td>
             </tr>
+            </tbody>
           </table>
         </div>
         <div className="docket-column-container">
@@ -182,7 +184,7 @@ const PageDocketTool = () => {
                   <th>Quantity Shipped:</th>
                   <th>Last Shipment:</th>
                 </tr>
-                {[...Array(0)].map((item, index) => (
+                {[...Array(10)].map((item, index) => (
                   <tr key={index}>
                     <td>
                       <input type="text" />
@@ -234,7 +236,7 @@ const PageDocketTool = () => {
                   <th>Cost:</th>
                   <th>Note:</th>
                 </tr>
-                {[...Array(0)].map((item, index) => (
+                {[...Array(10)].map((item, index) => (
                   <tr key={index}>
                     <td>
                       <input type="text" />

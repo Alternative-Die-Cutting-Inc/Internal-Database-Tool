@@ -24,11 +24,9 @@
   background-color: var(--dark-grey);
 }
 
-
-
 .docket-info-table {
   height: 100%;
-  border-radius: 15px; 
+  border-radius: 15px;
   overflow: auto;
   font-size: 1.25rem;
 
@@ -37,6 +35,13 @@
     background-color: unset;
     color: var(--light-accent);
     vertical-align: bottom;
+  }
+  thead {
+    background-color: unset;
+    border-bottom: 2px solid var(--light-accent);
+  }
+  th {
+    border: unset;
   }
   tbody {
     overflow: auto;

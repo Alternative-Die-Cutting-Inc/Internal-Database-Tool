@@ -371,7 +371,7 @@ const PageQuoteTool = () => {
                           <input
                             className="job-input"
                             type="text"
-                            value={extra.name}
+                            defaultValue={extra.name}
                           />
                         </td>
                         <td>
@@ -545,21 +545,21 @@ const PageQuoteTool = () => {
                         <input
                           className="job-input"
                           type="text"
-                          value="2000.00"
+                          defaultValue="2000.00"
                         />
                       </td>
                       <td>
                         <input
                           className="job-input"
                           type="text"
-                          value="2000.00"
+                          defaultValue="2000.00"
                         />
                       </td>
                       <td>
                         <input
                           className="job-input"
                           type="text"
-                          value="2000.00"
+                          defaultValue="2000.00"
                         />
                       </td>
                     </tr>
@@ -574,7 +574,7 @@ const PageQuoteTool = () => {
                           }}
                           className="job-input"
                           type="text"
-                          value={"2000.00"}
+                          defaultValue={"2000.00"}
                           disabled
                         />
                       </td>
@@ -629,6 +629,7 @@ const PageQuoteTool = () => {
             </>
           ))}
         </div>
+        
         <button className="add-job-button">+</button>
       </div>
     </>

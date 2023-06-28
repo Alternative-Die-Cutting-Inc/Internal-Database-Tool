@@ -36,7 +36,9 @@ const Navbar = () => {
                       }
                     : {}
                 }
-                onClick={page.function}
+                onClick={() => {
+                  page.function();
+                }}
               >
                 <nav className="navbar-link-label">
                   <h3>{page.label}</h3>

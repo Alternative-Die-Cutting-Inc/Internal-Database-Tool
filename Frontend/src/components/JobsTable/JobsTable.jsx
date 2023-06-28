@@ -4,7 +4,6 @@ import {
   useTable,
   useSortBy,
   usePagination,
-  useBlockLayout,
 } from "react-table";
 import { useMemo } from "react";
 import "../../scssStyles/tableStyle.scss";
@@ -44,9 +43,7 @@ const JobsTable = () => {
         accessor: "docketNumber",
         // eslint-disable-next-line react/prop-types
         Cell: ({ cell: { value } }) => (
-          <Link to={`/dockettool?docketNumber=${value}`}>
-            <a>{value}</a>
-          </Link>
+          <Link to={`/dockettool?docketNumber=${value}`}>{value}</Link>
         ),
         maxWidth: 150,
         minWidth: 50,
@@ -57,9 +54,7 @@ const JobsTable = () => {
         accessor: "quoteNumber",
         // eslint-disable-next-line react/prop-types
         Cell: ({ cell: { value } }) => (
-          <Link to={`/quotetool?quoteNumber=${value}`}>
-            <a>{value}</a>
-          </Link>
+          <Link to={`/quotetool?quoteNumber=${value}`}>{value}</Link>
         ),
       },
       {
@@ -153,7 +148,7 @@ const JobsTable = () => {
       initialState: { pageIndex: 0, pageSize: 10 },
     },
     useSortBy,
-    usePagination,
+    usePagination
     // useBlockLayout
   );
   return (

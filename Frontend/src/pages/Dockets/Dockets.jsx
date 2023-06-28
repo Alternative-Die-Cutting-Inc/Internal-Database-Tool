@@ -1,7 +1,7 @@
 import "./Dockets.scss";
 import { TableControls } from "../../components/TableControls/TableControls";
-import { JobsTable } from "../../components/JobsTable/JobsTable";
 import { useNavigate } from "react-router-dom";
+import { JobsTable } from "../../components/JobsTable/JobsTable";
 
 const PageDockets = () => {
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ const PageDockets = () => {
               <input
                 type="submit"
                 className="new-docket-submit"
-                value="Create"
+                defaultValue="Create"
               />
             </form>
           </div>

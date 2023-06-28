@@ -3,7 +3,7 @@ import "./TableControls.scss";
 import { Multiselect } from "multiselect-react-dropdown";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 
 const TableControls = ({
   filterCustomers,
@@ -108,7 +108,7 @@ const TableControls = ({
           )}
         </div>
       </div>
-      <Table />
+        <Table />
     </div>
   );
 };

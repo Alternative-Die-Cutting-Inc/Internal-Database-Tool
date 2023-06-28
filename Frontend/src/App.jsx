@@ -18,6 +18,8 @@ import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import { DarkModeProvider } from "./util/DarkModeProvider";
 import { SnackbarProvider } from "./util/SnackbarProvider";
 
+// import { Suspense } from "react";
+
 function App() {
   return (
     <DarkModeProvider>

@@ -33,9 +33,7 @@ const QuotesTable = () => {
         accessor: "quoteNumber",
         // eslint-disable-next-line react/prop-types
         Cell: ({ cell: { value } }) => (
-          <Link to={`/quotetool?quoteNumber=${value}`}>
-            <a>{value}</a>
-          </Link>
+          <Link to={`/quotetool?quoteNumber=${value}`}>{value}</Link>
         ),
         width: "auto",
       },

@@ -294,6 +294,16 @@ const PageDocketTool = () => {
                   placeholder="Memo"
                 />
               </div>
+              <div className="closing-date">
+                <label htmlFor="closing-datetime">
+                  Closing Date
+                  <input
+                    type="date"
+                    name="closing-datetime"
+                    id="closing-datetime"
+                  />
+                </label>
+              </div>
             </div>
           </div>
         </div>

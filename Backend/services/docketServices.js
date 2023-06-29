@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 
 const pool = require("../util/dbconfig");
@@ -9,7 +9,7 @@ const docketServices = {
    * @returns {Array()}
    */
   async get() {
-    const sqlQuery = "SELECT * FROM `customers`";
+    const sqlQuery = "SELECT * FROM `slip`";
     const [rows] = await pool.query(sqlQuery);
     return rows;
   },

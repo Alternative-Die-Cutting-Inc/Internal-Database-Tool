@@ -52,7 +52,7 @@ const PageDockets = () => {
               <input
                 type="submit"
                 className="new-docket-submit"
-                defaultValue="Create"
+                value="Create"
               />
             </form>
           </div>

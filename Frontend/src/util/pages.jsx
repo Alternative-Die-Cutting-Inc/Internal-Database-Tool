@@ -18,10 +18,9 @@ import { PageLogin } from "../pages/Login/Login";
 import { PageQuotes } from "../pages/Quotes/Quotes";
 import { PageDockets } from "../pages/Dockets/Dockets";
 import { PageReports } from "../pages/Reports/Reports";
+import { PageShipments } from "../pages/Shipments/Shipments";
 import { PageQuoteTool } from "../pages/QuoteTool/QuoteTool";
 import { PageDocketTool } from "../pages/DocketTool/DocketTool";
-import { PageQuotesFunctions } from "../pages/Quotes/functions";
-import { PageDocketsFunctions } from "../pages/Dockets/functions";
 import { PageQuoteToolFunctions } from "../pages/QuoteTool/functions";
 import { PageDocketToolFunctions } from "../pages/DocketTool/functions";
 
@@ -57,17 +56,22 @@ export const pages = {
     {
       label: "Quote Tool",
       component: <PageQuoteTool />,
-      path: "/quotetool/*",
+      path: "/quotetool",
     },
     {
       label: "Docket Tool",
       component: <PageDocketTool />,
-      path: "/dockettool/*",
+      path: "/dockettool",
     },
     {
       label: "Login",
       component: <PageLogin />,
       path: "/login",
+    },
+    {
+      label: "Shipments",
+      component: <PageShipments />,
+      path: "/shipments",
     },
   ],
   functions: {

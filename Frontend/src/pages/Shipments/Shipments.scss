@@ -1,0 +1,244 @@
+.shipment-tool-container {
+  min-height: 90vh;
+  background-color: var(--light-grey);
+  color: var(--light-accent);
+  margin: 0.5rem;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0.5vh;
+}
+.label-column {
+  display: flex;
+  flex-direction: column;
+}
+
+#col1 {
+  margin-right: 0.5vw;
+}
+#col2 {
+  width: 100%;
+}
+
+.label-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+#row2,
+#row3 {
+  margin-top: 1vh;
+}
+
+.label-info-header {
+  font-size: 1.5rem;
+  font-weight: normal;
+  user-select: none;
+  padding: 0.75vh 0;
+}
+
+.info-row-item {
+  background-color: var(--dark-grey);
+  border-radius: 15px;
+  overflow: auto;
+  padding: 0.75vh 0.75vw;
+  height: 35vh;
+}
+
+.shipment-info-table {
+  border-radius: 15px;
+  overflow: auto;
+  font-size: 1.25rem;
+  height: 100%;
+  td {
+    padding: unset;
+    background-color: unset;
+    color: var(--light-accent);
+    vertical-align: bottom;
+  }
+  thead {
+    background-color: unset;
+    border-bottom: 2px solid var(--light-accent);
+  }
+  th {
+    border: unset;
+  }
+  tbody {
+    overflow: auto;
+    background-color: var(--dark-grey);
+
+    tr {
+      border-bottom: unset;
+      &:hover {
+        background-color: unset;
+      }
+    }
+    td {
+      position: relative;
+      border-right: unset;
+    }
+  }
+}
+
+#production-info-table {
+  td {
+    padding: 1vh 0;
+  }
+  input {
+    max-width: 12vw;
+    font-size: 1.25rem;
+    margin: 0 0 0 1vw;
+  }
+}
+
+.label-production-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  width: 100%;
+}
+
+.label-shipping-address {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1rem;
+  width: 80%;
+  margin-left: 0.5vw;
+}
+
+.other-address-input {
+  border-radius: 15px;
+  height: 15vh;
+  padding: 0.5vh 0.5vw;
+  margin: 0.5vh 0;
+  font-size: 1rem;
+  resize: none;
+}
+
+.label-info-checkbox {
+  user-select: none;
+}
+
+.adc-address {
+  margin-top: 2vh;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.label-notes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  height: unset;
+  label {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.notes-input {
+  border-radius: 15px;
+  height: 20vh;
+  padding: 0.5vh 0.5vw;
+  margin: 0.5vh 0;
+  font-size: 1rem;
+  resize: none;
+}
+
+.label-forms {
+  display: flex;
+  flex-direction: column;
+  height: unset;
+}
+
+.add-shipments-form-button {
+  text-align: center;
+  margin: 1vh auto;
+  height: 5vh;
+  width: 75%;
+  border-radius: 10px;
+  background-color: var(--dark-grey);
+  color: var(--light-accent);
+  font-size: 1rem;
+  &:hover {
+    background-color: var(--light-grey);
+    color: var(--dark-grey);
+  }
+}
+
+#shipment-forms-table {
+  th {
+    padding: 0.5vh 0.5vw;
+
+    background-color: unset;
+    text-align: left;
+    color: var(--light-accent);
+    font-weight: normal;
+  }
+  td {
+    padding: 0.5vh 0.5vw;
+  }
+  input {
+    font-size: 1rem;
+    max-width: 10vw;
+  }
+  select,
+  option {
+    font-size: 1rem;
+  }
+  label {
+    display: flex;
+    flex-direction: column;
+  }
+  .bottom-row {
+    border-bottom: 1px solid #fff;
+    td {
+      padding-bottom: 1vh;
+    }
+  }
+}
+
+.delete-shipment-form-button {
+  // width: 2vw;
+  padding: 0.5vh 0.7vw;
+  background-color: #972828;
+  color: var(--light-accent);
+  font-size: 1rem;
+  &:hover {
+    background-color: var(--light-accent);
+    color: var(--dark-grey);
+  }
+}
+
+.label-controls {
+  height: unset;
+  width: 100%;
+}
+
+.controls-container {
+  display: flex;
+  flex-direction: column;
+  button {
+    border-radius: 10px;
+    height: 3.5vh;
+    background-color: var(--dark-grey);
+    color: var(--light-accent);
+    font-size: 1rem;
+    margin: 0.5vh 0;
+    &:hover {
+      background-color: var(--light-grey);
+      color: var(--dark-grey);
+    }
+  }
+}

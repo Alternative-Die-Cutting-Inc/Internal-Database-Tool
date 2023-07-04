@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { count } = require("./UserModel");
 
 const CounterSchema = new mongoose.Schema({
   id: {
@@ -9,7 +8,6 @@ const CounterSchema = new mongoose.Schema({
   seq: {
     type: Number,
     required: true,
-    default: 44300,
   },
 });
 

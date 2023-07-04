@@ -20,10 +20,10 @@ import { PageDockets } from "../pages/Dockets/Dockets";
 import { PageReports } from "../pages/Reports/Reports";
 import { PageQuoteTool } from "../pages/QuoteTool/QuoteTool";
 import { PageDocketTool } from "../pages/DocketTool/DocketTool";
-// import PageQuotesFunctions from "../pages/Quotes/functions";
-// import PageDocketsFunctions from "../pages/Dockets/functions";
-// import PageQuoteToolFunctions from "../pages/QuoteTool/functions";
-// import PageDocketToolFunctions from "../pages/DocketTool/functions";
+import { PageQuotesFunctions } from "../pages/Quotes/functions";
+import { PageDocketsFunctions } from "../pages/Dockets/functions";
+import { PageQuoteToolFunctions } from "../pages/QuoteTool/functions";
+import { PageDocketToolFunctions } from "../pages/DocketTool/functions";
 
 export const pages = {
   404: {
@@ -73,8 +73,8 @@ export const pages = {
   functions: {
     quotes: [],
     dockets: [],
-    quotetool: [],
-    dockettool: [],
+    quotetool: [...PageQuoteToolFunctions],
+    dockettool: [...PageDocketToolFunctions],
     reports: [],
   },
 };

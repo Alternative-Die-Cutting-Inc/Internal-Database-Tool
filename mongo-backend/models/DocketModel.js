@@ -68,6 +68,10 @@ const DocketSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  jobType: {
+    type: String,
+    required: false,
+  },
   soldFor: {
     type: Number,
     required: false,

@@ -1,6 +1,8 @@
 import "./QuoteTool.scss";
 import { useLocation } from "react-router-dom";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+
+
 
 function useQuery() {
   const { search } = useLocation();
@@ -629,7 +631,7 @@ const PageQuoteTool = () => {
             </>
           ))}
         </div>
-        
+
         <button className="add-job-button">+</button>
       </div>
     </>

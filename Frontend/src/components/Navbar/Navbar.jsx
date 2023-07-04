@@ -1,12 +1,20 @@
 import "./Navbar.scss";
-
+import { useEffect, useRef } from "react";
 import AlternativeDCLogo from "../../assets/logo/logo.png";
 import { Link, useLocation } from "react-router-dom";
 import { pages } from "../../util/pages";
-
+import { useDispatch } from "react-redux";
+import { setNavbarFunctions } from "../../state/navbar/saga";
 const Navbar = () => {
   const { pathname } = useLocation();
-
+  const navbarFunctionsRef = useRef([]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (navbarFunctionsRef.current.length > 0) {
+      dispatch(setNavbarFunctions({ navbarFunctions: navbarFunctionsRef }));
+      console.log(navbarFunctionsRef.current);
+    }
+  }, []);
   return (
     <>
       <div className="navbar-container">
@@ -19,32 +27,32 @@ const Navbar = () => {
             <img
               className="icon-logo"
               src={AlternativeDCLogo}
-              alt="frosh logo"
+              alt="altenative die cutting logo"
             ></img>
           </Link>
-          {pages.functions[pathname.replace("/", "")]?.map((page, index) => {
-            return (
-              <div
-                className="navbar-sub-container"
-                key={page.label}
-                style={
-                  index == 0
-                    ? {
-                        borderWidth: "0px 1px 0px 1px",
-                        borderStyle: "solid",
-                        borderColor: "#000000",
-                      }
-                    : {}
-                }
-                onClick={() => {
-                  page.function();
-                }}
-              >
-                <nav className="navbar-link-label">
-                  <h3>{page.label}</h3>
-                </nav>
-              </div>
-            );
+          {Object.keys(pages.functions).forEach((pageFunctions) => {
+            pages.functions[pageFunctions].map((pageFunction, index) => {
+              return (
+                <div
+                  className="navbar-sub-container"
+                  key={pageFunction.label}
+                  ref={(element) => navbarFunctionsRef.current.push(element)}
+                  style={
+                    index == 0
+                      ? {
+                          borderWidth: "0px 1px 0px 1px",
+                          borderStyle: "solid",
+                          borderColor: "#000000",
+                        }
+                      : {}
+                  }
+                >
+                  <nav className="navbar-link-label">
+                    <h3>{pageFunction.label}</h3>
+                  </nav>
+                </div>
+              );
+            });
           })}
         </div>
         <div className="navbar-main">

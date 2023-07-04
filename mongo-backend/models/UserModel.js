@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const getResponseObject = require("../utils/getResponseObject");
 
 const validateName = function (name) {
   return !(name === "" || name === null || name === undefined);
@@ -36,11 +35,6 @@ const UserSchema = new mongoose.Schema({
     required: true,
     default: [],
   },
-  isDeleted: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
   accountCreatedAt: {
     type: Date,
     required: true,
@@ -52,12 +46,6 @@ const UserSchema = new mongoose.Schema({
     default: new Date(),
   },
 });
-
-/**
- * Removes all fields from the user document which should not be sent in a response from the server.
- * @return {Object}
- */
-UserSchema.methods.getResponseObject = getResponseObject;
 
 const UserModel = mongoose.model("User", UserSchema);
 

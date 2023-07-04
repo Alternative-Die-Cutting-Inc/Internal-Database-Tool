@@ -11,7 +11,9 @@ function useClientSheet() {
 const PageQuoteToolFunctions = [
   {
     label: "Client Sheet",
-    function: useClientSheet,
+    function: function () {
+      console.log("hello world");
+    },
   },
   {
     label: "Work Sheet",

@@ -171,7 +171,7 @@ const PageShipments = () => {
                         <select>
                           <option value="Cartons">Cartons</option>
                           <option value="Sheets">Sheets</option>
-                          <option value="Piecess">Pieces</option>
+                          <option value="Pieces">Pieces</option>
                         </select>
                       </td>
                       <td>

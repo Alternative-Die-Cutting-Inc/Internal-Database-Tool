@@ -14,10 +14,10 @@ function useQuery() {
 const PageDocketTool = () => {
   let query = useQuery();
   const dispatch = useDispatch();
-  const { docket, loading, error } = useSelector(docketSelector);
+  const { docket, loading } = useSelector(docketSelector);
   useEffect(() => {
     dispatch(getDocket(query.get("docketNumber")));
-  }, []);
+  });
 
   return (
     <>

@@ -1,12 +1,12 @@
 import "./Shipments.scss";
-import { useLocation } from "react-router-dom";
-import { useMemo, useState } from "react";
+// import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
-function useQuery() {
-  const { search } = useLocation();
+// function useQuery() {
+//   const { search } = useLocation();
 
-  return useMemo(() => new URLSearchParams(search), [search]);
-}
+//   return useMemo(() => new URLSearchParams(search), [search]);
+// }
 
 const PageShipments = () => {
   const [checkedState, setCheckedState] = useState([true, false, false]);
@@ -17,7 +17,7 @@ const PageShipments = () => {
 
     setCheckedState(updatedCheckedState);
   };
-  let query = useQuery();
+  // let query = useQuery();
   // {query.get("docketNumber")}
   return (
     <>
@@ -164,7 +164,7 @@ const PageShipments = () => {
                 </tr>
               </thead>
               <tbody>
-                {[...Array(3)].map((item, index) => (
+                {[...Array(3)].map(() => (
                   <>
                     <tr>
                       <td>

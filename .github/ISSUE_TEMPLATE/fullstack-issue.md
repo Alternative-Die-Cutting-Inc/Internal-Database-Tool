@@ -1,5 +1,5 @@
 ---
-name: Backend Issue
+name: Full Stack Issue
 about: Submit an issue regarding the server and API
 title: ''
 labels: "full stack"

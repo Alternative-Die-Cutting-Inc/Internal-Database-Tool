@@ -6,7 +6,7 @@ const docketServices = {
   /** Get
    * @returns {Array()}
    */
-  async get() {
+  async getAllDockets() {
     // const sqlQuery = "SELECT * FROM `slip`";
     // const [rows] = await pool.query(sqlQuery);
     return;

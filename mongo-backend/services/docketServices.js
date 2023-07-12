@@ -7,10 +7,15 @@ const docketServices = {
    * @returns {Array()}
    */
   async getAllDockets() {
-    // const sqlQuery = "SELECT * FROM `slip`";
-    // const [rows] = await pool.query(sqlQuery);
     return;
   },
+  async getDocketById() {},
+
+  async createDocket() {},
+
+  async updateDocket() {},
+
+  async deleteDocket() {},
 };
 
 module.exports = docketServices;

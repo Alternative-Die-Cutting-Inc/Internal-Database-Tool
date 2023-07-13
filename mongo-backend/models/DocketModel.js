@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { autoIncrementModelID } = require("./CounterModel");
 
 const formSchema = new mongoose.Schema({
   formName: {
@@ -62,7 +63,7 @@ const DocketSchema = new mongoose.Schema({
   },
   productionPerson: {
     type: String,
-    required: true,
+    required: false,
   },
   jobName: {
     type: String,
@@ -107,6 +108,14 @@ const DocketSchema = new mongoose.Schema({
     type: Date,
     required: false,
   },
+});
+
+DocketSchema.pre("validate", function (next) {
+  if (!this.isNew) {
+    next();
+    return;
+  }
+  autoIncrementModelID("docketNumber", this, next);
 });
 
 const DocketModel = mongoose.model("Docket", DocketSchema);

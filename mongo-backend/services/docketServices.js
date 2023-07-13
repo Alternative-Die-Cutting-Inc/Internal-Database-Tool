@@ -3,6 +3,7 @@
  */
 
 const DocketModel = require("../models/docketModel");
+const { CounterModel } = require("../models/CounterModel");
 /**
  * Global Docket objet
  * @typedef {import("../models/docketModel").Docket} Docket
@@ -39,8 +40,14 @@ const docketServices = {
    * @param {Docket} docket the object containing docket fields
    * @returns {Docket}
    */
-  async createDocket(docket) {
+  async create(docket) {
     let responseDocket = null;
+    responseDocket = DocketModel.create(docket).then(
+      (docket) => docket,
+      (err) => {
+        throw err;
+      }
+    );
     return responseDocket;
   },
 
@@ -63,6 +70,38 @@ const docketServices = {
   async deleteDocket(id) {
     let responseDocket = null;
     return responseDocket;
+  },
+
+  /** Helper Functions **/
+
+  /**
+   * @description start docker counter and return the count
+   * @returns {Number} docket count
+   */
+  async initCounter() {
+    return CounterModel.findOneAndUpdate(
+      { _id: "docketNumber" },
+      {},
+      { upsert: true, new: true }
+    ).then(
+      (counter) => {
+        if (counter.seq === 0) {
+          counter.seq = 45000;
+          counter.save().then(
+            (counter) => {
+              return counter.seq;
+            },
+            (err) => {
+              throw err;
+            }
+          );
+        }
+        return counter.seq;
+      },
+      (err) => {
+        throw err;
+      }
+    );
   },
 };
 

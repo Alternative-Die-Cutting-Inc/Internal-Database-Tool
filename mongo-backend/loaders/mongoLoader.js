@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const docketServices = require("../services/docketServices");
 
 const loadMongo = async (app) => {
   console.log("Loading mongo...");
@@ -21,6 +22,8 @@ const loadMongo = async (app) => {
       }),
     })
   );
+  const docketCount = await docketServices.initCounter();
+  console.log(`Docket count: ${docketCount}`);
 };
 
 module.exports = loadMongo;

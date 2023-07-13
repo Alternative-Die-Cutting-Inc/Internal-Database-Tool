@@ -20,15 +20,15 @@ const docketServices = {
     if (id) {
       responseDocket = DocketModel.findById(id).then(
         (docket) => docket,
-        (err) => {
-          throw err;
+        (error) => {
+          throw error;
         }
       );
     } else {
       responseDocket = DocketModel.find({}).then(
         (dockets) => dockets,
-        (err) => {
-          throw err;
+        (error) => {
+          throw error;
         }
       );
     }
@@ -44,8 +44,8 @@ const docketServices = {
     let responseDocket = null;
     responseDocket = DocketModel.create(docket).then(
       (docket) => docket,
-      (err) => {
-        throw err;
+      (error) => {
+        throw error;
       }
     );
     return responseDocket;
@@ -63,8 +63,8 @@ const docketServices = {
       new: true,
     }).then(
       (docket) => docket,
-      (err) => {
-        throw err;
+      (error) => {
+        throw error;
       }
     );
     return responseDocket;
@@ -75,8 +75,14 @@ const docketServices = {
    * @param {String} id docket number | _id
    * @returns {Docket}
    */
-  async deleteDocket(id) {
+  async delete(id) {
     let responseDocket = null;
+    responseDocket = DocketModel.findOneAndDelete({ _id: id }).then(
+      (docket) => docket,
+      (error) => {
+        throw error;
+      }
+    );
     return responseDocket;
   },
 
@@ -99,15 +105,15 @@ const docketServices = {
             (counter) => {
               return counter.seq;
             },
-            (err) => {
-              throw err;
+            (error) => {
+              throw error;
             }
           );
         }
         return counter.seq;
       },
-      (err) => {
-        throw err;
+      (error) => {
+        throw error;
       }
     );
   },

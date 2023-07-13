@@ -17,7 +17,11 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   try {
     const allDockets = await docketServices.get();
-    res.status(200).send(allDockets);
+    if (allDockets.length === 0) {
+      res.status(404).send({ message: "No dockets found" });
+    } else {
+      res.status(200).send(allDockets);
+    }
   } catch (error) {
     next(error);
   }
@@ -32,7 +36,11 @@ router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     const responseDocket = await docketServices.get(id);
-    res.status(200).send(responseDocket);
+    if (!responseDocket) {
+      res.status(404).send({ message: "No docket found" });
+    } else {
+      res.status(200).send(responseDocket);
+    }
   } catch (error) {
     next(error);
   }
@@ -54,16 +62,39 @@ router.post("/", async (req, res, next) => {
 });
 
 /**
- * @description delete docket
+ * @description edit docket
  * @route PUT /dockets/:id
- * @returns {Object} docket object
+ * @returns {Docket} edited docket object
  */
 router.put("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     const editFields = req.body.fields;
     const responseDocket = await docketServices.update(id, editFields);
-    res.status(200).send(responseDocket);
+    if (!responseDocket) {
+      res.status(404).send({ message: "No docket found" });
+    } else {
+      res.status(200).send(responseDocket);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
+ * @description delete docket
+ * @route DELETE /dockets/:id
+ * @returns {Docket} deleted docket object
+ */
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const responseDocket = await docketServices.delete(id);
+    if (!responseDocket) {
+      res.status(404).send({ message: "No docket found" });
+    } else {
+      res.status(200).send(responseDocket);
+    }
   } catch (error) {
     next(error);
   }

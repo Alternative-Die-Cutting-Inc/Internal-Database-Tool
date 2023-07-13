@@ -6,7 +6,8 @@
   "author": "Farbod Mohammadzadeh",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ./server.js localhost 8080"
+    "start": "nodemon ./server.js localhost 8080",
+    "test": "jest"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -18,6 +19,7 @@
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "http": "^0.0.1-security",
+    "jest": "^29.6.1",
     "mongoose": "^7.3.3",
     "mysql2": "^3.3.3",
     "passport": "^0.6.0",

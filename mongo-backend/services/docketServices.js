@@ -57,8 +57,16 @@ const docketServices = {
    * @param {Object} fields fields to update
    * @returns {Docket} updated docket
    */
-  async updateDocket(id, fields) {
+  async update(id, fields) {
     let responseDocket = null;
+    responseDocket = DocketModel.findOneAndUpdate({ _id: id }, fields, {
+      new: true,
+    }).then(
+      (docket) => docket,
+      (err) => {
+        throw err;
+      }
+    );
     return responseDocket;
   },
 

@@ -111,4 +111,9 @@ const DocketSchema = new mongoose.Schema({
 
 const DocketModel = mongoose.model("Docket", DocketSchema);
 
+/**
+ * Global Docket objet
+ * @typedef {typeof DocketModel.schema.obj} Docket
+ */
+
 module.exports = DocketModel;

@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon ./server.js localhost 8080",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",

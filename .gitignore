@@ -4,3 +4,4 @@ node_modules
 
 mongo-volume
 
+mongo-backend/coverage

@@ -1,10 +1,11 @@
 name: automated_tests
 
 on:
-  pull_request:
+  push:
     branches:
       - dev
       - prod
+      - beta
 
 jobs:
   build_frontend:

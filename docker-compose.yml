@@ -38,3 +38,17 @@ services:
     environment:
       - REDIS_PORT_NUMBER=$REDIS_PORT
       - REDIS_PASSWORD=$REDIS_PASSWORD
+
+
+  ############################################
+  #          Uncomment for testing           #
+  ############################################
+  # mongodb-test:
+  #   image: mongo
+  #   container_name: mongo-test
+  #   environment:
+  #     - MONGO_INITDB_ROOT_USERNAME=admin
+  #     - MONGO_INITDB_ROOT_PASSWORD=root
+  #     - MONGO_INITDB_DATABASE=testingDatabase
+  #   ports:
+  #     - "27017:27017"

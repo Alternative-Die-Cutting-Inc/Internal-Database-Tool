@@ -2,11 +2,11 @@
  * @fileoverview Docket services
  */
 
-const DocketModel = require("../models/docketModel");
+const DocketModel = require("../models/DocketModel");
 const { CounterModel } = require("../models/CounterModel");
 /**
  * Global Docket objet
- * @typedef {import("../models/docketModel").Docket} Docket
+ * @typedef {import("../models/DocketModel").Docket} Docket
  */
 
 const docketServices = {

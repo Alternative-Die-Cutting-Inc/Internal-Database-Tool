@@ -15,4 +15,12 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build client
-        run: cd client && yarn install && yarn build
+        run: cd frontend && yarn install && yarn build
+  backend_tests:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Test backend
+        run: cd mongo-backend && yarn install && yarn test

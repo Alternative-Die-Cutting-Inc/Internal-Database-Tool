@@ -1,49 +1,54 @@
 version: '3.8'
 
 services:
-  # mongodb:
-  #   image: mongo
-  #   container_name: mongo-dev
-  #   restart: unless-stopped
-  #   environment:
-  #     - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
-  #     - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
-  #     - MONGO_INITDB_DATABASE=$MONGODB_DBNAME
-    # ports:
-    #   - "27017:27017"
-  #   volumes:
-  #     - ./mongo-volume:/data/db
-  # mongo-express:
-  #   image: mongo-express
-  #   container_name: mongo-express
-  #   restart: unless-stopped
-
-  #   depends_on:
-  #     mongodb:
-  #       condition: service_started
-  #   environment:
-  #     - ME_CONFIG_MONGODB_ADMINUSERNAME=$MONGODB_USER
-  #     - ME_CONFIG_MONGODB_ADMINPASSWORD=$MONGODB_PASSWORD
-  #     - ME_CONFIG_MONGODB_SERVER=mongo-dev
-  #     - ME_CONFIG_BASICAUTH_USERNAME=$MONGO_WEB_USERNAME
-  #     - ME_CONFIG_BASICAUTH_PASSWORD=$MONGO_WEB_PASSWORD
-  #   ports:
-  #     - "8081:8081"
-  # redis:
-  #   image: redis
-  #   container_name: redis
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7001:7001"
-  #   environment:
-  #     - REDIS_PORT_NUMBER=$REDIS_PORT
-  #     - REDIS_PASSWORD=$REDIS_PASSWORD
-  mongodb-test:
+  mongodb:
     image: mongo
-    container_name: mongo-test
+    container_name: mongo-dev
+    restart: unless-stopped
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=root
-      - MONGO_INITDB_DATABASE=testingDatabase
+      - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+      - MONGO_INITDB_DATABASE=$MONGODB_DBNAME
     ports:
       - "27017:27017"
+    volumes:
+      - ./mongo-volume:/data/db
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: unless-stopped
+
+    depends_on:
+      mongodb:
+        condition: service_started
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=$MONGODB_USER
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=$MONGODB_PASSWORD
+      - ME_CONFIG_MONGODB_SERVER=mongo-dev
+      - ME_CONFIG_BASICAUTH_USERNAME=$MONGO_WEB_USERNAME
+      - ME_CONFIG_BASICAUTH_PASSWORD=$MONGO_WEB_PASSWORD
+    ports:
+      - "8081:8081"
+  redis:
+    image: redis
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "7001:7001"
+    environment:
+      - REDIS_PORT_NUMBER=$REDIS_PORT
+      - REDIS_PASSWORD=$REDIS_PASSWORD
+
+
+  ############################################
+  #          Uncomment for testing           #
+  ############################################
+  # mongodb-test:
+  #   image: mongo
+  #   container_name: mongo-test
+  #   environment:
+  #     - MONGO_INITDB_ROOT_USERNAME=admin
+  #     - MONGO_INITDB_ROOT_PASSWORD=root
+  #     - MONGO_INITDB_DATABASE=testingDatabase
+  #   ports:
+  #     - "27017:27017"

@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  mongodb-test:
+    image: mongo
+    container_name: mongo-test
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=testingDatabase
+    ports:
+      - "27017:27017"

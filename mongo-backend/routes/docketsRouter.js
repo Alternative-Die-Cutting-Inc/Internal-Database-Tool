@@ -2,7 +2,7 @@
  * @fileoverview docket router
  * @baseURL /dockets
  * Global Docket objet
- * @typedef {import("../models/docketModel").Docket} Docket
+ * @typedef {import("../models/DocketModel").Docket} Docket
  */
 const express = require("express");
 const docketServices = require("../services/docketServices");
@@ -30,7 +30,7 @@ router.get("/", async (req, res, next) => {
 /**
  * @description get docket by id
  * @route GET /dockets/:id
- * @returns {Object} docket object
+ * @returns {Docket} docket object
  */
 router.get("/:id", async (req, res, next) => {
   try {
@@ -49,7 +49,7 @@ router.get("/:id", async (req, res, next) => {
 /**
  * @description create docket
  * @route POST /dockets
- * @returns {Object} docket object
+ * @returns {Docket} docket object
  */
 router.post("/", async (req, res, next) => {
   try {

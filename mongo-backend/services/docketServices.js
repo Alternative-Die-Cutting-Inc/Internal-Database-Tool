@@ -89,7 +89,7 @@ const docketServices = {
   /** Helper Functions **/
 
   /**
-   * @description start docker counter and return the count
+   * @description start docket counter and return the count
    * @returns {Number} docket count
    */
   async initCounter() {

@@ -24,7 +24,6 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
   },
   hashedPassword: {
     type: String,
@@ -47,14 +46,20 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-UserSchema.path("email").validate(function (value, done) {
-  this.model("User").count({ email: value }, function (error, count) {
-    if (error) {
-      return done(error);
-    }
-    // If `count` is greater than zero, "invalidate"
-    done(!count);
-  });
+UserSchema.path("email").validate(function (value) {
+  return this.model("User")
+    .count({ email: value })
+    .then(
+      (count) => {
+        if (count !== 0) {
+          return false;
+        }
+        return true;
+      },
+      (error) => {
+        return error;
+      }
+    );
 }, "Email already exists");
 
 const UserModel = mongoose.model("User", UserSchema);

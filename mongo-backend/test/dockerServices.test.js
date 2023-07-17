@@ -2,19 +2,19 @@ const docketServices = require("../services/docketServices");
 const assert = require("assert");
 
 describe("Testing Docket Services", () => {
-  it(".initCounter()\t\t|\t\tInitialize Counter", async function () {
+  it(".initCounter()\t\t|\tInitialize Counter", async function () {
     await docketServices.initCounter();
   });
 
   let newDocket = null;
-  it(".create()\t\t\t|\t\tCreate a Docket", async function () {
+  it(".create()\t\t\t|\tCreate a Docket", async function () {
     newDocket = await docketServices.create({
       customerName: "Alt Die Cut Inc",
       jobName: "Test 0",
     });
   });
 
-  it(".create()\t\t\t|\t\tAccurate Creation", async function () {
+  it(".create()\t\t\t|\tAccurate Creation", async function () {
     newDocket = await docketServices.create({
       customerName: "Alt Die Cut Inc",
       jobName: "Test 1",
@@ -24,7 +24,7 @@ describe("Testing Docket Services", () => {
     assert.equal(newDocket.docketNumber, 45002);
   });
 
-  it(".create()\t\t\t|\t\tCreate multiple Dockets", async function () {
+  it(".create()\t\t\t|\tCreate multiple Dockets", async function () {
     await docketServices.create({
       customerName: "Alt Die Cut Inc",
       jobName: "Test 2",
@@ -47,18 +47,18 @@ describe("Testing Docket Services", () => {
     });
   });
 
-  it(".get(id)\t\t\t|\t\tGet a Docket", async function () {
+  it(".get(id)\t\t\t|\tGet a Docket", async function () {
     const existingDocket = await docketServices.get(newDocket.id);
     assert.notEqual(existingDocket, null);
   });
 
-  it(".get()\t\t\t|\t\tGet all Dockets", async function () {
+  it(".get()\t\t\t|\tGet all Dockets", async function () {
     const existingDockets = await docketServices.get();
     assert.notEqual(existingDockets.length, 0);
     assert.equal(existingDockets.length, 7);
   });
 
-  it(".update(id, fields)\t|\t\tUpdate Docket info", async function () {
+  it(".update(id, fields)\t|\tUpdate Docket info", async function () {
     const updatedDocket = await docketServices.update(newDocket.id, {
       customerName: "Alternative Die Cut Inc",
       jobName: "Test 7",
@@ -68,7 +68,7 @@ describe("Testing Docket Services", () => {
     assert.equal(updatedDocket.jobName, "Test 7");
     assert.equal(updatedDocket.customerPO, 123456);
   });
-  it(".update(id, fields)\t|\t\tAdd forms", async function () {
+  it(".update(id, fields)\t|\tAdd forms", async function () {
     let forms = [
       {
         formName: "Form 1",
@@ -97,11 +97,11 @@ describe("Testing Docket Services", () => {
     });
   });
 
-  it(".delete(id)\t\t|\t\tDelete a Docket", async function () {
+  it(".delete(id)\t\t|\tDelete a Docket", async function () {
     const deletedDocket = await docketServices.delete(newDocket.id);
     assert.notEqual(deletedDocket, null);
   });
-  it(".delete(id)\t\t|\t\tCheck deleted Docket", async function () {
+  it(".delete(id)\t\t|\tCheck deleted Docket", async function () {
     const deletedDocket = await docketServices.delete(newDocket.id);
     assert.equal(deletedDocket, null);
   });

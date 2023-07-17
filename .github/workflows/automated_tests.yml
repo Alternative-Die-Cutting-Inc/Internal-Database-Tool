@@ -1,14 +1,6 @@
 name: Automated Tests
 
-on:
-  pull_request:
-    branches:
-      - dev
-  push:
-    branches:
-      - dev
-      - prod
-      - beta
+on: ["push"]
 
 jobs:
   build_frontend:
@@ -24,9 +16,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.5.3
-      
-      - name: Run Docker 
+
+      - name: Run Docker
         run: docker-compose -f docker-compose.test.yml up --build -d
 
       - name: Test backend
-        run: cd mongo-backend && yarn install && yarn test        
+        run: cd mongo-backend && yarn install && yarn test 

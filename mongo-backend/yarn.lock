@@ -247,9 +247,9 @@
     "@jridgewell/sourcemap-codec" "1.4.14"
 
 "@mapbox/node-pre-gyp@^1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@mapbox/node-pre-gyp/-/node-pre-gyp-1.0.10.tgz#8e6735ccebbb1581e5a7e652244cadc8a844d03c"
-  integrity sha512-4ySo4CjzStuprMwk35H5pPbkymjv1SF3jGLj6rAHp/xT/RF7TL7bd9CTm1xDY49K2qF7jmR/g7k+SkLETP6opA==
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@mapbox/node-pre-gyp/-/node-pre-gyp-1.0.11.tgz#417db42b7f5323d79e93b34a6d7a2a12c0df43fa"
+  integrity sha512-Yhlar6v9WQgUp/He7BdgzOz8lqMQ8sU+jkCq7Wx8Myc5YFJLbEe7lgui/V7G1qB1DJykHSGwreceSaD60Y0PUQ==
   dependencies:
     detect-libc "^2.0.0"
     https-proxy-agent "^5.0.0"
@@ -292,9 +292,9 @@
   integrity sha512-O+6Gs8UeDbyFpbSh2CPEz/UOrrdWPTBYNblZK5CxxLisYt4kGX3Sc+czffFonyjiGSq3jWLwJS/CCJc7tBr4sQ==
 
 "@types/node@*":
-  version "20.4.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.4.1.tgz#a6033a8718653c50ac4962977e14d0f984d9527d"
-  integrity sha512-JIzsAvJeA/5iY6Y/OxZbv1lUcc8dNSE77lb2gnBH+/PJ3lFR1Ccvgwl5JWnHAkNHcRsT0TbpVOsiMKZ1F/yyJg==
+  version "20.4.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.4.2.tgz#129cc9ae69f93824f92fac653eebfb4812ab4af9"
+  integrity sha512-Dd0BYtWgnWJKwO1jkmTrzofjK2QXXcai0dmtzvIBhcA+RsG5h8R3xlyta0kGOZRNfL9GuRtb1knmPEhQrePCEw==
 
 "@types/webidl-conversions@*":
   version "7.0.0"
@@ -517,7 +517,7 @@ browserslist@^4.21.9:
     node-releases "^2.0.12"
     update-browserslist-db "^1.0.11"
 
-bson@^5.3.0:
+bson@^5.3.0, bson@^5.4.0:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/bson/-/bson-5.4.0.tgz#0eea77276d490953ad8616b483298dbff07384c6"
   integrity sha512-WRZ5SQI5GfUuKnPTNmAYPiKIof3ORXAF4IRU5UcgmivNIon01rWQlw5RUH954dpu8yGL8T59YShVddIPaU/gFA==
@@ -570,9 +570,9 @@ camelcase@^6.0.0:
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
 caniuse-lite@^1.0.30001503:
-  version "1.0.30001515"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001515.tgz#418aefeed9d024cd3129bfae0ccc782d4cb8f12b"
-  integrity sha512-eEFDwUOZbE24sb+Ecsx3+OvNETqjWIdabMy52oOkIgcUtAsQifjUG9q4U9dgTHJM2mfk4uEPxc0+xuFdJ629QA==
+  version "1.0.30001516"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001516.tgz#621b1be7d85a8843ee7d210fd9d87b52e3daab3a"
+  integrity sha512-Wmec9pCBY8CWbmI4HsjBeQLqDTqV91nFVR83DnZpYyRnPI1wePDsTg0bGLPC5VU/3OIZV1fmxEea1b+tFKe86g==
 
 chalk@^2.0.0:
   version "2.4.2"
@@ -824,9 +824,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.431:
-  version "1.4.460"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.460.tgz#f360a5059c039c4a5fb4dfa99680ad8129dd9f84"
-  integrity sha512-kKiHnbrHME7z8E6AYaw0ehyxY5+hdaRmeUbjBO22LZMdqTYCO29EvF0T1cQ3pJ1RN5fyMcHl1Lmcsdt9WWJpJQ==
+  version "1.4.462"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.462.tgz#4faf5072bb5f55269d35ca9dc7475e7bf91b1ac3"
+  integrity sha512-ux2LqN9JKRBDKXMT+78jtiBLPiXf+rLtYlsrOg5Qn7uv6Cbg7+9JyIalE3wcqkOdB2wPCUYNWAuL7suKRMHe9w==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -1624,10 +1624,21 @@ mongodb@5.6.0:
   optionalDependencies:
     saslprep "^1.0.3"
 
+mongodb@^5.7.0:
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-5.7.0.tgz#e16d2fcdfd9f8503ec2d88288392dc3235bb3ecc"
+  integrity sha512-zm82Bq33QbqtxDf58fLWBwTjARK3NSvKYjyz997KSy6hpat0prjeX/kxjbPVyZY60XYPDNETaHkHJI2UCzSLuw==
+  dependencies:
+    bson "^5.4.0"
+    mongodb-connection-string-url "^2.6.0"
+    socks "^2.7.1"
+  optionalDependencies:
+    saslprep "^1.0.3"
+
 mongoose@^7.3.3:
-  version "7.3.3"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-7.3.3.tgz#4e9cce706d3c5628998f59875c5c2d60ee0c6d9c"
-  integrity sha512-g4NrRGIUEUYLeScaSChQR8i4Dlk9lR0UJzkK3r6TPJyqJ6ZWdRVP3oXfOG9Yn+hNeKcCJKfVEHo+jsU1rh3YTA==
+  version "7.3.4"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-7.3.4.tgz#d26934d62575cc01c8cbb70252c14dc8cc30ef49"
+  integrity sha512-luvv4PKFiFYaHNn5wGIRrMML3Vvoa8lkdhcLE1S/6gY9s9CUOdEu9olbDrkhvnwRQ20j1SrQFO5JEApW0xwL3w==
   dependencies:
     bson "^5.3.0"
     kareem "2.5.1"
@@ -1686,9 +1697,9 @@ msgpackr@^1.5.2:
     msgpackr-extract "^3.0.2"
 
 mysql2@^3.3.3:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/mysql2/-/mysql2-3.5.1.tgz#d57324228389a670408277399ded1d8f2a61b78c"
-  integrity sha512-RyaeUBqMiFR1ivk78JToPz0MhwN/sUWCKwPZszbXaFNZ6wmP/EJNPDU6gbZkF+qtLjr3sULQb0Y7JuFrNblnDg==
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/mysql2/-/mysql2-3.5.2.tgz#a06050e1514e9ac15711a8b883ffd51cb44b2dc8"
+  integrity sha512-cptobmhYkYeTBIFp2c0piw2+gElpioga1rUw5UidHvo8yaHijMZoo8A3zyBVoo/K71f7ZFvrShA9iMIy9dCzCA==
   dependencies:
     denque "^2.1.0"
     generate-function "^2.3.1"

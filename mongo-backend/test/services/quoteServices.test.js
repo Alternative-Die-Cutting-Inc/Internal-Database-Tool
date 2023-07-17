@@ -1,20 +1,20 @@
-const quoteServices = require("../services/quoteServices");
+const quoteServices = require("../../services/quoteServices");
 const assert = require("assert");
 
 describe("Testing Quote Services", () => {
-  it(".initCounter()\t\t|\t\tInitialize Counter", async function () {
+  it(".initCounter()\t\t|\tInitialize Counter", async function () {
     await quoteServices.initCounter();
   });
 
   let newQuote = null;
-  it(".create()\t\t\t|\t\tCreate a Quote", async function () {
+  it(".create()\t\t\t|\tCreate a Quote", async function () {
     newQuote = await quoteServices.create({
       customerName: "Alt Die Cut Inc",
       jobName: "Test 0",
     });
   });
 
-  it(".create()\t\t\t|\t\tAccurate Creation", async function () {
+  it(".create()\t\t\t|\tAccurate Creation", async function () {
     newQuote = await quoteServices.create({
       customerName: "Alt Die Cut Inc",
       jobName: "Test 1",
@@ -24,7 +24,7 @@ describe("Testing Quote Services", () => {
     assert.equal(newQuote.quoteNumber, 185002);
   });
 
-  it(".create()\t\t\t|\t\tCreate multiple Quotes", async function () {
+  it(".create()\t\t\t|\tCreate multiple Quotes", async function () {
     await quoteServices.create({
       customerName: "Alt Die Cut Inc",
       jobName: "Test 2",
@@ -47,18 +47,18 @@ describe("Testing Quote Services", () => {
     });
   });
 
-  it(".get(id)\t\t\t|\t\tGet a Quote", async function () {
+  it(".get(id)\t\t\t|\tGet a Quote", async function () {
     const existingQuote = await quoteServices.get(newQuote.id);
     assert.notEqual(existingQuote, null);
   });
 
-  it(".get()\t\t\t|\t\tGet all Quotes", async function () {
+  it(".get()\t\t\t|\tGet all Quotes", async function () {
     const existingQuotes = await quoteServices.get();
     assert.notEqual(existingQuotes.length, 0);
     assert.equal(existingQuotes.length, 7);
   });
 
-  it(".update(id, fields)\t|\t\tUpdate Quote info", async function () {
+  it(".update(id, fields)\t|\tUpdate Quote info", async function () {
     const updatedQuote = await quoteServices.update(newQuote.id, {
       customerName: "Alternative Die Cut Inc",
       jobName: "Test 7",
@@ -68,7 +68,7 @@ describe("Testing Quote Services", () => {
     assert.equal(updatedQuote.jobName, "Test 7");
     assert.equal(updatedQuote.description, "this is a test description");
   });
-  it(".update(id, fields)\t|\t\tAdd jobs", async function () {
+  it(".update(id, fields)\t|\tAdd jobs", async function () {
     let quoteJobs = [
       {
         units: 10000,
@@ -101,11 +101,11 @@ describe("Testing Quote Services", () => {
     });
   });
 
-  it(".delete(id)\t\t|\t\tDelete a Quote", async function () {
+  it(".delete(id)\t\t|\tDelete a Quote", async function () {
     const deletedQuote = await quoteServices.delete(newQuote.id);
     assert.notEqual(deletedQuote, null);
   });
-  it(".delete(id)\t\t|\t\tCheck deleted Quote", async function () {
+  it(".delete(id)\t\t|\tCheck deleted Quote", async function () {
     const deletedQuote = await quoteServices.delete(newQuote.id);
     assert.equal(deletedQuote, null);
   });

@@ -1,13 +1,11 @@
 /**
  * @fileoverview Quote services
+ * Global Quote objet
+ * @typedef {import("../models/QuoteModel").Quote} Quote
  */
 
 const QuoteModel = require("../models/QuoteModel");
 const { CounterModel } = require("../models/CounterModel");
-/**
- * Global Quote objet
- * @typedef {import("../models/QuoteModel").Quote} Quote
- */
 
 const quoteServices = {
   /**

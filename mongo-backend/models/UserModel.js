@@ -5,26 +5,25 @@ const validateName = function (name) {
 };
 
 const UserSchema = new mongoose.Schema({
-  firstName: {
+  username: {
     type: String,
     validate: {
       validator: validateName,
-      message: "MISSING_NAME",
+      message: "Username cannot be empty",
     },
-    required: [true, "MISSING_NAME"],
+    required: [true, "Username cannot be empty"],
+  },
+  firstName: {
+    type: String,
+    required: false,
   },
   lastName: {
     type: String,
-    validate: {
-      validator: validateName,
-      message: "MISSING_NAME",
-    },
-    required: [true, "MISSING_NAME"],
+    required: false,
   },
   email: {
     type: String,
     required: true,
-    unique: true,
   },
   hashedPassword: {
     type: String,
@@ -47,6 +46,26 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
+UserSchema.path("email").validate(function (value) {
+  return this.model("User")
+    .count({ email: value })
+    .then(
+      (count) => {
+        if (count !== 0) {
+          return false;
+        }
+        return true;
+      },
+      (error) => {
+        return error;
+      }
+    );
+}, "Email already exists");
+
 const UserModel = mongoose.model("User", UserSchema);
 
+/**
+ * Global User objet
+ * @typedef {typeof UserModel.schema.obj} User
+ */
 module.exports = UserModel;

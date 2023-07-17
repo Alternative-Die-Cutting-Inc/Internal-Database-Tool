@@ -1,4 +1,4 @@
-const quoteServices = require("../services/quoteServices");
+const quoteServices = require("../../services/quoteServices");
 const assert = require("assert");
 
 describe("Testing Quote Services", () => {

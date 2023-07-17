@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon ./server.js localhost 8080",
-    "test": "nyc --reporter=text mocha --recursive --exit"
+    "test": "nyc --reporter=lcov --reporter=text mocha --recursive --exit"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",

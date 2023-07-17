@@ -1,4 +1,4 @@
-const userServices = require("../services/userServices");
+const userServices = require("../../services/userServices");
 const assert = require("assert");
 const bcrypt = require("bcrypt");
 

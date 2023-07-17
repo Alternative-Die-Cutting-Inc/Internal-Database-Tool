@@ -1,4 +1,4 @@
-const docketServices = require("../services/docketServices");
+const docketServices = require("../../services/docketServices");
 const assert = require("assert");
 
 describe("Testing Docket Services", () => {

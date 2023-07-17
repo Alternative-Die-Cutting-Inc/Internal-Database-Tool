@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { autoIncrementModelID } = require("./CounterModel");
 
 const extraChargeSchema = new mongoose.Schema({
   chargeName: {
@@ -99,6 +100,18 @@ const QuoteSchema = new mongoose.Schema({
   quoteJobs: [quoteJobSchema],
 });
 
+QuoteSchema.pre("validate", function (next) {
+  if (!this.isNew) {
+    next();
+    return;
+  }
+  autoIncrementModelID("quoteNumber", this, next);
+});
+
 const QuoteModel = mongoose.model("Quote", QuoteSchema);
 
+/**
+ * Global Quote objet
+ * @typedef {typeof QuoteModel.schema.obj} Quote
+ */
 module.exports = QuoteModel;

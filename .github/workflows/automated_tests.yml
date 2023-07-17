@@ -1,14 +1,6 @@
 name: Automated Tests
 
-on:
-  pull_request:
-    branches:
-      - dev
-  push:
-    branches:
-      - dev
-      - prod
-      - beta
+on: ["push"]
 
 jobs:
   build_frontend:
@@ -29,4 +21,4 @@ jobs:
         run: docker-compose -f docker-compose.test.yml up --build -d
 
       - name: Test backend
-        run: yarn test:api
+        run: cd mongo-backend && yarn install && yarn test 

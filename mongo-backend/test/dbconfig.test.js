@@ -14,8 +14,12 @@ mongoose.connection
   });
 
 // Drop the database before each test
-// beforeEach((done) => {
-//   mongoose.connection.dropDatabase().then(() => {
-//     done();
-//   });
-// });
+beforeEach((done) => {
+  if (mongoose.connection.readyState === 0) {
+    mongoose.connect(mongoURI, (err) => {
+      if (err) throw err;
+      return done();
+    });
+  }
+  done();
+});

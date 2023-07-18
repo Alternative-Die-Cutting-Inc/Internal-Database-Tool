@@ -8,7 +8,7 @@
   "scripts": {
     "start": "nodemon ./server.js localhost 8080",
     "test": "nyc --reporter=lcov --reporter=text mocha --recursive --exit",
-    "test:actions": "nyc --reporter=text-summary mocha --recursive --exit",
+    "test:actions": "nyc --reporter=text-summary mocha --recursive --exit"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",

@@ -7,7 +7,7 @@ import { userSelector } from "../../state/user/userSlice";
 const PageLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector(userSelector);
+  const { user, error } = useSelector(userSelector);
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(signin({ username, password }));
@@ -18,7 +18,8 @@ const PageLogin = () => {
     if (user) {
       navigate("/");
     }
-  }, [user]);
+    console.log("error", error);
+  }, [user, error]);
   return (
     <>
       <div className="loginpage-container">
@@ -49,6 +50,11 @@ const PageLogin = () => {
               Log In
             </button>
           </form>
+          {error && (
+            <div className="login-error">
+              <p>{error.data.message}</p>
+            </div>
+          )}
         </div>
       </div>
     </>

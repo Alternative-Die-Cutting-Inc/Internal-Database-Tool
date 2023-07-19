@@ -54,3 +54,10 @@
     transition: background-color 200ms;
   }
 }
+
+.login-error {
+  padding: 0vh 0 2vh 0;
+  p {
+    color: red;
+  }
+}

@@ -11,7 +11,7 @@
 }
 
 :root {
-  --dark-mode: false;
+  --dark-mode: true;
 }
 
 html {
@@ -41,8 +41,12 @@ a {
   transition: text-decoration-color 250ms;
   cursor: pointer;
   background: linear-gradient(to left, #0000ee, #0000ee);
-  background-size: 100% 2px, 0 2px;
-  background-position: 0% 100%, 0 100%;
+  background-size:
+    100% 2px,
+    0 2px;
+  background-position:
+    0% 100%,
+    0 100%;
   background-repeat: no-repeat;
   transition: background-size 400ms;
 }
@@ -53,7 +57,9 @@ a {
 
 a:hover {
   transition: background-size 400ms;
-  background-size: 0% 2px, 100% 2px;
+  background-size:
+    0% 2px,
+    100% 2px;
 }
 
 .no-link-style {
@@ -79,7 +85,9 @@ a:hover {
 .page-enter-active {
   opacity: 1;
   transform: scale(1);
-  transition: opacity 300ms, transform 300ms;
+  transition:
+    opacity 300ms,
+    transform 300ms;
   @include devices(tablet) {
     transform: unset;
     transition: opacity 300ms;
@@ -94,7 +102,9 @@ a:hover {
 .page-exit-active {
   opacity: 0;
   transform: scale(0.92);
-  transition: opacity 300ms, transform 300ms;
+  transition:
+    opacity 300ms,
+    transform 300ms;
   @include devices(tablet) {
     transform: unset;
     transition: opacity 300ms;

@@ -64,6 +64,13 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = error;
     },
+    setLoading: (state, { payload: loading }) => {
+      state.loading = loading;
+    },
+    setUserInfo: (state, { payload: user }) => {
+      state.user = user;
+      state.loggedIn = true;
+    },
   },
 });
 
@@ -80,6 +87,8 @@ export const {
   signupStart,
   signupSuccess,
   signupFail,
+  setUserInfo,
+  setLoading,
 } = userSlice.actions;
 
 export default userSlice.reducer;

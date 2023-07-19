@@ -14,13 +14,15 @@ import {
   signupStart,
   signupSuccess,
   signupFail,
+  setUserInfo,
+  setLoading,
 } from "./userSlice";
 
 export const getUsers = createAction("getUsersSaga");
 
 export function* getUsersSaga() {
-  const { axios } = useAxios();
   try {
+    const { axios } = useAxios();
     yield put(getUsersStart());
     const response = yield call(axios.get, "/user");
     yield put(getUsersSuccess(response.data?.users));
@@ -32,8 +34,8 @@ export function* getUsersSaga() {
 export const signUp = createAction("createUserSaga");
 
 export function* createUserSaga({ payload: { user } }) {
-  const { axios } = useAxios();
   try {
+    const { axios } = useAxios();
     yield put(signupStart());
     const result = yield call(axios.post, "/user/signup", user);
     yield put(signupSuccess(result.data.user));
@@ -45,8 +47,8 @@ export function* createUserSaga({ payload: { user } }) {
 export const signin = createAction("signinSaga");
 
 export function* signinSaga({ payload: { username, password } }) {
-  const { axios } = useAxios();
   try {
+    const { axios } = useAxios();
     yield put(signinStart());
     const result = yield call(axios.post, "/user/signin", {
       username,
@@ -61,17 +63,32 @@ export function* signinSaga({ payload: { username, password } }) {
 
 export const logout = createAction("logoutSaga");
 
-export function* logoutSaga({ payload: { navigate } }) {
-  const { axios } = useAxios();
-
+export function* logoutSaga() {
   try {
+    const { axios } = useAxios();
     yield put(logoutStart());
-    yield call(axios.post, "/user/logout");
+    yield call(axios.post, "/user/signout");
     yield put(logoutSuccess());
-    yield call(navigate, "/");
   } catch (err) {
     console.error(err);
     yield put(logoutFailure(err.response.data));
+  }
+}
+
+export const getUserInfo = createAction("getUserInfoSaga");
+
+export function* getUserInfoSaga({ payload: navigate }) {
+  try {
+    yield put(setLoading(true));
+    const { axios } = useAxios();
+
+    const result = yield call(axios.get, "/user/info");
+    yield put(setUserInfo(result.data.user));
+    yield put(setLoading(false));
+  } catch (error) {
+    navigate && navigate("/");
+    console.error(error);
+    yield put(setLoading(false));
   }
 }
 
@@ -79,4 +96,5 @@ export default function* usersSaga() {
   yield takeLeading(signin.type, signinSaga);
   yield takeLeading(signUp.type, createUserSaga);
   yield takeLeading(logout.type, logoutSaga);
+  yield takeLeading(getUserInfo.type, getUserInfoSaga);
 }

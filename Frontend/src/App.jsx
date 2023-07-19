@@ -10,17 +10,29 @@
 import "./App.scss";
 import { pages } from "./util/pages";
 import { Navbar } from "./components/Navbar/Navbar";
-
-import { BrowserRouter, useLocation, Route, Routes } from "react-router-dom";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { useEffect } from "react";
+import {
+  BrowserRouter,
+  useLocation,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
+import { TransitionGroup } from "react-transition-group";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 import { DarkModeProvider } from "./util/DarkModeProvider";
 import { SnackbarProvider } from "./util/SnackbarProvider";
 
 import { useDispatch, useSelector } from "react-redux";
+import { getUserInfo } from "./state/user/saga";
 import { userSelector } from "./state/user/userSlice";
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUserInfo());
+  }, []);
+
   return (
     <DarkModeProvider>
       <SnackbarProvider>
@@ -34,42 +46,51 @@ function App() {
 
 const TransitionRoutes = () => {
   const location = useLocation();
-  const { user } = useSelector(userSelector);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user, loading } = useSelector(userSelector);
+  useEffect(() => {
+    if (!user) {
+      dispatch(getUserInfo(navigate));
+    }
+  }, [user]);
   return (
     <TransitionGroup>
       <Navbar />
       <ScrollToTop />
-      <CSSTransition key={location.key} classNames="page" timeout={300}>
-        <Routes location={location}>
-          {user ? (
-            [...pages.main, ...pages.hidden].map((page) => {
-              return (
-                <Route
-                  path={page.path}
-                  key={page.path}
-                  element={
-                    <div
-                      className="content-container"
-                      style={{
-                        marginTop: "45px",
-                        height: "fit-content",
-                        position: "absolute",
-                        right: 0,
-                        left: 0,
-                        bottom: 0,
-                        top: 0,
-                      }}
-                    >
-                      {page.component}
-                    </div>
-                  }
-                />
-              );
-            })
-          ) : (
-            <Route
-              path="/"
-              element={
+      <Routes location={location}>
+        {user ? (
+          [...pages.main, ...pages.hidden].map((page) => {
+            return (
+              <Route
+                path={page.path}
+                key={page.path}
+                element={
+                  <div
+                    className="content-container"
+                    style={{
+                      marginTop: "45px",
+                      height: "fit-content",
+                      position: "absolute",
+                      right: 0,
+                      left: 0,
+                      bottom: 0,
+                      top: 0,
+                    }}
+                  >
+                    {page.component}
+                  </div>
+                }
+              />
+            );
+          })
+        ) : (
+          <Route
+            path="/"
+            element={
+              loading ? (
+                <></>
+              ) : (
                 <div
                   className="content-container"
                   style={{
@@ -84,12 +105,12 @@ const TransitionRoutes = () => {
                 >
                   {pages["login"].component}
                 </div>
-              }
-            />
-          )}
-          <Route path="*" element={pages["404"].component} />
-        </Routes>
-      </CSSTransition>
+              )
+            }
+          />
+        )}
+        {loading ? <></> : <Route path="*" element={pages["404"].component} />}
+      </Routes>
     </TransitionGroup>
   );
 };

@@ -1,18 +1,19 @@
 import "./Navbar.scss";
 import { useEffect, useRef } from "react";
 import AlternativeDCLogo from "../../assets/logo/logo.png";
+import { useNavigate } from "react-router-dom";
 import { Link, useLocation } from "react-router-dom";
 import { pages } from "../../util/pages";
 import { useDispatch, useSelector } from "react-redux";
 import { setNavbarFunctions } from "../../state/navbar/saga";
 import { userSelector } from "../../state/user/userSlice";
-
+import { logout } from "../../state/user/saga";
 const Navbar = () => {
   const { pathname } = useLocation();
   const navbarFunctionsRef = useRef([]);
   const dispatch = useDispatch();
   const { user } = useSelector(userSelector);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (navbarFunctionsRef.current.length > 0) {
       dispatch(setNavbarFunctions({ navbarFunctions: navbarFunctionsRef }));
@@ -102,7 +103,14 @@ const Navbar = () => {
             <></>
           )}
           {user ? (
-            <div className="navbar-sub-container" key={"logout"}>
+            <div
+              className="navbar-sub-container"
+              key={"logout"}
+              onClick={() => {
+                dispatch(logout());
+                navigate("/");
+              }}
+            >
               <div className="navbar-link-label">
                 {" "}
                 <h3>Logout</h3>{" "}

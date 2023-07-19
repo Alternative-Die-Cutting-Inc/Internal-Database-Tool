@@ -4,8 +4,8 @@ import { createSelector } from "reselect";
 export const initialState = {
   loading: false,
   error: null,
-  users: [],
-  user: {},
+  users: null,
+  user: null,
 };
 
 const userSlice = createSlice({
@@ -25,18 +25,51 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = error;
     },
-    getUserStart: (state) => {
+    signinStart: (state) => {
       state.loading = true;
       state.error = null;
     },
-    getUserSuccess: (state, { payload: user }) => {
+    signinFail: (state, { payload: error }) => {
+      state.loading = false;
+      state.error = error;
+    },
+    signinSuccess: (state, { payload: user }) => {
+      console.log("user", user);
       state.loading = false;
       state.error = null;
       state.user = user;
     },
-    getUserFailure: (state, { payload: error }) => {
+    logoutStart: (state) => {
+      state.loading = true;
+      state.error = false;
+    },
+    logoutFailure: (state, { payload: error }) => {
       state.loading = false;
       state.error = error;
+    },
+    logoutSuccess: (state) => {
+      state.user = null;
+      state.loading = false;
+      state.error = null;
+    },
+    signupStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    signupSuccess: (state) => {
+      state.loading = false;
+      state.error = null;
+    },
+    signupFail: (state, { payload: error }) => {
+      state.loading = false;
+      state.error = error;
+    },
+    setLoading: (state, { payload: loading }) => {
+      state.loading = loading;
+    },
+    setUserInfo: (state, { payload: user }) => {
+      state.user = user;
+      state.loggedIn = true;
     },
   },
 });
@@ -45,9 +78,17 @@ export const {
   getUsersFailure,
   getUsersSuccess,
   getUsersStart,
-  getUserFailure,
-  getUserSuccess,
-  getUserStart,
+  signinFail,
+  signinStart,
+  signinSuccess,
+  logoutFailure,
+  logoutStart,
+  logoutSuccess,
+  signupStart,
+  signupSuccess,
+  signupFail,
+  setUserInfo,
+  setLoading,
 } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -18,13 +18,13 @@ describe("Testing User Services", () => {
   let newUser = null;
 
   it(".create()\t\t\t|\tCreate a User", async function () {
-    newUser = await userServices.create(
-      "dev@alternativeDC.com",
-      "Password1!",
-      "dev",
-      "John",
-      "Doe"
-    );
+    newUser = await userServices.create({
+      username: "dev",
+      password: "Password1!",
+      email: "dev@alternativeDC.com",
+      firstName: "John",
+      lastName: "Doe",
+    });
   });
 
   it(".create()\t\t\t|\tAccurate creation", async function () {
@@ -37,7 +37,11 @@ describe("Testing User Services", () => {
 
   it(".create()\t\t\t|\tDuplicate Email", async function () {
     await assert.rejects(
-      userServices.create("dev@alternativeDC.com", "Password1!", "dev"),
+      userServices.create({
+        email: "dev@alternativeDC.com",
+        password: "Password1!",
+        username: "dev",
+      }),
       Error,
       "Email already exists"
     );

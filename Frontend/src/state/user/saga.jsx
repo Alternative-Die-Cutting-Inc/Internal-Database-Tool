@@ -5,40 +5,96 @@ import {
   getUsersFailure,
   getUsersStart,
   getUsersSuccess,
-  getUserFailure,
-  getUserStart,
-  getUserSuccess,
+  signinFail,
+  signinStart,
+  signinSuccess,
+  logoutFailure,
+  logoutStart,
+  logoutSuccess,
+  signupStart,
+  signupSuccess,
+  signupFail,
+  setUserInfo,
+  setLoading,
 } from "./userSlice";
 
 export const getUsers = createAction("getUsersSaga");
 
 export function* getUsersSaga() {
-  const { axios } = useAxios();
-
   try {
+    const { axios } = useAxios();
     yield put(getUsersStart());
-    const response = yield call(axios.get, "/user/unapproved-users"); // change URL
+    const response = yield call(axios.get, "/user");
     yield put(getUsersSuccess(response.data?.users));
   } catch (e) {
     yield put(getUsersFailure(e));
   }
 }
 
-export const getUser = createAction("getUserSaga");
+export const signUp = createAction("createUserSaga");
 
-export function* getUserSaga() {
-  const { axios } = useAxios();
-
+export function* createUserSaga({ payload: { user } }) {
   try {
-    yield put(getUserStart());
-    const response = yield call(axios.get, "/user/unapproved-users"); // change URL
-    yield put(getUserSuccess(response.data?.users));
-  } catch (e) {
-    yield put(getUserFailure(e));
+    const { axios } = useAxios();
+    yield put(signupStart());
+    const result = yield call(axios.post, "/user/signup", user);
+    yield put(signupSuccess(result.data.user));
+  } catch (error) {
+    yield put(signupFail(error.response.data));
+  }
+}
+
+export const signin = createAction("signinSaga");
+
+export function* signinSaga({ payload: { username, password } }) {
+  try {
+    const { axios } = useAxios();
+    yield put(signinStart());
+    const result = yield call(axios.post, "/user/signin", {
+      username,
+      password,
+    });
+    yield put(signinSuccess(result.data.user));
+  } catch (error) {
+    console.error(error);
+    yield put(signinFail(error.response));
+  }
+}
+
+export const logout = createAction("logoutSaga");
+
+export function* logoutSaga() {
+  try {
+    const { axios } = useAxios();
+    yield put(logoutStart());
+    yield call(axios.post, "/user/signout");
+    yield put(logoutSuccess());
+  } catch (err) {
+    console.error(err);
+    yield put(logoutFailure(err.response.data));
+  }
+}
+
+export const getUserInfo = createAction("getUserInfoSaga");
+
+export function* getUserInfoSaga({ payload: navigate }) {
+  try {
+    yield put(setLoading(true));
+    const { axios } = useAxios();
+
+    const result = yield call(axios.get, "/user/info");
+    yield put(setUserInfo(result.data.user));
+    yield put(setLoading(false));
+  } catch (error) {
+    navigate && navigate("/");
+    console.error(error);
+    yield put(setLoading(false));
   }
 }
 
 export default function* usersSaga() {
-  yield takeLeading(getUsers.type, getUsersSaga);
-  yield takeLeading(getUser.type, getUserSaga);
+  yield takeLeading(signin.type, signinSaga);
+  yield takeLeading(signUp.type, createUserSaga);
+  yield takeLeading(logout.type, logoutSaga);
+  yield takeLeading(getUserInfo.type, getUserInfoSaga);
 }

@@ -76,6 +76,7 @@ const QuoteSchema = new mongoose.Schema({
   quoteNumber: {
     type: Number,
     required: true,
+    unique: true,
   },
   customerName: {
     type: String,

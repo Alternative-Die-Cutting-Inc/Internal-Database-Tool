@@ -44,6 +44,7 @@ const DocketSchema = new mongoose.Schema({
   docketNumber: {
     type: Number,
     required: true,
+    unique: true,
   },
   quoteNumber: {
     type: Number,

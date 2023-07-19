@@ -30,7 +30,7 @@ router.get("/", async (req, res, next) => {
 /**
  * @description get quote by id
  * @route GET /quotes/:id
- * @returns {Object} quote object
+ * @returns {Quote} quote object
  */
 router.get("/:id", async (req, res, next) => {
   try {
@@ -49,7 +49,7 @@ router.get("/:id", async (req, res, next) => {
 /**
  * @description create quote
  * @route POST /quotes
- * @returns {Object} quote object
+ * @returns {Quote} quote object
  */
 router.post("/", async (req, res, next) => {
   try {

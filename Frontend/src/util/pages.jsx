@@ -30,6 +30,11 @@ export const pages = {
     component: <Page404 />,
     path: "*",
   },
+  login: {
+    label: "Login",
+    component: <PageLogin />,
+    path: "/login",
+  },
   main: [
     {
       label: "Quotes",
@@ -64,16 +69,12 @@ export const pages = {
       path: "/dockettool",
     },
     {
-      label: "Login",
-      component: <PageLogin />,
-      path: "/login",
-    },
-    {
       label: "Shipments",
       component: <PageShipments />,
       path: "/shipments",
     },
   ],
+
   functions: {
     quotes: [],
     dockets: [],

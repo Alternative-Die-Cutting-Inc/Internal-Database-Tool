@@ -4,8 +4,8 @@ import { createSelector } from "reselect";
 export const initialState = {
   loading: false,
   error: null,
-  users: [],
-  user: {},
+  users: null,
+  user: null,
 };
 
 const userSlice = createSlice({
@@ -25,16 +25,41 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = error;
     },
-    getUserStart: (state) => {
+    loginStart: (state) => {
       state.loading = true;
       state.error = null;
     },
-    getUserSuccess: (state, { payload: user }) => {
+    loginFail: (state, { payload: error }) => {
+      state.loading = false;
+      state.error = error;
+    },
+    loginSuccess: (state, { payload: user }) => {
       state.loading = false;
       state.error = null;
       state.user = user;
     },
-    getUserFailure: (state, { payload: error }) => {
+    logoutStart: (state) => {
+      state.loading = true;
+      state.error = false;
+    },
+    logoutFailure: (state, { payload: error }) => {
+      state.loading = false;
+      state.error = error;
+    },
+    logoutSuccess: (state) => {
+      state.user = null;
+      state.loading = false;
+      state.error = null;
+    },
+    signupStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    signupSuccess: (state) => {
+      state.loading = false;
+      state.error = null;
+    },
+    signupFail: (state, { payload: error }) => {
       state.loading = false;
       state.error = error;
     },
@@ -45,9 +70,15 @@ export const {
   getUsersFailure,
   getUsersSuccess,
   getUsersStart,
-  getUserFailure,
-  getUserSuccess,
-  getUserStart,
+  loginFail,
+  loginStart,
+  loginSuccess,
+  logoutFailure,
+  logoutStart,
+  logoutSuccess,
+  signupStart,
+  signupSuccess,
+  signupFail,
 } = userSlice.actions;
 
 export default userSlice.reducer;

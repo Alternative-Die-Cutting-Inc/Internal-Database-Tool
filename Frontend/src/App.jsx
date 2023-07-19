@@ -18,8 +18,8 @@ import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import { DarkModeProvider } from "./util/DarkModeProvider";
 import { SnackbarProvider } from "./util/SnackbarProvider";
 
-// import { Suspense } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import { userSelector } from "./state/user/userSlice";
 function App() {
   return (
     <DarkModeProvider>
@@ -34,37 +34,41 @@ function App() {
 
 const TransitionRoutes = () => {
   const location = useLocation();
-
+  const { user } = useSelector(userSelector);
   return (
     <TransitionGroup>
       <Navbar />
       <ScrollToTop />
       <CSSTransition key={location.key} classNames="page" timeout={300}>
         <Routes location={location}>
-          {[...pages.main, ...pages.hidden].map((page) => {
-            return (
-              <Route
-                path={page.path}
-                key={page.path}
-                element={
-                  <div
-                    className="content-container"
-                    style={{
-                      marginTop: "45px",
-                      height: "fit-content",
-                      position: "absolute",
-                      right: 0,
-                      left: 0,
-                      bottom: 0,
-                      top: 0,
-                    }}
-                  >
-                    {page.component}
-                  </div>
-                }
-              />
-            );
-          })}
+          {user ? (
+            [...pages.main, ...pages.hidden].map((page) => {
+              return (
+                <Route
+                  path={page.path}
+                  key={page.path}
+                  element={
+                    <div
+                      className="content-container"
+                      style={{
+                        marginTop: "45px",
+                        height: "fit-content",
+                        position: "absolute",
+                        right: 0,
+                        left: 0,
+                        bottom: 0,
+                        top: 0,
+                      }}
+                    >
+                      {page.component}
+                    </div>
+                  }
+                />
+              );
+            })
+          ) : (
+            <Route path="/" element={pages["login"].component} />
+          )}
           <Route path="*" element={pages["404"].component} />
         </Routes>
       </CSSTransition>

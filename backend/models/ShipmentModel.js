@@ -75,7 +75,7 @@ const ShipmentSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  forms: { type: [formSchema], required: true },
+  shipmentForms: { type: [formSchema], required: true },
 });
 
 const ShipmentModel = mongoose.model("Shipment", ShipmentSchema);

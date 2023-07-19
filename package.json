@@ -7,11 +7,10 @@
   "license": "MIT",
   "scripts": {
     "start:dev": "concurrently \"cd backend && nodemon ./server.js localhost 8080\" \"cd frontend && yarn dev\"",
-    "start:dev:mongo": "concurrently \"cd mongo-backend && nodemon ./server.js localhost 8080\" \"cd frontend && yarn dev\"",
     "dev": "cd frontend && yarn dev",
     "start": "cd backend && nodemon ./server.js localhost 8080",
     "download": "concurrently \"cd backend && yarn install\" \"cd frontend && yarn install\"",
-    "test:api": "cd mongo-backend && yarn test"
+    "test:api": "cd backend && yarn test"
 },
 
   "devDependencies": {

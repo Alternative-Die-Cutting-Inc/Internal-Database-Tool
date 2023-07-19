@@ -1,38 +1,18 @@
-/**
- *
- */
-
-const express = require("express");
-const path = require("path");
-const port = process.env.PORT || 8080;
-const app = express();
-const cors = require("cors");
-const bodyParser = require("body-parser");
+const http = require("http");
+const mongoLoader = require("./loaders/mongoLoader");
+const passportLoader = require("./loaders/passportLoader");
+const errorResponseMiddleware = require("./middlewares/errorResponseMiddleware");
+const routerLoader = require("./loaders/routerLoader");
+const app = require("./app");
 require("dotenv").config();
 
-const docketsRouter = require("./routes/docketsRouter");
-const quotesRouter = require("./routes/quotesRouter");
-// const shippingRouter = require("./routes/shippingRouter");
+mongoLoader(app).then(async () => {
+  const server = http.createServer(app);
+  passportLoader(app);
+  routerLoader(app);
+  app.use(errorResponseMiddleware);
 
-const corsOptions = {
-  credentials: true,
-  origin: [
-    process.env.FRONTEND_BASE_URL,
-    process.env.BACKEND_BASE_URL,
-    "http://localhost:5173/",
-  ],
-};
-
-app.use(cors(corsOptions));
-app.use(bodyParser.json());
-
-app.use("/quotes", quotesRouter);
-app.use("/dockets", docketsRouter);
-// app.use("/shipping", shippingRouter);
-
-app.get("/*", function (req, res) {
-  res.send("Alternative Die Cutting Inc. Backend API");
+  server.listen(process.env.PORT || 5001, () => {
+    console.log(`Server is running on port: ${process.env.PORT}`);
+  });
 });
-
-app.listen(port);
-console.log("server started on port " + port);

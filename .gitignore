@@ -4,7 +4,7 @@ node_modules
 
 mongo-volume
 
-mongo-backend/.nyc_output
-mongo-backend/coverage
+backend/.nyc_output
+backend/coverage
 
 yarn-error.log

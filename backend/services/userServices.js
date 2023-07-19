@@ -29,7 +29,7 @@ const userServices = {
    * @param {String} username
    * @return {User} user object
    */
-  async create(email, password, username, firstName, lastName) {
+  async create({ username, password, email, firstName, lastName }) {
     let responseUser = null;
     responseUser = bcrypt.hash(password, 10).then(
       (hashedPassword) =>

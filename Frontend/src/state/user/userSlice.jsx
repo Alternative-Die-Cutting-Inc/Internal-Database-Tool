@@ -25,15 +25,16 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = error;
     },
-    loginStart: (state) => {
+    signinStart: (state) => {
       state.loading = true;
       state.error = null;
     },
-    loginFail: (state, { payload: error }) => {
+    signinFail: (state, { payload: error }) => {
       state.loading = false;
       state.error = error;
     },
-    loginSuccess: (state, { payload: user }) => {
+    signinSuccess: (state, { payload: user }) => {
+      console.log("user", user);
       state.loading = false;
       state.error = null;
       state.user = user;
@@ -70,9 +71,9 @@ export const {
   getUsersFailure,
   getUsersSuccess,
   getUsersStart,
-  loginFail,
-  loginStart,
-  loginSuccess,
+  signinFail,
+  signinStart,
+  signinSuccess,
   logoutFailure,
   logoutStart,
   logoutSuccess,

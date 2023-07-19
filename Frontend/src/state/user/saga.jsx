@@ -5,9 +5,9 @@ import {
   getUsersFailure,
   getUsersStart,
   getUsersSuccess,
-  loginFail,
-  loginStart,
-  loginSuccess,
+  signinFail,
+  signinStart,
+  signinSuccess,
   logoutFailure,
   logoutStart,
   logoutSuccess,
@@ -31,49 +31,31 @@ export function* getUsersSaga() {
 
 export const signUp = createAction("createUserSaga");
 
-export function* createUserSaga({
-  payload: { setSnackbar, setIsLoading, user },
-}) {
+export function* createUserSaga({ payload: { user } }) {
   const { axios } = useAxios();
   try {
     yield put(signupStart());
     const result = yield call(axios.post, "/user/signup", user);
     yield put(signupSuccess(result.data.user));
   } catch (error) {
-    setSnackbar(
-      error.response?.data?.message
-        ? error.response?.data?.message.toString()
-        : error.response?.data
-        ? error.response?.data.toString()
-        : error.toString(),
-      true
-    );
-    setIsLoading(false);
     yield put(signupFail(error.response.data));
   }
 }
 
-export const login = createAction("loginSaga");
+export const signin = createAction("signinSaga");
 
-export function* loginSaga({
-  payload: { setSnackbar, setIsLoading, email, password },
-}) {
+export function* signinSaga({ payload: { username, password } }) {
   const { axios } = useAxios();
   try {
-    yield put(loginStart());
-    const result = yield call(axios.post, "/user/login", { email, password });
-    yield put(loginSuccess(result.data.user));
+    yield put(signinStart());
+    const result = yield call(axios.post, "/user/signin", {
+      username,
+      password,
+    });
+    yield put(signinSuccess(result.data.user));
   } catch (error) {
-    setSnackbar(
-      error.response?.data?.message
-        ? error.response?.data?.message.toString()
-        : error.response?.data
-        ? error.response?.data.toString()
-        : error.toString(),
-      true
-    );
-    setIsLoading(false);
-    yield put(loginFail(error.response.data));
+    console.error(error);
+    yield put(signinFail(error.response));
   }
 }
 
@@ -94,7 +76,7 @@ export function* logoutSaga({ payload: { navigate } }) {
 }
 
 export default function* usersSaga() {
-  yield takeLeading(login.type, loginSaga);
+  yield takeLeading(signin.type, signinSaga);
   yield takeLeading(signUp.type, createUserSaga);
   yield takeLeading(logout.type, logoutSaga);
 }

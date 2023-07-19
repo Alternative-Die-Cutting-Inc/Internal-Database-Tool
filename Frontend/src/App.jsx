@@ -67,7 +67,25 @@ const TransitionRoutes = () => {
               );
             })
           ) : (
-            <Route path="/" element={pages["login"].component} />
+            <Route
+              path="/"
+              element={
+                <div
+                  className="content-container"
+                  style={{
+                    marginTop: "45px",
+                    height: "fit-content",
+                    position: "absolute",
+                    right: 0,
+                    left: 0,
+                    bottom: 0,
+                    top: 0,
+                  }}
+                >
+                  {pages["login"].component}
+                </div>
+              }
+            />
           )}
           <Route path="*" element={pages["404"].component} />
         </Routes>

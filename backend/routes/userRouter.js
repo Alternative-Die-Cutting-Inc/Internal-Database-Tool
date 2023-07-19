@@ -22,7 +22,7 @@ router.post("/signup", async (req, res, next) => {
     if (invalid) {
       res.status(400).send({ message: invalid.message });
     } else {
-      const responseUser = await userServices.create(newUser);
+      const responseUser = await userServices.create({ ...newUser });
       res.status(201).send(responseUser);
     }
   } catch (error) {
@@ -39,7 +39,7 @@ router.post("/signin", async (req, res, next) => {
   passport.authenticate("local", (error, user) => {
     if (error || !user) {
       res.status(403).send({
-        message: "Please ensure your email and password are correct.",
+        message: "Please ensure your username and password are correct.",
       });
     } else {
       req.logIn(user, (error) => {
@@ -48,7 +48,7 @@ router.post("/signin", async (req, res, next) => {
         } else {
           res.status(200).send({
             message: "successfully signed in",
-            user,
+            user: user,
           });
         }
       });

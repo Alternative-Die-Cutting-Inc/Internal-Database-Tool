@@ -7,6 +7,7 @@
 const express = require("express");
 const userServices = require("../services/userServices");
 const passport = require("../services/passport");
+const checkLoggedIn = require("../middlewares/checkLoggedIn");
 
 const router = express.Router();
 
@@ -73,6 +74,16 @@ router.post("/signout", async (req, res, next) => {
       });
     }
   });
+});
+
+/**
+ * Get the currently authenticated user.
+ * @route GET /user/info
+ * @return {User} user object
+ */
+router.get("/info", checkLoggedIn, async (req, res, next) => {
+  let user = req.user;
+  res.status(200).send({ user: user });
 });
 
 module.exports = router;

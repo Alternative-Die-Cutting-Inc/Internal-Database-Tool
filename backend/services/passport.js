@@ -8,7 +8,10 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id).then((err, user) => done(err, user));
+  User.findById(id).then(
+    (user) => done(null, user),
+    (error) => done(error)
+  );
 });
 
 passport.use(
@@ -25,7 +28,6 @@ passport.use(
               throw err;
             }
             if (isMatch) {
-              console.log("user", user);
               return done(null, user);
             } else {
               return done(null, false, { message: "WRONG_PASSWORD" });

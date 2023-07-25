@@ -39,7 +39,7 @@ const customerServices = {
    */
   async getNames() {
     return CustomerModel.find({}, { name: 1 }).then(
-      (customers) => customers.name,
+      (customers) => customers.map((customer) => customer.name),
       (error) => {
         throw new Error('UNABLE_TO_GET_CUSTOMERS', { cause: error });
       },

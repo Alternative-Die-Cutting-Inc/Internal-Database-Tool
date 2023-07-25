@@ -63,6 +63,7 @@ const CustomerSchema = new mongoose.Schema({
   type: {
     type: String,
     enum: ['customer', 'supplier', 'perspective', 'client'],
+    set: (value) => value.toLowerCase(),
     required: true,
   },
 });

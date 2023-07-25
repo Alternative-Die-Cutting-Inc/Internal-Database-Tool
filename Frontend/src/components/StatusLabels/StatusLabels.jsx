@@ -24,7 +24,40 @@ const StatusLabels = ({ values }) => {
             <span
               key={idx}
               className="badge"
+              style={{ backgroundColor: "gray" }}
+            >
+              {status}
+            </span>
+          );
+        } else if (status === "Created") {
+          return (
+            <span
+              key={idx}
+              className="badge"
+              style={{
+                backgroundColor: "yellow",
+                color: "black",
+              }}
+            >
+              {status}
+            </span>
+          );
+        } else if (status === "In Progress") {
+          return (
+            <span
+              key={idx}
+              className="badge"
               style={{ backgroundColor: "blue" }}
+            >
+              {status}
+            </span>
+          );
+        } else if (status === "Stopped") {
+          return (
+            <span
+              key={idx}
+              className="badge"
+              style={{ backgroundColor: "red" }}
             >
               {status}
             </span>

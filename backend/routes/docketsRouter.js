@@ -17,7 +17,7 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     const allDockets = await docketServices.get();
-    res.status(200).send(allDockets);
+    res.status(200).send({ dockets: allDockets });
   } catch (error) {
     next(error);
   }
@@ -32,7 +32,7 @@ router.get('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
     const responseDocket = await docketServices.get(id);
-    res.status(200).send(responseDocket);
+    res.status(200).send({ docket: responseDocket });
   } catch (error) {
     next(error);
   }

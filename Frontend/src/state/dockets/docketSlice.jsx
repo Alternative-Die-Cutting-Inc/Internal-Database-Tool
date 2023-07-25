@@ -4,27 +4,8 @@ import { createSelector } from "reselect";
 export const initialState = {
   loading: false,
   error: null,
-  dockets: [],
-  docket: {
-    docketNumber: 44300,
-    quoteNumber: 18500,
-    quoteJob: "",
-    customerName: "",
-    customerPO: 44182,
-    productionPerson: "",
-    jobName: "",
-    jobType: "",
-    soldFor: 1,
-    dieID: 43741,
-    dieType: "",
-    finishing: "",
-    specialInstructions: "",
-    forms: [],
-    extraCharges: [],
-    requoteMemo: "",
-    creationDate: null,
-    closeDate: null,
-  },
+  dockets: null,
+  docket: null,
 };
 
 const docketSlice = createSlice({

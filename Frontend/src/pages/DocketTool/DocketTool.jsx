@@ -1,6 +1,6 @@
 import "./DocketTool.scss";
 import { useLocation } from "react-router-dom";
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDocket } from "../../state/dockets/saga";
 import { docketSelector } from "../../state/dockets/docketSlice";
@@ -14,16 +14,20 @@ function useQuery() {
 const PageDocketTool = () => {
   let query = useQuery();
   const dispatch = useDispatch();
-  const { docket, loading } = useSelector(docketSelector);
+  const { docket } = useSelector(docketSelector);
   useEffect(() => {
-    dispatch(getDocket(query.get("docketNumber")));
-  });
+    dispatch(getDocket({ id: query.get("docketNumber") }));
+  }, [dispatch]);
+
+  const [editingDocket, setEditingDocket] = useState(docket);
+
+  useEffect(() => {
+    setEditingDocket(docket);
+  }, [docket]);
 
   return (
     <>
-      {loading ? (
-        <></>
-      ) : (
+      {editingDocket && (
         <div className="docket-tool-container">
           <div className="docket-info">
             <table className="docket-info-table" id="docket-info-table">
@@ -34,7 +38,7 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={docket.docketNumber}
+                      value={editingDocket.docketNumber}
                       disabled
                     />
                   </td>
@@ -43,7 +47,7 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={docket.customerName}
+                      value={editingDocket.customerName}
                     />
                   </td>
                   <td>Customer PO:</td>
@@ -51,7 +55,7 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={docket.customerPO}
+                      value={editingDocket.customerPO}
                     />
                   </td>
                   <td>Job Name:</td>
@@ -59,7 +63,7 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={docket.jobName}
+                      value={editingDocket.jobName}
                     />
                   </td>
                   <td>Quote Job:</td>
@@ -70,7 +74,8 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={docket.quoteNumber}
+                      value={editingDocket.quoteNumber}
+                      disabled
                     />
                   </td>
                   <td>Production Person:</td>
@@ -78,7 +83,7 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={docket.productionPerson}
+                      value={editingDocket.productionPerson}
                     />
                   </td>
                   <td>Sold For:</td>
@@ -86,7 +91,7 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={docket.soldFor}
+                      value={editingDocket.soldFor}
                     />
                   </td>
                   <td>Job Type:</td>
@@ -94,14 +99,14 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={docket.jobType}
+                      value={editingDocket.jobType}
                     />
                   </td>
                   <td>
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={docket.quoteJob}
+                      value={editingDocket.quoteJob}
                     />
                   </td>
                 </tr>
@@ -129,13 +134,13 @@ const PageDocketTool = () => {
                       <tr>
                         <td>Die search:</td>
                         <td>
-                          <input type="text" value={docket.dieID} />
+                          <input type="text" value={editingDocket.dieID} />
                         </td>
                       </tr>
                       <tr>
                         <td>Die type:</td>
                         <td>
-                          <input type="text" value={docket.dieType} />
+                          <input type="text" value={editingDocket.dieType} />
                         </td>
                       </tr>
                     </tbody>
@@ -206,7 +211,7 @@ const PageDocketTool = () => {
                     id=""
                     className="finishing-notes-input"
                     placeholder="Additional Notes"
-                    value={docket.finishing}
+                    value={editingDocket.finishing}
                   />
                 </div>
               </div>
@@ -223,7 +228,7 @@ const PageDocketTool = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {[...docket.forms].map((form, index) => (
+                    {[...editingDocket.forms].map((form, index) => (
                       <tr key={form.name + index}>
                         <td>
                           <input type="text" value={form.name} />
@@ -253,7 +258,23 @@ const PageDocketTool = () => {
                     </tr>
                   </tbody>
                 </table>
-                <button className="add-form-button">+</button>
+                <button
+                  className="add-form-button"
+                  onClick={() => {
+                    let newForms = [...editingDocket.forms];
+                    newForms.push({
+                      formName: "",
+                      formQuantity: 0,
+                    });
+                    setEditingDocket({
+                      ...editingDocket,
+                      forms: newForms,
+                    });
+                    console.log(editingDocket);
+                  }}
+                >
+                  +
+                </button>
               </div>
             </div>
             <div className="docket-input-column" id="column2">
@@ -265,7 +286,7 @@ const PageDocketTool = () => {
                     id=""
                     className="instructions-input"
                     placeholder="Instructions"
-                    value={docket.specialInstructions}
+                    value={editingDocket.specialInstructions}
                   />
                 </div>
               </div>
@@ -280,24 +301,41 @@ const PageDocketTool = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {[...docket.extraCharges].map((extraCharge, index) => (
-                      <tr key={extraCharge.chargeName + index}>
-                        <td>
-                          <input type="text" value={extraCharge.chargeName} />
-                        </td>
-                        <td>
-                          <input type="text" value={extraCharge.chargeCost} />
-                        </td>
-                        <td>
-                          <input type="text" value={extraCharge.chargeNotes} />
-                        </td>
-                        <td>
-                          <button className="delete-extra-cost-button">
-                            X
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
+                    {[...editingDocket.extraCharges].map(
+                      (extraCharge, index) => (
+                        <tr key={extraCharge.chargeName + index}>
+                          <td>
+                            <input type="text" value={extraCharge.chargeName} />
+                          </td>
+                          <td>
+                            <input type="text" value={extraCharge.chargeCost} />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              value={extraCharge.chargeNotes}
+                            />
+                          </td>
+                          <td>
+                            <button
+                              className="delete-extra-cost-button"
+                              // onClick={() => {
+                              //   let newExtraCharges = [
+                              //     ...editingDocket.extraCharges,
+                              //   ];
+                              //   newExtraCharges.splice(index, 1);
+                              //   setEditingDocket({
+                              //     ...editingDocket,
+                              //     extraCharges: newExtraCharges,
+                              //   });
+                              // }}
+                            >
+                              X
+                            </button>
+                          </td>
+                        </tr>
+                      )
+                    )}
                     <tr>
                       <td>Total Cost:</td>
                       <td>
@@ -306,7 +344,19 @@ const PageDocketTool = () => {
                     </tr>
                   </tbody>
                 </table>
-                <button className="add-extra-cost-button">+</button>
+                <button
+                  className="add-extra-cost-button"
+                  onClick={() => {
+                    let newExtraCharges = [...editingDocket.extraCharges];
+                    newExtraCharges.push({});
+                    setEditingDocket({
+                      ...editingDocket,
+                      extraCharges: newExtraCharges,
+                    });
+                  }}
+                >
+                  +
+                </button>
               </div>
               <div className="docket-docket-summary">
                 <h2>{docket.customerName + " #" + docket.docketNumber}</h2>
@@ -324,7 +374,7 @@ const PageDocketTool = () => {
                     rows={7}
                     className="requote-memo-input"
                     placeholder="Memo"
-                    value={docket.requoteMemo}
+                    value={editingDocket.requoteMemo}
                   />
                 </div>
                 <div className="closing-date">
@@ -334,7 +384,7 @@ const PageDocketTool = () => {
                       type="date"
                       name="closing-datetime"
                       id="closing-datetime"
-                      value={docket.closingDate}
+                      value={editingDocket.closingDate}
                     />
                   </label>
                 </div>

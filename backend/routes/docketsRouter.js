@@ -39,6 +39,21 @@ router.get('/:id', async (req, res, next) => {
 });
 
 /**
+ * @description get docket by number
+ * @route GET /dockets/number/:number
+ * @returns {Docket} docket object
+ */
+router.get('/number/:number', async (req, res, next) => {
+  try {
+    const number = req.params.number;
+    const responseDocket = await docketServices.getFromNum(number);
+    res.status(200).send({ docket: responseDocket });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
  * @description create docket
  * @route POST /dockets
  * @returns {Docket} docket object

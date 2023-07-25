@@ -89,16 +89,14 @@ const JobsTable = () => {
         accessor: "status",
         // eslint-disable-next-line react/prop-types
         Cell: ({ cell: { value } }) => <StatusLabels values={value} />,
-        minWidth: 140,
-        width: 140,
-        maxWidth: 175,
       },
       {
         Header: "Shipping",
-        accessor: "shipping",
-        minWidth: "1vw",
-        width: "1vw",
-        maxWidth: 150,
+        accessor: "docketNumber",
+        id: "shipping",
+        Cell: ({ cell: { value } }) => (
+          <Link to={`/shipments?docketNumber=${value}`}>Make New Shipment</Link>
+        ),
       },
     ],
     []

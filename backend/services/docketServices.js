@@ -35,6 +35,23 @@ const docketServices = {
   },
 
   /**
+   * @description Get docket by number
+   * @param {String} number the docket number
+   * @returns {Docket}
+   */
+  async getFromNum(number) {
+    return DocketModel.findOne({ docketNumber: number }).then(
+      (docket) => {
+        if (!docket) throw new Error('DOCKET_NOT_FOUND');
+        return docket;
+      },
+      (error) => {
+        throw new Error('UNABLE_TO_GET_DOCKET', { cause: error });
+      },
+    );
+  },
+
+  /**
    * @description Create docket
    * @param {Docket} docket the object containing docket fields
    * @returns {Docket}

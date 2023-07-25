@@ -31,7 +31,7 @@ export function* getDocketSaga({ payload: { id } }) {
 
   try {
     yield put(getDocketStart());
-    const response = yield call(axios.get, `/dockets/${id}`); // change URL
+    const response = yield call(axios.get, `/dockets/number/${id}`); // change URL
     yield put(getDocketSuccess(response.data?.docket));
   } catch (e) {
     yield put(getDocketFailure(e));

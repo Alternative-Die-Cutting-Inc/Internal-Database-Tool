@@ -10,6 +10,9 @@
     "test": "nyc --reporter=lcov --reporter=text mocha --recursive --exit",
     "test:actions": "nyc --reporter=text-summary mocha --recursive --exit"
   },
+  "lint-staged": {
+    "*.js": "eslint --quiet --fix && prettier --write"
+  },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
@@ -27,6 +30,12 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/eslint-parser": "^7.22.9",
+    "@babel/plugin-proposal-optional-chaining": "^7.16.7",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.5.0",
+    "lint-staged": "^13.0.0",
     "mocha": "^10.2.0",
     "nyc": "^15.1.0"
   }

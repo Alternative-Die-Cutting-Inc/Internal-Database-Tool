@@ -10,11 +10,13 @@
     "dev": "cd frontend && yarn dev",
     "start": "cd backend && nodemon ./server.js localhost 8080",
     "download": "concurrently \"cd backend && yarn install\" \"cd frontend && yarn install\"",
-    "test:api": "cd backend && yarn test"
-},
-
+    "test:api": "cd backend && yarn test",
+    "prepare": "husky install"
+  },
   "devDependencies": {
     "concurrently": "^7.6.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.3",
     "nodemon": "^2.0.20"
   }
 }

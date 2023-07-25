@@ -4,8 +4,8 @@
  * @typedef {import("../models/DocketModel").Docket} Docket
  */
 
-const DocketModel = require("../models/DocketModel");
-const { CounterModel } = require("../models/CounterModel");
+const DocketModel = require('../models/DocketModel');
+const { CounterModel } = require('../models/CounterModel');
 
 const docketServices = {
   /**
@@ -14,23 +14,24 @@ const docketServices = {
    * @returns {[Docket] | Docket}
    */
   async get(id) {
-    let responseDocket = null;
     if (id) {
-      responseDocket = DocketModel.findById(id).then(
-        (docket) => docket,
+      return DocketModel.findById(id).then(
+        (docket) => {
+          if (!docket) throw new Error('DOCKET_NOT_FOUND');
+          return docket;
+        },
         (error) => {
-          throw error;
-        }
+          throw new Error('UNABLE_TO_GET_DOCKET', { cause: error });
+        },
       );
     } else {
-      responseDocket = DocketModel.find({}).then(
+      return DocketModel.find({}).then(
         (dockets) => dockets,
         (error) => {
           throw error;
-        }
+        },
       );
     }
-    return responseDocket;
   },
 
   /**
@@ -43,15 +44,15 @@ const docketServices = {
     responseDocket = DocketModel.create(docket).then(
       (docket) => docket,
       (error) => {
-        throw error;
-      }
+        throw new Error('UNABLE_TO_CREATE_DOCKET', { cause: error });
+      },
     );
     return responseDocket;
   },
 
   /**
    * @description Update docket
-   * @param {String} id docket number | _id
+   * @param {String} id docket id
    * @param {Object} fields fields to update
    * @returns {Docket} updated docket
    */
@@ -60,10 +61,13 @@ const docketServices = {
     responseDocket = DocketModel.findOneAndUpdate({ _id: id }, fields, {
       new: true,
     }).then(
-      (docket) => docket,
+      (docket) => {
+        if (!docket) throw new Error('DOCKET_NOT_FOUND');
+        return docket;
+      },
       (error) => {
-        throw error;
-      }
+        throw new Error('UNABLE_TO_UPDATE_DOCKET', { cause: error });
+      },
     );
     return responseDocket;
   },
@@ -76,10 +80,13 @@ const docketServices = {
   async delete(id) {
     let responseDocket = null;
     responseDocket = DocketModel.findOneAndDelete({ _id: id }).then(
-      (docket) => docket,
+      (docket) => {
+        if (!docket) throw new Error('DOCKET_NOT_FOUND');
+        return docket;
+      },
       (error) => {
-        throw error;
-      }
+        throw new Error('UNABLE_TO_DELETE_DOCKET', { cause: error });
+      },
     );
     return responseDocket;
   },
@@ -92,9 +99,9 @@ const docketServices = {
    */
   async initCounter() {
     return CounterModel.findOneAndUpdate(
-      { _id: "docketNumber" },
+      { _id: 'docketNumber' },
       {},
-      { upsert: true, new: true }
+      { upsert: true, new: true },
     ).then(
       (counter) => {
         if (counter.seq === 0) {
@@ -105,14 +112,14 @@ const docketServices = {
             },
             (error) => {
               throw error;
-            }
+            },
           );
         }
         return counter.seq;
       },
       (error) => {
-        throw error;
-      }
+        throw new Error('UNABLE_TO_GET_COUNTER', { cause: error });
+      },
     );
   },
 };

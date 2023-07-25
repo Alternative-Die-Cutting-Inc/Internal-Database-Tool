@@ -35,11 +35,11 @@ const customerServices = {
 
   /**
    * @description Get all customer names
-   * @returns {[{name: String}]}
+   * @returns {[String]}
    */
   async getNames() {
     return CustomerModel.find({}, { name: 1 }).then(
-      (customers) => customers,
+      (customers) => customers.name,
       (error) => {
         throw new Error('UNABLE_TO_GET_CUSTOMERS', { cause: error });
       },

@@ -18,16 +18,14 @@
 
 .docket-info {
   width: 100%;
+  margin: 1vh 0;
   border-radius: 15px;
   overflow: auto;
-  margin: 1vh 0;
   background-color: var(--dark-grey);
 }
 
 .docket-info-table {
   height: 100%;
-  border-radius: 15px;
-  overflow: auto;
   font-size: 1.25rem;
 
   td {
@@ -44,7 +42,6 @@
     border: unset;
   }
   tbody {
-    overflow: auto;
     background-color: var(--dark-grey);
 
     tr {
@@ -54,7 +51,6 @@
       }
     }
     td {
-      position: relative;
       border-right: unset;
     }
   }
@@ -68,6 +64,50 @@
   input {
     width: 100%;
     font-size: 1.25rem;
+  }
+  select {
+    width: 100%;
+    font-size: 1.25rem;
+  }
+}
+.docket-info-select {
+  width: 100%;
+  height: 100%;
+  font-size: 1.25rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  background-color: field;
+  color: fieldtext;
+  z-index: 2;
+}
+
+.customer-select__control {
+  min-height: unset !important;
+  height: 100%;
+}
+
+.customer-select__value-container {
+  padding-left: 5px;
+}
+
+.customer-select__menu {
+  position: absolute;
+  margin-top: 1px;
+  background-color: field;
+}
+
+.customer-select__menu-list {
+  // height: 6.25vh;
+  background-color: field;
+}
+
+.customer-select__option {
+  padding: 0 5px;
+
+  &:hover,
+  &:active {
+    background-color: lightblue;
   }
 }
 
@@ -153,6 +193,10 @@
   input {
     font-size: 1.25rem;
   }
+  select {
+    width: 100%;
+    font-size: 1.25rem;
+  }
 }
 
 #finishing-option-table {
@@ -170,13 +214,20 @@
   padding: 0 0.25vw;
 }
 
-.finishing-notes-input {
+.finishing-select {
   border-radius: 15px;
   width: 20vw;
-  height: 100%;
-  padding: 0.5vh 0.5vw;
   font-size: 1rem;
-  resize: none;
+  color: var(--dark-grey);
+}
+
+.finishing-select__control {
+  height: 17.5vh;
+}
+
+.finishing-select__value-container {
+  height: 17vh;
+  align-items: baseline !important;
 }
 
 .docket-special-instructions {
@@ -210,12 +261,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 30vh;
   background-color: var(--dark-grey);
   border-radius: 15px;
   overflow: auto;
   margin: 0.5vh 0;
-  padding: 0 0.75vw;
+  padding: 1vh 0.75vw;
 }
 
 .docket-requote-memo {

@@ -62,7 +62,7 @@ router.post('/', async (req, res, next) => {
   try {
     const newDocket = req.body.docket;
     const responseDocket = await docketServices.create(newDocket);
-    res.status(201).send(responseDocket);
+    res.status(201).send({ docket: responseDocket });
   } catch (error) {
     next(error);
   }
@@ -78,7 +78,7 @@ router.put('/:id', async (req, res, next) => {
     const id = req.params.id;
     const editFields = req.body.fields;
     const responseDocket = await docketServices.update(id, editFields);
-    res.status(200).send(responseDocket);
+    res.status(200).send({ docket: responseDocket });
   } catch (error) {
     next(error);
   }
@@ -93,7 +93,7 @@ router.delete('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
     const responseDocket = await docketServices.delete(id);
-    res.status(200).send(responseDocket);
+    res.status(200).send({ docket: responseDocket });
   } catch (error) {
     next(error);
   }

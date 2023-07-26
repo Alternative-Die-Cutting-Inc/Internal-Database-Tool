@@ -79,16 +79,42 @@ const DocketSchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
-  dieID: {
-    type: Number,
-    required: false,
-  },
-  dieType: {
-    type: String,
+  die: {
+    type: {
+      standing: {
+        type: Boolean,
+        required: true,
+      },
+      dieID: {
+        type: String,
+        required: false,
+      },
+      dieType: {
+        type: String,
+        enum: ['H-die', 'B-die', 'other'],
+        required: true,
+      },
+    },
+    default: {
+      standing: false,
+      dieType: 'other',
+      dieID: '',
+    },
     required: false,
   },
   finishing: {
-    type: [String],
+    type: [
+      {
+        value: {
+          type: String,
+          required: true,
+        },
+        label: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     required: false,
   },
   specialInstructions: {
@@ -104,7 +130,7 @@ const DocketSchema = new mongoose.Schema({
   creationDate: {
     type: Date,
     required: true,
-    default: new Date(),
+    default: Date.now(),
   },
   numOfUnits: {
     type: Number,

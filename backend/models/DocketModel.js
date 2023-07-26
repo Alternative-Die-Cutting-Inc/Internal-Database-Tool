@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const { autoIncrementModelID } = require('./CounterModel');
 
 const formSchema = new mongoose.Schema({
-  formName: {
+  name: {
     type: String,
     required: true,
   },
-  formQuantity: {
+  quantity: {
     type: Number,
     required: true,
   },
-  formNotes: {
+  notes: {
     type: String,
     required: false,
   },
@@ -26,15 +26,15 @@ const formSchema = new mongoose.Schema({
 });
 
 const extraChargeSchema = new mongoose.Schema({
-  chargeName: {
+  name: {
     type: String,
     required: true,
   },
-  chargeCost: {
+  cost: {
     type: Number,
     required: true,
   },
-  chargeNotes: {
+  notes: {
     type: String,
     required: false,
   },
@@ -72,6 +72,7 @@ const DocketSchema = new mongoose.Schema({
   },
   jobType: {
     type: String,
+    enum: ['commercial', 'packaging', 'nflute', 'other'],
     required: false,
   },
   soldFor: {
@@ -87,7 +88,7 @@ const DocketSchema = new mongoose.Schema({
     required: false,
   },
   finishing: {
-    type: String,
+    type: [String],
     required: false,
   },
   specialInstructions: {

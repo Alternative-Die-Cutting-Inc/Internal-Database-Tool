@@ -60,6 +60,8 @@ const JobsTable = () => {
       {
         Header: "Finishing",
         accessor: "finishing",
+        Cell: ({ cell: { value } }) =>
+          value.reduce((a, b) => b.label + ", " + a, ""),
         minWidth: 120,
         width: 120,
         maxWidth: 150,

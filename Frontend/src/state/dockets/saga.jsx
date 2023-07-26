@@ -50,7 +50,7 @@ export function* createDocketSaga({ payload: { docket } }) {
   const { axios } = useAxios();
   try {
     yield put(createDocketStart());
-    const response = yield call(axios.post, `/dockets/`, { docket }); // change URL
+    const response = yield call(axios.post, `/dockets/`, { docket });
     yield put(createDocketSuccess(response.data?.docket));
   } catch (error) {
     yield put(createDocketFailure(error));
@@ -63,7 +63,7 @@ export function* updateDocketSaga({ payload: { id, fields } }) {
   const { axios } = useAxios();
   try {
     yield put(updateDocketStart());
-    const response = yield call(axios.put, `/dockets/${id}`, { fields }); // change URL
+    const response = yield call(axios.put, `/dockets/${id}`, { fields });
     yield put(updateDocketSuccess(response.data?.docket));
   } catch (error) {
     yield put(updateDocketFailure(error));

@@ -193,7 +193,11 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={editingDocket.soldFor}
+                      value={editingDocket.soldFor.toLocaleString("en-CA", {
+                        style: "currency",
+                        currency: "CAD",
+                        currencyDisplay: "symbol",
+                      })}
                       onBlur={(event) => {
                         handleBlur(event, {
                           soldFor: editingDocket.soldFor,
@@ -691,11 +695,18 @@ const PageDocketTool = () => {
                       <td>
                         <input
                           type="text"
-                          value={editingDocket.forms.reduce(
-                            (totalQuantity, form) =>
-                              parseInt(totalQuantity) + parseInt(form.quantity),
-                            0
-                          )}
+                          value={editingDocket.forms
+                            .reduce(
+                              (totalQuantity, form) =>
+                                parseInt(totalQuantity) +
+                                parseInt(form.quantity),
+                              0
+                            )
+                            .toLocaleString("en-CA", {
+                              style: "currency",
+                              currency: "CAD",
+                              currencyDisplay: "symbol",
+                            })}
                           readOnly
                         />
                       </td>
@@ -881,17 +892,17 @@ const PageDocketTool = () => {
                       <td>
                         <input
                           type="text"
-                          value={
-                            "$" +
-                            editingDocket.extraCharges
-                              .reduce(
-                                (totalCost, charge) =>
-                                  parseFloat(totalCost) +
-                                  parseFloat(charge.cost),
-                                0.0
-                              )
-                              .toFixed(2)
-                          }
+                          value={editingDocket.extraCharges
+                            .reduce(
+                              (totalCost, charge) =>
+                                parseFloat(totalCost) + parseFloat(charge.cost),
+                              0.0
+                            )
+                            .toLocaleString("en-CA", {
+                              style: "currency",
+                              currency: "CAD",
+                              currencyDisplay: "symbol",
+                            })}
                           readOnly
                         />
                       </td>

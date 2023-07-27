@@ -28,7 +28,7 @@ const docketServices = {
       return DocketModel.find({}).then(
         (dockets) => dockets,
         (error) => {
-          throw error;
+          throw new Error('UNABLE_TO_GET_DOCKETS', { cause: error });
         },
       );
     }
@@ -74,9 +74,9 @@ const docketServices = {
    * @returns {Docket} updated docket
    */
   async update(id, fields) {
-    let responseDocket = null;
-    responseDocket = DocketModel.findOneAndUpdate({ _id: id }, fields, {
+    return DocketModel.findOneAndUpdate({ _id: id }, fields, {
       new: true,
+      returnDocument: 'after',
     }).then(
       (docket) => {
         if (!docket) throw new Error('DOCKET_NOT_FOUND');
@@ -86,7 +86,6 @@ const docketServices = {
         throw new Error('UNABLE_TO_UPDATE_DOCKET', { cause: error });
       },
     );
-    return responseDocket;
   },
 
   /**

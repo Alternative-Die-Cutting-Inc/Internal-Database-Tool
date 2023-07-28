@@ -263,9 +263,12 @@
   justify-content: space-around;
   background-color: var(--dark-grey);
   border-radius: 15px;
-  overflow: auto;
   margin: 0.5vh 0;
   padding: 1vh 0.75vw;
+  word-wrap: break-word;
+  h2 {
+    max-width: 32.5vw;
+  }
 }
 
 .docket-requote-memo {

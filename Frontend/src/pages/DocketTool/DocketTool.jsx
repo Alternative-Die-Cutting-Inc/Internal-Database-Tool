@@ -166,7 +166,17 @@ const PageDocketTool = () => {
                       type="text"
                       className="docket-info-input"
                       value={editingDocket.quoteNumber}
-                      readOnly
+                      onBlur={(event) => {
+                        handleBlur(event, {
+                          quoteNumber: editingDocket.quoteNumber,
+                        });
+                      }}
+                      onChange={(event) => {
+                        setEditingDocket({
+                          ...editingDocket,
+                          quoteNumber: event.target.value,
+                        });
+                      }}
                     />
                   </td>
                   <td>Production Person:</td>
@@ -193,11 +203,15 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={editingDocket.soldFor.toLocaleString("en-CA", {
-                        style: "currency",
-                        currency: "CAD",
-                        currencyDisplay: "symbol",
-                      })}
+                      value={
+                        editingDocket.soldFor
+                          ? editingDocket.soldFor.toLocaleString("en-CA", {
+                              style: "currency",
+                              currency: "CAD",
+                              currencyDisplay: "symbol",
+                            })
+                          : ""
+                      }
                       onBlur={(event) => {
                         handleBlur(event, {
                           soldFor: editingDocket.soldFor,
@@ -605,6 +619,7 @@ const PageDocketTool = () => {
                         <td>
                           <input
                             type="number"
+                            step={1000}
                             value={form.quantity}
                             onBlur={(event) => {
                               handleBlur(event, { forms: editingDocket.forms });
@@ -702,11 +717,7 @@ const PageDocketTool = () => {
                                 parseInt(form.quantity),
                               0
                             )
-                            .toLocaleString("en-CA", {
-                              style: "currency",
-                              currency: "CAD",
-                              currencyDisplay: "symbol",
-                            })}
+                            .toLocaleString("en-CA")}
                           readOnly
                         />
                       </td>
@@ -946,10 +957,17 @@ const PageDocketTool = () => {
                 </h2>
                 <h2>{editingDocket.jobName}</h2>
                 <h3>
-                  {editingDocket.finishing.reduce(
-                    (a, b) => b.label + ", " + a,
-                    ""
-                  )}
+                  {`${editingDocket.die.standing ? "Standing" : "New"} ${
+                    editingDocket.die.dieType
+                  }${
+                    editingDocket.die.standing
+                      ? " #" + editingDocket.die.dieID
+                      : ""
+                  }, ` +
+                    editingDocket.finishing.reduce(
+                      (a, b) => b.label + ", " + a,
+                      ""
+                    )}
                 </h3>
                 <h3>{editingDocket.specialInstructions}</h3>
                 <button

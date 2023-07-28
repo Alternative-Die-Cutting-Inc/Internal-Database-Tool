@@ -42,7 +42,19 @@ const StatusLabels = ({ values }) => {
               {status}
             </span>
           );
-        } else if (status === "In Progress") {
+        } else if (status === "Closed") {
+          return (
+            <span
+              key={idx}
+              className="badge"
+              style={{
+                backgroundColor: "black",
+              }}
+            >
+              {status}
+            </span>
+          );
+        } else if (status === "In Progress" || status === "Inprogress") {
           return (
             <span
               key={idx}

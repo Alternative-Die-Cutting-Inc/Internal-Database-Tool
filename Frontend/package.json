@@ -16,6 +16,7 @@
   "dependencies": {
     "@redux-devtools/core": "^3.13.1",
     "@reduxjs/toolkit": "^1.9.5",
+    "@tanstack/react-table": "^8.9.3",
     "axios": "^1.4.0",
     "multiselect-react-dropdown": "^2.0.25",
     "prettier": "^3.0.0",

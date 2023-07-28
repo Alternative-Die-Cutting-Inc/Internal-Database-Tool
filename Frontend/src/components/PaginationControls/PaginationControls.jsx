@@ -8,7 +8,6 @@ const PaginationControls = ({
   canPreviousPage,
   canNextPage,
   pageOptions,
-  pageCount,
   gotoPage,
   nextPage,
   previousPage,
@@ -22,28 +21,28 @@ const PaginationControls = ({
         <button
           className="pagination-control"
           onClick={() => gotoPage(0)}
-          disabled={!canPreviousPage}
+          disabled={!canPreviousPage()}
         >
           {"<<"}
         </button>
         <button
           className="pagination-control"
           onClick={() => previousPage()}
-          disabled={!canPreviousPage}
+          disabled={!canPreviousPage()}
         >
           {"<"}
         </button>
         <button
           className="pagination-control"
           onClick={() => nextPage()}
-          disabled={!canNextPage}
+          disabled={!canNextPage()}
         >
           {">"}
         </button>
         <button
           className="pagination-control"
-          onClick={() => gotoPage(pageCount - 1)}
-          disabled={!canNextPage}
+          onClick={() => gotoPage(pageOptions() - 1)}
+          disabled={!canNextPage()}
         >
           {">>"}
         </button>
@@ -51,7 +50,7 @@ const PaginationControls = ({
           Page
           <strong>
             {" "}
-            {pageIndex + 1} of {pageOptions.length}
+            {pageIndex + 1} of {pageOptions()}
           </strong>
         </span>
         <span>
@@ -89,7 +88,6 @@ PaginationControls.propTypes = {
   canPreviousPage: PropTypes.bool,
   canNextPage: PropTypes.bool,
   pageOptions: PropTypes.any,
-  pageCount: PropTypes.number,
   gotoPage: PropTypes.any,
   nextPage: PropTypes.any,
   previousPage: PropTypes.any,

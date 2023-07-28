@@ -1,6 +1,10 @@
 import { PaginationControls } from "../PaginationControls/PaginationControls";
 import { StatusLabels } from "../StatusLabels/StatusLabels";
-import { useTable, useSortBy, usePagination } from "react-table";
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+} from "@tanstack/react-table";
 import { useMemo } from "react";
 import "../../scssStyles/tableStyle.scss";
 import { useSelector } from "react-redux";
@@ -15,89 +19,76 @@ import { Link } from "react-router-dom";
 const JobsTable = () => {
   const { dockets, loading } = useSelector(docketsSelector);
 
-  const data = useMemo(() => {
-    if (dockets) return dockets;
-    return [];
-  }, [dockets]);
-
   const columns = useMemo(
     () => [
       {
-        Header: "Docket Number",
-        accessor: "docketNumber",
+        header: "Docket Number",
+        accessorKey: "docketNumber",
         // eslint-disable-next-line react/prop-types
-        Cell: ({ cell: { value } }) => (
-          <Link to={`/dockettool?docketNumber=${value}`}>{value}</Link>
-        ),
-        maxWidth: 150,
-        minWidth: 50,
-        width: 100,
-      },
-      {
-        Header: "Quote Number",
-        accessor: "quoteNumber",
-        // eslint-disable-next-line react/prop-types
-        Cell: ({ cell: { value } }) => (
-          <Link to={`/quotetool?quoteNumber=${value}`}>{value}</Link>
+        cell: (value) => (
+          <Link to={`/dockettool?docketNumber=${value.getValue()}`}>
+            {value.getValue()}
+          </Link>
         ),
       },
       {
-        Header: "Customer",
-        accessor: "customerName",
+        header: "Quote Number",
+        accessorKey: "quoteNumber",
+        cell: (value) => (
+          <Link to={`/quotetool?quoteNumber=${value.getValue()}`}>
+            {value.getValue()}
+          </Link>
+        ),
       },
       {
-        Header: "Customer PO",
-        accessor: "customerPO",
+        header: "Customer",
+        accessorKey: "customerName",
       },
       {
-        Header: "Production Person",
-        accessor: "productionPerson",
-        minWidth: 110,
-        width: 110,
-        maxWidth: 150,
-      },
-      { Header: "Job Name", accessor: "jobName" },
-      {
-        Header: "Finishing",
-        accessor: "finishing",
-        Cell: ({ cell: { value } }) =>
-          value.reduce((a, b) => b.label + ", " + a, ""),
-        minWidth: 120,
-        width: 120,
-        maxWidth: 150,
+        header: "Customer PO",
+        accessorKey: "customerPO",
       },
       {
-        Header: "Special Instructions",
-        accessor: "specialInstructions",
-        minWidth: 140,
-        width: 140,
-        maxWidth: 150,
+        header: "Production Person",
+        accessorKey: "productionPerson",
       },
       {
-        Header: "Number of Units",
-        accessor: "numOfUnits",
-        minWidth: 100,
-        width: 100,
-        maxWidth: 150,
-      },
-      { Header: "Sold For", accessor: "soldFor" },
-      {
-        Header: "Date Created",
-        accessor: "creationDate",
-        Cell: ({ cell: { value } }) => new Date(value).toLocaleDateString(),
+        header: "Job Name",
+        accessorKey: "jobName",
       },
       {
-        Header: "Status",
-        accessor: "status",
-        // eslint-disable-next-line react/prop-types
-        Cell: ({ cell: { value } }) => <StatusLabels values={value} />,
+        header: "Finishing",
+        accessorKey: "finishing",
+        cell: (info) =>
+          info.getValue().reduce((a, b) => b.label + ", " + a, ""),
       },
       {
-        Header: "Shipping",
-        accessor: "docketNumber",
+        header: "Special Instructions",
+        accessorKey: "specialInstructions",
+      },
+      {
+        header: "Number of Units",
+        accessorKey: "numOfUnits",
+      },
+      { header: "Sold For", accessorKey: "soldFor" },
+      {
+        header: "Date Created",
+        accessorKey: "creationDate",
+        cell: (value) => new Date(value.getValue()).toLocaleDateString(),
+      },
+      {
+        header: "Status",
+        accessorKey: "status",
+        cell: (value) => <StatusLabels values={value.getValue()} />,
+      },
+      {
+        header: "Shipping",
+        accessorKey: "docketNumber",
         id: "shipping",
-        Cell: ({ cell: { value } }) => (
-          <Link to={`/shipments?docketNumber=${value}`}>Make New Shipment</Link>
+        cell: (value) => (
+          <Link to={`/shipments?docketNumber=${value.getValue()}`}>
+            Make New Shipment
+          </Link>
         ),
       },
     ],
@@ -105,64 +96,70 @@ const JobsTable = () => {
   );
 
   const {
-    getTableBodyProps,
-    getTableProps,
-    headerGroups,
-    prepareRow,
-    page,
-    canPreviousPage,
-    canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
-    nextPage,
+    getHeaderGroups,
+    getRowModel,
+    getCanPreviousPage,
     previousPage,
+    nextPage,
+    getCanNextPage,
+    setPageIndex,
+    getPageCount,
     setPageSize,
-    state: { pageIndex, pageSize },
-  } = useTable(
-    {
-      columns,
-      data,
-      initialState: { pageIndex: 0, pageSize: 10 },
-    },
-    useSortBy,
-    usePagination
-  );
+    getState,
+  } = useReactTable({
+    columns,
+    data: dockets,
+    getCoreRowModel: getCoreRowModel(),
+    autoResetPageIndex: true,
+  });
 
   return (
     <>
-      {dockets && !loading && (
-        <table {...getTableProps()}>
+      {!loading && (
+        <table>
           <thead>
-            {headerGroups.map((headerGroup) => (
-              // eslint-disable-next-line react/jsx-key
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  // eslint-disable-next-line react/jsx-key
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render("Header")}
-                    <span>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? " 🔽"
-                          : " 🔼"
-                        : ""}
-                    </span>
-                  </th>
-                ))}
+            {getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <th key={header.id} colSpan={header.colSpan}>
+                      {header.isPlaceholder ? null : (
+                        <div>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </div>
+                      )}
+                    </th>
+                  );
+                })}
               </tr>
             ))}
           </thead>
-          <tbody {...getTableBodyProps()}>
-            {page.map((row) => {
-              prepareRow(row);
+          <tbody>
+            {getRowModel().rows.map((row) => {
               return (
-                // eslint-disable-next-line react/jsx-key
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => (
-                    // eslint-disable-next-line react/jsx-key
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  ))}
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <td
+                        key={cell.id}
+                        style={
+                          cell.column.columnDef.accessorKey == "jobName"
+                            ? {
+                                wordBreak: "break-all",
+                              }
+                            : {}
+                        }
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </td>
+                    );
+                  })}
                 </tr>
               );
             })}
@@ -170,16 +167,15 @@ const JobsTable = () => {
         </table>
       )}
       <PaginationControls
-        canPreviousPage={canPreviousPage}
-        canNextPage={canNextPage}
-        pageOptions={pageOptions}
-        pageCount={pageCount}
-        gotoPage={gotoPage}
+        canPreviousPage={getCanPreviousPage}
+        canNextPage={getCanNextPage}
+        pageOptions={getPageCount}
+        gotoPage={setPageIndex}
         nextPage={nextPage}
         previousPage={previousPage}
         setPageSize={setPageSize}
-        pageIndex={pageIndex}
-        pageSize={pageSize}
+        pageIndex={getPageCount}
+        pageSize={getState().pagination.pageSize}
       />
     </>
   );

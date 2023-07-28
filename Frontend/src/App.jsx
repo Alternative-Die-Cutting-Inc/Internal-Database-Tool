@@ -35,7 +35,7 @@ function App() {
   useEffect(() => {
     dispatch(getUserInfo());
     dispatch(getDockets());
-  });
+  }, [dispatch]);
 
   return (
     <DarkModeProvider>

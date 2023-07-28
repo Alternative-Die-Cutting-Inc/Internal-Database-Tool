@@ -1,5 +1,5 @@
 import "./Navbar.scss";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
 import AlternativeDCLogo from "../../assets/logo/logo.png";
 import { useNavigate } from "react-router-dom";
 import { Link, useLocation } from "react-router-dom";
@@ -8,7 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setNavbarFunctions } from "../../state/navbar/saga";
 import { userSelector } from "../../state/user/userSlice";
 import { logout } from "../../state/user/saga";
+import { DarkModeContext } from "../../util/DarkModeProvider";
+
 const Navbar = () => {
+  const { darkMode, setDarkModeStatus } = useContext(DarkModeContext);
+
   const { pathname } = useLocation();
   const navbarFunctionsRef = useRef([]);
   const dispatch = useDispatch();
@@ -119,6 +123,21 @@ const Navbar = () => {
           ) : (
             <></>
           )}
+          <div
+            className="navbar-sub-container"
+            key={"darkmode"}
+            onClick={() => {
+              console.log("dark mode");
+              if (pathname === "/") {
+                setDarkModeStatus(!darkMode);
+              }
+            }}
+          >
+            <div className="navbar-link-label">
+              {" "}
+              <h3>Darkmode</h3>{" "}
+            </div>
+          </div>
         </div>
       </div>
     </>

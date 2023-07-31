@@ -25,12 +25,14 @@ const docketServices = {
         },
       );
     } else {
-      return DocketModel.find({}).then(
-        (dockets) => dockets,
-        (error) => {
-          throw new Error('UNABLE_TO_GET_DOCKETS', { cause: error });
-        },
-      );
+      return DocketModel.find({})
+        .sort({ docketNumber: -1 })
+        .then(
+          (dockets) => dockets,
+          (error) => {
+            throw new Error('UNABLE_TO_GET_DOCKETS', { cause: error });
+          },
+        );
     }
   },
 

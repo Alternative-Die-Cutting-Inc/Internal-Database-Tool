@@ -1,16 +1,16 @@
-const mongoose = require("mongoose");
-const { autoIncrementModelID } = require("./CounterModel");
+const mongoose = require('mongoose');
+const { autoIncrementModelID } = require('./CounterModel');
 
 const extraChargeSchema = new mongoose.Schema({
-  chargeName: {
+  name: {
     type: String,
     required: true,
   },
-  chargePerM: {
+  perM: {
     type: Number,
     required: false,
   },
-  chargeCost: {
+  cost: {
     type: Number,
     required: false,
   },
@@ -33,7 +33,11 @@ const quoteJobSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  extraCharges: [extraChargeSchema],
+  extraCharges: {
+    type: [extraChargeSchema],
+    required: true,
+    default: [],
+  },
   dieHours: {
     type: Number,
     required: false,
@@ -99,17 +103,26 @@ const QuoteSchema = new mongoose.Schema({
     required: false,
   },
   quoteJobs: [quoteJobSchema],
+  status: {
+    type: [String],
+    required: false,
+  },
+  creationDate: {
+    type: Date,
+    required: true,
+    default: Date.now(),
+  },
 });
 
-QuoteSchema.pre("validate", function (next) {
+QuoteSchema.pre('validate', function (next) {
   if (!this.isNew) {
     next();
     return;
   }
-  autoIncrementModelID("quoteNumber", this, next);
+  autoIncrementModelID('quoteNumber', this, next);
 });
 
-const QuoteModel = mongoose.model("Quote", QuoteSchema);
+const QuoteModel = mongoose.model('Quote', QuoteSchema);
 
 /**
  * Global Quote objet

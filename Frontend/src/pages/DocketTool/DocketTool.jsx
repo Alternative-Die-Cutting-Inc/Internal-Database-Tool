@@ -105,7 +105,7 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={editingDocket.docketNumber}
+                      value={editingDocket.docketNumber || ""}
                       readOnly
                     />
                   </td>
@@ -124,7 +124,7 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={editingDocket.customerPO}
+                      value={editingDocket.customerPO || ""}
                       onBlur={(event) => {
                         handleBlur(event, {
                           customerPO: editingDocket.customerPO,
@@ -143,7 +143,7 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={editingDocket.jobName}
+                      value={editingDocket.jobName || ""}
                       onBlur={(event) => {
                         handleBlur(event, {
                           jobName: editingDocket.jobName,
@@ -165,7 +165,7 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={editingDocket.quoteNumber}
+                      value={editingDocket.quoteNumber || ""}
                       onBlur={(event) => {
                         handleBlur(event, {
                           quoteNumber: editingDocket.quoteNumber,
@@ -184,7 +184,7 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       className="docket-info-input"
-                      value={editingDocket.productionPerson}
+                      value={editingDocket.productionPerson || ""}
                       onBlur={(event) => {
                         handleBlur(event, {
                           productionPerson: editingDocket.productionPerson,

@@ -6,9 +6,9 @@ import { getDocket, updateDocket } from "../../state/dockets/saga";
 import { docketSelector } from "../../state/dockets/docketSlice";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
+
 function useQuery() {
   const { search } = useLocation();
-
   return useMemo(() => new URLSearchParams(search), [search]);
 }
 

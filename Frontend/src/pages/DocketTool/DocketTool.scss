@@ -77,8 +77,8 @@
   border-width: 1px;
   border-style: solid;
   border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-  background-color: field;
-  color: fieldtext;
+  background-color: var(--white);
+  color: var(--text-black);
   z-index: 2;
 }
 
@@ -218,7 +218,6 @@
   border-radius: 15px;
   width: 20vw;
   font-size: 1rem;
-  color: var(--dark-grey);
 }
 
 .finishing-select__control {

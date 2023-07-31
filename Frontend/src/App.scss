@@ -51,8 +51,15 @@ a {
   transition: background-size 400ms;
 }
 
+input,
+textarea,
+select,
+button {
+  background-color: var(--white);
+}
+
 ::placeholder {
-  color: #000;
+  color: var(--text-black);
 }
 
 a:hover {

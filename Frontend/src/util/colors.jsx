@@ -4,6 +4,8 @@ export const colors = {
   "--dark-grey": ["#3B3939", "#3B3939"],
   "--light-grey": ["#EEEEEE", "#737373"],
   "--light-accent": ["#E0F5F5", "#78d3d3"],
+  "--text-white": ["#FFFFFF", "#000"],
+  "--text-black": ["#000", "#000"],
   "--white": ["#FFF", "#78d3d3"],
   "--black": ["#000", "#78d3d3"],
 };

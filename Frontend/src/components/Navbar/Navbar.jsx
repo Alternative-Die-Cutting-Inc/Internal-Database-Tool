@@ -18,7 +18,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(userSelector);
   const navigate = useNavigate();
-  useEffect(() => {
+  useEffect(() => { 
     if (navbarFunctionsRef.current.length > 0) {
       dispatch(setNavbarFunctions({ navbarFunctions: navbarFunctionsRef }));
       console.log(navbarFunctionsRef.current);
@@ -39,103 +39,97 @@ const Navbar = () => {
               alt="altenative die cutting logo"
             ></img>
           </Link>
-          {user ? (
-            Object.keys(pages.functions).forEach((pageFunctions) => {
-              pages.functions[pageFunctions].map((pageFunction, index) => {
-                return (
-                  <div
-                    className="navbar-sub-container"
-                    key={pageFunction.label}
-                    ref={(element) => navbarFunctionsRef.current.push(element)}
-                    style={
-                      index == 0
-                        ? {
-                            borderWidth: "0px 1px 0px 1px",
-                            borderStyle: "solid",
-                            borderColor: "#000000",
-                          }
-                        : {}
-                    }
-                  >
-                    <nav className="navbar-link-label">
-                      <h3>{pageFunction.label}</h3>
-                    </nav>
-                  </div>
-                );
-              });
-            })
-          ) : (
-            <></>
-          )}
+
+          {pages.functions[pathname.slice(1)] &&
+            pages.functions[pathname.slice(1)].map((pageFunction, index) => {
+              return (
+                <div
+                  className="navbar-sub-container"
+                  key={pageFunction.label}
+                  style={
+                    index == 0
+                      ? {
+                          borderWidth: "0px 1px 0px 1px",
+                          borderStyle: "solid",
+                          borderColor: "#000000",
+                        }
+                      : {}
+                  }
+                  onClick={() => {
+                    pageFunction.function(dispatch);
+                  }}
+                >
+                  <nav className="navbar-link-label">
+                    <h3>{pageFunction.label}</h3>
+                  </nav>
+                </div>
+              );
+            })}
         </div>
         <div className="navbar-main">
           {user ? (
-            pages.main.map((page, index) => {
-              return (
-                <Link
-                  to={pathname === page.path ? {} : page.path}
-                  key={page.path}
-                  style={
-                    pathname === page.path ? { pointerEvents: "none" } : {}
-                  }
-                >
-                  <div
-                    className={
-                      pathname === page.path
-                        ? "navbar-sub-container page-selected"
-                        : "navbar-sub-container"
-                    }
+            <>
+              {pages.main.map((page, index) => {
+                return (
+                  <Link
+                    to={pathname === page.path ? {} : page.path}
                     key={page.path}
                     style={
-                      index == 0
-                        ? {
-                            borderWidth: "0px 1px 0px 1px",
-                            borderStyle: "solid",
-                            borderColor: "#000000",
-                          }
-                        : {}
+                      pathname === page.path ? { pointerEvents: "none" } : {}
                     }
                   >
-                    <nav className="navbar-link-label">
-                      <h3>{page.label}</h3>{" "}
-                    </nav>
-                  </div>
-                </Link>
-              );
-            })
-          ) : (
-            <></>
-          )}
-          {user ? (
-            <div
-              className="navbar-sub-container"
-              key={"logout"}
-              onClick={() => {
-                dispatch(logout());
-                navigate("/");
-              }}
-            >
-              <div className="navbar-link-label">
-                {" "}
-                <h3>Logout</h3>{" "}
+                    <div
+                      className={
+                        pathname === page.path
+                          ? "navbar-sub-container page-selected"
+                          : "navbar-sub-container"
+                      }
+                      key={page.path}
+                      style={
+                        index == 0
+                          ? {
+                              borderWidth: "0px 1px 0px 1px",
+                              borderStyle: "solid",
+                              borderColor: "#000000",
+                            }
+                          : {}
+                      }
+                    >
+                      <nav className="navbar-link-label">
+                        <h3>{page.label}</h3>{" "}
+                      </nav>
+                    </div>
+                  </Link>
+                );
+              })}
+              <div
+                className="navbar-sub-container"
+                key={"logout"}
+                onClick={() => {
+                  dispatch(logout());
+                  navigate("/");
+                }}
+              >
+                <div className="navbar-link-label">
+                  {" "}
+                  <h3>Logout</h3>{" "}
+                </div>
               </div>
-            </div>
+            </>
           ) : (
             <></>
           )}
           <div
             className="navbar-sub-container"
+            id="darkmode"
             key={"darkmode"}
             onClick={() => {
-              console.log("dark mode");
-              if (pathname === "/") {
-                setDarkModeStatus(!darkMode);
-              }
+              setDarkModeStatus(!darkMode);
+              console.log("dark mode:", !darkMode);
             }}
           >
             <div className="navbar-link-label">
-              {" "}
-              <h3>Darkmode</h3>{" "}
+              <h3>Dark Mode</h3>
             </div>
           </div>
         </div>

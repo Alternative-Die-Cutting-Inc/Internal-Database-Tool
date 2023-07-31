@@ -51,7 +51,6 @@ export function* createDocketSaga({ payload: { docket, navigate } }) {
   try {
     yield put(createDocketStart());
     const response = yield call(axios.post, `/dockets/`, { docket });
-    console.log(response.data?.docket);
     yield put(createDocketSuccess(response.data?.docket));
     navigate(`/dockettool?docketNumber=${response.data?.docket?.docketNumber}`);
   } catch (error) {

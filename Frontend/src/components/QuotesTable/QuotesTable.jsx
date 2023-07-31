@@ -1,7 +1,12 @@
 import { PaginationControls } from "../PaginationControls/PaginationControls";
 import "./QuotesTable.scss";
 import { StatusLabels } from "../StatusLabels/StatusLabels";
-import { useTable, useSortBy, usePagination } from "react-table";
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+  getPaginationRowModel,
+} from "@tanstack/react-table";
 import { useMemo } from "react";
 import "../../scssStyles/tableStyle.scss";
 import { Link } from "react-router-dom";
@@ -29,99 +34,101 @@ const QuotesTable = () => {
   const columns = useMemo(
     () => [
       {
-        Header: "Quote Number",
-        accessor: "quoteNumber",
+        header: "Quote Number",
+        accessorKey: "quoteNumber",
         // eslint-disable-next-line react/prop-types
-        Cell: ({ cell: { value } }) => (
-          <Link to={`/quotetool?quoteNumber=${value}`}>{value}</Link>
+        cell: (value) => (
+          <Link to={`/quotetool?quoteNumber=${value.getValue()}`}>
+            {value.getValue()}
+          </Link>
         ),
         width: "auto",
       },
-      { Header: "Customer", accessor: "customer" },
-      { Header: "Job Name", accessor: "jobName" },
-      { Header: "Description", accessor: "description" },
-      { Header: "Notes", accessor: "notes" },
-      { Header: "Units + Sheets + Per M + Total", accessor: "costs" },
+      { header: "Customer", accessorKey: "customer" },
+      { header: "Job Name", accessorKey: "jobName" },
+      { header: "Description", accessorKey: "description" },
+      { header: "Notes", accessorKey: "notes" },
+      { header: "Units + Sheets + Per M + Total", accessorKey: "costs" },
       {
-        Header: "Status",
-        accessor: "status",
+        header: "Status",
+        accessorKey: "status",
         // eslint-disable-next-line react/prop-types
-        Cell: ({ cell: { value } }) => <StatusLabels values={value} />,
+        cell: (value) => <StatusLabels values={value.getValue()} />,
       },
-      { Header: "Date Created", accessor: "dateCreated" },
+      { header: "Date Created", accessorKey: "dateCreated" },
     ],
     []
   );
 
   const {
-    getTableBodyProps,
-    getTableProps,
-    headerGroups,
-    prepareRow,
-    page,
-    canPreviousPage,
-    canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
-    nextPage,
+    getHeaderGroups,
+    getRowModel,
+    getCanPreviousPage,
+    getCanNextPage,
     previousPage,
+    nextPage,
+    getPageCount,
+    setPageIndex,
     setPageSize,
-    state: { pageIndex, pageSize },
-  } = useTable(
-    { columns, data, initialState: { pageIndex: 0, pageSize: 10 } },
-    useSortBy,
-    usePagination
-  );
+    getState,
+  } = useReactTable({
+    columns,
+    data,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    autoResetPageIndex: true,
+  });
   return (
     <>
-      <table {...getTableProps()}>
+      <table>
         <thead>
-          {headerGroups.map((headerGroup) => (
-            // eslint-disable-next-line react/jsx-key
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                // eslint-disable-next-line react/jsx-key
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
-                  <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? " 🔽"
-                        : " 🔼"
-                      : ""}
-                  </span>
-                </th>
-              ))}
+          {getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
+                return (
+                  <th key={header.id} colSpan={header.colSpan}>
+                    {header.isPlaceholder ? null : (
+                      <div>
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </div>
+                    )}
+                  </th>
+                );
+              })}
             </tr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
+        <tbody>
+          {getRowModel().rows.map((row) => {
             return (
-              // eslint-disable-next-line react/jsx-key
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  // eslint-disable-next-line react/jsx-key
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                ))}
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => {
+                  return (
+                    <td key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  );
+                })}
               </tr>
             );
           })}
         </tbody>
       </table>
       <PaginationControls
-        canPreviousPage={canPreviousPage}
-        canNextPage={canNextPage}
-        pageOptions={pageOptions}
-        pageCount={pageCount}
-        gotoPage={gotoPage}
-        nextPage={nextPage}
+        getCanPreviousPage={getCanPreviousPage}
+        getCanNextPage={getCanNextPage}
         previousPage={previousPage}
+        nextPage={nextPage}
+        getPageCount={getPageCount}
+        setPageIndex={setPageIndex}
         setPageSize={setPageSize}
-        pageIndex={pageIndex}
-        pageSize={pageSize}
+        getState={getState}
       />
     </>
   );

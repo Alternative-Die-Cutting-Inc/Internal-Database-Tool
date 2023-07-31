@@ -4,6 +4,7 @@ import {
   useReactTable,
   getCoreRowModel,
   flexRender,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
 import { useMemo } from "react";
 import "../../scssStyles/tableStyle.scss";
@@ -99,17 +100,18 @@ const JobsTable = () => {
     getHeaderGroups,
     getRowModel,
     getCanPreviousPage,
+    getCanNextPage,
     previousPage,
     nextPage,
-    getCanNextPage,
-    setPageIndex,
     getPageCount,
+    setPageIndex,
     setPageSize,
     getState,
   } = useReactTable({
     columns,
-    data: dockets,
+    data: dockets || [],
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     autoResetPageIndex: true,
   });
 
@@ -167,15 +169,14 @@ const JobsTable = () => {
         </table>
       )}
       <PaginationControls
-        canPreviousPage={getCanPreviousPage}
-        canNextPage={getCanNextPage}
-        pageOptions={getPageCount}
-        gotoPage={setPageIndex}
-        nextPage={nextPage}
+        getCanPreviousPage={getCanPreviousPage}
+        getCanNextPage={getCanNextPage}
         previousPage={previousPage}
+        nextPage={nextPage}
+        getPageCount={getPageCount}
+        setPageIndex={setPageIndex}
         setPageSize={setPageSize}
-        pageIndex={getPageCount}
-        pageSize={getState().pagination.pageSize}
+        getState={getState}
       />
     </>
   );

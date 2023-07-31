@@ -4,8 +4,8 @@
  * @typedef {import("../models/QuoteModel").Quote} Quote
  */
 
-const QuoteModel = require("../models/QuoteModel");
-const { CounterModel } = require("../models/CounterModel");
+const QuoteModel = require('../models/QuoteModel');
+const { CounterModel } = require('../models/CounterModel');
 
 const quoteServices = {
   /**
@@ -20,17 +20,36 @@ const quoteServices = {
         (quote) => quote,
         (error) => {
           throw error;
-        }
+        },
       );
     } else {
-      responseQuote = QuoteModel.find({}).then(
-        (quotes) => quotes,
-        (error) => {
-          throw error;
-        }
-      );
+      responseQuote = QuoteModel.find({})
+        .sort({ quoteNumber: -1 })
+        .then(
+          (quotes) => quotes,
+          (error) => {
+            throw error;
+          },
+        );
     }
     return responseQuote;
+  },
+
+  /**
+   * @description Get quote by number
+   * @param {String} number the quote number
+   * @returns {Quote}
+   */
+  async getFromNum(number) {
+    return QuoteModel.findOne({ quoteNumber: number }).then(
+      (quote) => {
+        if (!quote) throw new Error('QUOTE_NOT_FOUND');
+        return quote;
+      },
+      (error) => {
+        throw new Error('UNABLE_TO_GET_QUOTE', { cause: error });
+      },
+    );
   },
 
   /**
@@ -44,7 +63,7 @@ const quoteServices = {
       (quote) => quote,
       (error) => {
         throw error;
-      }
+      },
     );
     return responseQuote;
   },
@@ -63,7 +82,7 @@ const quoteServices = {
       (quote) => quote,
       (error) => {
         throw error;
-      }
+      },
     );
     return responseQuote;
   },
@@ -79,7 +98,7 @@ const quoteServices = {
       (quote) => quote,
       (error) => {
         throw error;
-      }
+      },
     );
     return responseQuote;
   },
@@ -92,9 +111,9 @@ const quoteServices = {
    */
   async initCounter() {
     return CounterModel.findOneAndUpdate(
-      { _id: "quoteNumber" },
+      { _id: 'quoteNumber' },
       {},
-      { upsert: true, new: true }
+      { upsert: true, new: true },
     ).then(
       (counter) => {
         if (counter.seq === 0) {
@@ -105,14 +124,14 @@ const quoteServices = {
             },
             (error) => {
               throw error;
-            }
+            },
           );
         }
         return counter.seq;
       },
       (error) => {
         throw error;
-      }
+      },
     );
   },
 };

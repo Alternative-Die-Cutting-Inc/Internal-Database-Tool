@@ -21,7 +21,7 @@ describe("Testing Quote Services", () => {
     });
     assert.equal(newQuote.customerName, "Alt Die Cut Inc");
     assert.equal(newQuote.jobName, "Test 1");
-    assert.equal(newQuote.quoteNumber, 185002);
+    assert.equal(newQuote.quoteNumber, 185001);
   });
 
   it(".create()\t\t\t|\tCreate multiple Quotes", async function () {

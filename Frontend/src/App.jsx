@@ -29,12 +29,13 @@ import { getUserInfo } from "./state/user/saga";
 import { userSelector } from "./state/user/userSlice";
 
 import { getDockets } from "./state/dockets/saga";
-
+import { getQuotes } from "./state/quotes/saga";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserInfo());
     dispatch(getDockets());
+    dispatch(getQuotes());
   }, [dispatch]);
 
   return (

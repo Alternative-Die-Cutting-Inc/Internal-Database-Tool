@@ -4,8 +4,8 @@ import { createSelector } from "reselect";
 export const initialState = {
   loading: false,
   error: null,
-  quotes: [],
-  quote: {},
+  quotes: null,
+  quote: null,
 };
 
 const quoteSlice = createSlice({
@@ -38,6 +38,32 @@ const quoteSlice = createSlice({
       state.loading = false;
       state.error = error;
     },
+    createQuoteStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    createQuoteSuccess: (state, { payload: quote }) => {
+      state.loading = false;
+      state.error = null;
+      state.quote = quote;
+    },
+    createQuoteFailure: (state, { payload: error }) => {
+      state.loading = false;
+      state.error = error;
+    },
+    updateQuoteStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    updateQuoteSuccess: (state, { payload: quote }) => {
+      state.loading = false;
+      state.error = null;
+      state.quote = quote;
+    },
+    updateQuoteFailure: (state, { payload: error }) => {
+      state.loading = false;
+      state.error = error;
+    },
   },
 });
 
@@ -48,6 +74,12 @@ export const {
   getQuoteFailure,
   getQuoteSuccess,
   getQuoteStart,
+  createQuoteFailure,
+  createQuoteSuccess,
+  createQuoteStart,
+  updateQuoteFailure,
+  updateQuoteSuccess,
+  updateQuoteStart,
 } = quoteSlice.actions;
 
 export default quoteSlice.reducer;

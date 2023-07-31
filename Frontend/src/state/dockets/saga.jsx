@@ -46,12 +46,14 @@ export function* getDocketSaga({ payload: { id } }) {
 
 export const createDocket = createAction("createDocketSaga");
 
-export function* createDocketSaga({ payload: { docket } }) {
+export function* createDocketSaga({ payload: { docket, navigate } }) {
   const { axios } = useAxios();
   try {
     yield put(createDocketStart());
     const response = yield call(axios.post, `/dockets/`, { docket });
+    console.log(response.data?.docket);
     yield put(createDocketSuccess(response.data?.docket));
+    navigate(`/dockettool?docketNumber=${response.data?.docket?.docketNumber}`);
   } catch (error) {
     yield put(createDocketFailure(error));
   }

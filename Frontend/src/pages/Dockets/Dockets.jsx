@@ -2,9 +2,11 @@ import "./Dockets.scss";
 import { TableControls } from "../../components/TableControls/TableControls";
 import { useNavigate } from "react-router-dom";
 import { JobsTable } from "../../components/JobsTable/JobsTable";
-
+import { useDispatch } from "react-redux";
+import { createDocket } from "../../state/dockets/saga";
 const PageDockets = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <>
       <div className="docketspage-container">
@@ -19,7 +21,13 @@ const PageDockets = () => {
               className="new-docket-fields"
               onSubmit={(e) => {
                 e.preventDefault();
-                navigate("/dockettool");
+                const docket = {
+                  customerName: e.target.customer.value,
+                  jobName: e.target.jobName.value,
+                  customerPO: e.target.customerPO.value,
+                  quoteNumber: e.target.quoteNumber.value,
+                };
+                dispatch(createDocket({ docket, navigate }));
               }}
             >
               <input
@@ -41,7 +49,6 @@ const PageDockets = () => {
                 className="new-docket-field"
                 placeholder="Customer PO#"
                 name="customerPO"
-                required="required"
               />
               <input
                 type="text"

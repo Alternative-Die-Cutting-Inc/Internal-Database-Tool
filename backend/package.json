@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon ./server.js localhost 8080",
-    "test": "nyc --reporter=lcov --reporter=text mocha --recursive --exit",
+    "test": "nyc --reporter=lcov --reporter=text --check-coverage=true mocha --recursive --exit",
     "test:actions": "nyc --reporter=text-summary mocha --recursive --exit"
   },
   "lint-staged": {
@@ -24,7 +24,7 @@
     "express-session": "^1.17.3",
     "http": "^0.0.1-security",
     "mongodb": "^5.7.0",
-    "mongoose": "^7.3.3",
+    "mongoose": "^7.4.1",
     "mysql2": "^3.3.3",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0"
@@ -33,8 +33,11 @@
     "@babel/core": "^7.22.9",
     "@babel/eslint-parser": "^7.22.9",
     "@babel/plugin-proposal-optional-chaining": "^7.16.7",
+    "@babel/register": "^7.22.5",
+    "@istanbuljs/nyc-config-babel": "^3.0.0",
+    "babel-plugin-istanbul": "^6.1.1",
     "eslint": "^8.45.0",
-    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-prettier": "^8.9.0",
     "lint-staged": "^13.0.0",
     "mocha": "^10.2.0",
     "nyc": "^15.1.0"

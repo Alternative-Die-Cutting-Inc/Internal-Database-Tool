@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Docket services tests
+ * Global Docket objet
+ * @typedef {import("../../models/DocketModel").Docket} Docket
+ */
+
 const docketServices = require('../../services/docketServices');
 const assert = require('assert');
 
@@ -47,9 +53,42 @@ describe('Testing Docket Services', () => {
     });
   });
 
+  it('.create()\t\t\t|\tCreate a Docket (INVALID DATA)', async function () {
+    await assert.rejects(docketServices.create({}), {
+      name: 'Error',
+      message: 'UNABLE_TO_CREATE_DOCKET',
+    });
+  });
+
   it('.get(id)\t\t\t|\tGet a Docket', async function () {
     const existingDocket = await docketServices.get(newDocket.id);
     assert.notEqual(existingDocket, null);
+  });
+
+  it('.get(id)\t\t\t|\tGet a Docket (NO ID)', async function () {
+    await assert.rejects(docketServices.get('     '), {
+      name: 'Error',
+      message: 'UNABLE_TO_GET_DOCKET',
+    });
+  });
+
+  it('.get(id)\t\t\t|\tGet a Docket (INVALID ID)', async function () {
+    await assert.rejects(docketServices.get('64c2b3c7bef0f80ed01636d4'), {
+      name: 'Error',
+      message: 'DOCKET_NOT_FOUND',
+    });
+  });
+
+  it('.getFromNum(number)\t|\tGet Docket from docket number', async function () {
+    const existingDocket = await docketServices.getFromNum(newDocket.docketNumber);
+    assert.notEqual(existingDocket, null);
+  });
+
+  it('.getFromNum(number)\t|\tGet Docket from docket number (INVALID NUMBER)', async function () {
+    await assert.rejects(docketServices.getFromNum('00000'), {
+      name: 'Error',
+      message: 'DOCKET_NOT_FOUND',
+    });
   });
 
   it('.get()\t\t\t|\tGet all Dockets', async function () {
@@ -68,21 +107,22 @@ describe('Testing Docket Services', () => {
     assert.equal(updatedDocket.jobName, 'Test 7');
     assert.equal(updatedDocket.customerPO, 123456);
   });
+
   it('.update(id, fields)\t|\tAdd forms', async function () {
     let forms = [
       {
-        formName: 'Form 1',
-        formQuantity: 123,
+        name: 'Form 1',
+        quantity: 123,
         quantityShipped: 123,
       },
       {
-        formName: 'Form 2',
-        formQuantity: 246,
+        name: 'Form 2',
+        quantity: 246,
         quantityShipped: 123,
       },
       {
-        formName: 'Form 3',
-        formQuantity: 369,
+        name: 'Form 3',
+        quantity: 369,
         quantityShipped: 123,
       },
     ];
@@ -91,9 +131,23 @@ describe('Testing Docket Services', () => {
     });
     assert.equal(updatedDocket.forms.length, 3);
     updatedDocket.forms.forEach((form, index) => {
-      assert.equal(form.formName, `Form ${index + 1}`);
-      assert.equal(form.formQuantity, 123 * (index + 1));
+      assert.equal(form.name, `Form ${index + 1}`);
+      assert.equal(form.quantity, 123 * (index + 1));
       assert.equal(form.quantityShipped, 123);
+    });
+  });
+
+  it('.update(id, fields)\t|\tUpdate Docket info (NO ID)', async function () {
+    await assert.rejects(docketServices.update('', {}), {
+      name: 'Error',
+      message: 'UNABLE_TO_UPDATE_DOCKET',
+    });
+  });
+
+  it('.update(id, fields)\t|\tUpdate Docket info (INVALID ID)', async function () {
+    await assert.rejects(docketServices.update('64c2b3c7bef0f80ed01636d4', {}), {
+      name: 'Error',
+      message: 'DOCKET_NOT_FOUND',
     });
   });
 
@@ -101,10 +155,18 @@ describe('Testing Docket Services', () => {
     const deletedDocket = await docketServices.delete(newDocket.id);
     assert.notEqual(deletedDocket, null);
   });
+
   it('.delete(id)\t\t|\tCheck deleted Docket', async function () {
     await assert.rejects(docketServices.delete(newDocket.id), {
       name: 'Error',
       message: 'DOCKET_NOT_FOUND',
+    });
+  });
+
+  it('.delete(id)\t\t|\tCheck deleted Docket (NO ID)', async function () {
+    await assert.rejects(docketServices.delete(''), {
+      name: 'Error',
+      message: 'UNABLE_TO_DELETE_DOCKET',
     });
   });
 });

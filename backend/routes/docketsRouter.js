@@ -17,7 +17,7 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     const allDockets = await docketServices.get();
-    res.status(200).send(allDockets);
+    res.status(200).send({ dockets: allDockets });
   } catch (error) {
     next(error);
   }
@@ -32,7 +32,22 @@ router.get('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
     const responseDocket = await docketServices.get(id);
-    res.status(200).send(responseDocket);
+    res.status(200).send({ docket: responseDocket });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
+ * @description get docket by number
+ * @route GET /dockets/number/:number
+ * @returns {Docket} docket object
+ */
+router.get('/number/:number', async (req, res, next) => {
+  try {
+    const number = req.params.number;
+    const responseDocket = await docketServices.getFromNum(number);
+    res.status(200).send({ docket: responseDocket });
   } catch (error) {
     next(error);
   }
@@ -47,7 +62,7 @@ router.post('/', async (req, res, next) => {
   try {
     const newDocket = req.body.docket;
     const responseDocket = await docketServices.create(newDocket);
-    res.status(201).send(responseDocket);
+    res.status(201).send({ docket: responseDocket });
   } catch (error) {
     next(error);
   }
@@ -63,7 +78,7 @@ router.put('/:id', async (req, res, next) => {
     const id = req.params.id;
     const editFields = req.body.fields;
     const responseDocket = await docketServices.update(id, editFields);
-    res.status(200).send(responseDocket);
+    res.status(200).send({ docket: responseDocket });
   } catch (error) {
     next(error);
   }
@@ -78,7 +93,7 @@ router.delete('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
     const responseDocket = await docketServices.delete(id);
-    res.status(200).send(responseDocket);
+    res.status(200).send({ docket: responseDocket });
   } catch (error) {
     next(error);
   }

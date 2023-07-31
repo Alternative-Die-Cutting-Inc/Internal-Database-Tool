@@ -25,13 +25,32 @@ const docketServices = {
         },
       );
     } else {
-      return DocketModel.find({}).then(
-        (dockets) => dockets,
-        (error) => {
-          throw error;
-        },
-      );
+      return DocketModel.find({})
+        .sort({ docketNumber: -1 })
+        .then(
+          (dockets) => dockets,
+          (error) => {
+            throw new Error('UNABLE_TO_GET_DOCKETS', { cause: error });
+          },
+        );
     }
+  },
+
+  /**
+   * @description Get docket by number
+   * @param {String} number the docket number
+   * @returns {Docket}
+   */
+  async getFromNum(number) {
+    return DocketModel.findOne({ docketNumber: number }).then(
+      (docket) => {
+        if (!docket) throw new Error('DOCKET_NOT_FOUND');
+        return docket;
+      },
+      (error) => {
+        throw new Error('UNABLE_TO_GET_DOCKET', { cause: error });
+      },
+    );
   },
 
   /**
@@ -57,9 +76,9 @@ const docketServices = {
    * @returns {Docket} updated docket
    */
   async update(id, fields) {
-    let responseDocket = null;
-    responseDocket = DocketModel.findOneAndUpdate({ _id: id }, fields, {
+    return DocketModel.findOneAndUpdate({ _id: id }, fields, {
       new: true,
+      returnDocument: 'after',
     }).then(
       (docket) => {
         if (!docket) throw new Error('DOCKET_NOT_FOUND');
@@ -69,7 +88,6 @@ const docketServices = {
         throw new Error('UNABLE_TO_UPDATE_DOCKET', { cause: error });
       },
     );
-    return responseDocket;
   },
 
   /**

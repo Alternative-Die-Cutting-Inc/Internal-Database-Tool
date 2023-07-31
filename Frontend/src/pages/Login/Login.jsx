@@ -18,7 +18,6 @@ const PageLogin = () => {
     if (user) {
       navigate("/");
     }
-    console.log("error", error);
   }, [user, error]);
   return (
     <>

@@ -8,6 +8,12 @@ import {
   getDocketFailure,
   getDocketStart,
   getDocketSuccess,
+  createDocketFailure,
+  createDocketSuccess,
+  createDocketStart,
+  updateDocketFailure,
+  updateDocketSuccess,
+  updateDocketStart,
 } from "./docketSlice";
 
 export const getDockets = createAction("getDocketsSaga");
@@ -17,107 +23,58 @@ export function* getDocketsSaga() {
 
   try {
     yield put(getDocketsStart());
-    const response = yield call(axios.get, "/user/unapproved-users"); // change URL
+    const response = yield call(axios.get, "/dockets");
     yield put(getDocketsSuccess(response.data?.dockets));
-  } catch (e) {
-    yield put(getDocketsFailure(e));
+  } catch (error) {
+    yield put(getDocketsFailure(error));
   }
 }
 
 export const getDocket = createAction("getDocketSaga");
 
-export function* getDocketSaga() {
+export function* getDocketSaga({ payload: { id } }) {
   const { axios } = useAxios();
-  const docket = {
-    docketNumber: 44300,
-    quoteNumber: 18500,
-    quoteJob: "30000 units, $1235.14 at $41.17/M",
-    customerName: "Record Jacket Corp",
-    customerPO: 44182,
-    productionPerson: "Jessi, Tim, Manny",
-    jobName: "Album Gatefold Jacket Test (Fm - 3180)",
-    jobType: "commercial",
-    soldFor: 1,
-    dieID: 43741,
-    dieType: "B-die",
-    finishing:
-      "Standing B-die #43741, die cut, , score, strip, Fold and glue, final fold Manually, Carton in 55s",
-    specialInstructions:
-      "Die - 1up up Album Jacket. (TEST ) (final fold DTape machine)",
-    forms: [
-      {
-        name: "Total",
-        quantity: 2000,
-        notes: "Pcs",
-        quantityShipped: 1000,
-        lastShipmentDate: new Date(),
-      },
-      {
-        name: "Total",
-        quantity: 2000,
-        notes: "Pcs",
-        quantityShipped: 1000,
-        lastShipmentDate: new Date(),
-      },
-      {
-        name: "Total",
-        quantity: 2000,
-        notes: "Pcs",
-        quantityShipped: 1000,
-        lastShipmentDate: new Date(),
-      },
-      {
-        name: "Total",
-        quantity: 2000,
-        notes: "Pcs",
-        quantityShipped: 1000,
-        lastShipmentDate: new Date(),
-      },
-    ],
-    extraCharges: [
-      {
-        chargeName: "Total",
-        chargeCost: 2000,
-        chargeNotes: "Pcs",
-      },
-      {
-        chargeName: "Total",
-        chargeCost: 2000,
-        chargeNotes: "Pcs",
-      },
-      {
-        chargeName: "Total",
-        chargeCost: 2000,
-        chargeNotes: "Pcs",
-      },
-      {
-        chargeName: "Total",
-        chargeCost: 2000,
-        chargeNotes: "Pcs",
-      },
-      {
-        chargeName: "Total",
-        chargeCost: 2000,
-        chargeNotes: "Pcs",
-      },
-    ],
-    requoteMemo:
-      "Widen bottom crease on pocket next run please. RD July 2014  setup 35 min. speed 2000 gluer speed 9000",
-    creationDate: new Date(),
-    closeDate: new Date(),
-  };
 
   try {
     yield put(getDocketStart());
-    // const response = yield call(axios.get, "/user/unapproved-users"); // change URL
-    // yield put(getDocketSuccess(response.data?.docket));
-    yield put(getDocketSuccess(docket));
-  } catch (e) {
-    yield put(getDocketFailure(e));
+    const response = yield call(axios.get, `/dockets/number/${id}`); // change URL
+    yield put(getDocketSuccess(response.data?.docket));
+  } catch (error) {
+    yield put(getDocketFailure(error));
+  }
+}
+
+export const createDocket = createAction("createDocketSaga");
+
+export function* createDocketSaga({ payload: { docket, navigate } }) {
+  const { axios } = useAxios();
+  try {
+    yield put(createDocketStart());
+    const response = yield call(axios.post, `/dockets/`, { docket });
+    console.log(response.data?.docket);
+    yield put(createDocketSuccess(response.data?.docket));
+    navigate(`/dockettool?docketNumber=${response.data?.docket?.docketNumber}`);
+  } catch (error) {
+    yield put(createDocketFailure(error));
+  }
+}
+
+export const updateDocket = createAction("updateDocketSaga");
+
+export function* updateDocketSaga({ payload: { id, fields } }) {
+  const { axios } = useAxios();
+  try {
+    yield put(updateDocketStart());
+    const response = yield call(axios.put, `/dockets/${id}`, { fields });
+    yield put(updateDocketSuccess(response.data?.docket));
+  } catch (error) {
+    yield put(updateDocketFailure(error));
   }
 }
 
 export default function* docketsSaga() {
+  yield takeLeading(createDocket.type, createDocketSaga);
+  yield takeLeading(updateDocket.type, updateDocketSaga);
   yield takeLeading(getDockets.type, getDocketsSaga);
   yield takeLeading(getDocket.type, getDocketSaga);
 }

@@ -1,7 +1,9 @@
+import { updateDocket, getDockets } from "../../state/dockets/saga";
 export const PageDocketToolFunctions = [
   {
     label: "Save",
-    function: function () {
+    function: function (dispatch) {
+      dispatch(getDockets());
       console.log("hello world");
     },
   },
@@ -19,8 +21,8 @@ export const PageDocketToolFunctions = [
   },
   {
     label: "Delete",
-    function: function () {
-      console.log("hello world");
+    function: function (dispatch) {
+      dispatch(updateDocket);
     },
   },
   {

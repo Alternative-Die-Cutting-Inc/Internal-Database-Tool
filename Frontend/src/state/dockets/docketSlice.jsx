@@ -4,27 +4,8 @@ import { createSelector } from "reselect";
 export const initialState = {
   loading: false,
   error: null,
-  dockets: [],
-  docket: {
-    docketNumber: 44300,
-    quoteNumber: 18500,
-    quoteJob: "",
-    customerName: "",
-    customerPO: 44182,
-    productionPerson: "",
-    jobName: "",
-    jobType: "",
-    soldFor: 1,
-    dieID: 43741,
-    dieType: "",
-    finishing: "",
-    specialInstructions: "",
-    forms: [],
-    extraCharges: [],
-    requoteMemo: "",
-    creationDate: null,
-    closeDate: null,
-  },
+  dockets: null,
+  docket: null,
 };
 
 const docketSlice = createSlice({
@@ -57,6 +38,32 @@ const docketSlice = createSlice({
       state.loading = false;
       state.error = error;
     },
+    createDocketStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    createDocketSuccess: (state, { payload: docket }) => {
+      state.loading = false;
+      state.error = null;
+      state.docket = docket;
+    },
+    createDocketFailure: (state, { payload: error }) => {
+      state.loading = false;
+      state.error = error;
+    },
+    updateDocketStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    updateDocketSuccess: (state, { payload: docket }) => {
+      state.loading = false;
+      state.error = null;
+      state.docket = docket;
+    },
+    updateDocketFailure: (state, { payload: error }) => {
+      state.loading = false;
+      state.error = error;
+    },
   },
 });
 
@@ -67,6 +74,12 @@ export const {
   getDocketFailure,
   getDocketSuccess,
   getDocketStart,
+  createDocketFailure,
+  createDocketSuccess,
+  createDocketStart,
+  updateDocketFailure,
+  updateDocketSuccess,
+  updateDocketStart,
 } = docketSlice.actions;
 
 export default docketSlice.reducer;

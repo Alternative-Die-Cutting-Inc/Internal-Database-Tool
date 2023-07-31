@@ -27,11 +27,15 @@ import { SnackbarProvider } from "./util/SnackbarProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo } from "./state/user/saga";
 import { userSelector } from "./state/user/userSlice";
+
+import { getDockets } from "./state/dockets/saga";
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserInfo());
-  }, []);
+    dispatch(getDockets());
+  }, [dispatch]);
 
   return (
     <DarkModeProvider>

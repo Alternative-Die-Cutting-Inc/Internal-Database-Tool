@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const CounterSchema = new mongoose.Schema({
   _id: {
@@ -12,7 +12,7 @@ const CounterSchema = new mongoose.Schema({
   },
 });
 
-const CounterModel = mongoose.model("Counter", CounterSchema);
+const CounterModel = mongoose.model('Counter', CounterSchema);
 
 /**
  * @description Auto increment counter and assign to document
@@ -24,7 +24,7 @@ const autoIncrementModelID = function (counterName, doc, next) {
   CounterModel.findByIdAndUpdate(
     counterName,
     { $inc: { seq: 1 } },
-    { new: true, upsert: true }
+    { new: true, upsert: true },
   ).then(
     (counter) => {
       doc[counterName] = counter.seq;
@@ -32,7 +32,7 @@ const autoIncrementModelID = function (counterName, doc, next) {
     },
     (error) => {
       next(error);
-    }
+    },
   );
 };
 

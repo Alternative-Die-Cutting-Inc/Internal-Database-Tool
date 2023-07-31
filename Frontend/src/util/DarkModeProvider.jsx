@@ -16,9 +16,9 @@ function DarkModeProvider({ children }) {
     localStorage.setItem("dark-mode", status);
     for (let color of Object.keys(colors)) {
       if (status === false) {
-        setColor(color, colors[color][1]);
-      } else {
         setColor(color, colors[color][0]);
+      } else {
+        setColor(color, colors[color][1]);
       }
     }
   };

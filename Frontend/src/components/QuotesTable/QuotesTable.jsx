@@ -10,26 +10,14 @@ import {
 import { useMemo } from "react";
 import "../../scssStyles/tableStyle.scss";
 import { Link } from "react-router-dom";
-import { faker } from "@faker-js/faker";
+import { useSelector } from "react-redux";
+import { quotesSelector } from "../../state/quotes/quoteSlice";
 
 /** The quotes table component.
  * @returns a table of quotes
  */
 const QuotesTable = () => {
-  const fakeData = [
-    ...[...Array(200)].map(() => ({
-      customer: faker.company.name(),
-      dateCreated: faker.date.past().toString(),
-      description: faker.lorem.sentence(),
-      quoteNumber: faker.number.int({ min: 184000, max: 185000 }),
-      jobName: faker.lorem.words(),
-      notes: faker.lorem.paragraph(),
-      costs: faker.number.int({ min: 200, max: 3000 }),
-      status: faker.lorem.words().split(" "),
-    })),
-  ];
-  // generate fake data using faker
-  const data = useMemo(() => fakeData, []);
+  const { quotes, loading } = useSelector(quotesSelector);
 
   const columns = useMemo(
     () => [
@@ -44,7 +32,7 @@ const QuotesTable = () => {
         ),
         width: "auto",
       },
-      { header: "Customer", accessorKey: "customer" },
+      { header: "Customer", accessorKey: "customerName" },
       { header: "Job Name", accessorKey: "jobName" },
       { header: "Description", accessorKey: "description" },
       { header: "Notes", accessorKey: "notes" },
@@ -55,7 +43,11 @@ const QuotesTable = () => {
         // eslint-disable-next-line react/prop-types
         cell: (value) => <StatusLabels values={value.getValue()} />,
       },
-      { header: "Date Created", accessorKey: "dateCreated" },
+      {
+        header: "Date Created",
+        accessorKey: "creationDate",
+        cell: (value) => new Date(value.getValue()).toLocaleDateString(),
+      },
     ],
     []
   );
@@ -73,53 +65,58 @@ const QuotesTable = () => {
     getState,
   } = useReactTable({
     columns,
-    data,
+    data: quotes || [],
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     autoResetPageIndex: true,
   });
   return (
     <>
-      <table>
-        <thead>
-          {getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <th key={header.id} colSpan={header.colSpan}>
-                    {header.isPlaceholder ? null : (
-                      <div>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </div>
-                    )}
-                  </th>
-                );
-              })}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {getRowModel().rows.map((row) => {
-            return (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
+      {!loading ? (
+        <table>
+          <thead>
+            {getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
                   return (
-                    <td key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
+                    <th key={header.id} colSpan={header.colSpan}>
+                      {header.isPlaceholder ? null : (
+                        <div>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </div>
                       )}
-                    </td>
+                    </th>
                   );
                 })}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody>
+            {getRowModel().rows.map((row) => {
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <td key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      ) : (
+        <> </>
+      )}
+
       <PaginationControls
         getCanPreviousPage={getCanPreviousPage}
         getCanNextPage={getCanNextPage}

@@ -91,6 +91,40 @@ const quoteServices = {
   },
 
   /**
+   * @description Update quote job fields
+   * @param {String} quoteID quote _id
+   * @param {String} jobID job _id
+   * @param {Object} fields job fields to update
+   * @returns {Quote} updated quote
+   */
+  async updateJob(quoteID, jobID, fields) {
+    // Get the quote thats being updated
+    const quote = await QuoteModel.findById(quoteID).then(
+      (quote) => {
+        if (!quote) throw new Error('QUOTE_NOT_FOUND');
+        return quote;
+      },
+      (error) => {
+        throw new Error('UNABLE_TO_GET_QUOTE', { cause: error });
+      },
+    );
+    // Get the job thats being updated
+    const job = quote.quoteJobs.id(jobID);
+    if (!job) throw new Error('JOB_NOT_FOUND');
+
+    // Update the job fields
+    job.set(fields);
+
+    // Save the quote
+    return quote.save().then(
+      (quote) => quote,
+      (error) => {
+        throw new Error('UNABLE_TO_UPDATE_QUOTE', { cause: error });
+      },
+    );
+  },
+
+  /**
    * @description Delete quote
    * @param {String} id quote number | _id
    * @returns {Quote}

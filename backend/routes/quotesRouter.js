@@ -86,6 +86,24 @@ router.put('/:id', async (req, res, next) => {
 });
 
 /**
+ * @description edit quote job
+ * @route PUT /quotes/:quoteID/:jobID
+ * @returns {Quote} edited quote object
+ */
+router.put('/:quoteID/:jobID', async (req, res, next) => {
+  try {
+    const quoteID = req.params.quoteID;
+    const jobID = req.params.jobID;
+    const editFields = req.body.fields;
+    const responseQuote = await quoteServices.updateJob(quoteID, jobID, editFields);
+
+    res.status(200).send({ quote: responseQuote });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
  * @description delete quote
  * @route DELETE /quotes/:id
  * @returns {Quote} deleted quote object

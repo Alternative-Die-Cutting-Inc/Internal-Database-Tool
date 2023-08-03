@@ -17,9 +17,12 @@ const quoteServices = {
     let responseQuote = null;
     if (id) {
       responseQuote = QuoteModel.findById(id).then(
-        (quote) => quote,
+        (quote) => {
+          if (!quote) throw new Error('QUOTE_NOT_FOUND');
+          return quote;
+        },
         (error) => {
-          throw error;
+          throw new Error('UNABLE_TO_GET_QUOTE', { cause: error });
         },
       );
     } else {
@@ -28,7 +31,7 @@ const quoteServices = {
         .then(
           (quotes) => quotes,
           (error) => {
-            throw error;
+            throw new Error('UNABLE_TO_GET_QUOTES', { cause: error });
           },
         );
     }

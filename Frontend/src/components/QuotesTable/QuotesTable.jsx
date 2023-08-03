@@ -36,7 +36,37 @@ const QuotesTable = () => {
       { header: "Job Name", accessorKey: "jobName" },
       { header: "Description", accessorKey: "description" },
       { header: "Notes", accessorKey: "notes" },
-      { header: "Units + Sheets + Per M + Total", accessorKey: "costs" },
+      {
+        header: "Units + Sheets + Per M + Total",
+        accessorFn: (quote) =>
+          quote.quoteJobs.reduce((acc, job) => {
+            acc.push({
+              units: job.units,
+              sheets: parseInt(job.units / job.perSheet),
+              perM: job.total / (job.units / 1000),
+              total: job.total,
+            });
+            return acc;
+          }, []),
+        cell: (value) => {
+          console.log(value.getValue());
+          return value.getValue().map((val, index) => (
+            <div key={index}>{`${val.units.toLocaleString(
+              "en-CA"
+            )} + ${val.sheets.toLocaleString(
+              "en-CA"
+            )} + ${val.perM.toLocaleString("en-CA", {
+              style: "currency",
+              currency: "CAD",
+              currencyDisplay: "symbol",
+            })} + ${val.total.toLocaleString("en-CA", {
+              style: "currency",
+              currency: "CAD",
+              currencyDisplay: "symbol",
+            })}`}</div>
+          ));
+        },
+      },
       {
         header: "Status",
         accessorKey: "status",

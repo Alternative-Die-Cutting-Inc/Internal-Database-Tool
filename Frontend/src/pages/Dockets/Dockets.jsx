@@ -26,6 +26,7 @@ const PageDockets = () => {
                   jobName: e.target.jobName.value,
                   customerPO: e.target.customerPO.value,
                   quoteNumber: e.target.quoteNumber.value,
+                  status: [{ value: "Created", label: "Created" }],
                 };
                 dispatch(createDocket({ docket, navigate }));
               }}

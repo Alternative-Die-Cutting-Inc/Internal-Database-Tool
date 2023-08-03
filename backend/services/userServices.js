@@ -4,8 +4,8 @@
  * @typedef {import("../models/UserModel").User} User
  */
 
-const UserModel = require("../models/UserModel");
-const bcrypt = require("bcrypt");
+const UserModel = require('../models/UserModel');
+const bcrypt = require('bcrypt');
 
 const userServices = {
   /**
@@ -17,7 +17,7 @@ const userServices = {
     const passwordValidator =
       /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[~`_=^:();<>+-.@$!%*#?&])[A-Za-z0-9@$_=!%:*#?&.]/;
     if (!passwordValidator.test(password)) {
-      return new Error("Password is not valid.");
+      return new Error('Password is not valid.');
     }
     return 0;
   },
@@ -42,12 +42,12 @@ const userServices = {
         }).then(
           (user) => user,
           (error) => {
-            throw error;
-          }
+            throw new Error('UNABLE_TO_CREATE_USER', { cause: error });
+          },
         ),
       (error) => {
-        throw error;
-      }
+        throw new Error('UNABLE_TO_PROCESS_PASSWORD', { cause: error });
+      },
     );
 
     return responseUser;

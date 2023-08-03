@@ -113,7 +113,7 @@ const quoteJobSchema = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  rates: { type: quoteRatesSchema, required: true },
+  // rates: { type: quoteRatesSchema, required: true },
   total: {
     type: Number,
     required: false,

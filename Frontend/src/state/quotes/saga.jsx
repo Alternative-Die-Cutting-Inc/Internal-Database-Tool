@@ -71,9 +71,25 @@ export function* updateQuoteSaga({ payload: { id, fields } }) {
   }
 }
 
+export const updateJob = createAction("updateJobSaga");
+
+export function* updateJobSaga({ payload: { quoteID, jobID, fields } }) {
+  const { axios } = useAxios();
+  try {
+    yield put(updateQuoteStart());
+    const response = yield call(axios.put, `/quotes/${quoteID}/${jobID}`, {
+      fields,
+    });
+    yield put(updateQuoteSuccess(response.data?.quote));
+  } catch (error) {
+    yield put(updateQuoteFailure(error));
+  }
+}
+
 export default function* quotesSaga() {
   yield takeLeading(createQuote.type, createQuoteSaga);
   yield takeLeading(updateQuote.type, updateQuoteSaga);
+  yield takeLeading(updateJob.type, updateJobSaga);
   yield takeLeading(getQuotes.type, getQuotesSaga);
   yield takeLeading(getQuote.type, getQuoteSaga);
 }

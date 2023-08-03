@@ -2,7 +2,7 @@ import "./QuoteTool.scss";
 import { useLocation } from "react-router-dom";
 import { useEffect, useMemo, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getQuote, updateQuote } from "../../state/quotes/saga";
+import { getQuote, updateQuote, updateJob } from "../../state/quotes/saga";
 import { quoteSelector } from "../../state/quotes/quoteSlice";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
@@ -38,16 +38,27 @@ const PageQuoteTool = () => {
     }
   };
 
-  const handleBlur = (event, fields) => {
-    event.preventDefault();
-    if (event.currentTarget === event.target) {
-      saveQuote(fields);
-    }
+  const saveJob = (jobID, fields) => {
+    
+    dispatch(updateJob({ quoteID: editingQuote._id, jobID, fields }));
+  };
+
+  const calculateTotal = (job) => {
+    const dieTotal = job.dieHours * 100; // ! replace with actual value
+    const setupTotal = job.gluerSetupHours * 100; // ! replace with actual value
+    const gluerTotal = job.gluerRunSpeed * job.gluerRunM; // ! replace with actual value
+    const dieRunTotal = job.dieRunSpeed * job.dieRunM; // ! replace with actual value
+    const stripTotal = job.stripRunSpeed * job.stripRunM; // ! replace with actual value
+    const subtotal =
+      dieTotal + setupTotal + gluerTotal + dieRunTotal + stripTotal;
+    const premium = subtotal * 0.2;
+    const perM = subtotal + premium;
+    const total = perM * job.perM;
+    return total;
   };
 
   useEffect(() => {
     setEditingQuote(quote);
-    console.log("quote", quote);
   }, [quote]);
 
   return (
@@ -73,10 +84,8 @@ const PageQuoteTool = () => {
                     <input
                       type="text"
                       value={editingQuote.attention || ""}
-                      onBlur={(event) => {
-                        handleBlur(event, {
-                          attention: editingQuote.attention,
-                        });
+                      onBlur={() => {
+                        saveQuote({ attention: editingQuote.attention });
                       }}
                       onChange={(event) => {
                         setEditingQuote({
@@ -91,10 +100,8 @@ const PageQuoteTool = () => {
                     <input
                       type="text"
                       value={editingQuote.jobName || ""}
-                      onBlur={(event) => {
-                        handleBlur(event, {
-                          jobName: editingQuote.jobName,
-                        });
+                      onBlur={() => {
+                        saveQuote({ jobName: editingQuote.jobName });
                       }}
                       onChange={(event) => {
                         setEditingQuote({
@@ -111,10 +118,8 @@ const PageQuoteTool = () => {
                     <textarea
                       type="text"
                       value={editingQuote.description || ""}
-                      onBlur={(event) => {
-                        handleBlur(event, {
-                          description: editingQuote.description,
-                        });
+                      onBlur={() => {
+                        saveQuote({ description: editingQuote.description });
                       }}
                       onChange={(event) => {
                         setEditingQuote({
@@ -129,10 +134,8 @@ const PageQuoteTool = () => {
                     <textarea
                       type="text"
                       value={editingQuote.notes || ""}
-                      onBlur={(event) => {
-                        handleBlur(event, {
-                          notes: editingQuote.notes,
-                        });
+                      onBlur={() => {
+                        saveQuote({ notes: editingQuote.notes });
                       }}
                       onChange={(event) => {
                         setEditingQuote({
@@ -151,10 +154,8 @@ const PageQuoteTool = () => {
                       menuPosition="fixed"
                       closeMenuOnSelect={false}
                       value={editingQuote.status}
-                      onBlur={(event) => {
-                        handleBlur(event, {
-                          status: editingQuote.status,
-                        });
+                      onBlur={() => {
+                        saveQuote({ status: editingQuote.status });
                       }}
                       isClearable={false}
                       onChange={(options) => {
@@ -205,7 +206,7 @@ const PageQuoteTool = () => {
           </div>
           <div className="jobs-list">
             {editingQuote.quoteJobs.map((job, jobIndex) => (
-              <Fragment key={jobIndex}>
+              <Fragment key={job._id}>
                 <div className="job-item-container">
                   <div className="job-input-form" id="job-sheets">
                     <label className="job-input-label">
@@ -215,26 +216,22 @@ const PageQuoteTool = () => {
                         className="job-input"
                         type="number"
                         step={1000}
-                        value={job.units || 0}
-                        onBlur={(event) => {
-                          handleBlur(event, {
-                            quoteJobs: editingQuote.quoteJobs,
-                          });
+                        value={job.units}
+                        onBlur={() => {
+                          saveJob(job._id, { units: job.units });
                         }}
                         onChange={(event) => {
                           setEditingQuote({
                             ...editingQuote,
-                            quoteJobs: editingQuote.quoteJobs.map(
-                              (job, index) => {
-                                if (index === jobIndex) {
-                                  return {
-                                    ...job,
-                                    units: event.target.value,
-                                  };
-                                }
-                                return job;
+                            quoteJobs: editingQuote.quoteJobs.map((j, i) => {
+                              if (i === jobIndex) {
+                                return {
+                                  ...j,
+                                  units: event.target.value,
+                                };
                               }
-                            ),
+                              return j;
+                            }),
                           });
                         }}
                       />
@@ -245,7 +242,10 @@ const PageQuoteTool = () => {
                         className="job-input"
                         type="number"
                         step={10}
-                        value={job.perSheet || 0}
+                        value={job.perSheet}
+                        onBlur={() => {
+                          saveJob(job._id, { perSheet: job.perSheet });
+                        }}
                         onChange={(event) => {
                           setEditingQuote({
                             ...editingQuote,
@@ -288,11 +288,9 @@ const PageQuoteTool = () => {
                               className="job-input"
                               type="number"
                               step={1}
-                              value={job.dieHours || 0}
-                              onBlur={(event) => {
-                                handleBlur(event, {
-                                  quoteJobs: editingQuote.quoteJobs,
-                                });
+                              value={job.dieHours}
+                              onBlur={() => {
+                                saveJob(job._id, { dieHours: job.dieHours });
                               }}
                               onChange={(event) => {
                                 setEditingQuote({
@@ -329,10 +327,10 @@ const PageQuoteTool = () => {
                               name="gluerSetupHours"
                               className="job-input"
                               type="number"
-                              value={job.gluerSetupHours || 0}
-                              onBlur={(event) => {
-                                handleBlur(event, {
-                                  quoteJobs: editingQuote.quoteJobs,
+                              value={job.gluerSetupHours}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  gluerSetupHours: job.gluerSetupHours,
                                 });
                               }}
                               onChange={(event) => {
@@ -373,9 +371,9 @@ const PageQuoteTool = () => {
                               className="job-input"
                               type="number"
                               value={job.dieSetup || 0}
-                              onBlur={(event) => {
-                                handleBlur(event, {
-                                  quoteJobs: editingQuote.quoteJobs,
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  dieSetup: job.dieSetup,
                                 });
                               }}
                               onChange={(event) => {
@@ -412,10 +410,10 @@ const PageQuoteTool = () => {
                             <input
                               className="job-input"
                               type="number"
-                              value={job.gluerRunSpeed || 0}
-                              onBlur={(event) => {
-                                handleBlur(event, {
-                                  quoteJobs: editingQuote.quoteJobs,
+                              value={job.gluerRunSpeed}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  gluerRunSpeed: job.gluerRunSpeed,
                                 });
                               }}
                               onChange={(event) => {
@@ -441,9 +439,9 @@ const PageQuoteTool = () => {
                               className="job-input small"
                               type="number"
                               value={job.gluerRunM || 0}
-                              onBlur={(event) => {
-                                handleBlur(event, {
-                                  quoteJobs: editingQuote.quoteJobs,
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  gluerRunM: job.gluerRunM,
                                 });
                               }}
                               onChange={(event) => {
@@ -480,10 +478,10 @@ const PageQuoteTool = () => {
                             <input
                               className="job-input"
                               type="number"
-                              value={job.dieRunSpeed || 0}
-                              onBlur={(event) => {
-                                handleBlur(event, {
-                                  quoteJobs: editingQuote.quoteJobs,
+                              value={job.dieRunSpeed}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  dieRunSpeed: job.dieRunSpeed,
                                 });
                               }}
                               onChange={(event) => {
@@ -508,9 +506,10 @@ const PageQuoteTool = () => {
                             <input
                               className="job-input small"
                               type="number"
-                              onBlur={(event) => {
-                                handleBlur(event, {
-                                  quoteJobs: editingQuote.quoteJobs,
+                              value={job.dieRunM}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  dieRunM: job.dieRunM,
                                 });
                               }}
                               onChange={(event) => {
@@ -544,10 +543,10 @@ const PageQuoteTool = () => {
                             <input
                               className="job-input"
                               type="number"
-                              value={job.stripRunSpeed || 0}
-                              onBlur={(event) => {
-                                handleBlur(event, {
-                                  quoteJobs: editingQuote.quoteJobs,
+                              value={job.stripRunSpeed}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  stripRunSpeed: job.stripRunSpeed,
                                 });
                               }}
                               onChange={(event) => {
@@ -573,9 +572,9 @@ const PageQuoteTool = () => {
                               className="job-input small"
                               type="number"
                               value={job.stripRunM || 0}
-                              onBlur={(event) => {
-                                handleBlur(event, {
-                                  quoteJobs: editingQuote.quoteJobs,
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  stripRunM: job.stripRunM,
                                 });
                               }}
                               onChange={(event) => {
@@ -622,39 +621,35 @@ const PageQuoteTool = () => {
                           <td>
                             <input
                               className="job-input"
-                              type="text"
-                              defaultValue="2000.00"
+                              type="number"
+                              readOnly
                             />
                           </td>
                           <td>
                             <input
                               className="job-input"
-                              type="text"
-                              defaultValue="2000.00"
+                              type="number"
+                              readOnly
                             />
                           </td>
                           <td>
                             <input
                               className="job-input"
-                              type="text"
-                              defaultValue="2000.00"
+                              type="number"
+                              readOnly
                             />
                           </td>
                         </tr>
                         {/* row #3 */}
                         <tr>
                           <td colSpan="3">
-                            <input
-                              style={{
-                                fontWeight: "bold",
-                                height: "100%",
-                                color: "black",
-                              }}
-                              className="job-input"
-                              type="text"
-                              defaultValue={"2000.00"}
-                              disabled
-                            />
+                            <h3>
+                              {job.total.toLocaleString("en-CA", {
+                                style: "currency",
+                                currency: "CAD",
+                                currencyDisplay: "symbol",
+                              })}
+                            </h3>
                           </td>
                         </tr>
                       </tbody>
@@ -669,7 +664,16 @@ const PageQuoteTool = () => {
                         {/* row #1 */}
                         <tr>
                           <td>
-                            <button className="job-input-button">
+                            <button
+                              className="job-input-button"
+                              onClick={() => {
+                                saveQuote({
+                                  quoteJobs: editingQuote.quoteJobs.map(() => {
+                                    return { ...job, _id: undefined };
+                                  }),
+                                });
+                              }}
+                            >
                               Fill All
                             </button>
                           </td>
@@ -677,23 +681,18 @@ const PageQuoteTool = () => {
                             <button
                               className="job-input-button"
                               onClick={() => {
-                                const newQuoteJobs = editingQuote.quoteJobs.map(
-                                  (j, i) => {
-                                    if (jobIndex === i) {
-                                      return {
-                                        ...j,
-                                        extraCharges: [...j.extraCharges, {}],
-                                      };
-                                    }
-                                    return j;
-                                  }
-                                );
-                                setEditingQuote({
-                                  ...editingQuote,
-                                  quoteJobs: newQuoteJobs,
-                                });
                                 saveQuote({
-                                  quoteJobs: newQuoteJobs,
+                                  quoteJobs: editingQuote.quoteJobs.map(
+                                    (j, i) => {
+                                      if (jobIndex === i) {
+                                        return {
+                                          ...j,
+                                          extraCharges: [...j.extraCharges, {}],
+                                        };
+                                      }
+                                      return j;
+                                    }
+                                  ),
                                 });
                               }}
                             >
@@ -717,7 +716,17 @@ const PageQuoteTool = () => {
                         {/* row #3 */}
                         <tr>
                           <td>
-                            <button className="job-input-button">
+                            <button
+                              className="job-input-button"
+                              onClick={() => {
+                                saveQuote({
+                                  quoteJobs: [
+                                    ...editingQuote.quoteJobs,
+                                    { ...job, _id: undefined },
+                                  ],
+                                });
+                              }}
+                            >
                               Duplicate
                             </button>
                           </td>
@@ -725,19 +734,12 @@ const PageQuoteTool = () => {
                             <button
                               className="job-input-button"
                               onClick={() => {
-                                console.log(job, jobIndex);
-                                const newJobs = editingQuote.quoteJobs.filter(
-                                  (j, i) => {
-                                    if (jobIndex === i) console.log(j);
-                                    return jobIndex !== i;
-                                  }
-                                );
-                                setEditingQuote({
-                                  ...editingQuote,
-                                  quoteJobs: newJobs,
-                                });
                                 saveQuote({
-                                  quoteJobs: newJobs,
+                                  quoteJobs: editingQuote.quoteJobs.filter(
+                                    (j, i) => {
+                                      return jobIndex !== i;
+                                    }
+                                  ),
                                 });
                               }}
                             >
@@ -781,29 +783,10 @@ const PageQuoteTool = () => {
                               <td>
                                 <button
                                   onClick={() => {
-                                    const newExtraCharges =
-                                      editingQuote.quoteJobs[
-                                        jobIndex
-                                      ].extraCharges.filter(
+                                    saveJob(job._id, {
+                                      extraCharges: job.extraCharges.filter(
                                         (e, i) => i !== extraIndex
-                                      );
-                                    const newJobs = editingQuote.quoteJobs.map(
-                                      (j, i) => {
-                                        if (i === jobIndex) {
-                                          return {
-                                            ...j,
-                                            extraCharges: newExtraCharges,
-                                          };
-                                        }
-                                        return j;
-                                      }
-                                    );
-                                    setEditingQuote({
-                                      ...editingQuote,
-                                      quoteJobs: newJobs,
-                                    });
-                                    saveQuote({
-                                      quoteJobs: newJobs,
+                                      ),
                                     });
                                   }}
                                 >
@@ -815,9 +798,9 @@ const PageQuoteTool = () => {
                                   className="job-input"
                                   type="text"
                                   value={extra.name || ""}
-                                  onBlur={(event) => {
-                                    handleBlur(event, {
-                                      quoteJobs: editingQuote.quoteJobs,
+                                  onBlur={() => {
+                                    saveJob(job._id, {
+                                      extraCharges: job.extraCharges,
                                     });
                                   }}
                                   onChange={(event) => {
@@ -855,9 +838,9 @@ const PageQuoteTool = () => {
                                   className="job-input"
                                   type="number"
                                   value={extra.perM || ""}
-                                  onBlur={(event) => {
-                                    handleBlur(event, {
-                                      quoteJobs: editingQuote.quoteJobs,
+                                  onBlur={() => {
+                                    saveJob(job._id, {
+                                      extraCharges: job.extraCharges,
                                     });
                                   }}
                                   onChange={(event) => {
@@ -895,9 +878,9 @@ const PageQuoteTool = () => {
                                   className="job-input"
                                   type="text"
                                   value={extra.cost || ""}
-                                  onBlur={(event) => {
-                                    handleBlur(event, {
-                                      quoteJobs: editingQuote.quoteJobs,
+                                  onBlur={() => {
+                                    saveJob(job._id, {
+                                      extraCharges: job.extraCharges,
                                     });
                                   }}
                                   onChange={(event) => {
@@ -942,24 +925,23 @@ const PageQuoteTool = () => {
                         id="1"
                         value={job.clientNotes || ""}
                         placeholder="Notes for the client"
-                        onBlur={(event) =>
-                          handleBlur(event, {
-                            quoteJobs: editingQuote.quoteJobs,
-                          })
-                        }
-                        onChange={(event) => {
-                          const newJobs = editingQuote.quoteJobs.map((j, i) => {
-                            if (i === jobIndex) {
-                              return {
-                                ...j,
-                                clientNotes: event.target.value,
-                              };
-                            }
-                            return j;
+                        onBlur={() => {
+                          saveJob(job._id, {
+                            clientNotes: job.clientNotes,
                           });
+                        }}
+                        onChange={(event) => {
                           setEditingQuote({
                             ...editingQuote,
-                            quoteJobs: newJobs,
+                            quoteJobs: editingQuote.quoteJobs.map((j, i) => {
+                              if (i === jobIndex) {
+                                return {
+                                  ...j,
+                                  clientNotes: event.target.value,
+                                };
+                              }
+                              return j;
+                            }),
                           });
                         }}
                       />
@@ -968,24 +950,23 @@ const PageQuoteTool = () => {
                         id="2"
                         placeholder="Notes for internal review"
                         value={job.internalNotes || ""}
-                        onBlur={(event) =>
-                          handleBlur(event, {
-                            quoteJobs: editingQuote.quoteJobs,
-                          })
-                        }
-                        onChange={(event) => {
-                          const newJobs = editingQuote.quoteJobs.map((j, i) => {
-                            if (i === jobIndex) {
-                              return {
-                                ...j,
-                                internalNotes: event.target.value,
-                              };
-                            }
-                            return j;
+                        onBlur={() => {
+                          saveJob(job._id, {
+                            internalNotes: job.internalNotes,
                           });
+                        }}
+                        onChange={(event) => {
                           setEditingQuote({
                             ...editingQuote,
-                            quoteJobs: newJobs,
+                            quoteJobs: editingQuote.quoteJobs.map((j, i) => {
+                              if (i === jobIndex) {
+                                return {
+                                  ...j,
+                                  internalNotes: event.target.value,
+                                };
+                              }
+                              return j;
+                            }),
                           });
                         }}
                       />
@@ -999,22 +980,23 @@ const PageQuoteTool = () => {
                       id="1"
                       placeholder="Notes for the client"
                       value={job.clientNotes || ""}
-                      onBlur={(event) =>
-                        handleBlur(event, { quoteJobs: editingQuote.quoteJobs })
-                      }
-                      onChange={(event) => {
-                        const newJobs = editingQuote.quoteJobs.map((j, i) => {
-                          if (i === jobIndex) {
-                            return {
-                              ...j,
-                              clientNotes: event.target.value,
-                            };
-                          }
-                          return j;
+                      onBlur={() => {
+                        saveJob(job._id, {
+                          clientNotes: job.clientNotes,
                         });
+                      }}
+                      onChange={(event) => {
                         setEditingQuote({
                           ...editingQuote,
-                          quoteJobs: newJobs,
+                          quoteJobs: editingQuote.quoteJobs.map((j, i) => {
+                            if (i === jobIndex) {
+                              return {
+                                ...j,
+                                clientNotes: event.target.value,
+                              };
+                            }
+                            return j;
+                          }),
                         });
                       }}
                     />
@@ -1023,24 +1005,23 @@ const PageQuoteTool = () => {
                       id="2"
                       placeholder="Notes for internal review"
                       value={job.internalNotes || ""}
-                      onBlur={(event) => {
-                        handleBlur(event, {
-                          quoteJobs: editingQuote.quoteJobs,
+                      onBlur={() => {
+                        saveJob(job._id, {
+                          internalNotes: job.internalNotes,
                         });
                       }}
                       onChange={(event) => {
-                        const newJobs = editingQuote.quoteJobs.map((j, i) => {
-                          if (i === jobIndex) {
-                            return {
-                              ...j,
-                              internalNotes: event.target.value,
-                            };
-                          }
-                          return j;
-                        });
                         setEditingQuote({
                           ...editingQuote,
-                          quoteJobs: newJobs,
+                          quoteJobs: editingQuote.quoteJobs.map((j, i) => {
+                            if (i === jobIndex) {
+                              return {
+                                ...j,
+                                internalNotes: event.target.value,
+                              };
+                            }
+                            return j;
+                          }),
                         });
                       }}
                     />
@@ -1054,34 +1035,8 @@ const PageQuoteTool = () => {
           <button
             className="add-job-button"
             onClick={() => {
-              setEditingQuote({
-                ...editingQuote,
-                quoteJobs: [
-                  ...editingQuote.quoteJobs,
-                  {
-                    units: 0,
-                    extraCharges: [],
-                  },
-                ],
-              });
               saveQuote({
-                quoteJobs: [
-                  ...editingQuote.quoteJobs,
-                  {
-                    units: 0,
-                    perSheet: 0,
-                    dieHours: 0,
-                    dieSetup: 0,
-                    dieRunSpeed: 0,
-                    dieRunM: 0,
-                    gluerSetupHours: 0,
-                    gluerRunSpeed: 0,
-                    gluerRunM: 0,
-                    stripRunSpeed: 0,
-                    stripRunM: 0,
-                    extraCharges: [],
-                  },
-                ],
+                quoteJobs: [...editingQuote.quoteJobs, {}],
               });
             }}
           >

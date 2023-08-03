@@ -9,27 +9,28 @@ const StatusLabels = ({ values }) => {
   return (
     <>
       {values.map((status, idx) => {
-        if (status === "Done") {
+        const { label } = status;
+        if (label === "Done") {
           return (
             <span
               key={idx}
               className="badge"
               style={{ backgroundColor: "green" }}
             >
-              {status}
+              {label}
             </span>
           );
-        } else if (status === "Shipped") {
+        } else if (label === "Shipped") {
           return (
             <span
               key={idx}
               className="badge"
               style={{ backgroundColor: "gray" }}
             >
-              {status}
+              {label}
             </span>
           );
-        } else if (status === "Created") {
+        } else if (label === "Created") {
           return (
             <span
               key={idx}
@@ -39,10 +40,10 @@ const StatusLabels = ({ values }) => {
                 color: "black",
               }}
             >
-              {status}
+              {label}
             </span>
           );
-        } else if (status === "Closed") {
+        } else if (label === "Closed") {
           return (
             <span
               key={idx}
@@ -51,27 +52,27 @@ const StatusLabels = ({ values }) => {
                 backgroundColor: "black",
               }}
             >
-              {status}
+              {label}
             </span>
           );
-        } else if (status === "In Progress" || status === "Inprogress") {
+        } else if (label === "In Progress" || label === "Inprogress") {
           return (
             <span
               key={idx}
               className="badge"
               style={{ backgroundColor: "blue" }}
             >
-              {status}
+              {label}
             </span>
           );
-        } else if (status === "Stopped") {
+        } else if (label === "Stopped") {
           return (
             <span
               key={idx}
               className="badge"
               style={{ backgroundColor: "red" }}
             >
-              {status}
+              {label}
             </span>
           );
         } else {
@@ -84,7 +85,7 @@ const StatusLabels = ({ values }) => {
                 backgroundColor: "#" + color,
               }}
             >
-              {status}
+              {label}
             </span>
           );
         }

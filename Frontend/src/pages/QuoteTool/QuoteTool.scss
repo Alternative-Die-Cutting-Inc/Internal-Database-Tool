@@ -1,8 +1,6 @@
 .quote-tool-container {
   min-height: 90vh;
-  background-color: var(--light-grey);
   margin: 0.5rem;
-  border-radius: 15px;
   text-align: center;
 }
 
@@ -15,7 +13,16 @@
   justify-content: space-between;
 }
 
+.quote-info-container {
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
 .jobs-list {
+  background-color: var(--light-grey);
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -91,7 +98,7 @@
 }
 
 .small {
-  width: 2.75vw;
+  width: 3.25vw;
 }
 
 .input-break {
@@ -105,15 +112,24 @@
   min-height: inherit;
   font-size: 1.25rem;
 
-  td {
+  td,
+  th {
     font-size: 1rem;
-
     background-color: unset;
     padding: unset;
     color: var(--light-accent);
     vertical-align: middle;
     .job-input-label {
       display: unset;
+    }
+  }
+  thead {
+    background-color: var(--dark-grey);
+    tr {
+      border-bottom: unset;
+    }
+    th {
+      border-right: none;
     }
   }
   tbody {
@@ -131,11 +147,85 @@
   }
 }
 
+#quote-info-table {
+  width: 100%;
+  td {
+    input {
+      width: 90%;
+      height: 3.5vh;
+      font-size: 1rem;
+    }
+    padding: 0.5rem 0.5rem;
+    text-align: left;
+    textarea {
+      border-radius: 5px;
+      padding: 5px;
+      font-size: 1rem;
+      resize: none;
+    }
+  }
+}
+.status-select {
+  width: 25vw;
+  font-size: 1rem;
+  background-color: var(--white);
+  color: var(--text-black);
+}
+.status-select__value-container {
+  height: 7vh;
+  overflow-y: scroll !important;
+  align-items: baseline !important;
+}
+
+.quote-info-select {
+  width: 90%;
+  font-size: 1rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  background-color: var(--white);
+  color: var(--text-black);
+}
+
+.customer-select__control {
+  min-height: unset !important;
+  height: 100%;
+}
+
+.customer-select__value-container {
+  padding-left: 5px;
+}
+
+.customer-select__menu {
+  position: absolute;
+  margin-top: 1px;
+  background-color: field;
+}
+
+.customer-select__menu-list {
+  background-color: field;
+}
+
+.customer-select__option {
+  padding: 0 5px;
+
+  &:hover,
+  &:active {
+    background-color: lightblue;
+  }
+}
+
 #job-quantities-table {
   text-align: left;
 }
 
 #extraCharges-table {
+  th {
+    padding: 0.25rem 0;
+  }
+  td {
+    vertical-align: text-top;
+  }
   button {
     font-size: 1.25rem;
     width: 1.25vw;

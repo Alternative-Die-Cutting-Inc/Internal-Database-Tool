@@ -104,7 +104,18 @@ const QuoteSchema = new mongoose.Schema({
   },
   quoteJobs: [quoteJobSchema],
   status: {
-    type: [String],
+    type: [
+      {
+        value: {
+          type: String,
+          required: true,
+        },
+        label: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     required: false,
   },
   creationDate: {

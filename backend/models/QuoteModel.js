@@ -16,14 +16,44 @@ const extraChargeSchema = new mongoose.Schema({
   },
 });
 
+const quoteRatesSchema = new mongoose.Schema({
+  press: {},
+  gluer: {},
+  strip: {},
+  die: {},
+  customer_premium: {},
+  global_premium: {},
+});
+
+const RatesModel = mongoose.model('Rates', quoteRatesSchema);
+
+/**
+ * @description Add database rates to quote
+ * @param {Object} doc document to increment
+ * @param {Function} next callback function
+ */
+const getRates = function (doc, next) {
+  RatesModel.findOneAndUpdate({}, {},).then(
+    (counter) => {
+      doc[counterName] = counter.seq;
+      next();
+    },
+    (error) => {
+      next(error);
+    },
+  );
+};
+
 const quoteJobSchema = new mongoose.Schema({
   units: {
     type: Number,
     required: false,
+    default: 0,
   },
   perSheet: {
     type: Number,
     required: false,
+    default: 0,
   },
   clientNotes: {
     type: String,
@@ -41,38 +71,53 @@ const quoteJobSchema = new mongoose.Schema({
   dieHours: {
     type: Number,
     required: false,
+    default: 0,
   },
   dieSetup: {
     type: Number,
     required: false,
+    default: 0,
   },
   dieRunSpeed: {
     type: Number,
     required: false,
+    default: 0,
   },
   dieRunM: {
     type: Number,
     required: false,
+    default: 0,
   },
   gluerSetupHours: {
     type: Number,
     required: false,
+    default: 0,
   },
   gluerRunSpeed: {
     type: Number,
     required: false,
+    default: 0,
   },
   gluerRunM: {
     type: Number,
     required: false,
+    default: 0,
   },
   stripRunSpeed: {
     type: Number,
     required: false,
+    default: 0,
   },
   stripRunM: {
     type: Number,
     required: false,
+    default: 0,
+  },
+  rates: { type: quoteRatesSchema, required: true },
+  total: {
+    type: Number,
+    required: false,
+    default: 0,
   },
 });
 

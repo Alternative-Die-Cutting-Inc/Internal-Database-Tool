@@ -28,6 +28,7 @@ const PageQuotes = () => {
                   attention: e.target.attention.value,
                   description: e.target.description.value,
                   notes: e.target.notes.value,
+                  status: [{ value: "Created", label: "Created" }],
                 };
                 console.log(quote);
                 dispatch(createQuote({ quote, navigate }));

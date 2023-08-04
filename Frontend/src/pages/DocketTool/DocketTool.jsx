@@ -6,6 +6,8 @@ import { getDocket, updateDocket } from "../../state/dockets/saga";
 import { docketSelector } from "../../state/dockets/docketSlice";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
+import { getCustomerNames } from "../../state/customers/saga";
+import { customerNamesSelector } from "../../state/customers/customerSlice";
 
 function useQuery() {
   const { search } = useLocation();
@@ -16,19 +18,16 @@ const PageDocketTool = () => {
   let query = useQuery();
   const dispatch = useDispatch();
   const { docket } = useSelector(docketSelector);
+  const { customerNames } = useSelector(customerNamesSelector);
   const [editingDocket, setEditingDocket] = useState(docket);
-  const customerNames = [
-    { value: "customer1", label: "Customer 1" },
-    { value: "customer2", label: "Customer 2" },
-    { value: "customer3", label: "Customer 3" },
-    { value: "customer4", label: "Customer 4" },
-    { value: "customer5", label: "Customer 5" },
-    { value: "customer6", label: "Customer 6" },
-    { value: "customer7", label: "Customer 7" },
-  ];
+
   useEffect(() => {
     dispatch(getDocket({ id: query.get("docketNumber") }));
   }, [dispatch, query]);
+
+  useEffect(() => {
+    dispatch(getCustomerNames());
+  }, [dispatch]);
 
   const saveDocket = (fields) => {
     if (editingDocket) {
@@ -116,7 +115,19 @@ const PageDocketTool = () => {
                       classNamePrefix="customer-select"
                       unstyled
                       menuPosition="fixed"
-                      options={customerNames ? customerNames : []}
+                      options={customerNames || []}
+                      value={{
+                        label: editingDocket?.customer.name,
+                        value: editingDocket?.customer.customerID,
+                      }}
+                      onChange={(option) => {
+                        saveDocket({
+                          customer: {
+                            name: option.label,
+                            customerID: option.value,
+                          },
+                        });
+                      }}
                     />
                   </td>
                   <td>Customer PO:</td>
@@ -951,7 +962,7 @@ const PageDocketTool = () => {
               </div>
               <div className="docket-docket-summary">
                 <h2>
-                  {editingDocket.customerName +
+                  {editingDocket.customer.name +
                     " #" +
                     editingDocket.docketNumber}
                 </h2>

@@ -6,11 +6,11 @@ import {
   flexRender,
   getPaginationRowModel,
 } from "@tanstack/react-table";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import "../../scssStyles/tableStyle.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { docketsSelector } from "../../state/dockets/docketSlice";
-
+import { getDockets } from "../../state/dockets/saga";
 import { Link } from "react-router-dom";
 
 /**
@@ -18,7 +18,12 @@ import { Link } from "react-router-dom";
  * @returns a table of jobs
  */
 const JobsTable = () => {
-  const { dockets, loading } = useSelector(docketsSelector);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDockets());
+  }, [dispatch]);
+  const { dockets } = useSelector(docketsSelector);
 
   const columns = useMemo(
     () => [
@@ -117,57 +122,56 @@ const JobsTable = () => {
 
   return (
     <>
-      {!loading && (
-        <table>
-          <thead>
-            {getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
+      <table>
+        <thead>
+          {getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
+                return (
+                  <th key={header.id} colSpan={header.colSpan}>
+                    {header.isPlaceholder ? null : (
+                      <div>
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </div>
+                    )}
+                  </th>
+                );
+              })}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {getRowModel().rows.map((row) => {
+            return (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => {
                   return (
-                    <th key={header.id} colSpan={header.colSpan}>
-                      {header.isPlaceholder ? null : (
-                        <div>
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                        </div>
+                    <td
+                      key={cell.id}
+                      style={
+                        cell.column.columnDef.accessorKey == "jobName"
+                          ? {
+                              wordBreak: "break-all",
+                            }
+                          : {}
+                      }
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
                       )}
-                    </th>
+                    </td>
                   );
                 })}
               </tr>
-            ))}
-          </thead>
-          <tbody>
-            {getRowModel().rows.map((row) => {
-              return (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <td
-                        key={cell.id}
-                        style={
-                          cell.column.columnDef.accessorKey == "jobName"
-                            ? {
-                                wordBreak: "break-all",
-                              }
-                            : {}
-                        }
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
+            );
+          })}
+        </tbody>
+      </table>
+
       <PaginationControls
         getCanPreviousPage={getCanPreviousPage}
         getCanNextPage={getCanNextPage}

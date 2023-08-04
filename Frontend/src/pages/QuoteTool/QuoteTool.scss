@@ -3,6 +3,39 @@
   margin: 0.5rem;
   text-align: center;
 }
+.rate-editor-popup {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  position: fixed;
+  left: 15%;
+  border: 3px solid var(--white);
+  border-radius: 15px;
+  z-index: 9;
+  background-color: var(--dark-grey);
+  color: var(--light-accent);
+  padding: 1vh 2.5vw;
+  h1 {
+    user-select: none;
+    padding: 0.5vh 0;
+  }
+  h3 {
+    user-select: none;
+    padding: 0.5vh 0;
+  }
+  label {
+    text-align: left;
+    font-size: 1.25rem;
+  }
+  input {
+    font-size: 1.25rem;
+  }
+  button {
+    margin: 1.5vh 0;
+    padding: 0.5vh 0;
+  }
+}
 
 .job-item-container {
   display: flex;
@@ -156,6 +189,7 @@
       width: 90%;
       height: 3.5vh;
       font-size: 1rem;
+      padding-left: 0.25rem;
     }
     padding: 0.5rem 0.5rem;
     text-align: left;

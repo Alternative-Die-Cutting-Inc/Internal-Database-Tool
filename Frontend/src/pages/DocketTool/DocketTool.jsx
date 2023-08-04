@@ -823,9 +823,9 @@ const PageDocketTool = () => {
                         <td>
                           <input
                             type="number"
-                            min="0.01"
-                            step="0.01"
-                            value={charge.cost}
+                            min="0.00"
+                            step="100"
+                            value={charge.cost || 0}
                             onBlur={(event) => {
                               handleBlur(event, {
                                 extraCharges: editingDocket.extraCharges,
@@ -971,8 +971,23 @@ const PageDocketTool = () => {
                 </h3>
                 <h3>{editingDocket.specialInstructions}</h3>
                 <button
-                  onClick={() => {
+                  onClick={(event) => {
+                    console.log(event);
                     saveDocket(editingDocket);
+                    navigator.clipboard.writeText(
+                      `${editingDocket.customerName} #${
+                        editingDocket.docketNumber
+                      }\n${editingDocket.jobName}\n${
+                        editingDocket.die.standing ? "Standing" : "New"
+                      } ${editingDocket.die.dieType}${
+                        editingDocket.die.standing
+                          ? " #" + editingDocket.die.dieID
+                          : ""
+                      }, ${editingDocket.finishing.reduce(
+                        (a, b) => b.label + ", " + a,
+                        ""
+                      )}`
+                    );
                   }}
                 >
                   Save & Copy

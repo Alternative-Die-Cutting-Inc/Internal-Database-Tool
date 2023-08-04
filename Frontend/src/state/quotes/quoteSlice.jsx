@@ -6,6 +6,8 @@ export const initialState = {
   error: null,
   quotes: null,
   quote: null,
+  ratesEditor: false,
+  rates: null,
 };
 
 const quoteSlice = createSlice({
@@ -64,6 +66,32 @@ const quoteSlice = createSlice({
       state.loading = false;
       state.error = error;
     },
+    changeRatesEditorStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    changeRatesEditorSuccess: (state) => {
+      state.loading = false;
+      state.error = null;
+      state.ratesEditor = !state.ratesEditor;
+    },
+    changeRatesEditorFailure: (state, { payload: error }) => {
+      state.loading = false;
+      state.error = error;
+    },
+    getRatesStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    getRatesSuccess: (state, { payload: rates }) => {
+      state.loading = false;
+      state.error = null;
+      state.rates = rates;
+    },
+    getRatesFailure: (state, { payload: error }) => {
+      state.loading = false;
+      state.error = error;
+    },
   },
 });
 
@@ -80,6 +108,12 @@ export const {
   updateQuoteFailure,
   updateQuoteSuccess,
   updateQuoteStart,
+  changeRatesEditorFailure,
+  changeRatesEditorSuccess,
+  changeRatesEditorStart,
+  getRatesFailure,
+  getRatesSuccess,
+  getRatesStart,
 } = quoteSlice.actions;
 
 export default quoteSlice.reducer;
@@ -93,4 +127,14 @@ export const quotesSelector = createSelector(
 export const quoteSelector = createSelector(
   quoteReducerSelector,
   ({ quote, loading, error }) => ({ quote, loading, error })
+);
+
+export const ratesSelector = createSelector(
+  quoteReducerSelector,
+  ({ rates, loading, error }) => ({ rates, loading, error })
+);
+
+export const ratesEditorSelector = createSelector(
+  quoteReducerSelector,
+  ({ ratesEditor }) => ({ ratesEditor })
 );

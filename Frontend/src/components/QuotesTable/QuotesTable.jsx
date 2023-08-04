@@ -39,7 +39,11 @@ const QuotesTable = () => {
         ),
         width: "auto",
       },
-      { header: "Customer", accessorKey: "customerName" },
+      {
+        header: "Customer",
+        accessorKey: "customer",
+        cell: (value) => value.getValue().name,
+      },
       { header: "Job Name", accessorKey: "jobName" },
       { header: "Description", accessorKey: "description" },
       { header: "Notes", accessorKey: "notes" },

@@ -48,7 +48,8 @@ const JobsTable = () => {
       },
       {
         header: "Customer",
-        accessorKey: "customerName",
+        accessorKey: "customer",
+        cell: (value) => value.getValue().name,
       },
       {
         header: "Customer PO",

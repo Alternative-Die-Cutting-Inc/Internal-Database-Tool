@@ -13,21 +13,26 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { TableControls } from "../../components/TableControls/TableControls";
 import { QuotesTable } from "../../components/QuotesTable/QuotesTable";
 import { JobsTable } from "../../components/JobsTable/JobsTable";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCustomerNames } from "../../state/customers/saga";
+import { customerNamesSelector } from "../../state/customers/customerSlice";
+import Select from "react-select";
 
 /** The home page component. Renders the search menu and the jobs and quotes table.
  * @returns React component
  */
 const PageHome = () => {
-  const customers = [
-    { name: "alternative Die Cutting Inc." },
-    { name: "alternative Die Cutting Inc." },
-    { name: "alternative Die Cutting Inc." },
-    { name: "alternative Die Cutting Inc." },
-  ];
+  const dispatch = useDispatch();
 
+  const { customerNames } = useSelector(customerNamesSelector);
   const [searchJobs, setSearchJobs] = useState(false);
   const [searchQuotes, setSearchQuote] = useState(false);
   const [jobsTable, setJobTable] = useState(true);
+
+  useEffect(() => {
+    dispatch(getCustomerNames());
+  }, [dispatch]);
 
   return (
     <>
@@ -59,12 +64,7 @@ const PageHome = () => {
                   name="docker-number"
                   placeholder="Docket Number:"
                 />
-                <input
-                  className="search-field"
-                  type="search"
-                  name="customer-name"
-                  placeholder="Customer:"
-                />
+                <Select className="search-field" options={customerNames} />
                 <input
                   className="search-field"
                   type="search"
@@ -113,12 +113,7 @@ const PageHome = () => {
                   name="quote-number"
                   placeholder="Quote Number:"
                 />
-                <input
-                  className="search-field"
-                  type="search"
-                  name="customer-name"
-                  placeholder="Customer:"
-                />
+                <Select className="search-field" options={customerNames} />
                 <input
                   className="search-field"
                   type="search"
@@ -173,7 +168,7 @@ const PageHome = () => {
           </div>
           <TableControls
             filterCustomers={true}
-            customersArray={customers}
+            customersArray={customerNames}
             filterStatus={true}
             filterDate={true}
             statusArray={[

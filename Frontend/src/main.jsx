@@ -8,9 +8,11 @@ import docketSaga from "./state/dockets/saga";
 import quoteSaga from "./state/quotes/saga";
 import navbarSaga from "./state/navbar/saga";
 import userSaga from "./state/user/saga";
+import customerSaga from "./state/customers/saga";
 
 const store = configureAppStore();
 
+sagaMiddleware.run(customerSaga);
 sagaMiddleware.run(docketSaga);
 sagaMiddleware.run(navbarSaga);
 sagaMiddleware.run(quoteSaga);

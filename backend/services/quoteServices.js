@@ -31,7 +31,7 @@ const quoteServices = {
         {},
         {
           quoteNumber: 1,
-          customerName: 1,
+          customer: 1,
           jobName: 1,
           description: 1,
           notes: 1,

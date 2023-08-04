@@ -173,8 +173,17 @@ const QuoteSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  customerName: {
-    type: String,
+  customer: {
+    type: {
+      name: {
+        type: String,
+        required: true,
+      },
+      customerID: {
+        type: String,
+        required: true,
+      },
+    },
     required: true,
   },
   jobName: {

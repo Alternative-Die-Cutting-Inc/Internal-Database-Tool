@@ -54,8 +54,17 @@ const DocketSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  customerName: {
-    type: String,
+  customer: {
+    type: {
+      name: {
+        type: String,
+        required: true,
+      },
+      customerID: {
+        type: String,
+        required: true,
+      },
+    },
     required: true,
   },
   customerPO: {

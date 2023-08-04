@@ -24,6 +24,37 @@ router.get('/', async (req, res, next) => {
 });
 
 /**
+ * @description get all global rates
+ * @route GET /quotes/rates
+ * @returns {Rates[]} rates objects
+ */
+router.get('/rates', async (req, res, next) => {
+  try {
+    const responseRates = await quoteServices.getRates();
+
+    res.status(200).send({ rates: responseRates });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
+ * @description edit global rates
+ * @route PUT /quotes/rates
+ * @returns {Quote} edited quote object
+ */
+router.put('/rates', async (req, res, next) => {
+  try {
+    const rates = req.body.rates;
+    const updatedRates = await quoteServices.updateRates(rates);
+
+    res.status(200).send({ rates: updatedRates });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
  * @description get quote by id
  * @route GET /quotes/:id
  * @returns {Quote} quote object
@@ -78,6 +109,22 @@ router.put('/:id', async (req, res, next) => {
     const id = req.params.id;
     const editFields = req.body.fields;
     const responseQuote = await quoteServices.update(id, editFields);
+
+    res.status(200).send({ quote: responseQuote });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
+ * @description add job to quote
+ * @route POST /quotes/:id
+ * @returns {Quote} edited quote object
+ */
+router.post('/:id/job', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const responseQuote = await quoteServices.addJob(id);
 
     res.status(200).send({ quote: responseQuote });
   } catch (error) {

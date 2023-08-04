@@ -18,7 +18,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(userSelector);
   const navigate = useNavigate();
-  useEffect(() => { 
+  useEffect(() => {
     if (navbarFunctionsRef.current.length > 0) {
       dispatch(setNavbarFunctions({ navbarFunctions: navbarFunctionsRef }));
       console.log(navbarFunctionsRef.current);
@@ -56,7 +56,7 @@ const Navbar = () => {
                       : {}
                   }
                   onClick={() => {
-                    pageFunction.function(dispatch);
+                    pageFunction.function(dispatch, navigate, pathname);
                   }}
                 >
                   <nav className="navbar-link-label">

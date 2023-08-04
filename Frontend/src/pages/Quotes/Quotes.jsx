@@ -2,12 +2,24 @@ import "./Quotes.scss";
 import { TableControls } from "../../components/TableControls/TableControls";
 import { QuotesTable } from "../../components/QuotesTable/QuotesTable";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createQuote } from "../../state/quotes/saga";
+import { customerNamesSelector } from "../../state/customers/customerSlice";
+import Select from "react-select";
+import { useEffect, useState } from "react";
+import { getCustomerNames } from "../../state/customers/saga";
 
 const PageQuotes = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCustomerNames());
+  }, [dispatch]);
+
+  const [customer, setCustomer] = useState();
+  const { customerNames } = useSelector(customerNamesSelector);
+
   return (
     <>
       <div className="quotespage-container">
@@ -23,7 +35,10 @@ const PageQuotes = () => {
               onSubmit={(e) => {
                 e.preventDefault();
                 const quote = {
-                  customerName: e.target.customer.value,
+                  customer: {
+                    name: customer.label,
+                    customerID: customer.value,
+                  },
                   jobName: e.target.jobName.value,
                   attention: e.target.attention.value,
                   description: e.target.description.value,
@@ -33,12 +48,11 @@ const PageQuotes = () => {
                 dispatch(createQuote({ quote, navigate }));
               }}
             >
-              <input
-                type="search"
-                className="new-quote-field"
-                placeholder="Customer"
-                name="customer"
-                required="required"
+              <Select
+                options={customerNames || []}
+                onChange={(option) => {
+                  setCustomer(option);
+                }}
               />
               <input
                 type="text"

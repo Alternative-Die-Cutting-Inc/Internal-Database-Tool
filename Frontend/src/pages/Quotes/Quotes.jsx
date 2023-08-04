@@ -49,10 +49,14 @@ const PageQuotes = () => {
               }}
             >
               <Select
+                className="new-quote-customer-select"
+                unstyled
+                classNamePrefix="new-quote-customer-select"
                 options={customerNames || []}
                 onChange={(option) => {
                   setCustomer(option);
                 }}
+                required
               />
               <input
                 type="text"

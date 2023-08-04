@@ -7,15 +7,12 @@
  * @resource https://github.com/TanStack/table/blob/v7/docs/src/pages/docs/quick-start.md
  */
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./Home.scss";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { TableControls } from "../../components/TableControls/TableControls";
 import { QuotesTable } from "../../components/QuotesTable/QuotesTable";
 import { JobsTable } from "../../components/JobsTable/JobsTable";
-import { useDispatch } from "react-redux";
-import { getDockets } from "../../state/dockets/saga";
-import { getQuotes } from "../../state/quotes/saga";
 
 /** The home page component. Renders the search menu and the jobs and quotes table.
  * @returns React component
@@ -32,11 +29,6 @@ const PageHome = () => {
   const [searchQuotes, setSearchQuote] = useState(false);
   const [jobsTable, setJobTable] = useState(true);
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getDockets());
-    dispatch(getQuotes());
-  }, [dispatch]);
   return (
     <>
       <div className="homepage-container">

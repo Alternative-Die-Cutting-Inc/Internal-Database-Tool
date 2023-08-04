@@ -19,86 +19,84 @@ const PageDockets = () => {
 
   const { customerNames } = useSelector(customerNamesSelector);
   return (
-    <>
-      <div className="docketspage-container">
-        {/* New Docket Menu */}
-        <div className="new-docket-menu-container">
-          <header className="new-docket-title">
-            <h1>New Docket</h1>
-          </header>
-          <div className="new-docket-fields-container">
-            <form
-              action=""
-              className="new-docket-fields"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const docket = {
-                  customer: {
-                    name: customer.label,
-                    customerID: customer.value,
-                  },
-                  jobName: e.target.jobName.value,
-                  customerPO: e.target.customerPO.value,
-                  quoteNumber: e.target.quoteNumber.value,
-                  status: [{ value: "Created", label: "Created" }],
-                };
-                dispatch(createDocket({ docket, navigate }));
+    <div className="docketspage-container">
+      {/* New Docket Menu */}
+      <div className="new-docket-menu-container">
+        <header className="new-docket-title">
+          <h1>New Docket</h1>
+        </header>
+        <div className="new-docket-fields-container">
+          <form
+            action=""
+            className="new-docket-fields"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const docket = {
+                customer: {
+                  name: customer.label,
+                  customerID: customer.value,
+                },
+                jobName: e.target.jobName.value,
+                customerPO: e.target.customerPO.value,
+                quoteNumber: e.target.quoteNumber.value,
+                status: [{ value: "Created", label: "Created" }],
+              };
+              dispatch(createDocket({ docket, navigate }));
+            }}
+          >
+            <Select
+              required
+              className="new-docket-customer-select"
+              unstyled
+              classNamePrefix="new-docket-customer-select"
+              value={customer}
+              onChange={(option) => {
+                setCustomer(option);
               }}
-            >
-              <Select
-                value={customer}
-                onChange={(option) => {
-                  setCustomer(option);
-                }}
-                name="customer"
-                options={customerNames || []}
-              />
-              <input
-                type="text"
-                className="new-docket-field"
-                placeholder="Job Name"
-                name="jobName"
-                required="required"
-              />
-              <input
-                type="text"
-                className="new-docket-field"
-                placeholder="Customer PO#"
-                name="customerPO"
-              />
-              <input
-                type="text"
-                className="new-docket-field"
-                placeholder="Quote Number"
-                name="quoteNumber"
-              />
-              <input
-                type="submit"
-                className="new-docket-submit"
-                value="Create"
-              />
-            </form>
-          </div>
-        </div>
-
-        {/* dockets List */}
-        <div className="dockets-list-container">
-          <TableControls
-            filterCustomers={true}
-            filterStatus={true}
-            filterDate={true}
-            statusArray={[
-              { name: "Done" },
-              { name: "Shipped" },
-              { name: "On The Floor" },
-              { name: "Stopped" },
-            ]}
-            sortDate={true}
-            Table={JobsTable}
-          />
+              name="customer"
+              options={customerNames || []}
+            />
+            <input
+              type="text"
+              className="new-docket-field"
+              placeholder="Job Name"
+              name="jobName"
+              required="required"
+            />
+            <input
+              type="text"
+              className="new-docket-field"
+              placeholder="Customer PO#"
+              name="customerPO"
+            />
+            <input
+              type="text"
+              className="new-docket-field"
+              placeholder="Quote Number"
+              name="quoteNumber"
+            />
+            <input type="submit" className="new-docket-submit" value="Create" />
+          </form>
         </div>
       </div>
-    </>
+
+      {/* dockets List */}
+      <div className="dockets-list-container">
+        <TableControls
+          filterCustomers={true}
+          filterStatus={true}
+          filterDate={true}
+          statusArray={[
+            { name: "Done" },
+            { name: "Shipped" },
+            { name: "On The Floor" },
+            { name: "Stopped" },
+          ]}
+          sortDate={true}
+          Table={JobsTable}
+        />
+      </div>
+    </div>
   );
 };
 

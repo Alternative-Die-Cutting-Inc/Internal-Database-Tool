@@ -9,7 +9,6 @@
 
 import { useState } from "react";
 import "./Home.scss";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { TableControls } from "../../components/TableControls/TableControls";
 import { QuotesTable } from "../../components/QuotesTable/QuotesTable";
 import { JobsTable } from "../../components/JobsTable/JobsTable";
@@ -18,16 +17,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCustomerNames } from "../../state/customers/saga";
 import { customerNamesSelector } from "../../state/customers/customerSlice";
 import Select from "react-select";
+import { createDocket } from "../../state/dockets/saga";
+import { createQuote } from "../../state/quotes/saga";
+import { useNavigate } from "react-router-dom";
 
 /** The home page component. Renders the search menu and the jobs and quotes table.
  * @returns React component
  */
 const PageHome = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const { customerNames } = useSelector(customerNamesSelector);
-  const [searchJobs, setSearchJobs] = useState(false);
-  const [searchQuotes, setSearchQuote] = useState(false);
+  const [jobCustomer, setJobCustomer] = useState();
+  const [quoteCustomer, setQuoteCustomer] = useState();
   const [jobsTable, setJobTable] = useState(true);
 
   useEffect(() => {
@@ -37,103 +39,96 @@ const PageHome = () => {
   return (
     <>
       <div className="homepage-container">
-        {/* SEARCH MENU */}
-        <div className="search-menu">
-          <div className="job-search-container">
-            <div
-              className="search-header"
-              onClick={() => {
-                setSearchJobs(!searchJobs);
-              }}
-            >
-              <div className="search-title">
-                <h2>Jobs</h2>
+        {/* MENU */}
+        <div className="menus-container">
+          <div className="search-menu">
+            <div className="search-container">
+              <div className="search-header">
+                <div className="search-title">
+                  <h2>Jobs</h2>
+                </div>
               </div>
-              <div className="expansion-icon">
-                {searchJobs ? <AiOutlineMinus /> : <AiOutlinePlus />}
-              </div>
-            </div>
-            <div
-              className="search-fields-container"
-              style={searchJobs ? {} : { display: "none" }}
-            >
-              <form className="job-search-form">
-                <input
-                  className="search-field"
-                  type="search"
-                  name="docker-number"
-                  placeholder="Docket Number:"
-                />
-                <Select className="search-field" options={customerNames} />
-                <input
-                  className="search-field"
-                  type="search"
-                  name="quote-number"
-                  placeholder="Quote Number:"
-                />
-                <input
-                  className="search-field"
-                  type="search"
-                  name="docker-number"
-                  placeholder="Number of Units:"
-                />
-                <input
-                  className="search-field"
-                  type="search"
-                  name="quote-number"
-                  placeholder="Quote Number:"
-                />
-                <input className="search-submit" type="submit" value="Search" />
-              </form>
-            </div>
-          </div>
-          <div className="quote-search-container">
-            <div
-              className="search-header"
-              onClick={() => {
-                setSearchQuote(!searchQuotes);
-              }}
-              style={searchQuotes ? { borderRadius: "unset" } : {}}
-            >
-              <div className="search-title">
-                <h2>Quotes</h2>
-              </div>
-              <div className="expansion-icon">
-                {searchQuotes ? <AiOutlineMinus /> : <AiOutlinePlus />}
+              <div className="search-fields-container">
+                <form className="job-search-form">
+                  <input
+                    className="search-field"
+                    type="search"
+                    name="docker-number"
+                    placeholder="Docket Number:"
+                  />
+                  <Select
+                    className="search-field-customer-select"
+                    options={customerNames}
+                  />
+                  <input
+                    className="search-field"
+                    type="search"
+                    name="quote-number"
+                    placeholder="Quote Number:"
+                  />
+                  <input
+                    className="search-field"
+                    type="search"
+                    name="docker-number"
+                    placeholder="Number of Units:"
+                  />
+                  <input
+                    className="search-field"
+                    type="search"
+                    name="quote-number"
+                    placeholder="Quote Number:"
+                  />
+                  <input
+                    className="search-submit"
+                    type="submit"
+                    value="Search"
+                  />
+                </form>
               </div>
             </div>
-            <div
-              className="search-fields-container"
-              style={searchQuotes ? {} : { display: "none" }}
-            >
-              <form className="quote-search-form">
-                <input
-                  className="search-field"
-                  type="search"
-                  name="quote-number"
-                  placeholder="Quote Number:"
-                />
-                <Select className="search-field" options={customerNames} />
-                <input
-                  className="search-field"
-                  type="search"
-                  name="docker-number"
-                  placeholder="Number of Units:"
-                />
-                <input
-                  className="search-field"
-                  type="search"
-                  name="quote-number"
-                  placeholder="Quote Number:"
-                />
-                <input className="search-submit" type="submit" value="Search" />
-              </form>
+            <div className="search-container">
+              <div className="search-header">
+                <div className="search-title">
+                  <h2>Quotes</h2>
+                </div>
+              </div>
+              <div className="search-fields-container">
+                <form className="quote-search-form">
+                  <input
+                    className="search-field"
+                    type="search"
+                    name="quote-number"
+                    placeholder="Quote Number:"
+                  />
+                  <Select
+                    className="search-field-customer-select"
+                    options={customerNames}
+                  />
+                  <input
+                    className="search-field"
+                    type="search"
+                    name="docker-number"
+                    placeholder="Number of Units:"
+                  />
+                  <input
+                    className="search-field"
+                    type="search"
+                    name="quote-number"
+                    placeholder="Quote Number:"
+                  />
+                  <input
+                    className="search-submit"
+                    type="submit"
+                    value="Search"
+                  />
+                </form>
+              </div>
             </div>
-          </div>
-          <div className="die-search-container">
-            <div className="search-header">
-              <div className="search-title">
-                <h2>Die Search</h2>
+            <div className="search-container">
+              <div className="search-header">
+                <div className="search-title">
+                  <h2>Die Search</h2>
+                </div>
               </div>
               <input
                 className="search-field"
@@ -141,6 +136,134 @@ const PageHome = () => {
                 name="Die Number"
                 placeholder="Die Number:"
               />
+            </div>
+          </div>
+          <div id="homepage-new-quote" className="new-quote-menu-container">
+            <header className="new-quote-title">
+              <h1>New Quote</h1>
+            </header>
+            <div className="new-quote-fields-container">
+              <form
+                action=""
+                className="new-quote-fields"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const quote = {
+                    customer: {
+                      name: quoteCustomer.label,
+                      customerID: quoteCustomer.value,
+                    },
+                    jobName: e.target.jobName.value,
+                    attention: e.target.attention.value,
+                    description: e.target.description.value,
+                    notes: e.target.notes.value,
+                    status: [{ value: "Created", label: "Created" }],
+                  };
+                  dispatch(createQuote({ quote, navigate }));
+                }}
+              >
+                <Select
+                  className="new-quote-customer-select"
+                  unstyled
+                  classNamePrefix="new-quote-customer-select"
+                  options={customerNames || []}
+                  required
+                  onChange={(option) => {
+                    setQuoteCustomer(option);
+                  }}
+                />
+                <input
+                  type="text"
+                  className="new-quote-field"
+                  placeholder="Job Name"
+                  name="jobName"
+                  required="required"
+                />
+                <input
+                  type="text"
+                  className="new-quote-field"
+                  placeholder="Attention"
+                  name="attention"
+                />
+                <input
+                  type="text"
+                  className="new-quote-field"
+                  placeholder="Description"
+                  name="description"
+                />
+                <input
+                  type="text"
+                  className="new-quote-field"
+                  placeholder="Notes"
+                  name="notes"
+                />
+                <input
+                  type="submit"
+                  className="new-quote-submit"
+                  value="Create"
+                />
+              </form>
+            </div>
+          </div>
+          <div id="homepage-new-docket" className="new-docket-menu-container">
+            <header className="new-docket-title">
+              <h1>New Docket</h1>
+            </header>
+            <div className="new-docket-fields-container">
+              <form
+                action=""
+                className="new-docket-fields"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const docket = {
+                    customer: {
+                      name: jobCustomer.label,
+                      customerID: jobCustomer.value,
+                    },
+                    jobName: e.target.jobName.value,
+                    customerPO: e.target.customerPO.value,
+                    quoteNumber: e.target.quoteNumber.value,
+                    status: [{ value: "Created", label: "Created" }],
+                  };
+                  dispatch(createDocket({ docket, navigate }));
+                }}
+              >
+                <Select
+                  required
+                  className="new-docket-customer-select"
+                  unstyled
+                  classNamePrefix="new-docket-customer-select"
+                  onChange={(option) => {
+                    setJobCustomer(option);
+                  }}
+                  name="customer"
+                  options={customerNames || []}
+                />
+                <input
+                  type="text"
+                  className="new-docket-field"
+                  placeholder="Job Name"
+                  name="jobName"
+                  required="required"
+                />
+                <input
+                  type="text"
+                  className="new-docket-field"
+                  placeholder="Customer PO#"
+                  name="customerPO"
+                />
+                <input
+                  type="text"
+                  className="new-docket-field"
+                  placeholder="Quote Number"
+                  name="quoteNumber"
+                />
+                <input
+                  type="submit"
+                  className="new-docket-submit"
+                  value="Create"
+                />
+              </form>
             </div>
           </div>
         </div>

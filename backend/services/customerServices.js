@@ -38,8 +38,8 @@ const customerServices = {
    * @returns {[String]}
    */
   async getNames() {
-    return CustomerModel.find({}, { name: 1 }).then(
-      (customers) => customers.map((customer) => customer.name),
+    return CustomerModel.find({}, { _id: 1, name: 1 }).then(
+      (customers) => customers.map((customer) => ({ label: customer.name, value: customer._id })),
       (error) => {
         throw new Error('UNABLE_TO_GET_CUSTOMERS', { cause: error });
       },

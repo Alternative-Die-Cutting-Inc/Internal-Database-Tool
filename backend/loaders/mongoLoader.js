@@ -25,8 +25,10 @@ const loadMongo = async (app) => {
   );
   const docketCount = await docketServices.initCounter();
   const quoteCount = await quoteServices.initCounter();
+  const newRates = await quoteServices.initRates();
   console.log(`Docket count: ${docketCount}`);
   console.log(`Quote count: ${quoteCount}`);
+  console.log(`Rates created: `, newRates.length || newRates);
 };
 
 module.exports = loadMongo;

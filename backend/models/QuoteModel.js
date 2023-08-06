@@ -4,7 +4,7 @@ const { autoIncrementModelID } = require('./CounterModel');
 const extraChargeSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: false,
   },
   perM: {
     type: Number,
@@ -16,26 +16,60 @@ const extraChargeSchema = new mongoose.Schema({
   },
 });
 
-const quoteRatesSchema = new mongoose.Schema({
-  press: {},
-  gluer: {},
-  strip: {},
-  die: {},
-  customer_premium: {},
-  global_premium: {},
+const rateSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  value: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+  // press: {
+  //   type: Number,
+  //   required: true,
+  //   default: 0,
+  // },
+  // gluer: {
+  //   type: Number,
+  //   required: true,
+  //   default: 0,
+  // },
+  // strip: {
+  //   type: Number,
+  //   required: true,
+  //   default: 0,
+  // },
+  // die: {
+  //   type: Number,
+  //   required: true,
+  //   default: 0,
+  // },
+  // customer_premium: {
+  //   type: Number,
+  //   required: true,
+  //   default: 0,
+  // },
+  // global_premium: {
+  //   type: Number,
+  //   required: true,
+  //   default: 0,
+  // },
 });
 
-const RatesModel = mongoose.model('Rates', quoteRatesSchema);
+const RatesModel = mongoose.model('Rates', rateSchema);
 
 /**
- * @description Add database rates to quote
+ * @description Add database rates to job
  * @param {Object} doc document to increment
  * @param {Function} next callback function
  */
-const getRates = function (doc, next) {
-  RatesModel.findOneAndUpdate({}, {},).then(
-    (counter) => {
-      doc[counterName] = counter.seq;
+const getRates = function (job, next) {
+  RatesModel.find({}).then(
+    (rates) => {
+      if (!rates) throw new Error('NO_RATES_FOUND');
+      job.rates = rates;
       next();
     },
     (error) => {
@@ -113,12 +147,24 @@ const quoteJobSchema = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  // rates: { type: quoteRatesSchema, required: true },
+  rates: {
+    type: [rateSchema],
+    required: true,
+    default: {},
+  },
   total: {
     type: Number,
     required: false,
     default: 0,
   },
+});
+
+quoteJobSchema.pre('validate', function (next) {
+  if (!this.isNew) {
+    next();
+    return;
+  }
+  getRates(this, next);
 });
 
 const QuoteSchema = new mongoose.Schema({
@@ -127,8 +173,17 @@ const QuoteSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  customerName: {
-    type: String,
+  customer: {
+    type: {
+      name: {
+        type: String,
+        required: true,
+      },
+      customerID: {
+        type: String,
+        required: true,
+      },
+    },
     required: true,
   },
   jobName: {
@@ -184,4 +239,4 @@ const QuoteModel = mongoose.model('Quote', QuoteSchema);
  * Global Quote objet
  * @typedef {typeof QuoteModel.schema.obj} Quote
  */
-module.exports = QuoteModel;
+module.exports = { QuoteModel, RatesModel };

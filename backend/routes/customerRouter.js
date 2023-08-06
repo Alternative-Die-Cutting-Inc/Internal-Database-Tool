@@ -18,22 +18,7 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     const allCustomers = await customerServices.get();
-    res.status(200).send(allCustomers);
-  } catch (error) {
-    next(error);
-  }
-});
-
-/**
- * @description get one customer by id
- * @route GET /customers/:id
- * @returns {Customer} customer objects
- */
-router.get('/:id', async (req, res, next) => {
-  try {
-    const id = req.params.id;
-    const allCustomers = await customerServices.get(id);
-    res.status(200).send(allCustomers);
+    res.status(200).send({ customers: allCustomers });
   } catch (error) {
     next(error);
   }
@@ -47,7 +32,22 @@ router.get('/:id', async (req, res, next) => {
 router.get('/names', async (req, res, next) => {
   try {
     const allCustomers = await customerServices.getNames();
-    res.status(200).send(allCustomers);
+    res.status(200).send({ customers: allCustomers });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
+ * @description get one customer by id
+ * @route GET /customers/:id
+ * @returns {Customer} customer objects
+ */
+router.get('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const responseCustomer = await customerServices.get(id);
+    res.status(200).send({ customer: responseCustomer });
   } catch (error) {
     next(error);
   }
@@ -62,7 +62,7 @@ router.post('/', async (req, res, next) => {
   try {
     const newCustomer = req.body.customer;
     const responseCustomer = await customerServices.create(newCustomer);
-    res.status(201).send(responseCustomer);
+    res.status(201).send({ customer: responseCustomer });
   } catch (error) {
     next(error);
   }

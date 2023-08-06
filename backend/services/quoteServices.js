@@ -4,8 +4,9 @@
  * @typedef {import("../models/QuoteModel").Quote} Quote
  */
 
-const QuoteModel = require('../models/QuoteModel');
+const { QuoteModel, RatesModel } = require('../models/QuoteModel');
 const { CounterModel } = require('../models/CounterModel');
+const { updateOne } = require('../models/DocketModel');
 
 const quoteServices = {
   /**
@@ -26,7 +27,21 @@ const quoteServices = {
         },
       );
     } else {
-      responseQuote = QuoteModel.find({})
+      responseQuote = QuoteModel.find(
+        {},
+        {
+          quoteNumber: 1,
+          customer: 1,
+          jobName: 1,
+          description: 1,
+          notes: 1,
+          'quoteJobs.units': 1,
+          'quoteJobs.perSheet': 1,
+          'quoteJobs.total': 1,
+          status: 1,
+          creationDate: 1,
+        },
+      )
         .sort({ quoteNumber: -1 })
         .then(
           (quotes) => quotes,
@@ -36,6 +51,22 @@ const quoteServices = {
         );
     }
     return responseQuote;
+  },
+
+  /**
+   * @description Get all global rates
+   * @returns {Rates[]}
+   */
+  async getRates() {
+    return RatesModel.find({}).then(
+      (rates) => {
+        if (!rates) throw new Error('RATES_NOT_FOUND');
+        return rates;
+      },
+      (error) => {
+        throw new Error('UNABLE_TO_GET_RATES', { cause: error });
+      },
+    );
   },
 
   /**
@@ -125,6 +156,48 @@ const quoteServices = {
   },
 
   /**
+   * @description Update rates
+   * @param {Rate[]} rates An array of rates
+   * @returns {Rates[]} updated rates
+   */
+  async updateRates(rates) {
+    return RatesModel.bulkWrite(
+      rates.map((rate) => ({
+        updateOne: { filter: { _id: rate._id }, update: rate },
+      })),
+      {
+        new: true,
+      },
+    ).then(
+      (rates) => {
+        if (!rates) throw new Error('RATES_NOT_FOUND');
+        return rates;
+      },
+      (error) => {
+        throw new Error('UNABLE_TO_UPDATE_RATES', { cause: error });
+      },
+    );
+  },
+
+  async addJob(quoteID) {
+    return QuoteModel.findById(quoteID).then(
+      (quote) => {
+        if (!quote) throw new Error('QUOTE_NOT_FOUND');
+        quote.quoteJobs.push({});
+        return quote.save().then(
+          (quote) => quote,
+          (error) => {
+            throw new Error('UNABLE_TO_UPDATE_QUOTE', { cause: error });
+          },
+        );
+      },
+      (error) => {
+        throw new Error('UNABLE_TO_GET_QUOTE', { cause: error });
+      },
+    );
+  },
+
+  /**
    * @description Delete quote
    * @param {String} id quote number | _id
    * @returns {Quote}
@@ -168,6 +241,47 @@ const quoteServices = {
       },
       (error) => {
         throw error;
+      },
+    );
+  },
+
+  /**
+   * @description Initialize quote rates
+   * @returns {Boolean} true if rates are newly created
+   */
+  async initRates() {
+    return RatesModel.find({}).then(
+      (rates) => {
+        if (rates.length === 0) {
+          return RatesModel.insertMany([
+            {
+              name: 'Press',
+            },
+            {
+              name: 'Gluer',
+            },
+            {
+              name: 'Strip',
+            },
+            {
+              name: 'Die',
+            },
+            {
+              name: 'Global Premium',
+            },
+          ]).then(
+            (rates) => {
+              return true;
+            },
+            (error) => {
+              throw new Error('UNABLE_TO_CREATE_RATES', { cause: error });
+            },
+          );
+        }
+        return rates;
+      },
+      (error) => {
+        throw new Error('UNABLE_TO_GET_RATES', { cause: error });
       },
     );
   },

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { createAction } from "@reduxjs/toolkit";
 import { put, call, takeLeading } from "redux-saga/effects";
 import useAxios from "../../hooks/useAxios";
@@ -14,6 +15,12 @@ import {
   updateQuoteFailure,
   updateQuoteSuccess,
   updateQuoteStart,
+  changeRatesEditorFailure,
+  changeRatesEditorSuccess,
+  changeRatesEditorStart,
+  getRatesFailure,
+  getRatesSuccess,
+  getRatesStart,
 } from "./quoteSlice";
 
 export const getQuotes = createAction("getQuotesSaga");
@@ -44,6 +51,20 @@ export function* getQuoteSaga({ payload: { id } }) {
   }
 }
 
+export const getRates = createAction("getRatesSaga");
+
+export function* getRatesSaga() {
+  const { axios } = useAxios();
+
+  try {
+    yield put(getRatesStart());
+    const response = yield call(axios.get, `/quotes/rates`);
+    yield put(getRatesSuccess(response.data?.rates));
+  } catch (error) {
+    yield put(getRatesFailure(error.response.data?.errorMessage));
+  }
+}
+
 export const createQuote = createAction("createQuoteSaga");
 
 export function* createQuoteSaga({ payload: { quote, navigate } }) {
@@ -55,6 +76,19 @@ export function* createQuoteSaga({ payload: { quote, navigate } }) {
     navigate(`/quotetool?quoteNumber=${response.data?.quote?.quoteNumber}`);
   } catch (error) {
     yield put(createQuoteFailure(error));
+  }
+}
+
+export const createJob = createAction("createJobSaga");
+
+export function* createJobSaga({ payload: { quoteID } }) {
+  const { axios } = useAxios();
+  try {
+    yield put(updateQuoteStart());
+    const response = yield call(axios.post, `/quotes/${quoteID}/job`);
+    yield put(updateQuoteSuccess(response.data?.quote));
+  } catch (error) {
+    yield put(updateQuoteFailure(error));
   }
 }
 
@@ -86,10 +120,28 @@ export function* updateJobSaga({ payload: { quoteID, jobID, fields } }) {
   }
 }
 
+export const changeRates = createAction("changeRatesSaga");
+
+export function* changeRatesSaga({ payload: { rates } }) {
+  const { axios } = useAxios();
+  try {
+    yield put(changeRatesEditorStart());
+    if (rates !== undefined) {
+      yield call(axios.put, `/quotes/rates`, { rates });
+    }
+    yield put(changeRatesEditorSuccess());
+  } catch (error) {
+    yield put(changeRatesEditorFailure(error));
+  }
+}
+
 export default function* quotesSaga() {
   yield takeLeading(createQuote.type, createQuoteSaga);
+  yield takeLeading(createJob.type, createJobSaga);
   yield takeLeading(updateQuote.type, updateQuoteSaga);
   yield takeLeading(updateJob.type, updateJobSaga);
   yield takeLeading(getQuotes.type, getQuotesSaga);
   yield takeLeading(getQuote.type, getQuoteSaga);
+  yield takeLeading(getRates.type, getRatesSaga);
+  yield takeLeading(changeRates.type, changeRatesSaga);
 }

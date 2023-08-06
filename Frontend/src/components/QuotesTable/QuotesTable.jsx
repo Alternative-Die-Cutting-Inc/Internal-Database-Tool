@@ -7,16 +7,23 @@ import {
   flexRender,
   getPaginationRowModel,
 } from "@tanstack/react-table";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import "../../scssStyles/tableStyle.scss";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { quotesSelector } from "../../state/quotes/quoteSlice";
+import { getQuotes } from "../../state/quotes/saga";
 
 /** The quotes table component.
  * @returns a table of quotes
  */
 const QuotesTable = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getQuotes());
+  }, [dispatch]);
+
   const { quotes, loading } = useSelector(quotesSelector);
 
   const columns = useMemo(
@@ -32,7 +39,11 @@ const QuotesTable = () => {
         ),
         width: "auto",
       },
-      { header: "Customer", accessorKey: "customerName" },
+      {
+        header: "Customer",
+        accessorKey: "customer",
+        cell: (value) => value.getValue().name,
+      },
       { header: "Job Name", accessorKey: "jobName" },
       { header: "Description", accessorKey: "description" },
       { header: "Notes", accessorKey: "notes" },
@@ -42,14 +53,13 @@ const QuotesTable = () => {
           quote.quoteJobs.reduce((acc, job) => {
             acc.push({
               units: job.units,
-              sheets: parseInt(job.units / job.perSheet),
-              perM: job.total / (job.units / 1000),
+              sheets: parseInt(job.units / job.perSheet) || 0,
+              perM: job.total / (job.units / 1000) || 0,
               total: job.total,
             });
             return acc;
           }, []),
         cell: (value) => {
-          console.log(value.getValue());
           return value.getValue().map((val, index) => (
             <div key={index}>{`${val.units.toLocaleString(
               "en-CA"

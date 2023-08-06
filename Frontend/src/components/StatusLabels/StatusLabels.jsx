@@ -10,85 +10,47 @@ const StatusLabels = ({ values }) => {
     <>
       {values.map((status, idx) => {
         const { label } = status;
-        if (label === "Done") {
-          return (
-            <span
-              key={idx}
-              className="badge"
-              style={{ backgroundColor: "green" }}
-            >
-              {label}
-            </span>
-          );
-        } else if (label === "Shipped") {
-          return (
-            <span
-              key={idx}
-              className="badge"
-              style={{ backgroundColor: "gray" }}
-            >
-              {label}
-            </span>
-          );
-        } else if (label === "Created") {
-          return (
-            <span
-              key={idx}
-              className="badge"
-              style={{
-                backgroundColor: "yellow",
-                color: "black",
-              }}
-            >
-              {label}
-            </span>
-          );
-        } else if (label === "Closed") {
-          return (
-            <span
-              key={idx}
-              className="badge"
-              style={{
-                backgroundColor: "black",
-              }}
-            >
-              {label}
-            </span>
-          );
-        } else if (label === "In Progress" || label === "Inprogress") {
-          return (
-            <span
-              key={idx}
-              className="badge"
-              style={{ backgroundColor: "blue" }}
-            >
-              {label}
-            </span>
-          );
-        } else if (label === "Stopped") {
-          return (
-            <span
-              key={idx}
-              className="badge"
-              style={{ backgroundColor: "red" }}
-            >
-              {label}
-            </span>
-          );
-        } else {
-          let color = Math.floor(Math.random() * 16777215).toString(16);
-          return (
-            <span
-              className="badge"
-              key={idx}
-              style={{
-                backgroundColor: "#" + color,
-              }}
-            >
-              {label}
-            </span>
-          );
+        let backgroundColor = "black";
+        let color = "white";
+        switch (label) {
+          case "Done":
+            backgroundColor = "green";
+            break;
+          case "Shipped":
+            backgroundColor = "gray";
+            break;
+          case "Created":
+            backgroundColor = "yellow";
+            color = "black";
+            break;
+          case "Closed":
+            backgroundColor = "black";
+            break;
+          case "In Progress":
+          case "Inprogress":
+            backgroundColor = "blue";
+            break;
+          case "On The Floor":
+            backgroundColor = "orange";
+            break;
+          case "Stopped":
+            backgroundColor = "red";
+            break;
+          case "Approved":
+            backgroundColor = "green";
+            break;
+          case "Sent":
+            backgroundColor = "blue";
+            break;
+          default:
+            backgroundColor =
+              "#" + Math.floor(Math.random() * 16777215).toString(16);
         }
+        return (
+          <span key={idx} className="badge" style={{ backgroundColor, color }}>
+            {label}
+          </span>
+        );
       })}
     </>
   );

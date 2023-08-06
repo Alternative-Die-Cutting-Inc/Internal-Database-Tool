@@ -8,7 +8,7 @@
   "scripts": {
     "start": "nodemon ./server.js localhost 8080",
     "test": "nyc --reporter=lcov --reporter=text --check-coverage=true mocha --recursive --exit",
-    "test:actions": "nyc --reporter=text-summary mocha --recursive --exit"
+    "test:actions": "nyc --reporter=text-summary --check-coverage=true mocha --recursive --exit"
   },
   "lint-staged": {
     "*.js": "eslint --quiet --fix && prettier --write"

@@ -4,5 +4,7 @@
         "dbconfig",
         "diecut",
         "requote"
-    ]
+    ],
+    "vscode-edge-devtools.defaultUrl": "${workspaceFolder}/Frontend/",
+    "vscode-edge-devtools.webRoot": "${workspaceFolder}/Frontend/"
 }

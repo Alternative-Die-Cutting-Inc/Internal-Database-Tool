@@ -68,11 +68,9 @@ const quoteSlice = createSlice({
     },
     changeRatesEditorStart: (state) => {
       state.loading = true;
-      state.error = null;
     },
     changeRatesEditorSuccess: (state) => {
       state.loading = false;
-      state.error = null;
       state.ratesEditor = !state.ratesEditor;
     },
     changeRatesEditorFailure: (state, { payload: error }) => {
@@ -81,11 +79,9 @@ const quoteSlice = createSlice({
     },
     getRatesStart: (state) => {
       state.loading = true;
-      state.error = null;
     },
     getRatesSuccess: (state, { payload: rates }) => {
       state.loading = false;
-      state.error = null;
       state.rates = rates;
     },
     getRatesFailure: (state, { payload: error }) => {

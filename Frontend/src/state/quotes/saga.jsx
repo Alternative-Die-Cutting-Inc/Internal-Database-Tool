@@ -32,8 +32,8 @@ export function* getQuotesSaga() {
     yield put(getQuotesStart());
     const response = yield call(axios.get, "/quotes");
     yield put(getQuotesSuccess(response.data?.quotes));
-  } catch (e) {
-    yield put(getQuotesFailure(e));
+  } catch (error) {
+    yield put(getQuotesFailure(error.response.data?.errorMessage));
   }
 }
 
@@ -41,12 +41,14 @@ export const getQuote = createAction("getQuoteSaga");
 
 export function* getQuoteSaga({ payload: { id } }) {
   const { axios } = useAxios();
+  console.log(id);
 
   try {
     yield put(getQuoteStart());
     const response = yield call(axios.get, `/quotes/number/${id}`);
     yield put(getQuoteSuccess(response.data?.quote));
   } catch (error) {
+    console.log(error);
     yield put(getQuoteFailure(error.response.data?.errorMessage));
   }
 }
@@ -75,7 +77,7 @@ export function* createQuoteSaga({ payload: { quote, navigate } }) {
     yield put(createQuoteSuccess(response.data?.quote));
     navigate(`/quotetool?quoteNumber=${response.data?.quote?.quoteNumber}`);
   } catch (error) {
-    yield put(createQuoteFailure(error));
+    yield put(createQuoteFailure(error.response.data?.errorMessage));
   }
 }
 
@@ -88,7 +90,7 @@ export function* createJobSaga({ payload: { quoteID } }) {
     const response = yield call(axios.post, `/quotes/${quoteID}/job`);
     yield put(updateQuoteSuccess(response.data?.quote));
   } catch (error) {
-    yield put(updateQuoteFailure(error));
+    yield put(updateQuoteFailure(error.response.data?.errorMessage));
   }
 }
 
@@ -101,7 +103,7 @@ export function* updateQuoteSaga({ payload: { id, fields } }) {
     const response = yield call(axios.put, `/quotes/${id}`, { fields });
     yield put(updateQuoteSuccess(response.data?.quote));
   } catch (error) {
-    yield put(updateQuoteFailure(error));
+    yield put(updateQuoteFailure(error.response.data?.errorMessage));
   }
 }
 
@@ -116,7 +118,7 @@ export function* updateJobSaga({ payload: { quoteID, jobID, fields } }) {
     });
     yield put(updateQuoteSuccess(response.data?.quote));
   } catch (error) {
-    yield put(updateQuoteFailure(error));
+    yield put(updateQuoteFailure(error.response.data?.errorMessage));
   }
 }
 
@@ -131,7 +133,7 @@ export function* changeRatesSaga({ payload: { rates } }) {
     }
     yield put(changeRatesEditorSuccess());
   } catch (error) {
-    yield put(changeRatesEditorFailure(error));
+    yield put(changeRatesEditorFailure(error.response.data?.errorMessage));
   }
 }
 

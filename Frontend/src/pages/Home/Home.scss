@@ -4,7 +4,6 @@
   align-items: flex-start;
   justify-content: center;
   width: 100%;
-  height: 45vh;
 }
 .search-menu {
   width: 100%;
@@ -14,6 +13,7 @@
   margin: 1vh 0.5vw;
   background: var(--dark-grey);
   border-radius: 15px;
+  padding-bottom: 1vh;
 }
 
 #homepage-new-quote {
@@ -54,7 +54,12 @@
 }
 
 .search-field-customer-select {
-  width: 80%;
+  width: 100%;
+  margin: 1vh 0;
+}
+
+.search-field-customer-select__control {
+  border-radius: 15px !important;
 }
 
 .quote-search-form {

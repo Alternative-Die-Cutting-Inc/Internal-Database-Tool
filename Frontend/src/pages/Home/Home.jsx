@@ -58,6 +58,7 @@ const PageHome = () => {
                   />
                   <Select
                     className="search-field-customer-select"
+                    classNamePrefix="search-field-customer-select"
                     options={customerNames}
                   />
                   <input
@@ -102,6 +103,7 @@ const PageHome = () => {
                   />
                   <Select
                     className="search-field-customer-select"
+                    classNamePrefix="search-field-customer-select"
                     options={customerNames}
                   />
                   <input
@@ -115,6 +117,12 @@ const PageHome = () => {
                     type="search"
                     name="quote-number"
                     placeholder="Quote Number:"
+                  />
+                  <input
+                    className="search-field"
+                    type="search"
+                    name="key-word"
+                    placeholder="Key Word:"
                   />
                   <input
                     className="search-submit"

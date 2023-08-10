@@ -1,6 +1,6 @@
 .quote-tool-container {
   min-height: 90vh;
-  margin: 0.5rem;
+  margin: 0.5vw;
   text-align: center;
 }
 .rate-editor-popup {
@@ -26,10 +26,10 @@
   }
   label {
     text-align: left;
-    font-size: 1.25rem;
+    font-size: 1.2vw;
   }
   input {
-    font-size: 1.25rem;
+    font-size: 1.2vw;
   }
   button {
     margin: 1.5vh 0;
@@ -42,7 +42,6 @@
   flex-direction: row;
   align-items: flex-start;
   width: 100%;
-  padding: 0.5rem 0.5vw;
   justify-content: space-between;
 }
 
@@ -55,7 +54,7 @@
 
 .jobs-list {
   background-color: var(--light-grey);
-  border-radius: 15px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,35 +64,18 @@
 
 .job-notes {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 7.5rem;
-
-  textarea {
-    height: 3.75rem;
-    width: 20.5vw;
-    max-width: 20.5vw;
-    border-radius: 5px;
-    padding-top: 5px;
-    padding-left: 5px;
-    font-size: 1rem;
-  }
-}
-
-.job-notes-row {
-  display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
-  align-self: start;
+  width: 15vw;
+  margin: 0.5vh 0.25vw;
+  min-height: 17vh;
   textarea {
-    margin: 0 0 0 0.5vw;
-    height: 3.75rem;
-    width: 20.5vw;
-    max-width: 20.5vw;
+    width: 100%;
     border-radius: 5px;
     padding-top: 5px;
     padding-left: 5px;
-    font-size: 1rem;
+    font-size: 1.1vw;
   }
 }
 
@@ -101,10 +83,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  min-height: 7.5rem;
+  min-height: 17vh;
   background-color: var(--dark-grey);
   border-radius: 5px;
-  padding: 0 0.25rem;
+  padding: 0 0.25vw;
+  margin: 0.5vh 0.25vw;
+}
+
+#job-cost {
 }
 
 .job-input-label {
@@ -115,25 +101,23 @@
   font-weight: unset;
 }
 
-#job-extraCharges {
-  width: 20.5vw;
-  max-width: 20.5vw;
+.job-input {
+  width: 7ch;
+  height: 3.5vh;
+  margin-left: 0.25vw;
+  text-align: center;
+}
+.small {
+  width: 6ch;
 }
 
-.job-input {
-  width: 4.75vw;
-  height: 3.5vh;
-  margin: 0rem 0rem 0rem 0.5rem;
-  text-align: center;
+.large {
+  width: 8.5ch;
 }
 
 .job-input,
 .job-input-label {
-  font-size: 1rem;
-}
-
-.small {
-  width: 3.25vw;
+  font-size: 1.1vw;
 }
 
 .input-break {
@@ -145,11 +129,11 @@
   overflow: auto;
   height: inherit;
   min-height: inherit;
-  font-size: 1.25rem;
+  font-size: 1.2vw;
 
   td,
   th {
-    font-size: 1rem;
+    font-size: 1.1vw;
     background-color: unset;
     padding: unset;
     color: var(--light-accent);
@@ -185,37 +169,44 @@
 #quote-info-table {
   width: 100%;
   td {
-    input {
-      width: 90%;
-      height: 3.5vh;
-      font-size: 1rem;
-      padding-left: 0.25rem;
-    }
     padding: 0.5rem 0.5rem;
     text-align: left;
+    height: 5vh;
+    input {
+      width: 100%;
+      font-size: 1.1vw;
+      padding-left: 0.25rem;
+    }
     textarea {
+      width: 100%;
       border-radius: 5px;
+      max-height: 5vh;
       padding: 5px;
-      font-size: 1rem;
+      font-size: 1.1vw;
       resize: none;
     }
   }
 }
 .status-select {
-  width: 25vw;
-  font-size: 1rem;
+  font-size: 1.1vw;
   background-color: var(--white);
   color: var(--text-black);
 }
+
+.status-select__control {
+  min-height: unset !important;
+  max-height: 5vh;
+}
+
 .status-select__value-container {
-  height: 7vh;
+  max-height: 4.5vh;
   overflow-y: scroll !important;
   align-items: baseline !important;
 }
 
 .quote-info-select {
   width: 90%;
-  font-size: 1rem;
+  font-size: 1.1vw;
   border-width: 1px;
   border-style: solid;
   border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
@@ -252,18 +243,37 @@
 }
 
 #job-quantities-table {
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  th {
+    font-weight: unset;
+    padding: 0.25rem 0;
+  }
   text-align: left;
+  .job-input {
+    text-align: center;
+  }
 }
 
 #extraCharges-table {
+  min-height: unset;
+  margin-bottom: 0.75vh;
+
   th {
+    font-weight: unset;
     padding: 0.25rem 0;
   }
   td {
     vertical-align: text-top;
+    .job-input {
+      width: 15ch;
+    }
   }
   button {
-    font-size: 1.25rem;
+    font-size: 1.2vw;
     width: 1.25vw;
     color: var(--light-accent);
     background-color: var(--dark-grey);
@@ -271,26 +281,24 @@
 }
 
 #job-cost-table {
-  text-align: center;
-  .job-input {
-    margin: unset;
-    text-align: center;
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
   td {
-    padding: 0.25rem;
+    .job-input {
+      text-align: center;
+      margin: unset;
+      width: 10.5ch;
+    }
+    padding: 0.25vh 0.25vw;
   }
 }
 
 .job-input-button {
-  width: 80%;
-  font-size: 1rem;
-  height: 80%;
-}
-
-#extras-table {
-  .job-input {
-    width: 3.25vw;
-  }
+  width: 100%;
+  font-size: 1.1vw;
 }
 
 .add-job-button {

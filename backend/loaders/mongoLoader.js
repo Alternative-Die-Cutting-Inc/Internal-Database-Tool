@@ -28,7 +28,7 @@ const loadMongo = async (app) => {
   const newRates = await quoteServices.initRates();
   console.log(`Docket count: ${docketCount}`);
   console.log(`Quote count: ${quoteCount}`);
-  console.log(`Rates created: `, newRates.length || newRates);
+  console.log(`Rates created: `, newRates);
 };
 
 module.exports = loadMongo;

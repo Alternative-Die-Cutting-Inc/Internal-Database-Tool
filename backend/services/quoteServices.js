@@ -58,7 +58,7 @@ const quoteServices = {
    * @returns {Rates[]}
    */
   async getRates() {
-    return RatesModel.find({}).then(
+    return RatesModel.findOne({}).then(
       (rates) => {
         if (!rates) throw new Error('RATES_NOT_FOUND');
         return rates;
@@ -157,18 +157,11 @@ const quoteServices = {
 
   /**
    * @description Update rates
-   * @param {Rate[]} rates An array of rates
-   * @returns {Rates[]} updated rates
+   * @param {Rates} rates An array of rates
+   * @returns {Rates} updated rates
    */
   async updateRates(rates) {
-    return RatesModel.bulkWrite(
-      rates.map((rate) => ({
-        updateOne: { filter: { _id: rate._id }, update: rate },
-      })),
-      {
-        new: true,
-      },
-    ).then(
+    return RatesModel.findOneAndUpdate({}, rates, { new: true }).then(
       (rates) => {
         if (!rates) throw new Error('RATES_NOT_FOUND');
         return rates;
@@ -250,35 +243,24 @@ const quoteServices = {
    * @returns {Boolean} true if rates are newly created
    */
   async initRates() {
-    return RatesModel.find({}).then(
+    return RatesModel.findOneAndUpdate({}, {}, { upsert: true, new: true }).then(
       (rates) => {
-        if (rates.length === 0) {
-          return RatesModel.insertMany([
-            {
-              name: 'Press',
-            },
-            {
-              name: 'Gluer',
-            },
-            {
-              name: 'Strip',
-            },
-            {
-              name: 'Die',
-            },
-            {
-              name: 'Global Premium',
-            },
-          ]).then(
+        if (!rates.global) {
+          rates.global = 1;
+          rates.die = 1;
+          rates.press = 1;
+          rates.gluer = 1;
+          rates.strip = 1;
+          return rates.save().then(
             (rates) => {
               return true;
             },
             (error) => {
-              throw new Error('UNABLE_TO_CREATE_RATES', { cause: error });
+              throw new Error('UNABLE_TO_UPDATE_RATES', { cause: error });
             },
           );
         }
-        return rates;
+        return false;
       },
       (error) => {
         throw new Error('UNABLE_TO_GET_RATES', { cause: error });

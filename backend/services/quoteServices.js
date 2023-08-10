@@ -172,11 +172,11 @@ const quoteServices = {
     );
   },
 
-  async addJob(quoteID) {
+  async addJob(quoteID, fields) {
     return QuoteModel.findById(quoteID).then(
       (quote) => {
         if (!quote) throw new Error('QUOTE_NOT_FOUND');
-        quote.quoteJobs.push({});
+        quote.quoteJobs.push({ ...fields });
         return quote.save().then(
           (quote) => quote,
           (error) => {
@@ -248,9 +248,11 @@ const quoteServices = {
         if (!rates.global) {
           rates.global = 1;
           rates.die = 1;
-          rates.press = 1;
           rates.gluer = 1;
           rates.strip = 1;
+          rates.bobst = 1;
+          rates.ijima = 1;
+          rates.heidelberg = 1;
           return rates.save().then(
             (rates) => {
               return true;

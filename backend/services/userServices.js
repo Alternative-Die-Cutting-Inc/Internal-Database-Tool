@@ -13,13 +13,17 @@ const userServices = {
    * @param {String} password
    * @return {Boolean|Error}
    */
-  async validatePassword(password) {
+  async validateUser(username, password) {
     const passwordValidator =
       /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[~`_=^:();<>+-.@$!%*#?&])[A-Za-z0-9@$_=!%:*#?&.]/;
     if (!passwordValidator.test(password)) {
-      return new Error('Password is not valid.');
+      throw new Error('INVALID_PASSWORD');
     }
-    return 0;
+    return UserModel.findOne({ username }).then((user) => {
+      if (user) {
+        throw new Error('DUPLICATE_USERNAME');
+      }
+    });
   },
 
   /**

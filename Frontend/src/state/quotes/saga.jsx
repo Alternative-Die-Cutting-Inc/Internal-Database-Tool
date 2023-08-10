@@ -82,11 +82,13 @@ export function* createQuoteSaga({ payload: { quote, navigate } }) {
 
 export const createJob = createAction("createJobSaga");
 
-export function* createJobSaga({ payload: { quoteID } }) {
+export function* createJobSaga({ payload: { quoteID, fields } }) {
   const { axios } = useAxios();
   try {
     yield put(updateQuoteStart());
-    const response = yield call(axios.post, `/quotes/${quoteID}/job`);
+    const response = yield call(axios.post, `/quotes/${quoteID}/job`, {
+      fields,
+    });
     yield put(updateQuoteSuccess(response.data?.quote));
   } catch (error) {
     yield put(updateQuoteFailure(error.response.data?.errorMessage));

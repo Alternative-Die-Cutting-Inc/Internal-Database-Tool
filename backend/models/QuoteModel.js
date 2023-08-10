@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const { autoIncrementModelID } = require('./CounterModel');
+const CustomerModel = require('./CustomerModel');
 
+const formatFloat = (value) => parseFloat(value || 0).toFixed(2);
+const formatInteger = (value) => parseInt(value || 0, 10);
 const extraChargeSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -9,53 +12,53 @@ const extraChargeSchema = new mongoose.Schema({
   perM: {
     type: Number,
     required: false,
+    set: formatFloat,
+    default: 0,
   },
   cost: {
     type: Number,
     required: false,
+    set: formatFloat,
+    default: 0,
   },
 });
 
 const rateSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  value: {
+  die: {
     type: Number,
     required: true,
+    set: formatFloat,
     default: 0,
   },
-  // press: {
-  //   type: Number,
-  //   required: true,
-  //   default: 0,
-  // },
-  // gluer: {
-  //   type: Number,
-  //   required: true,
-  //   default: 0,
-  // },
-  // strip: {
-  //   type: Number,
-  //   required: true,
-  //   default: 0,
-  // },
-  // die: {
-  //   type: Number,
-  //   required: true,
-  //   default: 0,
-  // },
-  // customer_premium: {
-  //   type: Number,
-  //   required: true,
-  //   default: 0,
-  // },
-  // global_premium: {
-  //   type: Number,
-  //   required: true,
-  //   default: 0,
-  // },
+  press: {
+    type: Number,
+    required: true,
+    set: formatFloat,
+    default: 0,
+  },
+  gluer: {
+    type: Number,
+    required: true,
+    set: formatFloat,
+    default: 0,
+  },
+  strip: {
+    type: Number,
+    required: true,
+    set: formatFloat,
+    default: 0,
+  },
+  global: {
+    type: Number,
+    required: true,
+    set: formatFloat,
+    default: 0,
+  },
+  customer: {
+    type: Number,
+    required: false,
+    set: formatFloat,
+  },
 });
 
 const RatesModel = mongoose.model('Rates', rateSchema);
@@ -66,11 +69,20 @@ const RatesModel = mongoose.model('Rates', rateSchema);
  * @param {Function} next callback function
  */
 const getRates = function (job, next) {
-  RatesModel.find({}).then(
-    (rates) => {
-      if (!rates) throw new Error('NO_RATES_FOUND');
-      job.rates = rates;
-      next();
+  RatesModel.findOne({}).then(
+    (globalRates) => {
+      if (!globalRates) throw new Error('NO_RATES_FOUND');
+      job.rates = globalRates;
+      CustomerModel.findOne({ _id: job.parent().customer.customerID }).then(
+        (customer) => {
+          if (!customer) throw new Error('NO_CUSTOMER_FOUND');
+          job.rates.customer = customer.premium;
+          next();
+        },
+        (error) => {
+          next(error);
+        },
+      );
     },
     (error) => {
       next(error);
@@ -81,13 +93,15 @@ const getRates = function (job, next) {
 const quoteJobSchema = new mongoose.Schema({
   units: {
     type: Number,
-    required: false,
+    required: true,
     default: 0,
+    set: formatInteger,
   },
   perSheet: {
     type: Number,
-    required: false,
+    required: true,
     default: 0,
+    set: formatInteger,
   },
   clientNotes: {
     type: String,
@@ -104,57 +118,66 @@ const quoteJobSchema = new mongoose.Schema({
   },
   dieHours: {
     type: Number,
-    required: false,
+    required: true,
+    set: formatFloat,
     default: 0,
   },
   dieSetup: {
     type: Number,
-    required: false,
+    required: true,
+    set: formatFloat,
     default: 0,
   },
   dieRunSpeed: {
     type: Number,
-    required: false,
+    required: true,
+    set: formatInteger,
     default: 0,
   },
   dieRunM: {
     type: Number,
-    required: false,
+    required: true,
+    set: formatFloat,
     default: 0,
   },
   gluerSetupHours: {
     type: Number,
-    required: false,
+    required: true,
+    set: formatFloat,
     default: 0,
   },
   gluerRunSpeed: {
     type: Number,
-    required: false,
+    required: true,
+    set: formatInteger,
     default: 0,
   },
   gluerRunM: {
     type: Number,
-    required: false,
+    required: true,
+    set: formatFloat,
     default: 0,
   },
   stripRunSpeed: {
     type: Number,
-    required: false,
+    required: true,
+    set: formatInteger,
     default: 0,
   },
   stripRunM: {
     type: Number,
-    required: false,
+    required: true,
+    set: formatFloat,
     default: 0,
   },
   rates: {
-    type: [rateSchema],
+    type: rateSchema,
     required: true,
-    default: {},
   },
   total: {
     type: Number,
     required: false,
+    set: formatFloat,
     default: 0,
   },
 });

@@ -124,7 +124,8 @@ router.put('/:id', async (req, res, next) => {
 router.post('/:id/job', async (req, res, next) => {
   try {
     const id = req.params.id;
-    const responseQuote = await quoteServices.addJob(id);
+    const fields = req.body.fields;
+    const responseQuote = await quoteServices.addJob(id, fields);
 
     res.status(200).send({ quote: responseQuote });
   } catch (error) {

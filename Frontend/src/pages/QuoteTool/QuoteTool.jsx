@@ -1,6 +1,6 @@
 import "./QuoteTool.scss";
 import { useLocation } from "react-router-dom";
-import { useEffect, useMemo, useState, Fragment } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getQuote,
@@ -34,6 +34,7 @@ const PageQuoteTool = () => {
   const { customerNames } = useSelector(customerNamesSelector);
   const [editingQuote, setEditingQuote] = useState(quote);
   const [editingRates, setEditingRates] = useState(rates);
+  const [fillCheckboxes, setFillCheckboxes] = useState([]);
 
   useEffect(() => {
     dispatch(getQuote({ id: query.get("quoteNumber") }));
@@ -75,7 +76,7 @@ const PageQuoteTool = () => {
       return parseFloat(acc);
     }, 0.0);
 
-    Premium = Subtotal * parseFloat(rates.global - 1);
+    Premium = Subtotal * parseFloat(jobRates.global + jobRates.customer - 2);
 
     PerM = (Subtotal + parseFloat(Premium)) / parseFloat(job.units / 1000);
 
@@ -88,8 +89,21 @@ const PageQuoteTool = () => {
     return { Subtotal, Premium, PerM, Total };
   };
 
+  const nextRow = (event) => {
+    if (event.key === "Enter") {
+      const idx = event.target.parentElement.cellIndex;
+      const nextRow =
+        event.target.parentElement.parentElement.nextElementSibling;
+      if (nextRow !== null) {
+        const nextSibling = nextRow.cells[idx].firstChild;
+        nextSibling.focus();
+      }
+    }
+  };
+
   useEffect(() => {
     setEditingQuote(quote);
+    setFillCheckboxes(new Array(quote?.quoteJobs?.length).fill(false));
   }, [quote]);
 
   useEffect(() => {
@@ -109,8 +123,9 @@ const PageQuoteTool = () => {
             </h3>
             {editingRates?.rates &&
               Object.keys(editingRates.rates).map((rate, index) => {
-                if (rate === "_id" || rate === "__v") return <></>;
-                if (editingRates?.job && rate === "global") return <></>;
+                if (rate === "_id" || rate === "__v")
+                  return <div key={index}></div>;
+
                 return (
                   <label key={index} htmlFor={rate}>
                     {rate}
@@ -347,387 +362,470 @@ const PageQuoteTool = () => {
                   </label>
                 </div>
                 <div className="job-input-form" id="job-work">
-                  <table className="job-input-table" id="job-quantities-table">
-                    <thead>
-                      <tr>
-                        <th colSpan={4}>Die</th>
-                        <th colSpan={4}>Gluer and Strip</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {/* row #1 */}
-                      <tr>
-                        <td>Die</td>
-                        <td>
-                          <input
-                            className="job-input"
-                            type="number"
-                            step={1}
-                            value={job.dieHours || 0}
-                            onBlur={() => {
-                              saveJob(job._id, {
-                                dieHours: job.dieHours,
-                                total: calculateTotal(job).Total,
-                              });
-                            }}
-                            onChange={(event) => {
-                              setEditingQuote({
-                                ...editingQuote,
-                                quoteJobs: editingQuote.quoteJobs.map(
-                                  (job, index) => {
-                                    if (index === jobIndex) {
-                                      return {
-                                        ...job,
-                                        dieHours: event.target.value,
-                                      };
+                  <div className="quantities-tables">
+                    <table
+                      className="job-input-table"
+                      id="job-quantities-table"
+                    >
+                      <thead>
+                        <tr>
+                          <th colSpan={4}>
+                            <div>
+                              Press
+                              <select
+                                value={job.pressMachine}
+                                onBlur={() => {
+                                  saveJob(job._id, {
+                                    pressMachine: job.pressMachine,
+                                    rates: job.rates,
+                                  });
+                                }}
+                                onChange={(event) => {
+                                  setEditingQuote({
+                                    ...editingQuote,
+                                    quoteJobs: editingQuote.quoteJobs.map(
+                                      (j, i) => {
+                                        if (i === jobIndex) {
+                                          return {
+                                            ...j,
+                                            pressMachine: event.target.value,
+                                            rates: {
+                                              ...j.rates,
+                                              press:
+                                                job.rates[event.target.value],
+                                            },
+                                          };
+                                        }
+                                        return j;
+                                      }
+                                    ),
+                                  });
+                                }}
+                              >
+                                <option value={"bobst"}>Bobst</option>
+                                <option value={"ijima"}>Ijima</option>
+                                <option value={"heidelberg"}>Heidelberg</option>
+                              </select>
+                              <select>
+                                <option value="0.5">0.5</option>
+                                <option value="1">1</option>
+                                <option value="1.5">1.5</option>
+                                <option value="2">2</option>
+                              </select>
+                            </div>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Die</td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              className="job-input"
+                              type="number"
+                              step={1}
+                              value={job.dieHours || 0}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  dieHours: job.dieHours,
+                                  total: calculateTotal(job).Total,
+                                });
+                              }}
+                              onChange={(event) => {
+                                setEditingQuote({
+                                  ...editingQuote,
+                                  quoteJobs: editingQuote.quoteJobs.map(
+                                    (job, index) => {
+                                      if (index === jobIndex) {
+                                        return {
+                                          ...job,
+                                          dieHours: event.target.value,
+                                        };
+                                      }
+                                      return job;
                                     }
-                                    return job;
-                                  }
-                                ),
-                              });
-                            }}
-                          />
-                        </td>
-                        <td>
-                          <div className="input-break" />
-                        </td>
-                        <td>
-                          <input
-                            className="job-input large"
-                            type="number"
-                            readOnly
-                            value={job.dieHours * job.rates.die || 0}
-                          />
-                        </td>
-                        <td style={{ paddingLeft: "0.25rem" }}>Setup</td>
-                        <td>
-                          <input
-                            name="gluerSetupHours"
-                            className="job-input"
-                            type="number"
-                            value={job.gluerSetupHours || 0}
-                            onBlur={() => {
-                              saveJob(job._id, {
-                                gluerSetupHours: job.gluerSetupHours,
-                                total: calculateTotal(job).Total,
-                              });
-                            }}
-                            onChange={(event) => {
-                              setEditingQuote({
-                                ...editingQuote,
-                                quoteJobs: editingQuote.quoteJobs.map(
-                                  (job, index) => {
-                                    if (index === jobIndex) {
-                                      return {
-                                        ...job,
-                                        gluerSetupHours: event.target.value,
-                                      };
+                                  ),
+                                });
+                              }}
+                            />
+                          </td>
+                          <td>
+                            <div className="input-break" />
+                          </td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              className="job-input large"
+                              type="number"
+                              readOnly
+                              value={
+                                parseFloat(
+                                  job.dieHours * job.rates.die
+                                ).toFixed(2) || 0
+                              }
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Setup</td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              className="job-input"
+                              type="number"
+                              value={job.dieSetup || 0}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  dieSetup: job.dieSetup,
+                                  total: calculateTotal(job).Total,
+                                });
+                              }}
+                              onChange={(event) => {
+                                setEditingQuote({
+                                  ...editingQuote,
+                                  quoteJobs: editingQuote.quoteJobs.map(
+                                    (job, index) => {
+                                      if (index === jobIndex) {
+                                        return {
+                                          ...job,
+                                          dieSetup: event.target.value,
+                                        };
+                                      }
+                                      return job;
                                     }
-                                    return job;
-                                  }
-                                ),
-                              });
-                            }}
-                          />
-                        </td>
-                        <td>
-                          <div className="input-break" />
-                        </td>
-                        <td>
-                          <input
-                            readOnly
-                            className="job-input large"
-                            type="number"
-                            value={job.gluerSetupHours * job.rates.gluer || 0} // ! replace with actual value
-                          />
-                        </td>
-                      </tr>
-                      {/* row #2 */}
-                      <tr>
-                        <td>Setup</td>
-                        <td>
-                          <input
-                            className="job-input"
-                            type="number"
-                            value={job.dieSetup || 0}
-                            onBlur={() => {
-                              saveJob(job._id, {
-                                dieSetup: job.dieSetup,
-                                total: calculateTotal(job).Total,
-                              });
-                            }}
-                            onChange={(event) => {
-                              setEditingQuote({
-                                ...editingQuote,
-                                quoteJobs: editingQuote.quoteJobs.map(
-                                  (job, index) => {
-                                    if (index === jobIndex) {
-                                      return {
-                                        ...job,
-                                        dieSetup: event.target.value,
-                                      };
+                                  ),
+                                });
+                              }}
+                            />
+                          </td>
+                          <td>
+                            <div className="input-break" />
+                          </td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              readOnly
+                              className="job-input large"
+                              type="number"
+                              value={
+                                parseFloat(
+                                  job.dieSetup * job.rates.press
+                                ).toFixed(2) || 0
+                              }
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Run</td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              className="job-input"
+                              type="number"
+                              step={1000}
+                              value={job.dieRunSpeed || 0}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  dieRunSpeed: job.dieRunSpeed,
+                                  dieRunM:
+                                    (job.rates.press * 1000) / job.dieRunSpeed,
+                                  total: calculateTotal(job).Total,
+                                });
+                              }}
+                              onChange={(event) => {
+                                setEditingQuote({
+                                  ...editingQuote,
+                                  quoteJobs: editingQuote.quoteJobs.map(
+                                    (job, index) => {
+                                      if (index === jobIndex) {
+                                        return {
+                                          ...job,
+                                          dieRunSpeed: event.target.value,
+                                          dieRunM:
+                                            (job.rates.press * 1000) /
+                                            event.target.value,
+                                        };
+                                      }
+                                      return job;
                                     }
-                                    return job;
-                                  }
-                                ),
-                              });
-                            }}
-                          />
-                        </td>
-                        <td>
-                          <div className="input-break" />
-                        </td>
-                        <td>
-                          <input
-                            readOnly
-                            className="job-input large"
-                            type="number"
-                            value={job.dieSetup * job.rates.press || 0}
-                          />
-                        </td>
-                        <td style={{ paddingLeft: "0.25rem" }}>Gluer</td>
-                        <td>
-                          <input
-                            className="job-input"
-                            type="number"
-                            step={1000}
-                            value={job.gluerRunSpeed || 0}
-                            onBlur={() => {
-                              saveJob(job._id, {
-                                gluerRunSpeed: job.gluerRunSpeed,
-                                gluerRunM:
-                                  (job.rates.gluer * 1000) / job.gluerRunSpeed,
-                                total: calculateTotal(job).Total,
-                              });
-                            }}
-                            onChange={(event) => {
-                              setEditingQuote({
-                                ...editingQuote,
-                                quoteJobs: editingQuote.quoteJobs.map(
-                                  (job, index) => {
-                                    if (index === jobIndex) {
-                                      return {
-                                        ...job,
-                                        gluerRunSpeed: event.target.value,
-                                        gluerRunM:
-                                          (job.rates.gluer * 1000) /
-                                          event.target.value,
-                                      };
+                                  ),
+                                });
+                              }}
+                            />
+                          </td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              className="job-input small"
+                              type="number"
+                              value={job.dieRunM || 0}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  dieRunM: job.dieRunM,
+                                  dieRunSpeed:
+                                    (job.rates.press * 1000) / job.dieRunM,
+                                  total: calculateTotal(job).Total,
+                                });
+                              }}
+                              onChange={(event) => {
+                                setEditingQuote({
+                                  ...editingQuote,
+                                  quoteJobs: editingQuote.quoteJobs.map(
+                                    (job, index) => {
+                                      if (index === jobIndex) {
+                                        return {
+                                          ...job,
+                                          dieRunSpeed:
+                                            (job.rates.press * 1000) /
+                                            event.target.value,
+                                          dieRunM: event.target.value,
+                                        };
+                                      }
+                                      return job;
                                     }
-                                    return job;
-                                  }
-                                ),
-                              });
-                            }}
-                          />
-                        </td>
-                        <td>
-                          <input
-                            className="job-input small"
-                            type="number"
-                            value={job.gluerRunM || 0}
-                            onBlur={() => {
-                              saveJob(job._id, {
-                                gluerRunSpeed:
-                                  (job.rates.gluer * 1000) / job.gluerRunM,
-                                gluerRunM: job.gluerRunM,
-                                total: calculateTotal(job).Total,
-                              });
-                            }}
-                            onChange={(event) => {
-                              setEditingQuote({
-                                ...editingQuote,
-                                quoteJobs: editingQuote.quoteJobs.map(
-                                  (job, index) => {
-                                    if (index === jobIndex) {
-                                      return {
-                                        ...job,
-                                        gluerRunSpeed:
-                                          (job.rates.gluer * 1000) /
-                                          event.target.value,
-                                        gluerRunM: event.target.value,
-                                      };
+                                  ),
+                                });
+                              }}
+                            />
+                          </td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              readOnly
+                              className="job-input large"
+                              type="number"
+                              value={
+                                parseFloat(
+                                  job.dieRunM *
+                                    (job.units / job.perSheet / 1000)
+                                ).toFixed(2) || 0
+                              }
+                            />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table
+                      className="job-input-table"
+                      id="job-quantities-table"
+                    >
+                      <thead>
+                        <tr>
+                          <th colSpan={4}>Gluer and Strip</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td style={{ paddingLeft: "0.25rem" }}>Setup</td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              name="gluerSetupHours"
+                              className="job-input"
+                              type="number"
+                              value={job.gluerSetupHours || 0}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  gluerSetupHours: job.gluerSetupHours,
+                                  total: calculateTotal(job).Total,
+                                });
+                              }}
+                              onChange={(event) => {
+                                setEditingQuote({
+                                  ...editingQuote,
+                                  quoteJobs: editingQuote.quoteJobs.map(
+                                    (job, index) => {
+                                      if (index === jobIndex) {
+                                        return {
+                                          ...job,
+                                          gluerSetupHours: event.target.value,
+                                        };
+                                      }
+                                      return job;
                                     }
-                                    return job;
-                                  }
-                                ),
-                              });
-                            }}
-                          />
-                        </td>
-                        <td>
-                          <input
-                            readOnly
-                            className="job-input large"
-                            type="number"
-                            value={(job.gluerRunM * job.units) / 1000 || 0}
-                          />
-                        </td>
-                      </tr>
-                      {/* row #3 */}
-                      <tr>
-                        <td>Run</td>
-                        <td>
-                          <input
-                            className="job-input"
-                            type="number"
-                            step={1000}
-                            value={job.dieRunSpeed || 0}
-                            onBlur={() => {
-                              saveJob(job._id, {
-                                dieRunSpeed: job.dieRunSpeed,
-                                dieRunM:
-                                  (job.rates.press * 1000) / job.dieRunSpeed,
-                                total: calculateTotal(job).Total,
-                              });
-                            }}
-                            onChange={(event) => {
-                              setEditingQuote({
-                                ...editingQuote,
-                                quoteJobs: editingQuote.quoteJobs.map(
-                                  (job, index) => {
-                                    if (index === jobIndex) {
-                                      return {
-                                        ...job,
-                                        dieRunSpeed: event.target.value,
-                                        dieRunM:
-                                          (job.rates.press * 1000) /
-                                          event.target.value,
-                                      };
+                                  ),
+                                });
+                              }}
+                            />
+                          </td>
+                          <td>
+                            <div className="input-break" />
+                          </td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              readOnly
+                              className="job-input large"
+                              type="number"
+                              value={job.gluerSetupHours * job.rates.gluer || 0}
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style={{ paddingLeft: "0.25rem" }}>Gluer</td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              className="job-input"
+                              type="number"
+                              step={1000}
+                              value={job.gluerRunSpeed || 0}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  gluerRunSpeed: job.gluerRunSpeed,
+                                  gluerRunM:
+                                    (job.rates.gluer * 1000) /
+                                    job.gluerRunSpeed,
+                                  total: calculateTotal(job).Total,
+                                });
+                              }}
+                              onChange={(event) => {
+                                setEditingQuote({
+                                  ...editingQuote,
+                                  quoteJobs: editingQuote.quoteJobs.map(
+                                    (job, index) => {
+                                      if (index === jobIndex) {
+                                        return {
+                                          ...job,
+                                          gluerRunSpeed: event.target.value,
+                                          gluerRunM:
+                                            (job.rates.gluer * 1000) /
+                                            event.target.value,
+                                        };
+                                      }
+                                      return job;
                                     }
-                                    return job;
-                                  }
-                                ),
-                              });
-                            }}
-                          />
-                        </td>
-                        <td>
-                          <input
-                            className="job-input small"
-                            type="number"
-                            value={job.dieRunM || 0}
-                            onBlur={() => {
-                              saveJob(job._id, {
-                                dieRunM: job.dieRunM,
-                                dieRunSpeed:
-                                  (job.rates.press * 1000) / job.dieRunM,
-                                total: calculateTotal(job).Total,
-                              });
-                            }}
-                            onChange={(event) => {
-                              setEditingQuote({
-                                ...editingQuote,
-                                quoteJobs: editingQuote.quoteJobs.map(
-                                  (job, index) => {
-                                    if (index === jobIndex) {
-                                      return {
-                                        ...job,
-                                        dieRunSpeed:
-                                          (job.rates.press * 1000) /
-                                          event.target.value,
-                                        dieRunM: event.target.value,
-                                      };
+                                  ),
+                                });
+                              }}
+                            />
+                          </td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              className="job-input small"
+                              type="number"
+                              value={job.gluerRunM || 0}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  gluerRunSpeed:
+                                    (job.rates.gluer * 1000) / job.gluerRunM,
+                                  gluerRunM: job.gluerRunM,
+                                  total: calculateTotal(job).Total,
+                                });
+                              }}
+                              onChange={(event) => {
+                                setEditingQuote({
+                                  ...editingQuote,
+                                  quoteJobs: editingQuote.quoteJobs.map(
+                                    (job, index) => {
+                                      if (index === jobIndex) {
+                                        return {
+                                          ...job,
+                                          gluerRunSpeed:
+                                            (job.rates.gluer * 1000) /
+                                            event.target.value,
+                                          gluerRunM: event.target.value,
+                                        };
+                                      }
+                                      return job;
                                     }
-                                    return job;
-                                  }
-                                ),
-                              });
-                            }}
-                          />
-                        </td>
-                        <td>
-                          <input
-                            readOnly
-                            className="job-input large"
-                            type="number"
-                            value={
-                              job.dieRunM * (job.units / job.perSheet / 1000) ||
-                              0
-                            }
-                          />
-                        </td>
-                        <td style={{ paddingLeft: "0.25rem" }}>Strip</td>
-                        <td>
-                          <input
-                            className="job-input"
-                            type="number"
-                            step={1000}
-                            value={job.stripRunSpeed || 0}
-                            onBlur={() => {
-                              saveJob(job._id, {
-                                stripRunSpeed: job.stripRunSpeed,
-                                stripRunM:
-                                  (job.rates.strip * 1000) / job.stripRunSpeed,
-                                total: calculateTotal(job).Total,
-                              });
-                            }}
-                            onChange={(event) => {
-                              setEditingQuote({
-                                ...editingQuote,
-                                quoteJobs: editingQuote.quoteJobs.map(
-                                  (job, index) => {
-                                    if (index === jobIndex) {
-                                      return {
-                                        ...job,
-                                        stripRunSpeed: event.target.value,
-                                        stripRunM:
-                                          (job.rates.strip * 1000) /
-                                          event.target.value,
-                                      };
+                                  ),
+                                });
+                              }}
+                            />
+                          </td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              readOnly
+                              className="job-input large"
+                              type="number"
+                              value={
+                                parseFloat(
+                                  (job.gluerRunM * job.units) / 1000
+                                ).toFixed(2) || 0
+                              }
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style={{ paddingLeft: "0.25rem" }}>Strip</td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              className="job-input"
+                              type="number"
+                              step={1000}
+                              value={job.stripRunSpeed || 0}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  stripRunSpeed: job.stripRunSpeed,
+                                  stripRunM:
+                                    (job.rates.strip * 1000) /
+                                    job.stripRunSpeed,
+                                  total: calculateTotal(job).Total,
+                                });
+                              }}
+                              onChange={(event) => {
+                                setEditingQuote({
+                                  ...editingQuote,
+                                  quoteJobs: editingQuote.quoteJobs.map(
+                                    (job, index) => {
+                                      if (index === jobIndex) {
+                                        return {
+                                          ...job,
+                                          stripRunSpeed: event.target.value,
+                                          stripRunM:
+                                            (job.rates.strip * 1000) /
+                                            event.target.value,
+                                        };
+                                      }
+                                      return job;
                                     }
-                                    return job;
-                                  }
-                                ),
-                              });
-                            }}
-                          />
-                        </td>
-                        <td>
-                          <input
-                            className="job-input small"
-                            type="number"
-                            value={job.stripRunM || 0}
-                            onBlur={() => {
-                              saveJob(job._id, {
-                                stripRunSpeed:
-                                  (job.rates.strip * 1000) / job.stripRunM,
-                                stripRunM: job.stripRunM,
-                                total: calculateTotal(job).Total,
-                              });
-                            }}
-                            onChange={(event) => {
-                              setEditingQuote({
-                                ...editingQuote,
-                                quoteJobs: editingQuote.quoteJobs.map(
-                                  (job, index) => {
-                                    if (index === jobIndex) {
-                                      return {
-                                        ...job,
-                                        stripRunSpeed:
-                                          (job.rates.strip * 1000) /
-                                          event.target.value,
-                                        stripRunM: event.target.value,
-                                      };
+                                  ),
+                                });
+                              }}
+                            />
+                          </td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              className="job-input small"
+                              type="number"
+                              value={job.stripRunM || 0}
+                              onBlur={() => {
+                                saveJob(job._id, {
+                                  stripRunSpeed:
+                                    (job.rates.strip * 1000) / job.stripRunM,
+                                  stripRunM: job.stripRunM,
+                                  total: calculateTotal(job).Total,
+                                });
+                              }}
+                              onChange={(event) => {
+                                setEditingQuote({
+                                  ...editingQuote,
+                                  quoteJobs: editingQuote.quoteJobs.map(
+                                    (job, index) => {
+                                      if (index === jobIndex) {
+                                        return {
+                                          ...job,
+                                          stripRunSpeed:
+                                            (job.rates.strip * 1000) /
+                                            event.target.value,
+                                          stripRunM: event.target.value,
+                                        };
+                                      }
+                                      return job;
                                     }
-                                    return job;
-                                  }
-                                ),
-                              });
-                            }}
-                          />
-                        </td>
-                        <td>
-                          <input
-                            readOnly
-                            className="job-input large"
-                            type="number"
-                            value={job.stripRunSpeed * job.stripRunM || 0} // ! replace with actual value
-                          />
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                                  ),
+                                });
+                              }}
+                            />
+                          </td>
+                          <td onKeyDown={nextRow}>
+                            <input
+                              readOnly
+                              className="job-input large"
+                              type="number"
+                              value={
+                                parseFloat(
+                                  (job.stripRunM * job.units) / 1000
+                                ).toFixed(2) || 0
+                              }
+                            />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                   <table
                     className="job-input-table"
                     id="extraCharges-table"
@@ -757,7 +855,7 @@ const PageQuoteTool = () => {
                               x
                             </button>
                           </td>
-                          <td>
+                          <td onKeyDown={nextRow}>
                             <input
                               className="job-input"
                               type="text"
@@ -796,9 +894,9 @@ const PageQuoteTool = () => {
                               }}
                             />
                           </td>
-                          <td>
+                          <td onKeyDown={nextRow}>
                             <input
-                              className="job-input large"
+                              className="job-input"
                               type="number"
                               step={5}
                               value={extra.perM || 0}
@@ -839,9 +937,9 @@ const PageQuoteTool = () => {
                               }}
                             />
                           </td>
-                          <td>
+                          <td onKeyDown={nextRow}>
                             <input
-                              className="job-input large"
+                              className="job-input"
                               type="number"
                               step={100}
                               value={extra.cost || 0}
@@ -966,6 +1064,7 @@ const PageQuoteTool = () => {
                 <div className="job-input-form" id="job-controls">
                   <table
                     className="job-input-table"
+                    id="job-controls-table"
                     style={{ textAlign: "center" }}
                   >
                     <tbody>
@@ -1011,7 +1110,28 @@ const PageQuoteTool = () => {
                       {/* row #2 */}
                       <tr>
                         <td>
-                          <button className="job-input-button">
+                          <button
+                            className="job-input-button"
+                            onClick={() => {
+                              saveQuote({
+                                quoteJobs: editingQuote.quoteJobs.map(
+                                  (j, i) => {
+                                    if (fillCheckboxes[i])
+                                      return {
+                                        ...job,
+                                        _id: j._id,
+                                        rates: j.rates,
+                                        total: undefined,
+                                        dieRunM: undefined,
+                                        gluerRunM: undefined,
+                                        stripRunM: undefined,
+                                      };
+                                    return j;
+                                  }
+                                ),
+                              });
+                            }}
+                          >
                             Fill Selected
                           </button>
                         </td>
@@ -1035,12 +1155,20 @@ const PageQuoteTool = () => {
                           <button
                             className="job-input-button"
                             onClick={() => {
-                              saveQuote({
-                                quoteJobs: [
-                                  ...editingQuote.quoteJobs,
-                                  { ...job, _id: undefined },
-                                ],
-                              });
+                              dispatch(
+                                createJob({
+                                  quoteID: editingQuote._id,
+                                  fields: {
+                                    ...job,
+                                    _id: undefined,
+                                    rates: undefined,
+                                    total: undefined,
+                                    dieRunM: undefined,
+                                    gluerRunM: undefined,
+                                    stripRunM: undefined,
+                                  },
+                                })
+                              );
                             }}
                           >
                             Duplicate
@@ -1067,8 +1195,22 @@ const PageQuoteTool = () => {
                       <tr>
                         <td>
                           <label>
-                            <input type="checkbox" id="job-input-checkbox" /> To
-                            Be Filled
+                            <input
+                              checked={fillCheckboxes[jobIndex]}
+                              onChange={() => {
+                                setFillCheckboxes(
+                                  fillCheckboxes.map((c, i) => {
+                                    if (i === jobIndex) {
+                                      return !c;
+                                    }
+                                    return c;
+                                  })
+                                );
+                              }}
+                              type="checkbox"
+                              id="job-input-checkbox"
+                            />
+                            {" To Be Filled"}
                           </label>
                         </td>
                       </tr>

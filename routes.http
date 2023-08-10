@@ -15,3 +15,20 @@ Content-Type: application/json
         "type": "customer"
     }
 }
+
+###
+
+POST {{$dotenv API_BASE_URL}}/user/signup
+Content-Type: application/json
+
+{
+    "user": {
+        "email": "test@123.com",
+        "password": "Password!2",
+        "username": "1"
+    }
+}
+
+###
+
+POST {{$dotenv API_BASE_URL}}/user/signin

@@ -69,9 +69,10 @@ const quoteSlice = createSlice({
     changeRatesEditorStart: (state) => {
       state.loading = true;
     },
-    changeRatesEditorSuccess: (state) => {
+    changeRatesEditorSuccess: (state, { payload: rates }) => {
       state.loading = false;
       state.ratesEditor = !state.ratesEditor;
+      if (rates) state.rates = rates;
     },
     changeRatesEditorFailure: (state, { payload: error }) => {
       state.loading = false;

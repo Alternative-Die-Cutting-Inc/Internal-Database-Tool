@@ -41,7 +41,6 @@ export const getQuote = createAction("getQuoteSaga");
 
 export function* getQuoteSaga({ payload: { id } }) {
   const { axios } = useAxios();
-  console.log(id);
 
   try {
     yield put(getQuoteStart());
@@ -129,9 +128,11 @@ export function* changeRatesSaga({ payload: { rates } }) {
   try {
     yield put(changeRatesEditorStart());
     if (rates !== undefined) {
-      yield call(axios.put, `/quotes/rates`, { rates });
+      const response = yield call(axios.put, `/quotes/rates`, { rates });
+      yield put(changeRatesEditorSuccess(response.data?.rates));
+    } else {
+      yield put(changeRatesEditorSuccess());
     }
-    yield put(changeRatesEditorSuccess());
   } catch (error) {
     yield put(changeRatesEditorFailure(error.response.data?.errorMessage));
   }

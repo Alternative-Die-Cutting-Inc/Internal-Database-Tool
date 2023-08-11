@@ -4,10 +4,10 @@
  * Global User objet
  * @typedef {import("../models/UserModel").User} User
  */
-const express = require("express");
-const userServices = require("../services/userServices");
-const passport = require("../services/passport");
-const checkLoggedIn = require("../middlewares/checkLoggedIn");
+const express = require('express');
+const userServices = require('../services/userServices');
+const passport = require('../services/passport');
+const checkLoggedIn = require('../middlewares/checkLoggedIn');
 
 const router = express.Router();
 
@@ -16,16 +16,12 @@ const router = express.Router();
  * @route POST /user/signup
  * @returns {User} user object
  */
-router.post("/signup", async (req, res, next) => {
+router.post('/signup', async (req, res, next) => {
   try {
     const newUser = req.body.user;
-    invalid = await userServices.validatePassword(newUser.password);
-    if (invalid) {
-      res.status(400).send({ message: invalid.message });
-    } else {
-      const responseUser = await userServices.create({ ...newUser });
-      res.status(201).send(responseUser);
-    }
+    await userServices.validateUser(newUser.username, newUser.password);
+    const responseUser = await userServices.create({ ...newUser });
+    res.status(201).send(responseUser);
   } catch (error) {
     next(error);
   }
@@ -36,19 +32,19 @@ router.post("/signup", async (req, res, next) => {
  * @route POST /user/signin
  * @return {User} user object
  */
-router.post("/signin", async (req, res, next) => {
-  passport.authenticate("local", (error, user) => {
-    if (error || !user) {
-      res.status(403).send({
-        message: "Please ensure your username and password are correct.",
-      });
+router.post('/signin', async (req, res, next) => {
+  passport.authenticate('local', (error, user) => {
+    if (error) {
+      next(new Error('UNABLE_TO_AUTHENTICATE_USER', { cause: error }));
+    } else if (!user) {
+      next(new Error('INVALID_CREDENTIALS'));
     } else {
       req.logIn(user, (error) => {
         if (error) {
           next(error);
         } else {
           res.status(200).send({
-            message: "successfully signed in",
+            message: 'successfully signed in',
             user: user,
           });
         }
@@ -62,14 +58,14 @@ router.post("/signin", async (req, res, next) => {
  * @route POST /user/signout
  * @return {User} user object
  */
-router.post("/signout", async (req, res, next) => {
+router.post('/signout', async (req, res, next) => {
   const user = req.user;
   req.logout((error) => {
     if (error) {
       next(error);
     } else {
       res.status(200).send({
-        message: "Successful Logout by user " + user.id,
+        message: 'Successful Logout by user ' + user.id,
         user,
       });
     }
@@ -81,7 +77,7 @@ router.post("/signout", async (req, res, next) => {
  * @route GET /user/info
  * @return {User} user object
  */
-router.get("/info", checkLoggedIn, async (req, res, next) => {
+router.get('/info', checkLoggedIn, async (req, res, next) => {
   let user = req.user;
   res.status(200).send({ user: user });
 });

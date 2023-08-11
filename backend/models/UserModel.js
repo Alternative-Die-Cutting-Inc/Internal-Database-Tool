@@ -7,6 +7,7 @@ const validateName = function (name) {
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
+    unique: true,
     validate: {
       validator: validateName,
       message: 'Username cannot be empty',

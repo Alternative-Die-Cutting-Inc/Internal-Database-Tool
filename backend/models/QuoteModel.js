@@ -32,9 +32,8 @@ const rateSchema = new mongoose.Schema({
   },
   press: {
     type: Number,
-    required: true,
+    required: false,
     set: formatFloat,
-    default: 0,
   },
   gluer: {
     type: Number,
@@ -59,6 +58,21 @@ const rateSchema = new mongoose.Schema({
     required: false,
     set: formatFloat,
   },
+  bobst: {
+    type: Number,
+    required: true,
+    set: formatFloat,
+  },
+  ijima: {
+    type: Number,
+    required: true,
+    set: formatFloat,
+  },
+  heidelberg: {
+    type: Number,
+    required: true,
+    set: formatFloat,
+  },
 });
 
 const RatesModel = mongoose.model('Rates', rateSchema);
@@ -73,6 +87,7 @@ const getRates = function (job, next) {
     (globalRates) => {
       if (!globalRates) throw new Error('NO_RATES_FOUND');
       job.rates = globalRates;
+      job.rates.press = job.rates.bobst;
       CustomerModel.findOne({ _id: job.parent().customer.customerID }).then(
         (customer) => {
           if (!customer) throw new Error('NO_CUSTOMER_FOUND');
@@ -169,6 +184,12 @@ const quoteJobSchema = new mongoose.Schema({
     required: true,
     set: formatFloat,
     default: 0,
+  },
+  pressMachine: {
+    type: String,
+    required: true,
+    enum: ['bobst', 'ijima', 'heidelberg'],
+    default: 'bobst',
   },
   rates: {
     type: rateSchema,

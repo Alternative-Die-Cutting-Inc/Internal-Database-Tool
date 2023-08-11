@@ -26,8 +26,8 @@ export function* getUsersSaga() {
     yield put(getUsersStart());
     const response = yield call(axios.get, "/user");
     yield put(getUsersSuccess(response.data?.users));
-  } catch (e) {
-    yield put(getUsersFailure(e));
+  } catch (error) {
+    yield put(getUsersFailure(error.response.data?.errorMessage));
   }
 }
 
@@ -56,8 +56,8 @@ export function* signinSaga({ payload: { username, password } }) {
     });
     yield put(signinSuccess(result.data.user));
   } catch (error) {
-    console.error(error);
-    yield put(signinFail(error.response));
+    console.error(error.response.data?.errorMessage);
+    yield put(signinFail(error.response.data?.errorMessage));
   }
 }
 
@@ -69,9 +69,9 @@ export function* logoutSaga() {
     yield put(logoutStart());
     yield call(axios.post, "/user/signout");
     yield put(logoutSuccess());
-  } catch (err) {
-    console.error(err);
-    yield put(logoutFailure(err.response.data));
+  } catch (error) {
+    console.error(error);
+    yield put(logoutFailure(error.response.data?.errorMessage));
   }
 }
 

@@ -1,6 +1,6 @@
 import "./QuoteTool.scss";
 import { useLocation } from "react-router-dom";
-import { useEffect, useMemo, useState, Fragment } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getQuote,
@@ -142,6 +142,9 @@ const PageQuoteTool = () => {
                   setEditingRates({ job: undefined, rates });
                 } else {
                   dispatch(changeRates({ rates: editingRates.rates }));
+                  saveJob(editingRates.job._id, {
+                    rates: editingRates.rates,
+                  });
                 }
               }}
             >

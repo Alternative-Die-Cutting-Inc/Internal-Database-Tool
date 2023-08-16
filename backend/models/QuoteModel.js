@@ -62,16 +62,19 @@ const rateSchema = new mongoose.Schema({
     type: Number,
     required: true,
     set: formatFloat,
+    default: 0,
   },
   ijima: {
     type: Number,
     required: true,
     set: formatFloat,
+    default: 0,
   },
   heidelberg: {
     type: Number,
     required: true,
     set: formatFloat,
+    default: 0,
   },
 });
 

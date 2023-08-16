@@ -20,7 +20,6 @@
     "@tanstack/react-table": "^8.9.3",
     "axios": "^1.4.0",
     "multiselect-react-dropdown": "^2.0.25",
-    "prettier": "^3.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-datepicker": "^4.16.0",
@@ -43,6 +42,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "sass": "^1.63.6",
-    "vite": "^4.4.3"
+    "vite": "^4.4.3",
+    "prettier": "^3.0.0"
   }
 }

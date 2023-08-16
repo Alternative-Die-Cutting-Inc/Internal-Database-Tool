@@ -1,11 +1,4 @@
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import PropTypes from "prop-types";
 
 const WorkSheet = (quote, user, calculateTotal) => {
@@ -15,7 +8,7 @@ const WorkSheet = (quote, user, calculateTotal) => {
   const styles = StyleSheet.create({
     page: {
       backgroundColor: "#fff",
-      padding: "0.75cm",
+      padding: "0.50cm",
       fontFamily: "Times-Roman",
     },
     internalInfo: {
@@ -61,40 +54,34 @@ const WorkSheet = (quote, user, calculateTotal) => {
       fontFamily: "Times-Bold",
     },
     col1: {
-      width: "15%",
+      width: "10%",
       height: "100%",
+      padding: "0 0 0 0.1cm",
       textAlign: "center",
       flexDirection: "column",
-      justifyContent: "space-around",
+      justifyContent: "flex-start",
       fontSize: "12px",
       borderRight: "1px solid #000",
-    },
-    col2: {
-      width: "40%",
-      height: "100%",
-      fontSize: "12px",
-      borderRight: "1px solid #000",
-      display: "flex",
-      justifyContent: "space-around",
-      flexDirection: "column",
     },
     col3: {
-      width: "30%",
-      padding: "0 0.25cm",
+      width: "15%",
       height: "100%",
       borderRight: "1px solid #000",
       fontSize: "12px",
       display: "flex",
       flexDirection: "column",
       textAlign: "center",
-      justifyContent: "space-around",
+      justifyContent: "flex-start",
     },
     row1: {
       display: "flex",
       flexDirection: "row",
-      justifyContent: "space-between",
+      justifyContent: "space-evenly",
       textAlign: "center",
     },
+    cols3a: { width: "37%" },
+    cols3b: { width: "31%" },
+    cols3c: { width: "31%" },
     row2: {
       display: "flex",
       flexDirection: "row",
@@ -102,20 +89,20 @@ const WorkSheet = (quote, user, calculateTotal) => {
       textAlign: "center",
     },
     col4: {
-      width: "20%",
+      width: "15%",
       height: "100%",
-      padding: "0 0.25cm",
+      padding: "0 0 0 0.1cm",
       fontSize: "12px",
       display: "flex",
       flexDirection: "column",
-      justifyContent: "space-around",
-      textAlign: "center",
+      justifyContent: "flext-start",
+      textAlign: "left",
     },
   });
 
   const tableStyles = StyleSheet.create({
     table: {
-      width: "40%",
+      width: "60%",
       height: "100%",
       borderRight: "1px solid #000",
       fontSize: "12px",
@@ -124,8 +111,9 @@ const WorkSheet = (quote, user, calculateTotal) => {
       display: "flex",
       flexDirection: "row",
       borderTop: "1px solid #EEE",
-      paddingTop: 8,
-      paddingBottom: 8,
+      justifyContent: "space-evenly",
+      paddingTop: 5,
+      paddingBottom: 5,
     },
     header: {
       borderTop: "none",
@@ -135,19 +123,28 @@ const WorkSheet = (quote, user, calculateTotal) => {
     },
     // So Declarative and unDRY 👌
     row1: {
-      width: "27%",
+      width: "15%",
     },
     row2: {
-      width: "15%",
+      width: "12%",
     },
     row3: {
-      width: "15%",
+      width: "10%",
     },
     row4: {
-      width: "20%",
+      width: "5%",
     },
     row5: {
       width: "27%",
+    },
+    colSmall: {
+      width: "9.5%",
+    },
+    colMedium: {
+      width: "9.5%",
+    },
+    colLarge: {
+      width: "17.5%",
     },
   });
 
@@ -198,87 +195,141 @@ const WorkSheet = (quote, user, calculateTotal) => {
         {quote.quoteJobs.map((job, index) => {
           const { Subtotal, Premium, PerM } = calculateTotal(job);
           return (
-            <View key={index} style={styles.table}>
+            <View key={index} style={styles.table} wrap={false}>
               <View style={styles.col1}>
-                <Text>{"Units: " + job.units}</Text>
-                <Text>{"Per Sheet: " + job.perSheet}</Text>
-                <Text>{"Sheets: " + parseInt(job.units / job.perSheet)}</Text>
+                <Text>{"Units:"}</Text>
+                <Text>{job.units.toLocaleString("en-CA")}</Text>
+                <Text>{"Per Sheet:"}</Text>
+                <Text>{job.perSheet.toLocaleString("en-CA")}</Text>
+                <Text>{"Sheets:"}</Text>
+                <Text>
+                  {parseInt(job.units / job.perSheet).toLocaleString("en-CA")}
+                </Text>
               </View>
 
+              {/* Quantities */}
               <View style={tableStyles.table}>
-                <View style={[styles.row, styles.bold, styles.header]}>
+                <View style={styles.row}>
                   <Text style={styles.row1}>
                     {"Press: " + job.pressMachine}
                   </Text>
                 </View>
                 {/* Row 1 */}
-                <View style={styles.row} wrap={false}>
-                  <Text style={styles.row2}>123</Text>
-                  <Text style={styles.row2}>123</Text>
-                  <Text style={styles.row2}>123</Text>
-                  <Text style={styles.row2}>1232</Text>
-                  <Text style={styles.row2}>123</Text>
-                  <Text style={styles.row2}>123</Text>
-                  <Text>123</Text>
-                  <Text>123</Text>
+                <View style={tableStyles.row}>
+                  <Text style={tableStyles.colMedium}>Die:</Text>
+                  <Text style={tableStyles.colMedium}>{job.dieHours}</Text>
+                  <Text style={tableStyles.colSmall}></Text>
+                  <Text style={tableStyles.colLarge}>
+                    {(job.dieHours * job.rates.die).toLocaleString("en-CA", {
+                      style: "currency",
+                      currency: "CAD",
+                    })}
+                  </Text>
+                  <Text style={tableStyles.colMedium}>Setup:</Text>
+                  <Text style={tableStyles.colMedium}>{job.dieHours}</Text>
+                  <Text style={tableStyles.colSmall}></Text>
+                  <Text style={tableStyles.colLarge}>
+                    {(job.dieHours * job.rates.die).toLocaleString("en-CA", {
+                      style: "currency",
+                      currency: "CAD",
+                    })}
+                  </Text>
                 </View>
+                {/* Row 2 */}
+                <View style={tableStyles.row}>
+                  <Text style={tableStyles.colMedium}>Setup:</Text>
+                  <Text style={tableStyles.colMedium}>{job.dieSetup}</Text>
+                  <Text style={tableStyles.colSmall}></Text>
+                  <Text style={tableStyles.colLarge}>
+                    {(job.dieSetup * job.rates.press).toLocaleString("en-CA", {
+                      style: "currency",
+                      currency: "CAD",
+                    })}
+                  </Text>
+                  <Text style={tableStyles.colMedium}>Gluer:</Text>
+                  <Text style={tableStyles.colMedium}>{job.dieRunSpeed}</Text>
+                  <Text style={tableStyles.colSmall}>{job.dieRunM}</Text>
+                  <Text style={tableStyles.colLarge}>
+                    {(
+                      (job.dieRunM * (job.units / job.perSheet)) /
+                      1000
+                    ).toLocaleString("en-CA", {
+                      style: "currency",
+                      currency: "CAD",
+                    })}
+                  </Text>
+                </View>
+                {/* Row 3 */}
+                <View style={tableStyles.row}>
+                  <Text style={tableStyles.colMedium}>Run:</Text>
+                  <Text style={tableStyles.colMedium}>{job.dieRunSpeed}</Text>
+                  <Text style={tableStyles.colSmall}>{job.dieRunM}</Text>
+                  <Text style={tableStyles.colLarge}>
+                    {(
+                      (job.dieRunM * (job.units / job.perSheet)) /
+                      1000
+                    ).toLocaleString("en-CA", {
+                      style: "currency",
+                      currency: "CAD",
+                    })}
+                  </Text>
+                  <Text style={tableStyles.colMedium}>Strip:</Text>
+                  <Text style={tableStyles.colMedium}>{job.dieRunSpeed}</Text>
+                  <Text style={tableStyles.colSmall}>{job.dieRunM}</Text>
+                  <Text style={tableStyles.colLarge}>
+                    {(
+                      (job.dieRunM * (job.units / job.perSheet)) /
+                      1000
+                    ).toLocaleString("en-CA", {
+                      style: "currency",
+                      currency: "CAD",
+                    })}
+                  </Text>
+                </View>
+
+                {/* Extras */}
+                {job.extraCharges.map((extra, index) => {
+                  return (
+                    <View key={index} style={tableStyles.row}>
+                      <Text style={{ width: "20%" }}>{"Extra Charge:"}</Text>
+                      <Text style={{ width: "30%" }}>{extra.name}</Text>
+                      <Text style={tableStyles.colMedium}>{extra.perM}</Text>
+                      <Text style={tableStyles.colLarge}>
+                        {extra.cost.toLocaleString("en-CA", {
+                          style: "currency",
+                          currency: "CAD",
+                        })}
+                      </Text>
+                    </View>
+                  );
+                })}
               </View>
 
-              {/* <View debug style={styles.col2}>
-                <View style={styles.row2}>
-                  <Text>{"Press: " + job.pressMachine}</Text>
-                </View>
-                <View style={styles.row2}>
-                  <Text>{"Die: " + job.dieHours}</Text>
-                  <Text>{job.dieHours * job.rates.die}</Text>
-                  <Text>{"Setup: " + job.gluerSetupHours}</Text>
-                  <Text>{job.gluerSetupHours * job.rates.gluer}</Text>
-                </View>
-                <View style={styles.row2}>
-                  <Text>
-                    {"Setup: " +
-                      job.dieSetup +
-                      " " +
-                      job.dieSetup * job.rates.press}
-                  </Text>
-                  <Text>
-                    {"Gluer: " +
-                      job.gluerRunSpeed +
-                      " " +
-                      job.gluerRunM +
-                      " " +
-                      (job.gluerRunM * job.units) / 1000}
-                  </Text>
-                </View>
-              </View> */}
-
+              {/* Totals */}
               <View style={styles.col3}>
+                <Text>{"Subtotal"}</Text>
+                <Text>
+                  {Subtotal.toLocaleString("en-CA", {
+                    style: "currency",
+                    currency: "CAD",
+                  })}
+                </Text>
+                <Text>{"Premium"}</Text>
+                <Text>
+                  {Premium.toLocaleString("en-CA", {
+                    style: "currency",
+                    currency: "CAD",
+                  })}
+                </Text>
+                <Text>{"Per M"}</Text>
+                <Text>
+                  {PerM.toLocaleString("en-CA", {
+                    style: "currency",
+                    currency: "CAD",
+                  })}
+                </Text>
+
                 <View style={styles.row1}>
-                  <Text>{"Subtotal"}</Text>
-                  <Text>{"Premium"}</Text>
-                  <Text>{"Per M"}</Text>
-                </View>
-                <View style={styles.row1}>
-                  <Text>
-                    {Subtotal.toLocaleString("en-CA", {
-                      style: "currency",
-                      currency: "CAD",
-                    })}
-                  </Text>
-                  <Text>
-                    {Premium.toLocaleString("en-CA", {
-                      style: "currency",
-                      currency: "CAD",
-                    })}
-                  </Text>
-                  <Text>
-                    {PerM.toLocaleString("en-CA", {
-                      style: "currency",
-                      currency: "CAD",
-                    })}
-                  </Text>
-                </View>
-                <View style={[styles.row1, { justifyContent: "center" }]}>
                   <Text>
                     {"Total: " +
                       job.total.toLocaleString("en-CA", {
@@ -288,9 +339,13 @@ const WorkSheet = (quote, user, calculateTotal) => {
                   </Text>
                 </View>
               </View>
+
+              {/* Notes */}
               <View style={styles.col4}>
-                <Text>{"Client Notes: " + (job.clientNotes || "")}</Text>
-                <Text>{"Internal Notes: " + (job.internalNotes || "")}</Text>
+                <Text>{"Client Notes:"}</Text>
+                <Text>{job.clientNotes || ""}</Text>
+                <Text>{"Internal Notes:"}</Text>
+                <Text>{job.internalNotes || ""}</Text>
               </View>
             </View>
           );

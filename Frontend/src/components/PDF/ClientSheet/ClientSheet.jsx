@@ -230,7 +230,11 @@ const ClientSheet = (quote, user) => {
           {quote.quoteJobs.map((job, index) => {
             const sheets = parseInt(job.units / job.perSheet);
             return (
-              <View key={index} style={[styles.row, { fontSize: "12px" }]}>
+              <View
+                key={index}
+                style={[styles.row, { fontSize: "12px" }]}
+                wrap={false}
+              >
                 <Text style={{ width: "5%", textAlign: "center" }}>
                   {index + 1}
                 </Text>

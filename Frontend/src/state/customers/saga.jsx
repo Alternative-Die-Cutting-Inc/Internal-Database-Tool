@@ -72,6 +72,21 @@ export function* updateCustomerSaga({ payload: { id, fields } }) {
   }
 }
 
+export const sendToCustomer = createAction("sendToCustomerSaga");
+
+export function* sendToCustomerSaga({ payload: { emails, file } }) {
+  const { axios } = useAxios();
+  try {
+    yield put(updateCustomerStart());
+    const response = yield call(axios.put, `/customers/${id}`, {
+      fields,
+    });
+    yield put(updateCustomerSuccess(response.data?.customer));
+  } catch (error) {
+    yield put(updateCustomerFailure(error));
+  }
+}
+
 export default function* customerSaga() {
   yield takeLeading(getCustomer, getCustomerSaga);
   yield takeLeading(createCustomer, createCustomerSaga);

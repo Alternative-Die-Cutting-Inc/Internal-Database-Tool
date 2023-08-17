@@ -19,11 +19,12 @@ const userServices = {
     if (!passwordValidator.test(password)) {
       throw new Error('INVALID_PASSWORD');
     }
-    return UserModel.findOne({ username }).then((user) => {
+    await UserModel.findOne({ username }).then((user) => {
       if (user) {
         throw new Error('DUPLICATE_USERNAME');
       }
     });
+    return 0;
   },
 
   /**

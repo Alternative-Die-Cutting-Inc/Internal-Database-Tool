@@ -27,8 +27,8 @@ export const PageDocketToolFunctions = [
   },
   {
     label: "New Shipment",
-    function: function () {
-      console.log("hello world");
+    function: function (_, navigate) {
+      navigate("/shipments" + window.location.search);
     },
   },
   {

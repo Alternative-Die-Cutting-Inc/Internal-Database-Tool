@@ -7,8 +7,12 @@
 
 const express = require('express');
 const customerServices = require('../services/customerServices');
-
+const emailServices = require('../services/emailServices');
 const router = express.Router();
+
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 /**
  * @description get all customers
@@ -94,6 +98,32 @@ router.delete('/:id', async (req, res, next) => {
     const id = req.params.id;
     const responseCustomer = await customerServices.delete(id);
     res.status(200).send(responseCustomer);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/email', upload.single('pdfFile'), async (req, res, next) => {
+  const file = req.file;
+  const emails = req.body.emails.split(',');
+  const subject = req.body.subject;
+  const body = req.body.body;
+  try {
+    if (!file) {
+      throw new Error('NO_FILE');
+    }
+    if (!emails || emails.length === 0) {
+      throw new Error('NO_EMAILS');
+    }
+    const response = await emailServices.sendRawEmail(
+      body,
+      ' ',
+      subject,
+      [{ content: file, type: 'non-static', contentDisposition: 'attachment' }],
+      emails,
+      'developer@alternativedc.com',
+    );
+    res.status(200).send(response);
   } catch (error) {
     next(error);
   }

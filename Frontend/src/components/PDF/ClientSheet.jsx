@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
-import Logo from "../../assets/logo/Logo.png";
+import Logo from "../../assets/logo/logo-large.png";
 import PropTypes from "prop-types";
 
 const ClientSheet = ({ quote, user }) => {
@@ -37,7 +37,7 @@ const ClientSheet = ({ quote, user }) => {
       width: "100%",
     },
     logo: {
-      height: "60px",
+      height: "45px",
     },
     table: {
       width: "100%",
@@ -90,182 +90,177 @@ const ClientSheet = ({ quote, user }) => {
   };
 
   return (
-    <Document
-      author={user.firstName}
-      title={`Alternative Die Cutting Inc. Quote for ${quote.jobName}`}
-    >
-      <Page size="LETTER" style={styles.page}>
-        <View style={styles.internalInfo}>
-          <View style={{ flexDirection: "row" }}>
-            <Image source={Logo} style={styles.logo} />
-            <View>
+    <>
+      {quote && user && (
+        <Document
+          author={user.firstName}
+          title={`Alternative Die Cutting Inc. Quote for ${quote.jobName}`}
+        >
+          <Page size="LETTER" style={styles.page}>
+            <View style={styles.internalInfo}>
+              <View style={{ flexDirection: "column" }}>
+                <Image source={Logo} style={styles.logo} />
+                <View>
+                  <Text
+                    style={{
+                      fontSize: "12px",
+                      fontWeight: "light",
+                    }}
+                  >
+                    {AltDieIncInfo.address +
+                      `\n` +
+                      AltDieIncInfo.postalCode +
+                      `\n` +
+                      "Tel: " +
+                      AltDieIncInfo.tel +
+                      `\n` +
+                      AltDieIncInfo.website +
+                      `\n`}
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.quoteInfo}>
+                <Text
+                  style={{
+                    fontSize: "20px",
+                    fontFamily: "Times-Bold",
+                  }}
+                >
+                  {"#" + quote.quoteNumber}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "extrabold",
+                  }}
+                >
+                  {quote.customer.name}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "extrabold",
+                  }}
+                >
+                  {"Attention: " + quote.attention}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.section}>
+              <Text
+                style={{
+                  fontSize: "12px",
+                  marginBottom: "15px",
+                }}
+              >
+                {"Quote for "}
+                <Text
+                  style={{
+                    fontSize: "12px",
+                    fontFamily: "Times-Bold",
+                  }}
+                >
+                  {quote.customer.name}
+                </Text>
+                {" By " +
+                  user.firstName +
+                  " on " +
+                  new Date().toLocaleDateString("en-CA", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+              </Text>
               <Text
                 style={{
                   fontSize: "16px",
                   fontFamily: "Times-Bold",
+                  marginBottom: "15px",
                 }}
               >
-                {AltDieIncInfo.name}
+                {quote.jobName}
               </Text>
               <Text
                 style={{
                   fontSize: "12px",
-                  fontWeight: "light",
+                  marginBottom: "10px",
                 }}
               >
-                {AltDieIncInfo.address +
-                  `\n` +
-                  AltDieIncInfo.postalCode +
-                  `\n` +
-                  "Tel: " +
-                  AltDieIncInfo.tel +
-                  `\n` +
-                  "Fax: " +
-                  AltDieIncInfo.fax +
-                  `\n` +
-                  AltDieIncInfo.website +
-                  `\n`}
+                {quote.description}
+              </Text>
+              <Text
+                style={{
+                  fontSize: "12px",
+                  marginBottom: "10px",
+                }}
+              >
+                {quote.notes}
               </Text>
             </View>
-          </View>
-          <View style={styles.quoteInfo}>
-            <Text
-              style={{
-                fontSize: "20px",
-                fontFamily: "Times-Bold",
-              }}
-            >
-              {"#" + quote.quoteNumber}
-            </Text>
-            <Text
-              style={{
-                fontSize: "16px",
-                fontWeight: "extrabold",
-              }}
-            >
-              {quote.customer.name}
-            </Text>
-            <Text
-              style={{
-                fontSize: "16px",
-                fontWeight: "extrabold",
-              }}
-            >
-              {"Attention: " + quote.attention}
-            </Text>
-          </View>
-        </View>
-        <View style={styles.section}>
-          <Text
-            style={{
-              fontSize: "12px",
-              marginBottom: "15px",
-            }}
-          >
-            {"Quote for "}
-            <Text
-              style={{
-                fontSize: "12px",
-                fontFamily: "Times-Bold",
-              }}
-            >
-              {quote.customer.name}
-            </Text>
-            {" By " +
-              user.firstName +
-              " on " +
-              new Date().toLocaleDateString("en-CA", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })}
-          </Text>
-          <Text
-            style={{
-              fontSize: "16px",
-              fontFamily: "Times-Bold",
-              marginBottom: "15px",
-            }}
-          >
-            {quote.jobName}
-          </Text>
-          <Text
-            style={{
-              fontSize: "12px",
-              marginBottom: "10px",
-            }}
-          >
-            {quote.description}
-          </Text>
-          <Text
-            style={{
-              fontSize: "12px",
-              marginBottom: "10px",
-            }}
-          >
-            {quote.notes}
-          </Text>
-        </View>
-        <View style={styles.table}>
-          <View style={[styles.row, styles.bold, styles.header]}>
-            <Text style={{ width: "5%" }}> </Text>
-            <Text style={styles.row1}>{"Units"}</Text>
-            <Text style={styles.row2}>{"Units per Sheet"}</Text>
-            <Text style={styles.row3}>{"Sheets"}</Text>
-            <Text style={styles.row4}>{"Cost Per Thousand"}</Text>
-            <Text style={styles.row5}>{"Total"}</Text>
-            <Text
-              style={{
-                width: "25%",
-                fontFamily: "Times-Bold",
-                textAlign: "center",
-              }}
-            >
-              {"Notes"}
-            </Text>
-          </View>
-          {quote.quoteJobs.map((job, index) => {
-            const sheets = parseInt(job.units / job.perSheet);
-            return (
-              <View
-                key={index}
-                style={[styles.row, { fontSize: "12px" }]}
-                wrap={false}
-              >
-                <Text style={{ width: "5%", textAlign: "center" }}>
-                  {index + 1}
-                </Text>
-                <Text style={styles.row1}>{job.units}</Text>
-                <Text style={styles.row2}>{job.perSheet}</Text>
-                <Text style={styles.row3}>{isNaN(sheets) ? 0 : sheets}</Text>
-                <Text style={styles.row4}>
-                  {isNaN(sheets)
-                    ? 0
-                    : (job.total / sheets).toLocaleString("en-CA", {
-                        style: "currency",
-                        currency: "CAD",
-                      })}
-                </Text>
-                <Text style={[styles.row5, styles.bold]}>
-                  {job.total.toLocaleString("en-CA", {
-                    style: "currency",
-                    currency: "CAD",
-                  })}
-                </Text>
+            <View style={styles.table}>
+              <View style={[styles.row, styles.bold, styles.header]}>
+                <Text style={{ width: "5%" }}> </Text>
+                <Text style={styles.row1}>{"Units"}</Text>
+                <Text style={styles.row2}>{"Units per Sheet"}</Text>
+                <Text style={styles.row3}>{"Sheets"}</Text>
+                <Text style={styles.row4}>{"Cost Per Thousand"}</Text>
+                <Text style={styles.row5}>{"Total"}</Text>
                 <Text
                   style={{
                     width: "25%",
+                    fontFamily: "Times-Bold",
                     textAlign: "center",
                   }}
                 >
-                  {job.clientNotes}
+                  {"Notes"}
                 </Text>
               </View>
-            );
-          })}
-        </View>
-      </Page>
-    </Document>
+              {quote.quoteJobs.map((job, index) => {
+                const sheets = parseInt(job.units / job.perSheet);
+                return (
+                  <View
+                    key={index}
+                    style={[styles.row, { fontSize: "12px" }]}
+                    wrap={false}
+                  >
+                    <Text style={{ width: "5%", textAlign: "center" }}>
+                      {index + 1}
+                    </Text>
+                    <Text style={styles.row1}>{job.units}</Text>
+                    <Text style={styles.row2}>{job.perSheet}</Text>
+                    <Text style={styles.row3}>
+                      {isNaN(sheets) ? 0 : sheets}
+                    </Text>
+                    <Text style={styles.row4}>
+                      {isNaN(sheets)
+                        ? 0
+                        : (job.total / sheets).toLocaleString("en-CA", {
+                            style: "currency",
+                            currency: "CAD",
+                          })}
+                    </Text>
+                    <Text style={[styles.row5, styles.bold]}>
+                      {job.total.toLocaleString("en-CA", {
+                        style: "currency",
+                        currency: "CAD",
+                      })}
+                    </Text>
+                    <Text
+                      style={{
+                        width: "25%",
+                        textAlign: "center",
+                      }}
+                    >
+                      {job.clientNotes}
+                    </Text>
+                  </View>
+                );
+              })}
+            </View>
+          </Page>
+        </Document>
+      )}
+    </>
   );
 };
 

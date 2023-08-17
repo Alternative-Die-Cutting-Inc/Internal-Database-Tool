@@ -91,7 +91,6 @@ const quoteServices = {
   async create(quote) {
     return QuoteModel.create(quote).then(
       (quote) => {
-        if (!quote) throw new Error('UNABLE_TO_CREATE_QUOTE');
         return quote;
       },
       (error) => {
@@ -110,9 +109,12 @@ const quoteServices = {
     return QuoteModel.findOneAndUpdate({ _id: id }, fields, {
       new: true,
     }).then(
-      (quote) => quote,
+      (quote) => {
+        if (!quote) throw new Error('QUOTE_NOT_FOUND');
+        return quote;
+      },
       (error) => {
-        throw error;
+        throw new Error('UNABLE_TO_UPDATE_QUOTE', { cause: error });
       },
     );
   },

@@ -145,4 +145,20 @@ describe('Testing Quote Services', () => {
     const rates = await quoteServices.initRates();
     assert.equal(rates, false);
   });
+
+  it('.getFromNum()\t\t\t|\tGet Quote from number', async function () {
+    newQuote = await quoteServices.create({
+      customer: { name: 'Alt Die Cut Inc', customerID: '123123' },
+      jobName: 'Test 8',
+    });
+    const quote = await quoteServices.getFromNum(newQuote.quoteNumber);
+    assert.equal(quote.quoteNumber, newQuote.quoteNumber);
+  });
+
+  it('.getFromNum()\t\t\t|\tGet quote from number (nonexistent number)', async function () {
+    await assert.rejects(quoteServices.getFromNum(1234565), {
+      name: 'Error',
+      message: 'QUOTE_NOT_FOUND',
+    });
+  });
 });

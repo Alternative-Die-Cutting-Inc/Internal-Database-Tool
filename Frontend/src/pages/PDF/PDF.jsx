@@ -9,8 +9,14 @@ import { quoteSelector } from "../../state/quotes/quoteSlice";
 import {
   customerNamesSelector,
   customerSelector,
+  emailSelector,
 } from "../../state/customers/customerSlice";
-import { getCustomer } from "../../state/customers/saga";
+import {
+  getCustomerNames,
+  getCustomer,
+  sendToCustomer,
+} from "../../state/customers/saga";
+import { getQuote } from "../../state/quotes/saga";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import ClientSheet from "../../components/PDF/ClientSheet";
@@ -29,14 +35,12 @@ const PagePDF = () => {
   const { customer } = useSelector(customerSelector);
   const { quote } = useSelector(quoteSelector);
   const { user } = useSelector(userSelector);
+  const { email, error } = useSelector(emailSelector);
 
-  const [customerSelected, setCustomerSelected] = useState({
-    label: quote?.customer.name,
-    value: quote?.customer.customerID,
-  });
+  const [emails, setEmails] = useState([]);
+  const [customerSelected, setCustomerSelected] = useState();
 
   const sheet = query.get("sheet");
-  const document = import(`../../components/PDF/${sheet}`);
 
   const pickSheet = () => {
     switch (sheet) {
@@ -60,9 +64,34 @@ const PagePDF = () => {
     }
   };
 
+  const handleSend = async (event) => {
+    event.preventDefault();
+    const blob = await getBlob();
+    let formData = new FormData();
+    formData.append(
+      "emails",
+      emails.map((email) => email.value)
+    );
+    formData.append("pdfFile", blob);
+    formData.append("subject", event.target.subject.value);
+    formData.append("body", event.target.body.value);
+    dispatch(sendToCustomer({ formData }));
+  };
+
   useEffect(() => {
-    dispatch(getCustomer({ id: customerSelected.value }));
-  }, [dispatch, customerSelected]);
+    if (quote?.customer?.customerID) {
+      setCustomerSelected({
+        value: quote.customer.customerID,
+        label: quote.customer.name,
+      });
+      dispatch(getCustomer({ id: quote.customer.customerID }));
+    }
+  }, [dispatch, quote]);
+
+  useEffect(() => {
+    dispatch(getQuote({ id: query.get("quoteNumber") }));
+    dispatch(getCustomerNames());
+  }, [dispatch, query]);
 
   return (
     <div className="pdf-container">
@@ -78,49 +107,58 @@ const PagePDF = () => {
       </div>
       <div className="pdf-controls-container">
         <div className="email-controls">
-          <div className="email-selection">
-            <label htmlFor="">
-              Email to customer
-              <Select
-                className="customer-contact-select"
-                classNamePrefix="customer-contact-select"
-                unstyled
-                menuPosition="fixed"
-                options={customerNames || []}
-                value={customerSelected}
-                onChange={(e) => setCustomerSelected(e)}
-              />
-            </label>
-            <label htmlFor="">
-              At
-              <CreatableSelect
-                className="customer-contact-select"
-                classNamePrefix="customer-contact-select"
-                unstyled
-                menuPosition="fixed"
-                options={
-                  customer?.contacts?.reduce((emailList, contact) => {
+          <form className="control-buttons" onSubmit={handleSend}>
+            <div className="email-selection">
+              <label htmlFor="">
+                Email to
+                <Select
+                  className="customer-contact-select"
+                  classNamePrefix="customer-contact-select"
+                  unstyled
+                  menuPosition="fixed"
+                  options={customerNames || []}
+                  value={customerSelected}
+                  onChange={(e) => setCustomerSelected(e)}
+                />
+              </label>
+              <label htmlFor="">
+                At
+                <CreatableSelect
+                  className="customer-contact-select"
+                  classNamePrefix="customer-contact-select"
+                  unstyled
+                  menuPosition="fixed"
+                  value={emails}
+                  options={customer?.contacts?.reduce((list, contact) => {
                     if (contact.type === "email") {
-                      emailList.push({
+                      list.push({
                         label: contact.label + ": " + contact.info,
                         value: contact.info,
                       });
                     }
-                    return emailList;
-                  }, []) || []
-                }
-                isMulti={false}
-              />
-            </label>
-          </div>
-          <div className="control-buttons">
-            <button
-              onClick={() => {
-                dispatch();
-              }}
-            >
-              Send To Customer
-            </button>
+                    return list;
+                  }, [])}
+                  required
+                  onChange={setEmails}
+                  isMulti={true}
+                />
+              </label>
+            </div>
+            <input
+              id="subject"
+              name="subject"
+              type="text"
+              placeholder="Subject..."
+              required
+            />
+            <textarea
+              id="body"
+              name="body"
+              type="text"
+              placeholder="Email..."
+              required
+            />
+            <input type="submit" value="Send Email" />
             <button
               onClick={async () => {
                 const blob = await getBlob();
@@ -138,7 +176,9 @@ const PagePDF = () => {
             >
               Go Back To Quote
             </button>
-          </div>
+          </form>
+          {error && <div className="error">{error}</div>}
+          {email && <div className="success">{email}</div>}
         </div>
       </div>
     </div>

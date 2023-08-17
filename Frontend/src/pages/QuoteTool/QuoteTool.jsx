@@ -406,14 +406,7 @@ const PageQuoteTool = () => {
                                 }}
                               >
                                 <option value={"bobst"}>Bobst</option>
-                                <option value={"ijima"}>Ijima</option>
                                 <option value={"heidelberg"}>Heidelberg</option>
-                              </select>
-                              <select>
-                                <option value="0.5">0.5</option>
-                                <option value="1">1</option>
-                                <option value="1.5">1.5</option>
-                                <option value="2">2</option>
                               </select>
                             </div>
                           </th>
@@ -1199,7 +1192,7 @@ const PageQuoteTool = () => {
                         <td>
                           <label>
                             <input
-                              checked={fillCheckboxes[jobIndex]}
+                              checked={fillCheckboxes[jobIndex] || false}
                               onChange={() => {
                                 setFillCheckboxes(
                                   fillCheckboxes.map((c, i) => {

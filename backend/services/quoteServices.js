@@ -6,7 +6,6 @@
 
 const { QuoteModel, RatesModel } = require('../models/QuoteModel');
 const { CounterModel } = require('../models/CounterModel');
-const { updateOne } = require('../models/DocketModel');
 
 const quoteServices = {
   /**
@@ -15,9 +14,8 @@ const quoteServices = {
    * @returns {[Quote] | Quote}
    */
   async get(id) {
-    let responseQuote = null;
     if (id) {
-      responseQuote = QuoteModel.findById(id).then(
+      return QuoteModel.findById(id).then(
         (quote) => {
           if (!quote) throw new Error('QUOTE_NOT_FOUND');
           return quote;
@@ -27,7 +25,7 @@ const quoteServices = {
         },
       );
     } else {
-      responseQuote = QuoteModel.find(
+      return QuoteModel.find(
         {},
         {
           quoteNumber: 1,
@@ -50,7 +48,6 @@ const quoteServices = {
           },
         );
     }
-    return responseQuote;
   },
 
   /**
@@ -92,14 +89,15 @@ const quoteServices = {
    * @returns {Quote}
    */
   async create(quote) {
-    let responseQuote = null;
-    responseQuote = QuoteModel.create(quote).then(
-      (quote) => quote,
+    return QuoteModel.create(quote).then(
+      (quote) => {
+        if (!quote) throw new Error('UNABLE_TO_CREATE_QUOTE');
+        return quote;
+      },
       (error) => {
-        throw error;
+        throw new Error('UNABLE_TO_CREATE_QUOTE', { cause: error });
       },
     );
-    return responseQuote;
   },
 
   /**
@@ -109,8 +107,7 @@ const quoteServices = {
    * @returns {Quote} updated quote
    */
   async update(id, fields) {
-    let responseQuote = null;
-    responseQuote = QuoteModel.findOneAndUpdate({ _id: id }, fields, {
+    return QuoteModel.findOneAndUpdate({ _id: id }, fields, {
       new: true,
     }).then(
       (quote) => quote,
@@ -118,7 +115,6 @@ const quoteServices = {
         throw error;
       },
     );
-    return responseQuote;
   },
 
   /**
@@ -196,14 +192,12 @@ const quoteServices = {
    * @returns {Quote}
    */
   async delete(id) {
-    let responseQuote = null;
-    responseQuote = QuoteModel.findOneAndDelete({ _id: id }).then(
+    return QuoteModel.findOneAndDelete({ _id: id }).then(
       (quote) => quote,
       (error) => {
         throw error;
       },
     );
-    return responseQuote;
   },
 
   /** Helper Functions **/

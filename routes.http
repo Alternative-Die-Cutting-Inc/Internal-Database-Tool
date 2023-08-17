@@ -12,7 +12,24 @@ Content-Type: application/json
 {
     "customer": {
         "name": "alt die inc.{{$timestamp }}",
-        "type": "customer"
+        "type": "customer",
+        "contacts":[
+            {
+                "type": "email",
+                "label": "test 1",
+                "info": "developer+1@alternativedc.com"
+            },
+            {
+                "type": "email",
+                "label": "test 2",
+                "info": "developer+2@alternativedc.com"
+            },
+            {
+                "type": "email",
+                "label": "test 3",
+                "info": "developer+3@alternativedc.com"
+            }
+        ]
     }
 }
 

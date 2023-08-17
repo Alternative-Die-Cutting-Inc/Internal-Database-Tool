@@ -58,7 +58,7 @@ const TransitionRoutes = () => {
     if (!user) {
       dispatch(getUserInfo(navigate));
     }
-  }, [user]);
+  }, [dispatch, navigate, user]);
   return (
     <TransitionGroup>
       <Navbar />

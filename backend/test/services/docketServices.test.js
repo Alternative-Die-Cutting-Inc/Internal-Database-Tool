@@ -15,40 +15,40 @@ describe('Testing Docket Services', () => {
   let newDocket = null;
   it('.create()\t\t\t|\tCreate a Docket', async function () {
     newDocket = await docketServices.create({
-      customerName: 'Alt Die Cut Inc',
+      customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 0',
     });
   });
 
   it('.create()\t\t\t|\tAccurate Creation', async function () {
     newDocket = await docketServices.create({
-      customerName: 'Alt Die Cut Inc',
+      customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 1',
     });
-    assert.equal(newDocket.customerName, 'Alt Die Cut Inc');
+    assert.equal(newDocket.customer.name, 'Alt Die Cut Inc');
     assert.equal(newDocket.jobName, 'Test 1');
     assert.equal(newDocket.docketNumber, 45002);
   });
 
   it('.create()\t\t\t|\tCreate multiple Dockets', async function () {
     await docketServices.create({
-      customerName: 'Alt Die Cut Inc',
+      customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 2',
     });
     await docketServices.create({
-      customerName: 'Alt Die Cut Inc',
+      customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 3',
     });
     await docketServices.create({
-      customerName: 'Alt Die Cut Inc',
+      customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 4',
     });
     await docketServices.create({
-      customerName: 'Alt Die Cut Inc',
+      customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 5',
     });
     await docketServices.create({
-      customerName: 'Alt Die Cut Inc',
+      customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 6',
     });
   });
@@ -99,11 +99,11 @@ describe('Testing Docket Services', () => {
 
   it('.update(id, fields)\t|\tUpdate Docket info', async function () {
     const updatedDocket = await docketServices.update(newDocket.id, {
-      customerName: 'Alternative Die Cut Inc',
+      customer: { name: 'Alternative Die Cut Inc', customerID: '12345' },
       jobName: 'Test 7',
       customerPO: 123456,
     });
-    assert.equal(updatedDocket.customerName, 'Alternative Die Cut Inc');
+    assert.equal(updatedDocket.customer.name, 'Alternative Die Cut Inc');
     assert.equal(updatedDocket.jobName, 'Test 7');
     assert.equal(updatedDocket.customerPO, 123456);
   });

@@ -59,14 +59,12 @@ const docketServices = {
    * @returns {Docket}
    */
   async create(docket) {
-    let responseDocket = null;
-    responseDocket = DocketModel.create(docket).then(
+    return DocketModel.create(docket).then(
       (docket) => docket,
       (error) => {
         throw new Error('UNABLE_TO_CREATE_DOCKET', { cause: error });
       },
     );
-    return responseDocket;
   },
 
   /**

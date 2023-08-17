@@ -6,6 +6,7 @@ export const initialState = {
   error: null,
   customerNames: null,
   customer: null,
+  email: null,
 };
 
 const customerSlice = createSlice({
@@ -64,6 +65,18 @@ const customerSlice = createSlice({
       state.loading = false;
       state.error = error;
     },
+    sendPDFStart: (state) => {
+      state.loading = true;
+      state.email = "Email being sent...";
+    },
+    sendPDFSuccess: (state) => {
+      state.loading = false;
+      state.email = "Email sent successfully";
+    },
+    sendPDFFailure: (state, { payload: error }) => {
+      state.loading = false;
+      state.email = error;
+    },
   },
 });
 
@@ -80,6 +93,9 @@ export const {
   updateCustomerFailure,
   updateCustomerSuccess,
   updateCustomerStart,
+  sendPDFFailure,
+  sendPDFSuccess,
+  sendPDFStart,
 } = customerSlice.actions;
 
 export default customerSlice.reducer;
@@ -97,4 +113,9 @@ export const customerNamesSelector = createSelector(
 export const customerSelector = createSelector(
   customerReducerSelector,
   ({ customer, loading, error }) => ({ customer, loading, error })
+);
+
+export const emailSelector = createSelector(
+  customerReducerSelector,
+  ({ email, error }) => ({ email, error })
 );

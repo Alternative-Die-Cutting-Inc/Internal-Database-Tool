@@ -19,9 +19,7 @@ import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { getCustomerNames } from "../../state/customers/saga";
 import { customerNamesSelector } from "../../state/customers/customerSlice";
-import { ClientSheet } from "../../components/PDF/ClientSheet/ClientSheet";
-import { WorkSheet } from "../../components/PDF/WorkSheet/WorkSheet";
-import ReactPDF from "@react-pdf/renderer";
+
 function useQuery() {
   const { search } = useLocation();
   return useMemo(() => new URLSearchParams(search), [search]);
@@ -159,9 +157,9 @@ const PageQuoteTool = () => {
                   setEditingRates({ job: undefined, rates });
                 } else {
                   dispatch(changeRates({ rates: editingRates.rates }));
-                  saveJob(editingRates.job._id, {
-                    rates: editingRates.rates,
-                  });
+                  // saveJob(editingRates.job._id, {
+                  //   rates: editingRates.rates,
+                  // });
                 }
               }}
             >
@@ -1277,18 +1275,7 @@ const PageQuoteTool = () => {
               </div>
             ))}
           </div>
-          <button
-            onClick={async () => {
-              const blob = await ReactPDF.pdf(
-                WorkSheet(quote, { firstName: "Farbod" }, calculateTotal)
-              ).toBlob();
-              const fileURL = URL.createObjectURL(blob);
-              const pdfWindow = window.open(fileURL, "_blank");
-              pdfWindow && pdfWindow.focus();
-            }}
-          >
-            PDF
-          </button>
+
           <button
             className="add-job-button"
             onClick={() => {

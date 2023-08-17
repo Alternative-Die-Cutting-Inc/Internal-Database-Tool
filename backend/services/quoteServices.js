@@ -251,7 +251,6 @@ const quoteServices = {
           rates.gluer = 1;
           rates.strip = 1;
           rates.bobst = 1;
-          rates.ijima = 1;
           rates.heidelberg = 1;
           return rates.save().then(
             (rates) => {

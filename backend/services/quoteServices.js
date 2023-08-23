@@ -90,9 +90,7 @@ const quoteServices = {
    */
   async create(quote) {
     return QuoteModel.create(quote).then(
-      (quote) => {
-        return quote;
-      },
+      (quote) => quote,
       (error) => {
         throw new Error('UNABLE_TO_CREATE_QUOTE', { cause: error });
       },
@@ -195,9 +193,12 @@ const quoteServices = {
    */
   async delete(id) {
     return QuoteModel.findOneAndDelete({ _id: id }).then(
-      (quote) => quote,
+      (quote) => {
+        if (!quote) throw new Error('QUOTE_NOT_FOUND');
+        return quote;
+      },
       (error) => {
-        throw error;
+        throw new Error('UNABLE_TO_DELETE_QUOTE', { cause: error });
       },
     );
   },
@@ -222,14 +223,14 @@ const quoteServices = {
               return counter.seq;
             },
             (error) => {
-              throw error;
+              throw new Error('UNABLE_TO_UPDATE_COUNTER', { cause: error });
             },
           );
         }
         return counter.seq;
       },
       (error) => {
-        throw error;
+        throw new Error('UNABLE_TO_GET_COUNTER', { cause: error });
       },
     );
   },

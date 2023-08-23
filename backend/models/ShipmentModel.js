@@ -1,29 +1,31 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const formSchema = new mongoose.Schema({
-  formName: {
-    type: String,
-    required: true,
-  },
-  numberOfSkids: {
-    type: Number,
-    required: true,
-  },
-  formNotes: {
+  name: {
     type: String,
     required: false,
   },
-  packageType: {
+  skids: {
+    type: Number,
+    required: false,
+  },
+  notes: {
+    type: String,
+    required: false,
+  },
+  type: {
     type: String,
     required: true,
-    enum: ["cartons", "sheets", "pieces"],
+    enum: ['cartons', 'sheets', 'pieces'],
+    default: 'cartons',
   },
-  packageQuantity: {
+  quantity: {
     // Number of cartons, sheets, or pieces
     type: Number,
     required: true,
+    default: 0,
   },
-  perCartonQuantity: {
+  cartonQuantity: {
     type: Number,
     required: false,
   },
@@ -38,26 +40,22 @@ const ShipmentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  quoteNumber: {
-    type: Number,
+  customer: {
+    type: {
+      name: {
+        type: String,
+        required: true,
+      },
+      customerID: {
+        type: String,
+        required: true,
+      },
+    },
     required: true,
-  },
-  jobName: {
-    type: String,
-    required: true,
-  },
-  customerName: {
-    type: String,
-    required: true,
-  },
-  customerPO: {
-    type: String,
-    required: false,
   },
   labelDate: {
     type: Date,
     required: true,
-    default: new Date(),
   },
   shipDate: {
     type: Date,
@@ -65,6 +63,35 @@ const ShipmentSchema = new mongoose.Schema({
   },
   additionalNotes: {
     type: String,
+    required: false,
+  },
+  address: {
+    type: {
+      line1: {
+        type: String,
+        required: true,
+      },
+      line2: {
+        type: String,
+        required: false,
+      },
+      city: {
+        type: String,
+        required: true,
+      },
+      province: {
+        type: String,
+        required: true,
+      },
+      postalCode: {
+        type: String,
+        required: true,
+      },
+      notes: {
+        type: String,
+        required: false,
+      },
+    },
     required: false,
   },
   label1: {
@@ -75,10 +102,14 @@ const ShipmentSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  shipmentForms: { type: [formSchema], required: true },
+  forms: {
+    type: [formSchema],
+    required: true,
+    default: [],
+  },
 });
 
-const ShipmentModel = mongoose.model("Shipment", ShipmentSchema);
+const ShipmentModel = mongoose.model('Shipment', ShipmentSchema);
 
 /**
  * Global Shipment objet

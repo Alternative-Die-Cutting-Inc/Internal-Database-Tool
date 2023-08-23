@@ -23,7 +23,7 @@ import { PageQuoteTool } from "../pages/QuoteTool/QuoteTool";
 import { PageDocketTool } from "../pages/DocketTool/DocketTool";
 import { PageQuoteToolFunctions } from "../pages/QuoteTool/functions";
 import { PageDocketToolFunctions } from "../pages/DocketTool/functions";
-
+import PagePDF from "../pages/PDF/PDF";
 export const pages = {
   404: {
     label: "404",
@@ -72,6 +72,11 @@ export const pages = {
       label: "Shipments",
       component: <PageShipments />,
       path: "/shipments",
+    },
+    {
+      label: "PDF",
+      component: <PagePDF />,
+      path: "/pdf",
     },
   ],
 

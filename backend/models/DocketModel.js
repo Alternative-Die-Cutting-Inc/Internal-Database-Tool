@@ -54,8 +54,17 @@ const DocketSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  customerName: {
-    type: String,
+  customer: {
+    type: {
+      name: {
+        type: String,
+        required: true,
+      },
+      customerID: {
+        type: String,
+        required: true,
+      },
+    },
     required: true,
   },
   customerPO: {
@@ -141,7 +150,18 @@ const DocketSchema = new mongoose.Schema({
     required: false,
   },
   status: {
-    type: [String],
+    type: [
+      {
+        value: {
+          type: String,
+          required: true,
+        },
+        label: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     required: false,
   },
 });

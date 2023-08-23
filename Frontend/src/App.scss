@@ -58,6 +58,11 @@ button {
   background-color: var(--white);
 }
 
+button,
+th {
+  user-select: none;
+}
+
 ::placeholder {
   color: var(--text-black);
 }

@@ -18,123 +18,121 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(userSelector);
   const navigate = useNavigate();
-  useEffect(() => { 
+  useEffect(() => {
     if (navbarFunctionsRef.current.length > 0) {
       dispatch(setNavbarFunctions({ navbarFunctions: navbarFunctionsRef }));
       console.log(navbarFunctionsRef.current);
     }
-  }, []);
+  });
   return (
-    <>
-      <div className="navbar-container">
-        <div className="navbar-special">
-          <Link
-            to={pathname === "/" ? {} : "/"}
-            style={pathname === "/" ? { pointerEvents: "none" } : {}}
-            key={"home"}
-          >
-            <img
-              className="icon-logo"
-              src={AlternativeDCLogo}
-              alt="altenative die cutting logo"
-            ></img>
-          </Link>
+    <div className="navbar-container">
+      <div className="navbar-special">
+        <Link
+          to={pathname === "/" ? {} : "/"}
+          style={pathname === "/" ? { pointerEvents: "none" } : {}}
+          key={"home"}
+        >
+          <img
+            className="icon-logo"
+            src={AlternativeDCLogo}
+            alt="altenative die cutting logo"
+          ></img>
+        </Link>
 
-          {pages.functions[pathname.slice(1)] &&
-            pages.functions[pathname.slice(1)].map((pageFunction, index) => {
-              return (
-                <div
-                  className="navbar-sub-container"
-                  key={pageFunction.label}
-                  style={
-                    index == 0
-                      ? {
-                          borderWidth: "0px 1px 0px 1px",
-                          borderStyle: "solid",
-                          borderColor: "#000000",
-                        }
-                      : {}
-                  }
-                  onClick={() => {
-                    pageFunction.function(dispatch);
-                  }}
-                >
-                  <nav className="navbar-link-label">
-                    <h3>{pageFunction.label}</h3>
-                  </nav>
-                </div>
-              );
-            })}
-        </div>
-        <div className="navbar-main">
-          {user ? (
-            <>
-              {pages.main.map((page, index) => {
-                return (
-                  <Link
-                    to={pathname === page.path ? {} : page.path}
-                    key={page.path}
-                    style={
-                      pathname === page.path ? { pointerEvents: "none" } : {}
-                    }
-                  >
-                    <div
-                      className={
-                        pathname === page.path
-                          ? "navbar-sub-container page-selected"
-                          : "navbar-sub-container"
-                      }
-                      key={page.path}
-                      style={
-                        index == 0
-                          ? {
-                              borderWidth: "0px 1px 0px 1px",
-                              borderStyle: "solid",
-                              borderColor: "#000000",
-                            }
-                          : {}
-                      }
-                    >
-                      <nav className="navbar-link-label">
-                        <h3>{page.label}</h3>{" "}
-                      </nav>
-                    </div>
-                  </Link>
-                );
-              })}
+        {pages.functions[pathname.slice(1)] &&
+          pages.functions[pathname.slice(1)].map((pageFunction, index) => {
+            return (
               <div
                 className="navbar-sub-container"
-                key={"logout"}
+                key={pageFunction.label}
+                style={
+                  index == 0
+                    ? {
+                        borderWidth: "0px 1px 0px 1px",
+                        borderStyle: "solid",
+                        borderColor: "#000000",
+                      }
+                    : {}
+                }
                 onClick={() => {
-                  dispatch(logout());
-                  navigate("/");
+                  pageFunction.function(dispatch, navigate, pathname);
                 }}
               >
-                <div className="navbar-link-label">
-                  {" "}
-                  <h3>Logout</h3>{" "}
-                </div>
+                <nav className="navbar-link-label">
+                  <h3>{pageFunction.label}</h3>
+                </nav>
               </div>
-            </>
-          ) : (
-            <></>
-          )}
-          <div
-            className="navbar-sub-container"
-            id="darkmode"
-            key={"darkmode"}
-            onClick={() => {
-              setDarkModeStatus(!darkMode);
-              console.log("dark mode:", !darkMode);
-            }}
-          >
-            <div className="navbar-link-label">
-              <h3>Dark Mode</h3>
+            );
+          })}
+      </div>
+      <div className="navbar-main">
+        {user ? (
+          <>
+            {pages.main.map((page, index) => {
+              return (
+                <Link
+                  to={pathname === page.path ? {} : page.path}
+                  key={page.path}
+                  style={
+                    pathname === page.path ? { pointerEvents: "none" } : {}
+                  }
+                >
+                  <div
+                    className={
+                      pathname === page.path
+                        ? "navbar-sub-container page-selected"
+                        : "navbar-sub-container"
+                    }
+                    key={page.path}
+                    style={
+                      index == 0
+                        ? {
+                            borderWidth: "0px 1px 0px 1px",
+                            borderStyle: "solid",
+                            borderColor: "#000000",
+                          }
+                        : {}
+                    }
+                  >
+                    <nav className="navbar-link-label">
+                      <h3>{page.label}</h3>{" "}
+                    </nav>
+                  </div>
+                </Link>
+              );
+            })}
+            <div
+              className="navbar-sub-container"
+              key={"logout"}
+              onClick={() => {
+                dispatch(logout());
+                navigate("/");
+              }}
+            >
+              <div className="navbar-link-label">
+                {" "}
+                <h3>Logout</h3>{" "}
+              </div>
             </div>
+          </>
+        ) : (
+          <></>
+        )}
+        <div
+          className="navbar-sub-container"
+          id="darkmode"
+          key={"darkmode"}
+          onClick={() => {
+            setDarkModeStatus(!darkMode);
+            console.log("dark mode:", !darkMode);
+          }}
+        >
+          <div className="navbar-link-label">
+            <h3>Dark Mode</h3>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

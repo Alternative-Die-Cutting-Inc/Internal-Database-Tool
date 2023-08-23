@@ -33,6 +33,7 @@ const TableControls = ({
           {filterStatus ? (
             <div className="statusSelector" style={{ marginRight: "1vw" }}>
               <Multiselect
+                placeholder="Status"
                 style={{
                   multiselectContainer: {
                     backgroundColor: "var(--dark-grey)",
@@ -99,9 +100,8 @@ const TableControls = ({
         <div className="sorter">
           {sortDate ? (
             <select className="sort-field" name="sorter">
-              <option value={"newToOld"}>Newest to oldest</option>
-              <option value={"oldToNew"}>Oldest to newest</option>
-              <option value={"docketNumber"}>Docket Number</option>
+              <option value={"newToOld"}>Newest to Oldest</option>
+              <option value={"oldToNew"}>Oldest to Newest</option>
             </select>
           ) : (
             <></>

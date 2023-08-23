@@ -26,6 +26,7 @@ const CustomerSchema = new mongoose.Schema({
       },
     ],
     required: false,
+    default: [],
   },
   address: {
     type: {
@@ -55,6 +56,11 @@ const CustomerSchema = new mongoose.Schema({
       },
     },
     required: false,
+  },
+  premium: {
+    type: Number,
+    required: true,
+    default: 1,
   },
   memo: {
     type: String,

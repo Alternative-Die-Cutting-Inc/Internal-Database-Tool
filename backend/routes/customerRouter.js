@@ -7,8 +7,12 @@
 
 const express = require('express');
 const customerServices = require('../services/customerServices');
-
+const emailServices = require('../services/emailServices');
 const router = express.Router();
+
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 /**
  * @description get all customers
@@ -18,22 +22,7 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     const allCustomers = await customerServices.get();
-    res.status(200).send(allCustomers);
-  } catch (error) {
-    next(error);
-  }
-});
-
-/**
- * @description get one customer by id
- * @route GET /customers/:id
- * @returns {Customer} customer objects
- */
-router.get('/:id', async (req, res, next) => {
-  try {
-    const id = req.params.id;
-    const allCustomers = await customerServices.get(id);
-    res.status(200).send(allCustomers);
+    res.status(200).send({ customers: allCustomers });
   } catch (error) {
     next(error);
   }
@@ -47,7 +36,22 @@ router.get('/:id', async (req, res, next) => {
 router.get('/names', async (req, res, next) => {
   try {
     const allCustomers = await customerServices.getNames();
-    res.status(200).send(allCustomers);
+    res.status(200).send({ customers: allCustomers });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
+ * @description get one customer by id
+ * @route GET /customers/:id
+ * @returns {Customer} customer objects
+ */
+router.get('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const responseCustomer = await customerServices.get(id);
+    res.status(200).send({ customer: responseCustomer });
   } catch (error) {
     next(error);
   }
@@ -62,7 +66,7 @@ router.post('/', async (req, res, next) => {
   try {
     const newCustomer = req.body.customer;
     const responseCustomer = await customerServices.create(newCustomer);
-    res.status(201).send(responseCustomer);
+    res.status(201).send({ customer: responseCustomer });
   } catch (error) {
     next(error);
   }
@@ -94,6 +98,32 @@ router.delete('/:id', async (req, res, next) => {
     const id = req.params.id;
     const responseCustomer = await customerServices.delete(id);
     res.status(200).send(responseCustomer);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/email', upload.single('pdfFile'), async (req, res, next) => {
+  const file = req.file;
+  const emails = req.body.emails.split(',');
+  const subject = req.body.subject;
+  const body = req.body.body;
+  try {
+    if (!file) {
+      throw new Error('NO_FILE');
+    }
+    if (!emails || emails.length === 0) {
+      throw new Error('NO_EMAILS');
+    }
+    const response = await emailServices.sendRawEmail(
+      body,
+      ' ',
+      subject,
+      [{ content: file, type: 'non-static', contentDisposition: 'attachment' }],
+      emails,
+      'developer@alternativedc.com',
+    );
+    res.status(200).send(response);
   } catch (error) {
     next(error);
   }

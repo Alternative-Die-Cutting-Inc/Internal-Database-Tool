@@ -2,9 +2,23 @@ import "./Quotes.scss";
 import { TableControls } from "../../components/TableControls/TableControls";
 import { QuotesTable } from "../../components/QuotesTable/QuotesTable";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { createQuote } from "../../state/quotes/saga";
+import { customerNamesSelector } from "../../state/customers/customerSlice";
+import Select from "react-select";
+import { useEffect, useState } from "react";
+import { getCustomerNames } from "../../state/customers/saga";
 
 const PageQuotes = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCustomerNames());
+  }, [dispatch]);
+
+  const [customer, setCustomer] = useState();
+  const { customerNames } = useSelector(customerNamesSelector);
 
   return (
     <>
@@ -20,16 +34,29 @@ const PageQuotes = () => {
               className="new-quote-fields"
               onSubmit={(e) => {
                 e.preventDefault();
-
-                navigate("/quotetool");
+                const quote = {
+                  customer: {
+                    name: customer.label,
+                    customerID: customer.value,
+                  },
+                  jobName: e.target.jobName.value,
+                  attention: e.target.attention.value,
+                  description: e.target.description.value,
+                  notes: e.target.notes.value,
+                  status: [{ value: "Created", label: "Created" }],
+                };
+                dispatch(createQuote({ quote, navigate }));
               }}
             >
-              <input
-                type="search"
-                className="new-quote-field"
-                placeholder="Customer"
-                name="customer"
-                required="required"
+              <Select
+                className="new-quote-customer-select"
+                unstyled
+                classNamePrefix="new-quote-customer-select"
+                options={customerNames || []}
+                onChange={(option) => {
+                  setCustomer(option);
+                }}
+                required
               />
               <input
                 type="text"
@@ -43,7 +70,6 @@ const PageQuotes = () => {
                 className="new-quote-field"
                 placeholder="Attention"
                 name="attention"
-                required="required"
               />
               <input
                 type="text"

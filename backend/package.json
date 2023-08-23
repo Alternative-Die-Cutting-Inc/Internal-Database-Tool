@@ -7,13 +7,15 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon ./server.js localhost 8080",
-    "test": "nyc --reporter=lcov --reporter=text --check-coverage=true mocha --recursive --exit",
-    "test:actions": "nyc --reporter=text-summary mocha --recursive --exit"
+    "test": "nyc --reporter=lcov --reporter=text --check-coverage=true mocha --recursive --exit ",
+    "testing": "set JWT_RESET_TOKEN=123 && nodemon -x nyc --reporter=lcov --reporter=text mocha --recursive --exit",
+    "test:actions": "nyc --reporter=text-summary --check-coverage=true mocha --recursive --exit"
   },
   "lint-staged": {
     "*.js": "eslint --quiet --fix && prettier --write"
   },
   "dependencies": {
+    "@aws-sdk/client-sesv2": "^3.391.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "bull": "^4.10.4",
@@ -23,8 +25,10 @@
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "http": "^0.0.1-security",
+    "mimemessage": "^1.0.5",
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.1",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.3.3",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0"

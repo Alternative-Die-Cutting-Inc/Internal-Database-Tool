@@ -51,7 +51,7 @@ const PageLogin = () => {
           </form>
           {error && (
             <div className="login-error">
-              <p>{error.data.message}</p>
+              <p>{error}</p>
             </div>
           )}
         </div>

@@ -101,7 +101,7 @@ describe('Testing Customer Services', () => {
     const existingCustomerNames = await customerServices.getNames();
     assert.notEqual(existingCustomerNames.length, 0);
     assert.equal(existingCustomerNames.length, 4);
-    assert.equal(existingCustomerNames[0], 'Alt Die Cut Inc');
+    assert.equal(existingCustomerNames[0].label, 'Alt Die Cut Inc');
   });
 
   it('.update(id, fields)\t|\tUpdate a Customer', async function () {

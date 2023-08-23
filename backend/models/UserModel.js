@@ -1,17 +1,18 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const validateName = function (name) {
-  return !(name === "" || name === null || name === undefined);
+  return !(name === '' || name === null || name === undefined);
 };
 
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
+    unique: true,
     validate: {
       validator: validateName,
-      message: "Username cannot be empty",
+      message: 'Username cannot be empty',
     },
-    required: [true, "Username cannot be empty"],
+    required: [true, 'Username cannot be empty'],
   },
   firstName: {
     type: String,
@@ -46,8 +47,8 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-UserSchema.path("email").validate(function (value) {
-  return this.model("User")
+UserSchema.path('email').validate(function (value) {
+  return this.model('User')
     .count({ email: value })
     .then(
       (count) => {
@@ -57,12 +58,12 @@ UserSchema.path("email").validate(function (value) {
         return true;
       },
       (error) => {
-        return error;
-      }
+        return new Error('UNABLE_TO_VALIDATE_EMAIL', { cause: error });
+      },
     );
-}, "Email already exists");
+}, 'DUPLICATE_EMAIL');
 
-const UserModel = mongoose.model("User", UserSchema);
+const UserModel = mongoose.model('User', UserSchema);
 
 /**
  * Global User objet

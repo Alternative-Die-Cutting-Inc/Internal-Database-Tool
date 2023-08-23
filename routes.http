@@ -1,0 +1,51 @@
+GET {{$dotenv API_BASE_URL}}/customers/
+
+###
+
+GET {{$dotenv API_BASE_URL}}/customers/names
+
+###
+
+POST {{$dotenv API_BASE_URL}}/customers/
+Content-Type: application/json
+
+{
+    "customer": {
+        "name": "alt die inc.{{$timestamp }}",
+        "type": "customer",
+        "contacts":[
+            {
+                "type": "email",
+                "label": "test 1",
+                "info": "developer+1@alternativedc.com"
+            },
+            {
+                "type": "email",
+                "label": "test 2",
+                "info": "developer+2@alternativedc.com"
+            },
+            {
+                "type": "email",
+                "label": "test 3",
+                "info": "developer+3@alternativedc.com"
+            }
+        ]
+    }
+}
+
+###
+
+POST {{$dotenv API_BASE_URL}}/user/signup
+Content-Type: application/json
+
+{
+    "user": {
+        "email": "test@123.com",
+        "password": "Password!2",
+        "username": "1"
+    }
+}
+
+###
+
+POST {{$dotenv API_BASE_URL}}/user/signin

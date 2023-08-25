@@ -11,23 +11,48 @@ Content-Type: application/json
 
 {
     "customer": {
-        "name": "alt die inc.{{$timestamp }}",
-        "type": "customer",
+        "name": "Alternative Die Cutting Inc.",
+        "type": "supplier",
         "contacts":[
             {
                 "type": "email",
-                "label": "test 1",
-                "info": "developer+1@alternativedc.com"
+                "label": "Richard",
+                "info":"richard@alternativedc.com"
             },
             {
                 "type": "email",
-                "label": "test 2",
-                "info": "developer+2@alternativedc.com"
+                "label": "Rob",
+                "info":"rob@alternativedc.com"
             },
             {
                 "type": "email",
-                "label": "test 3",
-                "info": "developer+3@alternativedc.com"
+                "label": "Frank",
+                "info":"frankp@alternativedc.com"
+            },
+            {
+                "type": "email",
+                "label": "Carmine",
+                "info":"carmine@alternativedc.com"
+            },
+            {
+                "type": "email",
+                "label": "Aldo",
+                "info":"aldo@alternativedc.com"
+            },
+            {
+                "type": "email",
+                "label": "Shipping",
+                "info":"shipping@alternativedc.com"
+            },
+            {
+                "type": "email",
+                "label": "Dies",
+                "info":"dies@alternativedc.com"
+            },
+            {
+                "type": "email",
+                "label": "Developer",
+                "info":"developer@alternativedc.com"
             }
         ]
     }

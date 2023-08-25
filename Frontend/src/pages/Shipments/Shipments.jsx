@@ -28,8 +28,34 @@ const PageShipments = () => {
       index === position ? true : false
     );
 
-    if (position === 0) saveShipment({ address: customer.address });
-    else if (position === 2) saveShipment({ address: {} });
+    if (position === 0)
+      saveShipment({
+        address: {
+          ...customer.address,
+          show: {
+            adc: editingShipment?.address.show.adc,
+            customer: true,
+          },
+        },
+      });
+    else if (position === 1)
+      saveShipment({
+        address: {
+          show: {
+            adc: editingShipment?.address.show.adc,
+            customer: true,
+          },
+        },
+      });
+    else if (position === 2)
+      saveShipment({
+        address: {
+          show: {
+            adc: editingShipment?.address.show.adc,
+            customer: false,
+          },
+        },
+      });
     setCheckedState(updatedCheckedState);
   };
 
@@ -51,6 +77,9 @@ const PageShipments = () => {
           forms: [],
           customer: info,
           labelDate: new Date(),
+          address: {
+            show: {},
+          },
         })
       );
       dispatch(getCustomer({ id: info.customerID }));
@@ -64,13 +93,23 @@ const PageShipments = () => {
   }, [shipment]);
 
   useEffect(() => {
-    if (customer) {
-      setEditingShipment((prev) => ({
-        ...prev,
-        address: customer.address,
-      }));
+    if (customer && editingShipment) {
+      dispatch(
+        updateShipment({
+          id: editingShipment._id,
+          fields: {
+            address: {
+              ...customer.address,
+              show: {
+                adc: true,
+                customer: true,
+              },
+            },
+          },
+        })
+      );
     }
-  }, [customer]);
+  }, [dispatch, customer]);
 
   const saveShipment = (fields) => {
     if (editingShipment) {
@@ -447,8 +486,23 @@ const PageShipments = () => {
               className="label-info-checkbox adc-address"
               htmlFor="adc-address"
             >
-              <input type="checkbox" name="adc-address" id="adc-address" /> Hide
-              ADC Address
+              <input
+                type="checkbox"
+                name="adc-address"
+                id="adc-address"
+                onChange={(event) => {
+                  saveShipment({
+                    address: {
+                      ...editingShipment.address,
+                      show: {
+                        ...editingShipment.address.show,
+                        adc: !event.target.checked,
+                      },
+                    },
+                  });
+                }}
+              />{" "}
+              Hide ADC Address
             </label>
           </div>
         </div>

@@ -244,7 +244,7 @@ const PageShipments = () => {
                     <input
                       type="text"
                       name="customer"
-                      value={editingShipment?.customer.name || ""}
+                      value={editingShipment?.customer?.name || ""}
                       readOnly
                     />
                   </td>
@@ -480,21 +480,6 @@ const PageShipments = () => {
                 id="additional-notes"
               />
             </label>
-          </div>
-        </div>
-        <div className="label-row" id="row3">
-          <div className="info-row-item label-controls">
-            <h2 className="label-info-header">Email To Client</h2>
-            <div className="controls-container">
-              <label htmlFor="">
-                Client Email: <input type="email" name="" id="" />
-              </label>
-              <button>Print & Send</button>
-            </div>
-            <h2 className="label-info-header">Print Label</h2>
-            <div className="controls-container">
-              <button>Print</button>
-            </div>
           </div>
         </div>
       </div>

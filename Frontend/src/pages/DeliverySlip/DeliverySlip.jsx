@@ -5,13 +5,13 @@ import {
   View,
   StyleSheet,
   Image,
+  pdf,
+  PDFViewer,
 } from "@react-pdf/renderer";
 import Logo from "../../assets/logo/logo-large.png";
-import PropTypes from "prop-types";
 import "./DeliverySlip.scss";
 import { useLocation } from "react-router-dom";
 import { useMemo, useEffect, useState } from "react";
-import { pdf, PDFViewer } from "@react-pdf/renderer";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userSelector } from "../../state/user/userSlice";
@@ -49,14 +49,14 @@ const PageDeliverySlip = () => {
   const { docket } = useSelector(docketSelector);
   const { quote } = useSelector(quoteSelector);
   const { user } = useSelector(userSelector);
-  const { email, error } = useSelector(emailSelector);
+  const { email, error, loading } = useSelector(emailSelector);
 
   const [emails, setEmails] = useState([]);
   const [customerSelected, setCustomerSelected] = useState();
 
   const handleSend = async (event) => {
     event.preventDefault();
-    const blob = await pdf(DeliverySlip).toBlob();
+    const blob = await pdf(DeliverySlip()).toBlob();
     let formData = new FormData();
     formData.append(
       "emails",
@@ -169,13 +169,13 @@ const PageDeliverySlip = () => {
 
   const AltDieIncInfo = {
     name: "Alternative Die Cutting Inc.",
-    address: "132 Alexdon Rd, Toronto ON",
+    address: `132 Alexdon Rd\nToronto ON`,
     postalCode: "M3J2B3",
     tel: "(416) 748-6868",
     fax: "(416) 748-0737",
     website: "www.alternativedc.com",
   };
-  const DeliverySlip = (
+  const DeliverySlip = () => (
     <Document
       author={user?.firstName}
       title={`Alternative Die Cutting Inc. Quote for ${quote?.jobName}`}
@@ -191,13 +191,17 @@ const PageDeliverySlip = () => {
                   fontWeight: "light",
                 }}
               >
-                {shipment?.address
+                {shipment?.address.show.adc
                   ? AltDieIncInfo.address +
                     `\n` +
                     AltDieIncInfo.postalCode +
-                    `\n`
-                  : "" +
+                    `\n` +
                     "Tel: " +
+                    AltDieIncInfo.tel +
+                    `\n` +
+                    AltDieIncInfo.website +
+                    `\n`
+                  : "Tel: " +
                     AltDieIncInfo.tel +
                     `\n` +
                     AltDieIncInfo.website +
@@ -224,14 +228,14 @@ const PageDeliverySlip = () => {
             </Text>
           </View>
         </View>
-        <View debug style={styles.section1}>
-          <View debug style={{ width: "100%" }}>
+        <View style={styles.section1}>
+          <View style={{ width: "100%" }}>
             <Text
               style={{
                 fontSize: "12px",
               }}
             >
-              {"Docket #" + quote?.jobName}
+              {"Docket #" + docket?.docketNumber}
             </Text>
             <Text
               style={{
@@ -262,21 +266,29 @@ const PageDeliverySlip = () => {
               {"Contact: " + (docket?.productionPerson || "N/A")}
             </Text>
           </View>
-          <View debug style={{ width: "100%" }}>
-            <Text
-              style={{
-                fontSize: "12px",
-              }}
-            >
-              {"Ship to:"}
-            </Text>
-            <Text
-              style={{
-                fontSize: "12px",
-              }}
-            >
-              {"Ship to:"}
-            </Text>
+          <View style={{ width: "100%" }}>
+            {shipment?.address.show.customer ? (
+              <>
+                <Text
+                  style={{
+                    fontSize: "12px",
+                  }}
+                >
+                  {"Ship to:"}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: "12px",
+                  }}
+                >
+                  {`${shipment?.address.line1 || ""}\n${
+                    shipment?.address.line2 || ""
+                  }\n${shipment?.address.city || ""}\n${
+                    shipment?.address.province || ""
+                  }\n${shipment?.address.postalCode || ""}`}
+                </Text>
+              </>
+            ) : null}
           </View>
         </View>
         <View style={styles.section2}>
@@ -300,10 +312,10 @@ const PageDeliverySlip = () => {
         </View>
         <View style={styles.table}>
           <View style={[styles.row, styles.bold, styles.header]}>
-            <Text style={{ width: "5%" }}> </Text>
-            <Text style={styles.row1}>{"Units"}</Text>
-            <Text style={styles.row2}>{"Units per Sheet"}</Text>
-            <Text style={styles.row3}>{"Sheets"}</Text>
+            <Text style={{ width: "5%" }} />
+            <Text style={styles.row1}>{"Form"}</Text>
+            <Text style={styles.row2}>{"Quantity"}</Text>
+            <Text style={styles.row3}>{"Number of Skids"}</Text>
             <Text style={styles.row4}>{"Cost Per Thousand"}</Text>
             <Text style={styles.row5}>{"Total"}</Text>
             <Text
@@ -316,8 +328,7 @@ const PageDeliverySlip = () => {
               {"Notes"}
             </Text>
           </View>
-          {quote?.quoteJobs.map((job, index) => {
-            const sheets = parseInt(job.units / job.perSheet);
+          {shipment?.forms?.map((form, index) => {
             return (
               <View
                 key={index}
@@ -327,22 +338,26 @@ const PageDeliverySlip = () => {
                 <Text style={{ width: "5%", textAlign: "center" }}>
                   {index + 1}
                 </Text>
-                <Text style={styles.row1}>{job.units}</Text>
-                <Text style={styles.row2}>{job.perSheet}</Text>
-                <Text style={styles.row3}>{isNaN(sheets) ? 0 : sheets}</Text>
-                <Text style={styles.row4}>
-                  {isNaN(sheets)
-                    ? 0
-                    : (job.total / sheets).toLocaleString("en-CA", {
-                        style: "currency",
-                        currency: "CAD",
-                      })}
+                <Text style={styles.row1}>{form.name}</Text>
+                <Text style={styles.row2}>
+                  {form.type === "cartons"
+                    ? form.quantity +
+                      " " +
+                      form.type +
+                      `\n` +
+                      form.cartonQuantity +
+                      " pieces per carton and partial of " +
+                      form.partialCartonQuantity +
+                      " pieces"
+                    : form.quantity + " " + form.type}
                 </Text>
+                <Text style={styles.row3}>{form.skids}</Text>
+                <Text style={styles.row4}>{form.name}</Text>
                 <Text style={[styles.row5, styles.bold]}>
-                  {job.total.toLocaleString("en-CA", {
-                    style: "currency",
-                    currency: "CAD",
-                  })}
+                  {form.type === "cartons"
+                    ? form.quantity * form.cartonQuantity +
+                      form.partialCartonQuantity
+                    : form.quantity}
                 </Text>
                 <Text
                   style={{
@@ -350,7 +365,7 @@ const PageDeliverySlip = () => {
                     textAlign: "center",
                   }}
                 >
-                  {job.clientNotes}
+                  {form.notes}
                 </Text>
               </View>
             );
@@ -360,21 +375,19 @@ const PageDeliverySlip = () => {
     </Document>
   );
 
-  if (!quote || !user || !docket || !shipment) return <></>;
+  if (!quote || !user || !docket || !shipment) return null;
 
   return (
     <div className="pdf-container">
       <div className="pdf-viewer-container">
-        {quote && user && docket && shipment ? (
-          <PDFViewer
-            className="pdf-viewer"
-            showToolbar={true}
-            height={"100%"}
-            width={"100%"}
-          >
-            <DeliverySlip /> // Error here
-          </PDFViewer>
-        ) : null}
+        <PDFViewer
+          className="pdf-viewer"
+          showToolbar={true}
+          height={"100%"}
+          width={"100%"}
+        >
+          <DeliverySlip />
+        </PDFViewer>
       </div>
       <div className="pdf-controls-container">
         <div className="email-controls">
@@ -448,6 +461,7 @@ const PageDeliverySlip = () => {
               Go Back To Docket
             </button>
           </form>
+          {loading && <div className="loading">Sending Email...</div>}
           {error && <div className="error">{error}</div>}
           {email && <div className="success">{email}</div>}
         </div>

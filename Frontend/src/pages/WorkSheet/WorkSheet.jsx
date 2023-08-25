@@ -1,6 +1,25 @@
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import PropTypes from "prop-types";
-
+import "./WorkSheet.scss";
+import { useLocation } from "react-router-dom";
+import { useMemo, useEffect, useState } from "react";
+import { pdf, PDFViewer } from "@react-pdf/renderer";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { userSelector } from "../../state/user/userSlice";
+import { quoteSelector } from "../../state/quotes/quoteSlice";
+import {
+  customerNamesSelector,
+  customerSelector,
+  emailSelector,
+} from "../../state/customers/customerSlice";
+import {
+  getCustomerNames,
+  getCustomer,
+  sendToCustomer,
+} from "../../state/customers/saga";
+import { getQuote } from "../../state/quotes/saga";
+import CreatableSelect from "react-select/creatable";
 const WorkSheet = ({ quote, user }) => {
   const calculateTotal = (job) => {
     let Subtotal = 0,
@@ -388,4 +407,132 @@ WorkSheet.propTypes = {
   user: PropTypes.object,
 };
 
-export default WorkSheet;
+function useQuery() {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
+
+const PageWorkSheet = () => {
+  let query = useQuery();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { customerNames } = useSelector(customerNamesSelector);
+  const { customer } = useSelector(customerSelector);
+  const { quote } = useSelector(quoteSelector);
+  const { user } = useSelector(userSelector);
+  const { email, error } = useSelector(emailSelector);
+
+  const [emails, setEmails] = useState([]);
+
+  const handleSend = async (event) => {
+    event.preventDefault();
+    const blob = await pdf(WorkSheet({ quote, user })).toBlob();
+    let formData = new FormData();
+    formData.append(
+      "emails",
+      emails.map((email) => email.value)
+    );
+    formData.append("pdfFile", blob);
+    formData.append("subject", event.target.subject.value);
+    formData.append("body", event.target.body.value);
+    dispatch(sendToCustomer({ formData }));
+  };
+
+  useEffect(() => {
+    dispatch(getQuote({ id: query.get("quoteNumber") }));
+  }, [dispatch, query]);
+
+  useEffect(() => {
+    dispatch(getCustomerNames());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const customerID = customerNames?.find(
+      (customer) => customer.label === "Alternative Die Cutting Inc."
+    )?.value;
+    if (customerID) dispatch(getCustomer({ id: customerID }));
+  }, [dispatch, customerNames]);
+
+  return (
+    <div className="work-sheet-container">
+      <div className="pdf-viewer-container">
+        {quote ? (
+          <PDFViewer
+            className="pdf-viewer"
+            showToolbar={true}
+            height={"100%"}
+            width={"100%"}
+          >
+            <WorkSheet quote={quote} user={user} />
+          </PDFViewer>
+        ) : null}
+      </div>
+      <div className="pdf-controls-container">
+        <div className="email-controls">
+          <form className="control-buttons" onSubmit={handleSend}>
+            <div className="email-selection">
+              <label htmlFor="">
+                Email To:
+                <CreatableSelect
+                  className="customer-contact-select"
+                  classNamePrefix="customer-contact-select"
+                  unstyled
+                  menuPosition="fixed"
+                  value={emails}
+                  options={customer?.contacts?.reduce((list, contact) => {
+                    if (contact.type === "email") {
+                      list.push({
+                        label: contact.label + ": " + contact.info,
+                        value: contact.info,
+                      });
+                    }
+                    return list;
+                  }, [])}
+                  required
+                  onChange={setEmails}
+                  isMulti={true}
+                />
+              </label>
+            </div>
+            <input
+              id="subject"
+              name="subject"
+              type="text"
+              placeholder="Subject..."
+              required
+            />
+            <textarea
+              id="body"
+              name="body"
+              type="text"
+              placeholder="Email..."
+              required
+            />
+            <input type="submit" value="Send Email" />
+            <button
+              onClick={async () => {
+                const blob = await pdf(WorkSheet({ quote, user })).toBlob();
+                const fileURL = URL.createObjectURL(blob);
+                const pdfWindow = window.open(fileURL, "_blank");
+                pdfWindow && pdfWindow.focus();
+              }}
+            >
+              Open PDF
+            </button>
+            <button
+              onClick={() => {
+                navigate("/quotetool?quoteNumber=" + quote.quoteNumber);
+              }}
+            >
+              Go Back To Quote
+            </button>
+          </form>
+          {error && <div className="error">{error}</div>}
+          {email && <div className="success">{email}</div>}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PageWorkSheet;

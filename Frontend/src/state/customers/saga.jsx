@@ -35,7 +35,7 @@ export function* getCustomerNamesSaga() {
 
 export const getCustomer = createAction("getCustomerSaga");
 
-export function* getCustomerSaga({ payload: { id } }) {
+export function* getCustomerSaga({ payload: { id, name } }) {
   const { axios } = useAxios();
 
   try {

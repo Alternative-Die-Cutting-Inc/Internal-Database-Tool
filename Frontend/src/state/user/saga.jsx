@@ -87,7 +87,6 @@ export function* getUserInfoSaga({ payload: navigate }) {
     yield put(setLoading(false));
   } catch (error) {
     navigate && navigate("/");
-    console.error(error);
     yield put(setLoading(false));
   }
 }

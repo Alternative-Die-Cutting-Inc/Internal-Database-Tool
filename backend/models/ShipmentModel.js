@@ -69,7 +69,7 @@ const ShipmentSchema = new mongoose.Schema({
     type: {
       line1: {
         type: String,
-        required: true,
+        required: false,
       },
       line2: {
         type: String,
@@ -77,19 +77,33 @@ const ShipmentSchema = new mongoose.Schema({
       },
       city: {
         type: String,
-        required: true,
+        required: false,
       },
       province: {
         type: String,
-        required: true,
+        required: false,
       },
       postalCode: {
         type: String,
-        required: true,
+        required: false,
       },
       notes: {
         type: String,
         required: false,
+      },
+      show: {
+        type: {
+          adc: {
+            type: Boolean,
+            required: false,
+            default: true,
+          },
+          customer: {
+            type: Boolean,
+            required: false,
+            default: true,
+          },
+        },
       },
     },
     required: false,

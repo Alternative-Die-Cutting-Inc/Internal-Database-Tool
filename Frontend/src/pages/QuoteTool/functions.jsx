@@ -2,17 +2,13 @@ const PageQuoteToolFunctions = [
   {
     label: "Client Sheet",
     function: function (_, navigate) {
-      navigate(
-        "/pdf?sheet=ClientSheet" + window.location.search.replace("?", "&")
-      );
+      navigate("/client-sheet" + window.location.search);
     },
   },
   {
     label: "Work Sheet",
     function: function (_, navigate) {
-      navigate(
-        "/pdf?sheet=WorkSheet" + window.location.search.replace("?", "&")
-      );
+      navigate("/work-sheet" + window.location.search);
     },
   },
 ];

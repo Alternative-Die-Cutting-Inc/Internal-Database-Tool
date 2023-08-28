@@ -67,7 +67,7 @@ const customerSlice = createSlice({
     },
     sendPDFStart: (state) => {
       state.loading = true;
-      state.email = "Email being sent...";
+      state.email = null;
     },
     sendPDFSuccess: (state) => {
       state.loading = false;
@@ -75,7 +75,13 @@ const customerSlice = createSlice({
     },
     sendPDFFailure: (state, { payload: error }) => {
       state.loading = false;
-      state.email = error;
+      state.email = null;
+      state.error = error;
+    },
+    clearEmailState: (state) => {
+      state.email = null;
+      state.error = null;
+      state.loading = false;
     },
   },
 });
@@ -96,6 +102,7 @@ export const {
   sendPDFFailure,
   sendPDFSuccess,
   sendPDFStart,
+  clearEmailState,
 } = customerSlice.actions;
 
 export default customerSlice.reducer;

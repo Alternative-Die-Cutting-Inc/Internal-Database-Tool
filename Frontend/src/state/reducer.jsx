@@ -4,8 +4,10 @@ import customerReducer from "./customers/customerSlice";
 import quotesReducer from "./quotes/quoteSlice";
 import navbarReducer from "./navbar/navbarSlice";
 import usersReducer from "./user/userSlice";
+import shipmentsReducer from "./shipments/shipmentsSlice";
 
 const rootReducer = combineReducers({
+  shipmentsReducer,
   customerReducer,
   docketsReducer,
   quotesReducer,

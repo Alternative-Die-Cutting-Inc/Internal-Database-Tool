@@ -17,6 +17,7 @@ import {
   sendPDFFailure,
   sendPDFSuccess,
   sendPDFStart,
+  clearEmailState,
 } from "./customerSlice";
 
 export const getCustomerNames = createAction("getCustomerNamesSaga");
@@ -35,7 +36,7 @@ export function* getCustomerNamesSaga() {
 
 export const getCustomer = createAction("getCustomerSaga");
 
-export function* getCustomerSaga({ payload: { id } }) {
+export function* getCustomerSaga({ payload: { id, name } }) {
   const { axios } = useAxios();
 
   try {
@@ -90,10 +91,17 @@ export function* sendToCustomerSaga({ payload: { formData } }) {
   }
 }
 
+export const clearEmail = createAction("clearEmailSaga");
+
+export function* clearEmailSaga() {
+  yield put(clearEmailState());
+}
+
 export default function* customerSaga() {
   yield takeLeading(getCustomer, getCustomerSaga);
   yield takeLeading(createCustomer, createCustomerSaga);
   yield takeLeading(updateCustomer, updateCustomerSaga);
   yield takeLeading(getCustomerNames, getCustomerNamesSaga);
   yield takeLeading(sendToCustomer, sendToCustomerSaga);
+  yield takeLeading(clearEmail, clearEmailSaga);
 }

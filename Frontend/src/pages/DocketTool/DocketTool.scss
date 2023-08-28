@@ -1,7 +1,6 @@
 .docket-tool-container {
   min-height: 90vh;
   background-color: var(--light-grey);
-  color: var(--light-accent);
   margin: 0.5rem;
   border-radius: 15px;
   flex-direction: column;
@@ -14,6 +13,7 @@
   font-size: 1.5rem;
   font-weight: normal;
   padding: 0.75vh 0.5vw;
+  color: var(--light-accent);
 }
 
 .docket-info {
@@ -261,12 +261,30 @@
   flex-direction: column;
   justify-content: space-around;
   background-color: var(--dark-grey);
+  color: var(--light-accent);
   border-radius: 15px;
   margin: 0.5vh 0;
   padding: 1vh 0.75vw;
   word-wrap: break-word;
   h2 {
     max-width: 32.5vw;
+  }
+  button {
+    align-self: center;
+    width: 20vw;
+    border-radius: 15px;
+    background-color: var(--light-grey);
+    color: var(--dark-grey);
+    font-size: 1.25rem;
+    margin-top: 10px;
+    &:hover {
+      background-color: var(--light-accent);
+      color: var(--dark-grey);
+    }
+    &:active {
+      background-color: var(--dark-grey);
+      color: var(--light-grey);
+    }
   }
 }
 

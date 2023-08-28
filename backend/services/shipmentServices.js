@@ -4,7 +4,7 @@
  * @typedef {import("../models/ShipmentModel").Shipment} Shipment
  */
 
-const ShipmentModel = require("../models/ShipmentModel");
+const ShipmentModel = require('../models/ShipmentModel');
 
 const shipmentServices = {
   /**
@@ -13,23 +13,24 @@ const shipmentServices = {
    * @returns {[Shipment] | Shipment}
    */
   async get(id) {
-    let responseShipment = null;
     if (id) {
-      responseShipment = ShipmentModel.findById(id).then(
-        (shipment) => shipment,
+      return ShipmentModel.findById(id).then(
+        (shipment) => {
+          if (!shipment) throw new Error('SHIPMENT_NOT_FOUND');
+          return shipment;
+        },
         (error) => {
-          throw error;
-        }
+          throw new Error('UNABLE_TO_GET_SHIPMENT', { cause: error });
+        },
       );
     } else {
-      responseShipment = ShipmentModel.find({}).then(
+      return ShipmentModel.find({}).then(
         (shipments) => shipments,
         (error) => {
-          throw error;
-        }
+          throw new Error('UNABLE_TO_GET_SHIPMENTS', { cause: error });
+        },
       );
     }
-    return responseShipment;
   },
 
   /**
@@ -38,14 +39,12 @@ const shipmentServices = {
    * @returns {Shipment}
    */
   async create(shipment) {
-    let responseShipment = null;
-    responseShipment = ShipmentModel.create(shipment).then(
+    return ShipmentModel.create(shipment).then(
       (shipment) => shipment,
       (error) => {
-        throw error;
-      }
+        throw new Error('UNABLE_TO_CREATE_SHIPMENT', { cause: error });
+      },
     );
-    return responseShipment;
   },
 
   /**
@@ -55,16 +54,17 @@ const shipmentServices = {
    * @returns {Shipment} updated shipment
    */
   async update(id, fields) {
-    let responseShipment = null;
-    responseShipment = ShipmentModel.findOneAndUpdate({ _id: id }, fields, {
+    return ShipmentModel.findByIdAndUpdate({ _id: id }, fields, {
       new: true,
     }).then(
-      (shipment) => shipment,
+      (shipment) => {
+        if (!shipment) throw new Error('SHIPMENT_NOT_FOUND');
+        return shipment;
+      },
       (error) => {
-        throw error;
-      }
+        throw new Error('UNABLE_TO_UPDATE_SHIPMENT', { cause: error });
+      },
     );
-    return responseShipment;
   },
 
   /**
@@ -73,14 +73,15 @@ const shipmentServices = {
    * @returns {Shipment}
    */
   async delete(id) {
-    let responseShipment = null;
-    responseShipment = ShipmentModel.findOneAndDelete({ _id: id }).then(
-      (shipment) => shipment,
+    return ShipmentModel.findByIdAndDelete({ _id: id }).then(
+      (shipment) => {
+        if (!shipment) throw new Error('SHIPMENT_NOT_FOUND');
+        return shipment;
+      },
       (error) => {
-        throw error;
-      }
+        throw new Error('UNABLE_TO_DELETE_SHIPMENT', { cause: error });
+      },
     );
-    return responseShipment;
   },
 };
 

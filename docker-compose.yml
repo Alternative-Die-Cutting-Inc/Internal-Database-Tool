@@ -29,13 +29,4 @@ services:
       - ME_CONFIG_BASICAUTH_PASSWORD=$MONGO_WEB_PASSWORD
     ports:
       - "8081:8081"
-  redis:
-    image: redis
-    container_name: redis
-    restart: unless-stopped
-    ports:
-      - "7001:7001"
-    environment:
-      - REDIS_PORT_NUMBER=$REDIS_PORT
-      - REDIS_PASSWORD=$REDIS_PASSWORD
 

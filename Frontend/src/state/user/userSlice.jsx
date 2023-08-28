@@ -34,7 +34,6 @@ const userSlice = createSlice({
       state.error = error;
     },
     signinSuccess: (state, { payload: user }) => {
-      console.log("user", user);
       state.loading = false;
       state.error = null;
       state.user = user;

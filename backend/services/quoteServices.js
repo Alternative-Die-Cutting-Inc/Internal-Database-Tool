@@ -66,6 +66,19 @@ const quoteServices = {
     );
   },
 
+  async search(query, filters) {
+    return QuoteModel.find(query, filters).then(
+      (quotes) => {
+        if (!quotes.length) throw new Error('QUOTES_NOT_FOUND');
+        console.log(quotes);
+        return quotes;
+      },
+      (error) => {
+        throw new Error('UNABLE_TO_GET_QUOTES', { cause: error });
+      },
+    );
+  },
+
   /**
    * @description Get quote by number
    * @param {String} number the quote number

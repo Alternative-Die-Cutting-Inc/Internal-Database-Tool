@@ -1,0 +1,98 @@
+name: Beta Deployment
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - beta
+      - dev
+
+concurrency: beta-deployment
+
+env:
+  REGISTRY: registry.digitalocean.com/uoft-orientation
+  TAG: beta
+  SERVER_IMAGE_NAME: "internal-tool"
+  CLIENT_IMAGE_NAME: "internal-tool"
+  DIGITALOCEAN_API_KEY: ${{ secrets.DIGITALOCEAN_API_KEY }}
+
+jobs:
+  build_server:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.3
+
+      - name: Build server image
+        run: cd backend && docker build -t internal-tool:backend
+
+      - name: Tag server image
+        run: docker tag internal-tool:backend registry.digitalocean.com/altdieinc/internal-tool:backend
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Remove old server image
+        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $SERVER_IMAGE_NAME)")" ]; then doctl registry repository delete-tag $(echo $SERVER_IMAGE_NAME) $(echo $TAG) --force; else echo "No repository"; fi
+
+      - name: Push server image to container registry
+        run: docker push registry.digitalocean.com/uoft-orientation/orientation-server:beta
+
+  build_client:
+    runs-on: ubuntu-20.04
+    needs:
+      - build_server
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.3
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_VITE_API_BASE_URL: "https://api.beta.orientation.skule.ca"
+          file_name: .env
+          directory: client
+
+      - name: Build client image
+        run: cd client && docker build -t orientation-client:beta -f beta.Dockerfile .
+
+      - name: Tag client image
+        run: docker tag orientation-client:beta registry.digitalocean.com/uoft-orientation/orientation-client:beta
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Remove old client image
+        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $CLIENT_IMAGE_NAME)")" ]; then doctl registry repository delete-tag $(echo $CLIENT_IMAGE_NAME) $(echo $TAG) --force; else echo "No repository"; fi
+
+      - name: Push client image to container registry
+        run: docker push registry.digitalocean.com/uoft-orientation/orientation-client:beta
+
+      - name: Run garbage collector
+        run: doctl registry garbage-collection start --include-untagged-manifests --force uoft-orientation
+
+  deploy_beta:
+    runs-on: ubuntu-20.04
+    needs:
+      - build_client
+      - build_server
+
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: beta.orientation.skule.ca
+          username: ${{ secrets.DO_SSH_USER }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          script: ${{ secrets.BETA_DEPLOYMENT_SCRIPT }}

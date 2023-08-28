@@ -49,7 +49,7 @@ const JobsTable = () => {
       {
         header: "Customer",
         accessorKey: "customer",
-        cell: (value) => value.getValue().name,
+        cell: (value) => value.getValue()?.name,
       },
       {
         header: "Customer PO",
@@ -67,7 +67,7 @@ const JobsTable = () => {
         header: "Finishing",
         accessorKey: "finishing",
         cell: (info) =>
-          info.getValue().reduce((a, b) => b.label + ", " + a, ""),
+          info.getValue()?.reduce((a, b) => b.label + ", " + a, ""),
       },
       {
         header: "Special Instructions",

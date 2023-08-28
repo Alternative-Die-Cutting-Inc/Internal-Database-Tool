@@ -42,7 +42,7 @@ const QuotesTable = () => {
       {
         header: "Customer",
         accessorKey: "customer",
-        cell: (value) => value.getValue().name,
+        cell: (value) => value.getValue()?.name,
       },
       { header: "Job Name", accessorKey: "jobName" },
       { header: "Description", accessorKey: "description" },
@@ -60,16 +60,16 @@ const QuotesTable = () => {
             return acc;
           }, []),
         cell: (value) => {
-          return value.getValue().map((val, index) => (
-            <div key={index}>{`${val.units.toLocaleString(
+          return value.getValue()?.map((val, index) => (
+            <div key={index}>{`${val?.units?.toLocaleString(
               "en-CA"
-            )} + ${val.sheets.toLocaleString(
+            )} + ${val?.sheets?.toLocaleString(
               "en-CA"
-            )} + ${val.perM.toLocaleString("en-CA", {
+            )} + ${val?.perM?.toLocaleString("en-CA", {
               style: "currency",
               currency: "CAD",
               currencyDisplay: "symbol",
-            })} + ${val.total.toLocaleString("en-CA", {
+            })} + ${val?.total?.toLocaleString("en-CA", {
               style: "currency",
               currency: "CAD",
               currencyDisplay: "symbol",

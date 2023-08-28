@@ -71,9 +71,26 @@ export function* updateDocketSaga({ payload: { id, fields } }) {
   }
 }
 
+export const searchDockets = createAction("searchDocketsSaga");
+
+export function* searchDocketsSaga({ payload: { query, filters } }) {
+  const { axios } = useAxios();
+  try {
+    yield put(getDocketsStart());
+    const response = yield call(axios.post, `/dockets/search`, {
+      query,
+      filters,
+    });
+    yield put(getDocketsSuccess(response.data?.dockets));
+  } catch (error) {
+    yield put(getDocketsFailure(error));
+  }
+}
+
 export default function* docketsSaga() {
   yield takeLeading(createDocket.type, createDocketSaga);
   yield takeLeading(updateDocket.type, updateDocketSaga);
   yield takeLeading(getDockets.type, getDocketsSaga);
   yield takeLeading(getDocket.type, getDocketSaga);
+  yield takeLeading(searchDockets.type, searchDocketsSaga);
 }

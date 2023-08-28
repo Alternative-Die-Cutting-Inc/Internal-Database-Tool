@@ -19,7 +19,7 @@ const PageDocketTool = () => {
   const dispatch = useDispatch();
   const { docket } = useSelector(docketSelector);
   const { customerNames } = useSelector(customerNamesSelector);
-  const [editingDocket, setEditingDocket] = useState(docket);
+  const [editingDocket, setEditingDocket] = useState();
 
   useEffect(() => {
     dispatch(getDocket({ id: query.get("docketNumber") }));
@@ -89,7 +89,14 @@ const PageDocketTool = () => {
   };
 
   useEffect(() => {
-    setEditingDocket(docket);
+    setEditingDocket({
+      ...docket,
+      numOfUnits: docket?.forms?.reduce(
+        (totalQuantity, form) =>
+          parseInt(totalQuantity) + parseInt(form.quantity),
+        0
+      ),
+    });
   }, [docket]);
 
   if (!editingDocket) return null;
@@ -105,7 +112,7 @@ const PageDocketTool = () => {
                 <input
                   type="text"
                   className="docket-info-input"
-                  value={editingDocket.docketNumber || ""}
+                  value={editingDocket?.docketNumber || ""}
                   readOnly
                 />
               </td>
@@ -117,10 +124,12 @@ const PageDocketTool = () => {
                   unstyled
                   menuPosition="fixed"
                   options={customerNames || []}
-                  value={{
-                    label: editingDocket?.customer.name,
-                    value: editingDocket?.customer.customerID,
-                  }}
+                  value={
+                    {
+                      label: editingDocket?.customer?.name,
+                      value: editingDocket?.customer?.customerID,
+                    } || {}
+                  }
                   onChange={(option) => {
                     saveDocket({
                       customer: {
@@ -136,7 +145,7 @@ const PageDocketTool = () => {
                 <input
                   type="text"
                   className="docket-info-input"
-                  value={editingDocket.customerPO || ""}
+                  value={editingDocket?.customerPO || ""}
                   onBlur={(event) => {
                     handleBlur(event, {
                       customerPO: editingDocket.customerPO,
@@ -155,7 +164,7 @@ const PageDocketTool = () => {
                 <input
                   type="text"
                   className="docket-info-input"
-                  value={editingDocket.jobName || ""}
+                  value={editingDocket?.jobName || ""}
                   onBlur={(event) => {
                     handleBlur(event, {
                       jobName: editingDocket.jobName,
@@ -177,7 +186,7 @@ const PageDocketTool = () => {
                 <input
                   type="text"
                   className="docket-info-input"
-                  value={editingDocket.quoteNumber || ""}
+                  value={editingDocket?.quoteNumber || ""}
                   onBlur={(event) => {
                     handleBlur(event, {
                       quoteNumber: editingDocket.quoteNumber,
@@ -196,7 +205,7 @@ const PageDocketTool = () => {
                 <input
                   type="text"
                   className="docket-info-input"
-                  value={editingDocket.productionPerson || ""}
+                  value={editingDocket?.productionPerson || ""}
                   onBlur={(event) => {
                     handleBlur(event, {
                       productionPerson: editingDocket.productionPerson,
@@ -216,13 +225,13 @@ const PageDocketTool = () => {
                   type="text"
                   className="docket-info-input"
                   value={
-                    editingDocket.soldFor
-                      ? editingDocket.soldFor.toLocaleString("en-CA", {
+                    editingDocket?.soldFor
+                      ? editingDocket?.soldFor.toLocaleString("en-CA", {
                           style: "currency",
                           currency: "CAD",
                           currencyDisplay: "symbol",
                         })
-                      : ""
+                      : "" || ""
                   }
                   onBlur={(event) => {
                     handleBlur(event, {
@@ -240,7 +249,7 @@ const PageDocketTool = () => {
               <td>Job Type:</td>
               <td>
                 <select
-                  value={editingDocket.jobType}
+                  value={editingDocket?.jobType || ""}
                   onBlur={(event) => {
                     handleBlur(event, {
                       jobType: editingDocket.jobType,
@@ -261,7 +270,7 @@ const PageDocketTool = () => {
               </td>
               <td>
                 <select
-                  value={editingDocket.quoteJob}
+                  value={editingDocket?.quoteJob || ""}
                   readOnly
                   // onBlur={(event) => {
                   //   handleBlur(event, {
@@ -275,8 +284,8 @@ const PageDocketTool = () => {
                   //   });
                   // }}
                 >
-                  <option value={editingDocket.quoteJob}>
-                    {editingDocket.quoteJob}
+                  <option value={editingDocket?.quoteJob || ""}>
+                    {editingDocket?.quoteJob}
                   </option>
                 </select>
               </td>
@@ -297,7 +306,7 @@ const PageDocketTool = () => {
                         <div
                           className="die-tab"
                           style={
-                            editingDocket.die.standing
+                            editingDocket?.die?.standing
                               ? {
                                   backgroundColor: "var(--light-grey)",
                                   color: "black",
@@ -319,7 +328,7 @@ const PageDocketTool = () => {
                         <div
                           className="die-tab"
                           style={
-                            !editingDocket.die.standing
+                            !editingDocket?.die?.standing
                               ? {
                                   backgroundColor: "var(--light-grey)",
                                   color: "black",
@@ -330,7 +339,7 @@ const PageDocketTool = () => {
                             setEditingDocket({
                               ...editingDocket,
                               die: {
-                                ...editingDocket.die,
+                                ...editingDocket?.die,
                                 standing: false,
                               },
                             });
@@ -347,25 +356,25 @@ const PageDocketTool = () => {
                       <input
                         type="text"
                         value={
-                          editingDocket.die.standing
-                            ? editingDocket.die.dieID
-                            : editingDocket.docketNumber
+                          editingDocket?.die?.standing
+                            ? editingDocket?.die?.dieID
+                            : editingDocket?.docketNumber || ""
                         }
                         onBlur={(event) => {
                           handleBlur(event, {
-                            die: editingDocket.die,
+                            die: editingDocket?.die,
                           });
                         }}
                         onChange={(event) => {
                           setEditingDocket({
                             ...editingDocket,
                             die: {
-                              ...editingDocket.die,
+                              ...editingDocket?.die,
                               dieID: event.target.value,
                             },
                           });
                         }}
-                        readOnly={!editingDocket.die.standing}
+                        readOnly={!editingDocket?.die?.standing}
                       />
                     </td>
                   </tr>
@@ -373,12 +382,12 @@ const PageDocketTool = () => {
                     <td>Die type:</td>
                     <td>
                       <select
-                        value={editingDocket.die.dieType}
+                        value={editingDocket?.die?.dieType || ""}
                         onBlur={(event) => {
                           handleBlur(event, {
                             die: {
-                              ...editingDocket.die,
-                              dieType: editingDocket.die.dieType,
+                              ...editingDocket?.die,
+                              dieType: editingDocket?.die?.dieType,
                             },
                           });
                         }}
@@ -386,12 +395,12 @@ const PageDocketTool = () => {
                           setEditingDocket({
                             ...editingDocket,
                             die: {
-                              ...editingDocket.die,
+                              ...editingDocket?.die,
                               dieType: event.target.value,
                             },
                           });
                         }}
-                        disabled={editingDocket.die.standing}
+                        disabled={editingDocket?.die?.standing}
                       >
                         <option value="H-die">H-die</option>
                         <option value="B-die">B-die</option>
@@ -412,9 +421,11 @@ const PageDocketTool = () => {
                           type="checkbox"
                           name="Die Cut"
                           id="diecut"
-                          checked={editingDocket.finishing
-                            .map((value) => value.value)
-                            .includes("diecut")}
+                          checked={
+                            editingDocket?.finishing
+                              ?.map((value) => value.value)
+                              .includes("diecut") || false
+                          }
                           onChange={handleCheckbox}
                         />{" "}
                         Die Cut
@@ -424,8 +435,8 @@ const PageDocketTool = () => {
                       <label htmlFor="strip">
                         <input
                           checked={editingDocket.finishing
-                            .map((value) => value.value)
-                            .includes("strip")}
+                            ?.map((value) => value.value)
+                            .includes("strip") || false}
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Strip"
@@ -439,9 +450,9 @@ const PageDocketTool = () => {
                     <td>
                       <label htmlFor="foldAndGlue">
                         <input
-                          checked={editingDocket.finishing
-                            .map((value) => value.value)
-                            .includes("foldAndGlue")}
+                          checked={editingDocket?.finishing
+                            ?.map((value) => value.value)
+                            .includes("foldAndGlue") || false}
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Fold & Glue"
@@ -453,9 +464,9 @@ const PageDocketTool = () => {
                     <td>
                       <label htmlFor="score">
                         <input
-                          checked={editingDocket.finishing
-                            .map((value) => value.value)
-                            .includes("score")}
+                          checked={editingDocket?.finishing
+                            ?.map((value) => value.value)
+                            .includes("score") || false}
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Score"
@@ -470,8 +481,8 @@ const PageDocketTool = () => {
                       <label htmlFor="crease">
                         <input
                           checked={editingDocket.finishing
-                            .map((value) => value.value)
-                            .includes("crease")}
+                            ?.map((value) => value.value)
+                            .includes("crease") || false}
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Crease"
@@ -484,8 +495,8 @@ const PageDocketTool = () => {
                       <label htmlFor="carton">
                         <input
                           checked={editingDocket.finishing
-                            .map((value) => value.value)
-                            .includes("carton")}
+                            ?.map((value) => value.value)
+                            .includes("carton") || false}
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Carton"
@@ -500,8 +511,8 @@ const PageDocketTool = () => {
                       <label htmlFor="stripHole">
                         <input
                           checked={editingDocket.finishing
-                            .map((value) => value.value)
-                            .includes("stripHole")}
+                            ?.map((value) => value.value)
+                            .includes("stripHole") || false}
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Strip Hole"
@@ -514,8 +525,8 @@ const PageDocketTool = () => {
                       <label htmlFor="skidFlat">
                         <input
                           checked={editingDocket.finishing
-                            .map((value) => value.value)
-                            .includes("skidFlat")}
+                            ?.map((value) => value.value)
+                            .includes("skidFlat") || false}
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Skid Flat"
@@ -534,7 +545,7 @@ const PageDocketTool = () => {
                 classNamePrefix="finishing-select"
                 isMulti
                 closeMenuOnSelect={false}
-                value={editingDocket?.finishing}
+                value={editingDocket?.finishing || ""}
                 onBlur={(event) => {
                   handleBlur(event, {
                     finishing: editingDocket.finishing,
@@ -597,12 +608,12 @@ const PageDocketTool = () => {
                 </tr>
               </thead>
               <tbody>
-                {[...editingDocket.forms].map((form, index) => (
+                {editingDocket?.forms?.map((form, index) => (
                   <tr key={"form_" + index}>
                     <td>
                       <input
                         type="text"
-                        value={form.name}
+                        value={form.name || ""}
                         onBlur={(event) => {
                           handleBlur(event, { forms: editingDocket.forms });
                         }}
@@ -624,7 +635,7 @@ const PageDocketTool = () => {
                       <input
                         type="number"
                         step={1000}
-                        value={form.quantity}
+                        value={form.quantity || 0}
                         onBlur={(event) => {
                           handleBlur(event, { forms: editingDocket.forms });
                         }}
@@ -648,7 +659,7 @@ const PageDocketTool = () => {
                     <td>
                       <input
                         type="text"
-                        value={form.notes}
+                        value={form.notes || ""}
                         onBlur={(event) => {
                           handleBlur(event, { forms: editingDocket.forms });
                         }}
@@ -671,7 +682,9 @@ const PageDocketTool = () => {
                     <td>
                       <input
                         type="text"
-                        value={form.quantityShipped + " / " + form.quantity}
+                        value={
+                          form.quantityShipped + " / " + form.quantity || ""
+                        }
                         readOnly
                       />
                     </td>
@@ -681,7 +694,7 @@ const PageDocketTool = () => {
                         value={
                           form.lastShipment
                             ? form.lastShipment.toLocaleDateString("en-CA")
-                            : "No Shipments"
+                            : "No Shipments" || ""
                         }
                         readOnly
                       />
@@ -712,13 +725,9 @@ const PageDocketTool = () => {
                   <td>
                     <input
                       type="text"
-                      value={editingDocket.forms
-                        .reduce(
-                          (totalQuantity, form) =>
-                            parseInt(totalQuantity) + parseInt(form.quantity),
-                          0
-                        )
-                        .toLocaleString("en-CA")}
+                      value={
+                        editingDocket?.numOfUnits?.toLocaleString("en-CA") || ""
+                      }
                       readOnly
                     />
                   </td>
@@ -766,7 +775,7 @@ const PageDocketTool = () => {
                 id=""
                 className="instructions-input"
                 placeholder="Instructions"
-                value={editingDocket.specialInstructions}
+                value={editingDocket.specialInstructions || ""}
                 onBlur={(event) => {
                   handleBlur(event, {
                     specialInstructions: editingDocket.specialInstructions,
@@ -792,12 +801,12 @@ const PageDocketTool = () => {
                 </tr>
               </thead>
               <tbody>
-                {[...editingDocket.extraCharges].map((charge, index) => (
+                {editingDocket?.extraCharges?.map((charge, index) => (
                   <tr key={index}>
                     <td>
                       <input
                         type="text"
-                        value={charge.name}
+                        value={charge.name || ""}
                         onBlur={(event) => {
                           handleBlur(event, {
                             extraCharges: editingDocket.extraCharges,
@@ -853,7 +862,7 @@ const PageDocketTool = () => {
                     <td>
                       <input
                         type="text"
-                        value={charge.notes}
+                        value={charge.notes || ""}
                         onBlur={(event) => {
                           handleBlur(event, {
                             extraCharges: editingDocket.extraCharges,
@@ -902,17 +911,19 @@ const PageDocketTool = () => {
                   <td>
                     <input
                       type="text"
-                      value={editingDocket.extraCharges
-                        .reduce(
-                          (totalCost, charge) =>
-                            parseFloat(totalCost) + parseFloat(charge.cost),
-                          0.0
-                        )
-                        .toLocaleString("en-CA", {
-                          style: "currency",
-                          currency: "CAD",
-                          currencyDisplay: "symbol",
-                        })}
+                      value={
+                        editingDocket.extraCharges
+                          ?.reduce(
+                            (totalCost, charge) =>
+                              parseFloat(totalCost) + parseFloat(charge.cost),
+                            0.0
+                          )
+                          .toLocaleString("en-CA", {
+                            style: "currency",
+                            currency: "CAD",
+                            currencyDisplay: "symbol",
+                          }) || ""
+                      }
                       readOnly
                     />
                   </td>
@@ -952,21 +963,23 @@ const PageDocketTool = () => {
             <h2>
               {editingDocket?.customer?.name +
                 " #" +
-                editingDocket.docketNumber}
+                editingDocket?.docketNumber}
             </h2>
-            <h2>{editingDocket.jobName}</h2>
+            <h2>{editingDocket?.jobName}</h2>
             <h3>
-              {`${editingDocket.die.standing ? "Standing" : "New"} ${
-                editingDocket.die.dieType
+              {`${editingDocket?.die?.standing ? "Standing" : "New"} ${
+                editingDocket?.die?.dieType
               }${
-                editingDocket.die.standing ? " #" + editingDocket.die.dieID : ""
+                editingDocket?.die?.standing
+                  ? " #" + editingDocket?.die?.dieID
+                  : ""
               }, ` +
-                editingDocket.finishing.reduce(
+                editingDocket?.finishing?.reduce(
                   (a, b) => b.label + ", " + a,
                   ""
                 )}
             </h3>
-            <h3>{editingDocket.specialInstructions}</h3>
+            <h3>{editingDocket?.specialInstructions}</h3>
             <button
               onClick={(event) => {
                 console.log(event);
@@ -999,7 +1012,7 @@ const PageDocketTool = () => {
                 rows={7}
                 className="requote-memo-input"
                 placeholder="Memo"
-                value={editingDocket.requoteMemo}
+                value={editingDocket.requoteMemo || ""}
                 onBlur={(event) => {
                   handleBlur(event, {
                     requoteMemo: editingDocket.requoteMemo,
@@ -1023,7 +1036,7 @@ const PageDocketTool = () => {
                   value={
                     editingDocket.closeDate
                       ? editingDocket.closeDate.split("T")[0]
-                      : ""
+                      : "" || ""
                   }
                   onBlur={(event) => {
                     handleBlur(event, {

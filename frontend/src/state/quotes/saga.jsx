@@ -140,6 +140,22 @@ export function* changeRatesSaga({ payload: { rates } }) {
   }
 }
 
+export const searchQuotes = createAction("searchQuotesSaga");
+
+export function* searchQuotesSaga({ payload: { query, filters } }) {
+  const { axios } = useAxios();
+  try {
+    yield put(getQuotesStart());
+    const response = yield call(axios.post, `/quotes/search`, {
+      query,
+      filters,
+    });
+    yield put(getQuotesSuccess(response.data?.quotes));
+  } catch (error) {
+    yield put(getQuotesFailure(error.response.data?.errorMessage));
+  }
+}
+
 export default function* quotesSaga() {
   yield takeLeading(createQuote.type, createQuoteSaga);
   yield takeLeading(createJob.type, createJobSaga);
@@ -149,4 +165,5 @@ export default function* quotesSaga() {
   yield takeLeading(getQuote.type, getQuoteSaga);
   yield takeLeading(getRates.type, getRatesSaga);
   yield takeLeading(changeRates.type, changeRatesSaga);
+  yield takeLeading(searchQuotes.type, searchQuotesSaga);
 }

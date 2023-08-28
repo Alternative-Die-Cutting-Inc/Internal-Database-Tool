@@ -124,7 +124,6 @@ const Navbar = () => {
           key={"darkmode"}
           onClick={() => {
             setDarkModeStatus(!darkMode);
-            console.log("dark mode:", !darkMode);
           }}
         >
           <div className="navbar-link-label">

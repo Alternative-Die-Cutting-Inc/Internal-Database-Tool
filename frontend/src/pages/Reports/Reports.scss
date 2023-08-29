@@ -72,6 +72,20 @@
   border-radius: 0px 0px 15px 15px;
 }
 
+.planning-container {
+  .not-found {
+    padding: 1vh;
+  }
+  table {
+    th,
+    td {
+      text-align: left;
+      padding: 16px;
+      border: none;
+    }
+  }
+}
+
 .snapshot-container {
   width: 100%;
   display: flex;
@@ -89,5 +103,8 @@
     tr:nth-child(even) {
       background-color: #a5a5a5;
     }
+  }
+  #report-table {
+    width: 100%;
   }
 }

@@ -1,8 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import "./Reports.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { docketsSelector } from "../../state/dockets/docketSlice";
-import { searchDockets } from "../../state/dockets/saga";
+import {
+  docketSelector,
+  docketsSelector,
+} from "../../state/dockets/docketSlice";
+import { searchDockets, updateDocket } from "../../state/dockets/saga";
 import { quotesSelector } from "../../state/quotes/quoteSlice";
 import { searchQuotes } from "../../state/quotes/saga";
 import PropTypes from "prop-types";
@@ -10,7 +13,9 @@ import {
   useReactTable,
   getCoreRowModel,
   flexRender,
+  createColumnHelper,
 } from "@tanstack/react-table";
+import { Link } from "react-router-dom";
 
 const PageReports = () => {
   const [planning, setPlanning] = useState(true);
@@ -89,8 +94,10 @@ const PageReports = () => {
   );
 };
 
-const PlanningReport = ({ dateRange }) => {
+const PlanningReport = () => {
   const { dockets } = useSelector(docketsSelector);
+  const { docket } = useSelector(docketSelector);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -106,62 +113,146 @@ const PlanningReport = ({ dateRange }) => {
           closeDate: 1,
           status: 1,
           soldFor: 1,
+          numOfUnits: 1,
           "extraCharges.cost": 1,
           bill: 1,
         },
       })
     );
-  }, [dispatch, dateRange]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(
+      searchDockets({
+        query: {
+          "status.value": "Open",
+        },
+        filters: {
+          docketNumber: 1,
+          "customer.name": 1,
+          jobName: 1,
+          closeDate: 1,
+          status: 1,
+          soldFor: 1,
+          numOfUnits: 1,
+          "extraCharges.cost": 1,
+          bill: 1,
+        },
+      })
+    );
+  }, [dispatch, docket]);
 
   const data = useMemo(() => dockets, [dockets]);
 
-  const columns = useMemo(
-    () => [
-      {
-        header: "Docket Number",
-        accessorKey: "docketNumber",
+  const columnHelper = createColumnHelper();
+
+  const columns = [
+    columnHelper.accessor("docketNumber", {
+      header: "Docket Number",
+      cell: (value) => (
+        <Link to={`/dockettool?docketNumber=${value.getValue()}`}>
+          {value.getValue()}
+        </Link>
+      ),
+    }),
+    columnHelper.accessor("jobName", {
+      header: "Job Name",
+    }),
+    columnHelper.accessor("closeDate", {
+      header: "Close Date",
+      cell: function Cell({ getValue, row, column, table }) {
+        const initialValue = getValue();
+        const tableMeta = table.options.meta;
+        const [value, setValue] = useState(initialValue);
+        return (
+          <input
+            value={value?.split("T")[0] || ""}
+            onChange={(e) => {
+              setValue(e.target.value);
+              tableMeta?.updateData(row.index, column.id, e.target.value);
+              dispatch(
+                updateDocket({
+                  id: row.original._id,
+                  fields: { closeDate: e.target.value },
+                })
+              );
+            }}
+            type="date"
+          />
+        );
       },
-      {
-        header: "Customer",
-        accessorKey: "customer.name",
+    }),
+    columnHelper.accessor("numOfUnits", {
+      header: "Number of Units",
+    }),
+    columnHelper.accessor("soldFor", {
+      header: "Sold For",
+      cell: (value) =>
+        (value.getValue() || 0).toLocaleString("en-CA", {
+          style: "currency",
+          currency: "CAD",
+        }),
+    }),
+    columnHelper.accessor("extraCharges", {
+      header: "Total Extra Charges",
+      cell: (value) =>
+        value
+          .getValue()
+          ?.reduce((total, item) => total + item.cost, 0.0)
+          .toLocaleString("en-CA", {
+            style: "currency",
+            currency: "CAD",
+          }),
+    }),
+    columnHelper.accessor("status", {
+      header: "Status",
+      cell: (value) =>
+        value
+          .getValue()
+          ?.map((item) => item.label)
+          .join(", "),
+    }),
+    columnHelper.accessor("bill", {
+      header: "Bill",
+      accessorFn: (values) => {
+        return { bill: values.bill, id: values._id };
       },
-      {
-        header: "Job Name",
-        accessorKey: "jobName",
+      cell: function Cell({ getValue, row, column, table }) {
+        const initialValue = getValue();
+        const tableMeta = table.options.meta;
+        const [value, setValue] = useState(initialValue);
+        return (
+          <input
+            type="checkbox"
+            checked={initialValue.bill}
+            onChange={(e) => {
+              setValue({ id: initialValue.id, bill: e.target.checked });
+              tableMeta?.updateData(row.index, column.id, value);
+              dispatch(
+                updateDocket({
+                  id: initialValue.id,
+                  fields: { bill: e.target.checked },
+                })
+              );
+            }}
+          />
+        );
       },
-      {
-        header: "Close Date",
-        accessorKey: "closeDate",
-      },
-      {
-        header: "Status",
-        accessorKey: "status",
-        cell: (value) =>
-          value
-            .getValue()
-            ?.map((item) => item.label)
-            .join(", "),
-      },
-      {
-        header: "Sold For",
-        accessorKey: "soldFor",
-      },
-      // {
-      //   header: "Extra Charges",
-      //   accessorKey: "extraCharges.cost",
-      // },
-      {
-        header: "Bill",
-        accessorKey: "bill",
-      },
-    ],
-    []
-  );
+    }),
+  ];
+
   const { getHeaderGroups, getRowModel } = useReactTable({
     columns,
     data: data || [],
     getCoreRowModel: getCoreRowModel(),
   });
+
+  if (!data?.length)
+    return (
+      <div className="planning-container">
+        <h2 className="not-found">No Open Dockets Found.</h2>
+      </div>
+    );
 
   return (
     <div className="planning-container">
@@ -245,10 +336,11 @@ const SnapshotReport = ({ dateRange }) => {
           ],
         },
         filters: {
-          closeDate: 1,
-          creationDate: 1,
-          status: 1,
-          soldFor: 1,
+          // closeDate: 1,
+          // creationDate: 1,
+          // status: 1,
+          // bill: 1,
+          // soldFor: 1,
         },
       })
     );
@@ -301,8 +393,7 @@ const SnapshotReport = ({ dateRange }) => {
     const firstDate = new Date(dateRange.startDate);
     firstDate.setDate(firstDate.getDate() + 1);
     const secondDate = new Date(dateRange.endDate);
-    secondDate.setDate(secondDate.getDate() + 2);
-
+    secondDate.setDate(secondDate.getDate() + 1);
     const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
 
     return [...Array(diffDays)].map((_, index) => {
@@ -315,7 +406,7 @@ const SnapshotReport = ({ dateRange }) => {
       let docketsOpened = 0;
       let docketsClosed = 0;
 
-      if (quotes.length) {
+      if (quotes?.length) {
         quotes.forEach((quote) => {
           if (
             new Date(quote.creationDate).toLocaleDateString() ===
@@ -327,7 +418,7 @@ const SnapshotReport = ({ dateRange }) => {
         });
       }
 
-      if (dockets.length) {
+      if (dockets?.length) {
         dockets.forEach((docket) => {
           if (
             new Date(docket.creationDate).toLocaleDateString() ===
@@ -336,19 +427,25 @@ const SnapshotReport = ({ dateRange }) => {
             docketsInDay++;
             docketsOpened += docket?.soldFor || 0;
           }
+
           if (
             new Date(docket.closeDate).toLocaleDateString() ===
             day.toLocaleDateString()
           ) {
             docketsClosed += docket?.soldFor || 0;
           }
+          // console.log(docket.creationDate);
         });
+        console.log(dockets);
       }
 
       return {
         quotesInDay,
         docketsInDay,
-        date: day.toLocaleDateString(),
+        date: day.toLocaleDateString("en-CA", {
+          month: "2-digit",
+          day: "2-digit",
+        }),
         quoted,
         docketsOpened,
         docketsClosed,
@@ -361,6 +458,7 @@ const SnapshotReport = ({ dateRange }) => {
       {
         header: "Date",
         accessorKey: "date",
+        cell: (value) => value.getValue(),
       },
       {
         header: "Quotes",
@@ -410,7 +508,7 @@ const SnapshotReport = ({ dateRange }) => {
 
   return (
     <div className="snapshot-container">
-      <table>
+      <table id="report-table">
         <thead>
           {getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -445,7 +543,7 @@ const SnapshotReport = ({ dateRange }) => {
           })}
         </tbody>
       </table>
-      <table>
+      <table id="summary-table">
         <thead>
           {getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -475,78 +573,78 @@ const SnapshotReport = ({ dateRange }) => {
             <td>
               {(
                 data.reduce((total, item) => total + item.quotesInDay, 0) /
-                data.length
-              ).toFixed(2) || 0}
+                  data.length || 0
+              ).toFixed(2)}
             </td>
             <td>
               {(
                 data.reduce((total, item) => total + item.quoted, 0) /
-                data.length
+                  data.length || 0
               ).toLocaleString("en-CA", {
                 style: "currency",
                 currency: "CAD",
-              }) || 0}
+              })}
             </td>
             <td>
               {(
                 data.reduce((total, item) => total + item.docketsInDay, 0) /
-                data.length
-              ).toFixed(2) || 0}
+                  data.length || 0
+              ).toFixed(2)}
             </td>
             <td>
               {(
                 data.reduce((total, item) => total + item.docketsOpened, 0) /
-                data.length
+                  data.length || 0
               ).toLocaleString("en-CA", {
                 style: "currency",
                 currency: "CAD",
-              }) || 0}
+              })}
             </td>
             <td>
               {(
                 data.reduce((total, item) => total + item.docketsClosed, 0) /
-                data.length
+                  data.length || 0
               ).toLocaleString("en-CA", {
                 style: "currency",
                 currency: "CAD",
-              }) || 0}
+              })}
             </td>
           </tr>
           <tr>
             <td>Totals</td>
             <td>
-              {data
-                .reduce((total, item) => total + item.quotesInDay, 0)
-                .toFixed(2) || 0}
+              {(
+                data.reduce((total, item) => total + item.quotesInDay, 0) || 0
+              ).toFixed(2)}
             </td>
             <td>
-              {data
-                .reduce((total, item) => total + item.quoted, 0)
-                .toLocaleString("en-CA", {
-                  style: "currency",
-                  currency: "CAD",
-                }) || 0}
+              {(
+                data.reduce((total, item) => total + item.quoted, 0) || 0
+              ).toLocaleString("en-CA", {
+                style: "currency",
+                currency: "CAD",
+              })}
             </td>
             <td>
-              {data
-                .reduce((total, item) => total + item.docketsInDay, 0)
-                .toFixed(2) || 0}
+              {(
+                data.reduce((total, item) => total + item.docketsInDay, 0) || 0
+              ).toFixed(2)}
             </td>
             <td>
-              {data
-                .reduce((total, item) => total + item.docketsOpened, 0)
-                .toLocaleString("en-CA", {
-                  style: "currency",
-                  currency: "CAD",
-                }) || 0}
+              {(
+                data.reduce((total, item) => total + item.docketsOpened, 0) || 0
+              ).toLocaleString("en-CA", {
+                style: "currency",
+                currency: "CAD",
+              })}
             </td>
             <td>
-              {data
-                .reduce((total, item) => total + item.docketsClosed, 0)
-                .toLocaleString("en-CA", {
-                  style: "currency",
-                  currency: "CAD",
-                }) || 0}
+              {(
+                data.reduce((total, item) => total + item.docketsClosed, 0) || 0
+              ).toLocaleString("en-CA", {
+                style: "currency",
+                currency: "CAD",
+              })}
             </td>
           </tr>
           <tr>

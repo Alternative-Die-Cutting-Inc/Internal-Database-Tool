@@ -36,6 +36,7 @@ const PageDockets = () => {
                   name: customer.label,
                   customerID: customer.value,
                 },
+                creationDate: new Date(),
                 jobName: e.target.jobName.value,
                 customerPO: e.target.customerPO.value,
                 quoteNumber: e.target.quoteNumber.value,

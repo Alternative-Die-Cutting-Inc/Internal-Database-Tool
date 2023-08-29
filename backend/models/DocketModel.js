@@ -139,7 +139,6 @@ const DocketSchema = new mongoose.Schema({
   creationDate: {
     type: Date,
     required: true,
-    default: () => Date.now(),
   },
   numOfUnits: {
     type: Number,

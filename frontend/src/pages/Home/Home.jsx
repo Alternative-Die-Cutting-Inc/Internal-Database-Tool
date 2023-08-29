@@ -219,10 +219,11 @@ const PageHome = () => {
                     name: jobCustomer.label,
                     customerID: jobCustomer.value,
                   },
+                  creationDate: new Date(),
                   jobName: e.target.jobName.value,
                   customerPO: e.target.customerPO.value,
                   quoteNumber: e.target.quoteNumber.value,
-                  status: [{ value: "Created", label: "Created" }],
+                  status: [{ value: "Open", label: "Open" }],
                 };
                 dispatch(createDocket({ docket, navigate }));
               }}

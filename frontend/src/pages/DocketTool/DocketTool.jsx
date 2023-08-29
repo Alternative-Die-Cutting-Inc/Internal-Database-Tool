@@ -40,11 +40,23 @@ const PageDocketTool = () => {
     }
   };
 
-  const handleBlur = (event, fields) => {
-    event.preventDefault();
-    if (event.currentTarget === event.target) {
-      saveDocket(fields);
-    }
+  const handleBlur = (fields) => {
+    if (
+      editingDocket?.forms?.reduce(
+        (totalQuantity, form) =>
+          parseInt(totalQuantity) + parseInt(form.quantity),
+        0
+      ) !== editingDocket?.numOfUnits
+    )
+      saveDocket({
+        ...fields,
+        numOfUnits: editingDocket?.forms?.reduce(
+          (totalQuantity, form) =>
+            parseInt(totalQuantity) + parseInt(form.quantity),
+          0
+        ),
+      });
+    saveDocket(fields);
   };
 
   const handleCheckbox = (event) => {
@@ -91,11 +103,13 @@ const PageDocketTool = () => {
   useEffect(() => {
     setEditingDocket({
       ...docket,
-      numOfUnits: docket?.forms?.reduce(
-        (totalQuantity, form) =>
-          parseInt(totalQuantity) + parseInt(form.quantity),
-        0
-      ),
+      numOfUnits: docket?.numOfUnits
+        ? docket.numOfUnits
+        : docket?.forms?.reduce(
+            (totalQuantity, form) =>
+              parseInt(totalQuantity) + parseInt(form.quantity),
+            0
+          ),
     });
   }, [docket]);
 
@@ -146,8 +160,8 @@ const PageDocketTool = () => {
                   type="text"
                   className="docket-info-input"
                   value={editingDocket?.customerPO || ""}
-                  onBlur={(event) => {
-                    handleBlur(event, {
+                  onBlur={() => {
+                    handleBlur({
                       customerPO: editingDocket.customerPO,
                     });
                   }}
@@ -165,8 +179,8 @@ const PageDocketTool = () => {
                   type="text"
                   className="docket-info-input"
                   value={editingDocket?.jobName || ""}
-                  onBlur={(event) => {
-                    handleBlur(event, {
+                  onBlur={() => {
+                    handleBlur({
                       jobName: editingDocket.jobName,
                     });
                   }}
@@ -187,8 +201,8 @@ const PageDocketTool = () => {
                   type="text"
                   className="docket-info-input"
                   value={editingDocket?.quoteNumber || ""}
-                  onBlur={(event) => {
-                    handleBlur(event, {
+                  onBlur={() => {
+                    handleBlur({
                       quoteNumber: editingDocket.quoteNumber,
                     });
                   }}
@@ -206,8 +220,8 @@ const PageDocketTool = () => {
                   type="text"
                   className="docket-info-input"
                   value={editingDocket?.productionPerson || ""}
-                  onBlur={(event) => {
-                    handleBlur(event, {
+                  onBlur={() => {
+                    handleBlur({
                       productionPerson: editingDocket.productionPerson,
                     });
                   }}
@@ -233,8 +247,8 @@ const PageDocketTool = () => {
                         })
                       : "" || ""
                   }
-                  onBlur={(event) => {
-                    handleBlur(event, {
+                  onBlur={() => {
+                    handleBlur({
                       soldFor: editingDocket.soldFor,
                     });
                   }}
@@ -250,8 +264,8 @@ const PageDocketTool = () => {
               <td>
                 <select
                   value={editingDocket?.jobType || ""}
-                  onBlur={(event) => {
-                    handleBlur(event, {
+                  onBlur={() => {
+                    handleBlur({
                       jobType: editingDocket.jobType,
                     });
                   }}
@@ -272,8 +286,8 @@ const PageDocketTool = () => {
                 <select
                   value={editingDocket?.quoteJob || ""}
                   readOnly
-                  // onBlur={(event) => {
-                  //   handleBlur(event, {
+                  // onBlur={() => {
+                  //   handleBlur( {
                   //     : editingDocket.,
                   //   });
                   // }}
@@ -360,8 +374,8 @@ const PageDocketTool = () => {
                             ? editingDocket?.die?.dieID
                             : editingDocket?.docketNumber || ""
                         }
-                        onBlur={(event) => {
-                          handleBlur(event, {
+                        onBlur={() => {
+                          handleBlur({
                             die: editingDocket?.die,
                           });
                         }}
@@ -383,8 +397,8 @@ const PageDocketTool = () => {
                     <td>
                       <select
                         value={editingDocket?.die?.dieType || ""}
-                        onBlur={(event) => {
-                          handleBlur(event, {
+                        onBlur={() => {
+                          handleBlur({
                             die: {
                               ...editingDocket?.die,
                               dieType: editingDocket?.die?.dieType,
@@ -434,9 +448,11 @@ const PageDocketTool = () => {
                     <td>
                       <label htmlFor="strip">
                         <input
-                          checked={editingDocket.finishing
-                            ?.map((value) => value.value)
-                            .includes("strip") || false}
+                          checked={
+                            editingDocket.finishing
+                              ?.map((value) => value.value)
+                              .includes("strip") || false
+                          }
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Strip"
@@ -450,9 +466,11 @@ const PageDocketTool = () => {
                     <td>
                       <label htmlFor="foldAndGlue">
                         <input
-                          checked={editingDocket?.finishing
-                            ?.map((value) => value.value)
-                            .includes("foldAndGlue") || false}
+                          checked={
+                            editingDocket?.finishing
+                              ?.map((value) => value.value)
+                              .includes("foldAndGlue") || false
+                          }
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Fold & Glue"
@@ -464,9 +482,11 @@ const PageDocketTool = () => {
                     <td>
                       <label htmlFor="score">
                         <input
-                          checked={editingDocket?.finishing
-                            ?.map((value) => value.value)
-                            .includes("score") || false}
+                          checked={
+                            editingDocket?.finishing
+                              ?.map((value) => value.value)
+                              .includes("score") || false
+                          }
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Score"
@@ -480,9 +500,11 @@ const PageDocketTool = () => {
                     <td>
                       <label htmlFor="crease">
                         <input
-                          checked={editingDocket.finishing
-                            ?.map((value) => value.value)
-                            .includes("crease") || false}
+                          checked={
+                            editingDocket.finishing
+                              ?.map((value) => value.value)
+                              .includes("crease") || false
+                          }
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Crease"
@@ -494,9 +516,11 @@ const PageDocketTool = () => {
                     <td>
                       <label htmlFor="carton">
                         <input
-                          checked={editingDocket.finishing
-                            ?.map((value) => value.value)
-                            .includes("carton") || false}
+                          checked={
+                            editingDocket.finishing
+                              ?.map((value) => value.value)
+                              .includes("carton") || false
+                          }
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Carton"
@@ -510,9 +534,11 @@ const PageDocketTool = () => {
                     <td>
                       <label htmlFor="stripHole">
                         <input
-                          checked={editingDocket.finishing
-                            ?.map((value) => value.value)
-                            .includes("stripHole") || false}
+                          checked={
+                            editingDocket.finishing
+                              ?.map((value) => value.value)
+                              .includes("stripHole") || false
+                          }
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Strip Hole"
@@ -524,9 +550,11 @@ const PageDocketTool = () => {
                     <td>
                       <label htmlFor="skidFlat">
                         <input
-                          checked={editingDocket.finishing
-                            ?.map((value) => value.value)
-                            .includes("skidFlat") || false}
+                          checked={
+                            editingDocket.finishing
+                              ?.map((value) => value.value)
+                              .includes("skidFlat") || false
+                          }
                           onChange={handleCheckbox}
                           type="checkbox"
                           name="Skid Flat"
@@ -546,8 +574,8 @@ const PageDocketTool = () => {
                 isMulti
                 closeMenuOnSelect={false}
                 value={editingDocket?.finishing || ""}
-                onBlur={(event) => {
-                  handleBlur(event, {
+                onBlur={() => {
+                  handleBlur({
                     finishing: editingDocket.finishing,
                   });
                 }}
@@ -614,8 +642,8 @@ const PageDocketTool = () => {
                       <input
                         type="text"
                         value={form.name || ""}
-                        onBlur={(event) => {
-                          handleBlur(event, { forms: editingDocket.forms });
+                        onBlur={() => {
+                          handleBlur({ forms: editingDocket.forms });
                         }}
                         onChange={(event) => {
                           const newForms = editingDocket.forms.map((f, i) => {
@@ -636,8 +664,8 @@ const PageDocketTool = () => {
                         type="number"
                         step={1000}
                         value={form.quantity || 0}
-                        onBlur={(event) => {
-                          handleBlur(event, { forms: editingDocket.forms });
+                        onBlur={() => {
+                          handleBlur({ forms: editingDocket.forms });
                         }}
                         onChange={(event) => {
                           const newForms = editingDocket.forms.map((f, i) => {
@@ -660,8 +688,8 @@ const PageDocketTool = () => {
                       <input
                         type="text"
                         value={form.notes || ""}
-                        onBlur={(event) => {
-                          handleBlur(event, { forms: editingDocket.forms });
+                        onBlur={() => {
+                          handleBlur({ forms: editingDocket.forms });
                         }}
                         onChange={(event) => {
                           setEditingDocket({
@@ -776,8 +804,8 @@ const PageDocketTool = () => {
                 className="instructions-input"
                 placeholder="Instructions"
                 value={editingDocket.specialInstructions || ""}
-                onBlur={(event) => {
-                  handleBlur(event, {
+                onBlur={() => {
+                  handleBlur({
                     specialInstructions: editingDocket.specialInstructions,
                   });
                 }}
@@ -807,8 +835,8 @@ const PageDocketTool = () => {
                       <input
                         type="text"
                         value={charge.name || ""}
-                        onBlur={(event) => {
-                          handleBlur(event, {
+                        onBlur={() => {
+                          handleBlur({
                             extraCharges: editingDocket.extraCharges,
                           });
                         }}
@@ -836,8 +864,8 @@ const PageDocketTool = () => {
                         min="0.00"
                         step="100"
                         value={charge.cost || 0}
-                        onBlur={(event) => {
-                          handleBlur(event, {
+                        onBlur={() => {
+                          handleBlur({
                             extraCharges: editingDocket.extraCharges,
                           });
                         }}
@@ -863,8 +891,8 @@ const PageDocketTool = () => {
                       <input
                         type="text"
                         value={charge.notes || ""}
-                        onBlur={(event) => {
-                          handleBlur(event, {
+                        onBlur={() => {
+                          handleBlur({
                             extraCharges: editingDocket.extraCharges,
                           });
                         }}
@@ -1013,8 +1041,8 @@ const PageDocketTool = () => {
                 className="requote-memo-input"
                 placeholder="Memo"
                 value={editingDocket.requoteMemo || ""}
-                onBlur={(event) => {
-                  handleBlur(event, {
+                onBlur={() => {
+                  handleBlur({
                     requoteMemo: editingDocket.requoteMemo,
                   });
                 }}
@@ -1038,8 +1066,8 @@ const PageDocketTool = () => {
                       ? editingDocket.closeDate.split("T")[0]
                       : "" || ""
                   }
-                  onBlur={(event) => {
-                    handleBlur(event, {
+                  onBlur={() => {
+                    handleBlur({
                       closeDate: editingDocket.closeDate,
                     });
                   }}

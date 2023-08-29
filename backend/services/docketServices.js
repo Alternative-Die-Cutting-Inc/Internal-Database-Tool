@@ -60,7 +60,9 @@ const docketServices = {
    * @returns {Docket[]}
    */
   async search(query, filters) {
-    return DocketModel.find(query, filters).then(
+    return DocketModel.find(query, filters, {
+      sort: { docketNumber: -1 },
+    }).then(
       (dockets) => {
         if (!dockets.length) throw new Error('DOCKETS_NOT_FOUND');
         return dockets;

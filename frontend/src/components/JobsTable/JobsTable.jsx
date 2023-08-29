@@ -77,7 +77,16 @@ const JobsTable = () => {
         header: "Number of Units",
         accessorKey: "numOfUnits",
       },
-      { header: "Sold For", accessorKey: "soldFor" },
+      {
+        header: "Sold For",
+        accessorKey: "soldFor",
+        cell: (value) =>
+          value.getValue()?.toLocaleString("en-CA", {
+            style: "currency",
+            currency: "CAD",
+            currencyDisplay: "symbol",
+          }),
+      },
       {
         header: "Date Created",
         accessorKey: "creationDate",

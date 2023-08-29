@@ -70,7 +70,6 @@ const quoteServices = {
     return QuoteModel.find(query, filters).then(
       (quotes) => {
         if (!quotes.length) throw new Error('QUOTES_NOT_FOUND');
-        console.log(quotes);
         return quotes;
       },
       (error) => {

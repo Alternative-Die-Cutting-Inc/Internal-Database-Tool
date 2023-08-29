@@ -63,7 +63,6 @@ const docketServices = {
     return DocketModel.find(query, filters).then(
       (dockets) => {
         if (!dockets.length) throw new Error('DOCKETS_NOT_FOUND');
-        console.log(filters);
         return dockets;
       },
       (error) => {

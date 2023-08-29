@@ -2,7 +2,7 @@
 }
 
 .report-items-list-container {
-  margin: 2vh 1vw;
+  margin: 2vh 0.5vw;
   border-radius: 15px;
 
   overflow-y: scroll;
@@ -73,6 +73,7 @@
 }
 
 .snapshot-container {
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: flex-start;

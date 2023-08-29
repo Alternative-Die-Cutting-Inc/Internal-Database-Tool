@@ -42,38 +42,40 @@ const PageReports = () => {
               Snapshots
             </h2>
           </div>
-          <div className="report-date-range">
-            <label htmlFor="startDate">
-              Start Date:{" "}
-              <input
-                type="date"
-                name="Start Date"
-                id="startDate"
-                value={dateRange.startDate}
-                onChange={(event) => {
-                  setDateRange({
-                    ...dateRange,
-                    startDate: event.target.value,
-                  });
-                }}
-              />
-            </label>
-            <label htmlFor="endDate">
-              End Date:{" "}
-              <input
-                type="date"
-                name="End Date"
-                id="endDate"
-                value={dateRange.endDate}
-                onChange={(event) => {
-                  setDateRange({
-                    ...dateRange,
-                    endDate: event.target.value,
-                  });
-                }}
-              />
-            </label>
-          </div>
+          {!planning ? (
+            <div className="report-date-range">
+              <label htmlFor="startDate">
+                Start Date:{" "}
+                <input
+                  type="date"
+                  name="Start Date"
+                  id="startDate"
+                  value={dateRange.startDate}
+                  onChange={(event) => {
+                    setDateRange({
+                      ...dateRange,
+                      startDate: event.target.value,
+                    });
+                  }}
+                />
+              </label>
+              <label htmlFor="endDate">
+                End Date:{" "}
+                <input
+                  type="date"
+                  name="End Date"
+                  id="endDate"
+                  value={dateRange.endDate}
+                  onChange={(event) => {
+                    setDateRange({
+                      ...dateRange,
+                      endDate: event.target.value,
+                    });
+                  }}
+                />
+              </label>
+            </div>
+          ) : null}
         </div>
         <div className="report-content-container">
           {planning ? (
@@ -88,13 +90,118 @@ const PageReports = () => {
 };
 
 const PlanningReport = ({ dateRange }) => {
-  // const { dockets } = useSelector(docketsSelector);
-  // const dispatch = useDispatch();
+  const { dockets } = useSelector(docketsSelector);
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getDockets({ dateRange }));
-  // }, [dispatch, dateRange]);
-  return <div></div>;
+  useEffect(() => {
+    dispatch(
+      searchDockets({
+        query: {
+          "status.value": "Open",
+        },
+        filters: {
+          docketNumber: 1,
+          "customer.name": 1,
+          jobName: 1,
+          closeDate: 1,
+          status: 1,
+          soldFor: 1,
+          "extraCharges.cost": 1,
+          bill: 1,
+        },
+      })
+    );
+  }, [dispatch, dateRange]);
+
+  const data = useMemo(() => dockets, [dockets]);
+
+  const columns = useMemo(
+    () => [
+      {
+        header: "Docket Number",
+        accessorKey: "docketNumber",
+      },
+      {
+        header: "Customer",
+        accessorKey: "customer.name",
+      },
+      {
+        header: "Job Name",
+        accessorKey: "jobName",
+      },
+      {
+        header: "Close Date",
+        accessorKey: "closeDate",
+      },
+      {
+        header: "Status",
+        accessorKey: "status",
+        cell: (value) =>
+          value
+            .getValue()
+            ?.map((item) => item.label)
+            .join(", "),
+      },
+      {
+        header: "Sold For",
+        accessorKey: "soldFor",
+      },
+      // {
+      //   header: "Extra Charges",
+      //   accessorKey: "extraCharges.cost",
+      // },
+      {
+        header: "Bill",
+        accessorKey: "bill",
+      },
+    ],
+    []
+  );
+  const { getHeaderGroups, getRowModel } = useReactTable({
+    columns,
+    data: data || [],
+    getCoreRowModel: getCoreRowModel(),
+  });
+
+  return (
+    <div className="planning-container">
+      <table>
+        <thead>
+          {getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
+                return (
+                  <th key={header.id} colSpan={header.colSpan}>
+                    {header.isPlaceholder ? null : (
+                      <div>
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </div>
+                    )}
+                  </th>
+                );
+              })}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {getRowModel().rows.map((row) => {
+            return (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 const SnapshotReport = ({ dateRange }) => {
@@ -288,6 +395,7 @@ const SnapshotReport = ({ dateRange }) => {
           value.getValue()?.toLocaleString("en-CA", {
             style: "currency",
             currency: "CAD",
+            currencyDisplay: "symbol",
           }),
       },
     ],
@@ -302,169 +410,160 @@ const SnapshotReport = ({ dateRange }) => {
 
   return (
     <div className="snapshot-container">
-      <div className="snapshot-table-container">
-        <table>
-          <thead>
-            {getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <th key={header.id} colSpan={header.colSpan}>
-                      {header.isPlaceholder ? null : (
-                        <div>
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                        </div>
-                      )}
-                    </th>
-                  );
-                })}
+      <table>
+        <thead>
+          {getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
+                return (
+                  <th key={header.id} colSpan={header.colSpan}>
+                    {header.isPlaceholder ? null : (
+                      <div>
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </div>
+                    )}
+                  </th>
+                );
+              })}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {getRowModel().rows.map((row) => {
+            return (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
               </tr>
-            ))}
-          </thead>
-          <tbody>
-            {getRowModel().rows.map((row) => {
-              return (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-      <div className="snapshot-data-container">
-        <table>
-          <thead>
-            {getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                <th></th>
-                {headerGroup.headers.map((header) => {
-                  if (header.id === "date") return null;
+            );
+          })}
+        </tbody>
+      </table>
+      <table>
+        <thead>
+          {getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              <th></th>
+              {headerGroup.headers.map((header) => {
+                if (header.id === "date") return null;
 
-                  return (
-                    <th key={header.id} colSpan={header.colSpan}>
-                      {header.isPlaceholder ? null : (
-                        <div>
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                        </div>
-                      )}
-                    </th>
-                  );
-                })}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            <tr>
-              <td>Average</td>
-              <td>
-                {(
-                  data.reduce((total, item) => total + item.quotesInDay, 0) /
-                  data.length
-                ).toFixed(2) || 0}
-              </td>
-              <td>
-                {(
-                  data.reduce((total, item) => total + item.quoted, 0) /
-                  data.length
-                ).toLocaleString("en-CA", {
+                return (
+                  <th key={header.id} colSpan={header.colSpan}>
+                    {header.isPlaceholder ? null : (
+                      <div>
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </div>
+                    )}
+                  </th>
+                );
+              })}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          <tr>
+            <td>Average</td>
+            <td>
+              {(
+                data.reduce((total, item) => total + item.quotesInDay, 0) /
+                data.length
+              ).toFixed(2) || 0}
+            </td>
+            <td>
+              {(
+                data.reduce((total, item) => total + item.quoted, 0) /
+                data.length
+              ).toLocaleString("en-CA", {
+                style: "currency",
+                currency: "CAD",
+              }) || 0}
+            </td>
+            <td>
+              {(
+                data.reduce((total, item) => total + item.docketsInDay, 0) /
+                data.length
+              ).toFixed(2) || 0}
+            </td>
+            <td>
+              {(
+                data.reduce((total, item) => total + item.docketsOpened, 0) /
+                data.length
+              ).toLocaleString("en-CA", {
+                style: "currency",
+                currency: "CAD",
+              }) || 0}
+            </td>
+            <td>
+              {(
+                data.reduce((total, item) => total + item.docketsClosed, 0) /
+                data.length
+              ).toLocaleString("en-CA", {
+                style: "currency",
+                currency: "CAD",
+              }) || 0}
+            </td>
+          </tr>
+          <tr>
+            <td>Totals</td>
+            <td>
+              {data
+                .reduce((total, item) => total + item.quotesInDay, 0)
+                .toFixed(2) || 0}
+            </td>
+            <td>
+              {data
+                .reduce((total, item) => total + item.quoted, 0)
+                .toLocaleString("en-CA", {
                   style: "currency",
                   currency: "CAD",
                 }) || 0}
-              </td>
-              <td>
-                {(
-                  data.reduce((total, item) => total + item.docketsInDay, 0) /
-                  data.length
-                ).toFixed(2) || 0}
-              </td>
-              <td>
-                {(
-                  data.reduce((total, item) => total + item.docketsOpened, 0) /
-                  data.length
-                ).toLocaleString("en-CA", {
+            </td>
+            <td>
+              {data
+                .reduce((total, item) => total + item.docketsInDay, 0)
+                .toFixed(2) || 0}
+            </td>
+            <td>
+              {data
+                .reduce((total, item) => total + item.docketsOpened, 0)
+                .toLocaleString("en-CA", {
                   style: "currency",
                   currency: "CAD",
                 }) || 0}
-              </td>
-              <td>
-                {(
-                  data.reduce((total, item) => total + item.docketsClosed, 0) /
-                  data.length
-                ).toLocaleString("en-CA", {
+            </td>
+            <td>
+              {data
+                .reduce((total, item) => total + item.docketsClosed, 0)
+                .toLocaleString("en-CA", {
                   style: "currency",
                   currency: "CAD",
                 }) || 0}
-              </td>
-            </tr>
-            <tr>
-              <td>Totals</td>
-              <td>
-                {data
-                  .reduce((total, item) => total + item.quotesInDay, 0)
-                  .toFixed(2) || 0}
-              </td>
-              <td>
-                {data
-                  .reduce((total, item) => total + item.quoted, 0)
-                  .toLocaleString("en-CA", {
-                    style: "currency",
-                    currency: "CAD",
-                  }) || 0}
-              </td>
-              <td>
-                {data
-                  .reduce((total, item) => total + item.docketsInDay, 0)
-                  .toFixed(2) || 0}
-              </td>
-              <td>
-                {data
-                  .reduce((total, item) => total + item.docketsOpened, 0)
-                  .toLocaleString("en-CA", {
-                    style: "currency",
-                    currency: "CAD",
-                  }) || 0}
-              </td>
-              <td>
-                {data
-                  .reduce((total, item) => total + item.docketsClosed, 0)
-                  .toLocaleString("en-CA", {
-                    style: "currency",
-                    currency: "CAD",
-                  }) || 0}
-              </td>
-            </tr>
-            <tr>
-              <td>All Open Dockets</td>
-              <td>
-                
-              </td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td colSpan={4}></td>
-              <td>Projected Billing</td>
-              <td>{"$120,000"}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+            </td>
+          </tr>
+          <tr>
+            <td>All Open Dockets</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colSpan={4}></td>
+            <td>Projected Billing</td>
+            <td>{"$120,000"}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

@@ -1,9 +1,12 @@
+import { docketSelector } from "../../state/dockets/docketSlice";
 import { updateDocket, getDockets } from "../../state/dockets/saga";
+import { useSelector } from "react-redux";
+
 export const PageDocketToolFunctions = [
   {
     label: "Save",
-    function: function (dispatch) {
-      dispatch(getDockets());
+    function: function SaveDocket() {
+      const { docket } = useSelector(docketSelector);
       console.log("hello world");
     },
   },

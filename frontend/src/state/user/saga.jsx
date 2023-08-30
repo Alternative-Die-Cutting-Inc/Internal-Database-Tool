@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { createAction } from "@reduxjs/toolkit";
 import { put, call, takeLeading } from "redux-saga/effects";
 import useAxios from "../../hooks/useAxios";

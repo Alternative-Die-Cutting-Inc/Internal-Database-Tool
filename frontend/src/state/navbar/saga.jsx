@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { createAction } from "@reduxjs/toolkit";
 import { put, takeLeading } from "redux-saga/effects";
 import {

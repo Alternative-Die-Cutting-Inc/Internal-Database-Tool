@@ -87,10 +87,24 @@ export function* searchDocketsSaga({ payload: { query, filters } }) {
   }
 }
 
+export const deleteDocket = createAction("deleteDocketSaga");
+
+export function* deleteDocketSaga({ payload: { id } }) {
+  const { axios } = useAxios();
+  try {
+    yield put(updateDocketStart());
+    const response = yield call(axios.delete, `/dockets/${id}`);
+    yield put(updateDocketSuccess(response.data?.docket));
+  } catch (error) {
+    yield put(updateDocketFailure(error));
+  }
+}
+
 export default function* docketsSaga() {
   yield takeLeading(createDocket.type, createDocketSaga);
   yield takeLeading(updateDocket.type, updateDocketSaga);
   yield takeLeading(getDockets.type, getDocketsSaga);
   yield takeLeading(getDocket.type, getDocketSaga);
   yield takeLeading(searchDockets.type, searchDocketsSaga);
+  yield takeLeading(deleteDocket.type, deleteDocketSaga);
 }

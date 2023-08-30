@@ -5,7 +5,11 @@ import {
   docketSelector,
   docketsSelector,
 } from "../../state/dockets/docketSlice";
-import { searchDockets, updateDocket } from "../../state/dockets/saga";
+import {
+  deleteDocket,
+  searchDockets,
+  updateDocket,
+} from "../../state/dockets/saga";
 import { quotesSelector } from "../../state/quotes/quoteSlice";
 import { searchQuotes } from "../../state/quotes/saga";
 import PropTypes from "prop-types";
@@ -238,6 +242,19 @@ const PlanningReport = () => {
           />
         );
       },
+    }),
+    columnHelper.accessor("_id", {
+      header: "Delete",
+      cell: (value) => (
+        <button
+          onClick={() => {
+            const id = value.getValue();
+            dispatch(deleteDocket({ id }));
+          }}
+        >
+          delete
+        </button>
+      ),
     }),
   ];
 

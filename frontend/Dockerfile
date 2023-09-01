@@ -5,4 +5,8 @@ COPY package.json yarn.lock ./
 RUN yarn install
 
 COPY ./ ./
-CMD [ "yarn", "build" ]
+RUN yarn build
+
+FROM alpine
+
+COPY --from=build /app/dist /app/dist

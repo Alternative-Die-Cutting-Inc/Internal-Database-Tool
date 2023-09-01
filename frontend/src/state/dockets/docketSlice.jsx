@@ -24,6 +24,7 @@ const docketSlice = createSlice({
     getDocketsFailure: (state, { payload: error }) => {
       state.loading = false;
       state.error = error;
+      state.dockets = null;
     },
     getDocketStart: (state) => {
       state.loading = true;

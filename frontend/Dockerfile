@@ -6,8 +6,9 @@ RUN yarn install
 
 COPY ./ ./
 
-RUN yarn build
+RUN yarn build 
 
-FROM alpine:3.14
+FROM alpine:3.14 as final
+COPY --from=build /app/dist /dist
 
-COPY --from=build /app/dist /app/dist
+CMD ["cp", "-R","/dist" ,"/app"]

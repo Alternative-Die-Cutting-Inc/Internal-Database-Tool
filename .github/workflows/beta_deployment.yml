@@ -60,10 +60,10 @@ jobs:
           directory: frontend
 
       - name: Build frontend image
-        run: cd frontend && docker build -t internal-tool:frontend .
+        run: cd frontend && docker build -t frontend:beta .
 
       - name: Tag frontend image
-        run: docker tag internal-tool:frontend registry.digitalocean.com/altdieinc/internal-tool:frontend
+        run: docker tag frontend:beta registry.digitalocean.com/altdieinc/frontend:beta
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2.4.1
@@ -77,7 +77,7 @@ jobs:
         run: if [ ! -z "$(doctl registry repository list | grep "$(echo $FRONTEND_IMAGE_NAME)")" ]; then doctl registry repository delete-tag $(echo $FRONTEND_IMAGE_NAME) $(echo $TAG) --force; else echo "No repository"; fi
 
       - name: Push frontend image to container registry
-        run: docker push registry.digitalocean.com/altdieinc/internal-tool:frontend
+        run: docker push registry.digitalocean.com/altdieinc/frontend:beta
 
       - name: Run garbage collector
         run: doctl registry garbage-collection start --include-untagged-manifests --force altdieinc

@@ -7,7 +7,7 @@ const quoteServices = require('../services/quoteServices');
 const loadMongo = async (app) => {
   console.log('Loading mongo...');
   const { MONGODB_PASSWORD, MONGODB_USER } = process.env;
-  const mongoURI = `mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@localhost:27017/internal?authSource=admin`;
+  const mongoURI = `mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@mongo-database:27017/internal?authSource=admin`;
 
   await mongoose.connect(mongoURI);
   // mongoose.set('debug', true); // uncomment this if you have issues with mongo and want to debug

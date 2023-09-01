@@ -113,7 +113,14 @@ const PageDocketTool = () => {
     });
   }, [docket]);
 
-  if (!editingDocket) return null;
+  if (!docket)
+    return (
+      <div className="docket-tool-container">
+        <h2 style={{ textAlign: "center", paddingTop: "40px" }}>
+          {"No docket found. Please recheck the docket number and try again"}
+        </h2>
+      </div>
+    );
 
   return (
     <div className="docket-tool-container">
@@ -449,7 +456,7 @@ const PageDocketTool = () => {
                       <label htmlFor="strip">
                         <input
                           checked={
-                            editingDocket.finishing
+                            editingDocket?.finishing
                               ?.map((value) => value.value)
                               .includes("strip") || false
                           }

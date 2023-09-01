@@ -12,9 +12,8 @@ concurrency: beta-deployment
 
 env:
   REGISTRY: registry.digitalocean.com/altdieinc
-  TAG: beta
   BACKEND_IMAGE_NAME: "internal-tool"
-  FO_IMAGE_NAME: "internal-tool"
+  FRONTEND_IMAGE_NAME: "internal-tool"
   DIGITALOCEAN_API_KEY: ${{ secrets.DIGITALOCEAN_API_KEY }}
 
 jobs:
@@ -39,12 +38,12 @@ jobs:
         run: doctl registry login --expiry-seconds 600
 
       - name: Remove old server image
-        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $BACKEND_IMAGE_NAME)")" ]; then doctl registry repository delete-tag $(echo $BACKEND_IMAGE_NAME) $(echo $TAG) --force; else echo "No repository"; fi
+        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $BACKEND_IMAGE_NAME)")" ]; then doctl registry repository delete-tag $(echo $BACKEND_IMAGE_NAME) $(echo backend) --force; else echo "No repository"; fi
 
       - name: Push server image to container registry
-        run: docker push registry.digitalocean.com/altdieinc/internal-tool:beta
+        run: docker push registry.digitalocean.com/altdieinc/internal-tool:backend
 
-  build_client:
+  frontend:
     runs-on: ubuntu-20.04
     needs:
       - build_server
@@ -57,13 +56,13 @@ jobs:
         with:
           envkey_VITE_API_BASE_URL: "https://api.beta.alterantivedc.com"
           file_name: .env
-          directory: client
+          directory: frontend
 
-      - name: Build client image
-        run: cd client && docker build -t internal-tool:beta -f beta.Dockerfile .
+      - name: Build frontend image
+        run: cd frontend && docker build -t internal-tool:frontend
 
-      - name: Tag client image
-        run: docker tag internal-tool:beta registry.digitalocean.com/altdieinc/internal-tool:beta
+      - name: Tag frontend image
+        run: docker tag internal-tool:frontend registry.digitalocean.com/altdieinc/internal-tool:frontend
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2.4.1
@@ -73,11 +72,11 @@ jobs:
       - name: Log in to DigitalOcean Container Registry
         run: doctl registry login --expiry-seconds 600
 
-      - name: Remove old client image
-        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $FO_IMAGE_NAME)")" ]; then doctl registry repository delete-tag $(echo $FO_IMAGE_NAME) $(echo $TAG) --force; else echo "No repository"; fi
+      - name: Remove old frontend image
+        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $FRONTEND_IMAGE_NAME)")" ]; then doctl registry repository delete-tag $(echo $FRONTEND_IMAGE_NAME) $(echo frontend) --force; else echo "No repository"; fi
 
-      - name: Push client image to container registry
-        run: docker push registry.digitalocean.com/altdieinc/internal-tool:beta
+      - name: Push frontend image to container registry
+        run: docker push registry.digitalocean.com/altdieinc/internal-tool:frontend
 
       - name: Run garbage collector
         run: doctl registry garbage-collection start --include-untagged-manifests --force altdieinc
@@ -85,7 +84,7 @@ jobs:
   deploy_beta:
     runs-on: ubuntu-20.04
     needs:
-      - build_client
+      - frontend
       - build_server
 
     steps:

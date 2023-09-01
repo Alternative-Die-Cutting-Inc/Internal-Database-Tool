@@ -12,8 +12,9 @@ concurrency: beta-deployment
 
 env:
   REGISTRY: registry.digitalocean.com/altdieinc
-  BACKEND_IMAGE_NAME: "internal-tool"
-  FRONTEND_IMAGE_NAME: "internal-tool"
+  BACKEND_IMAGE_NAME: "backend"
+  FRONTEND_IMAGE_NAME: "frontend"
+  TAG: "beta"
   DIGITALOCEAN_API_KEY: ${{ secrets.DIGITALOCEAN_API_KEY }}
 
 jobs:
@@ -24,10 +25,10 @@ jobs:
         uses: actions/checkout@v3.5.3
 
       - name: Build backend image
-        run: cd backend && docker build -t internal-tool:backend .
+        run: cd backend && docker build -t backend:beta .
 
       - name: Tag backend image
-        run: docker tag internal-tool:backend registry.digitalocean.com/altdieinc/internal-tool:backend
+        run: docker tag backend:beta registry.digitalocean.com/altdieinc/backend:beta
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2.4.1
@@ -38,10 +39,10 @@ jobs:
         run: doctl registry login --expiry-seconds 600
 
       - name: Remove old backend image
-        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $BACKEND_IMAGE_NAME)")" ]; then doctl registry repository delete-tag $(echo $BACKEND_IMAGE_NAME) $(echo backend) --force; else echo "No repository"; fi
+        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $BACKEND_IMAGE_NAME)")" ]; then doctl registry repository delete-tag $(echo $BACKEND_IMAGE_NAME) $(echo $TAG) --force; else echo "No repository"; fi
 
       - name: Push backend image to container registry
-        run: docker push registry.digitalocean.com/altdieinc/internal-tool:backend
+        run: docker push registry.digitalocean.com/altdieinc/backend:beta
 
   frontend:
     runs-on: ubuntu-20.04
@@ -73,7 +74,7 @@ jobs:
         run: doctl registry login --expiry-seconds 600
 
       - name: Remove old frontend image
-        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $FRONTEND_IMAGE_NAME)")" ]; then doctl registry repository delete-tag $(echo $FRONTEND_IMAGE_NAME) $(echo frontend) --force; else echo "No repository"; fi
+        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $FRONTEND_IMAGE_NAME)")" ]; then doctl registry repository delete-tag $(echo $FRONTEND_IMAGE_NAME) $(echo $TAG) --force; else echo "No repository"; fi
 
       - name: Push frontend image to container registry
         run: docker push registry.digitalocean.com/altdieinc/internal-tool:frontend

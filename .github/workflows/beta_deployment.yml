@@ -17,16 +17,16 @@ env:
   DIGITALOCEAN_API_KEY: ${{ secrets.DIGITALOCEAN_API_KEY }}
 
 jobs:
-  build_server:
+  build_backend:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.5.3
 
-      - name: Build server image
-        run: cd backend && docker build -t internal-tool:backend
+      - name: Build backend image
+        run: cd backend && docker build -t internal-tool:backend .
 
-      - name: Tag server image
+      - name: Tag backend image
         run: docker tag internal-tool:backend registry.digitalocean.com/altdieinc/internal-tool:backend
 
       - name: Install doctl
@@ -37,16 +37,16 @@ jobs:
       - name: Log in to DigitalOcean Container Registry
         run: doctl registry login --expiry-seconds 600
 
-      - name: Remove old server image
+      - name: Remove old backend image
         run: if [ ! -z "$(doctl registry repository list | grep "$(echo $BACKEND_IMAGE_NAME)")" ]; then doctl registry repository delete-tag $(echo $BACKEND_IMAGE_NAME) $(echo backend) --force; else echo "No repository"; fi
 
-      - name: Push server image to container registry
+      - name: Push backend image to container registry
         run: docker push registry.digitalocean.com/altdieinc/internal-tool:backend
 
   frontend:
     runs-on: ubuntu-20.04
     needs:
-      - build_server
+      - build_backend
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.5.3
@@ -59,7 +59,7 @@ jobs:
           directory: frontend
 
       - name: Build frontend image
-        run: cd frontend && docker build -t internal-tool:frontend
+        run: cd frontend && docker build -t internal-tool:frontend .
 
       - name: Tag frontend image
         run: docker tag internal-tool:frontend registry.digitalocean.com/altdieinc/internal-tool:frontend
@@ -85,7 +85,7 @@ jobs:
     runs-on: ubuntu-20.04
     needs:
       - frontend
-      - build_server
+      - build_backend
 
     steps:
       - name: Deploy over SSH

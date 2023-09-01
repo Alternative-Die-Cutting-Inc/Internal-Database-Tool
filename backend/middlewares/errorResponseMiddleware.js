@@ -1,7 +1,8 @@
 function errorResponseMiddleware(error, req, res, next) {
   let statusCode, errorMessage;
-  console.log('errorMiddleware');
-  console.log(error);
+  console.log(`\n\nError Middleware`);
+  console.log(`\n\n`);
+  console.error(error);
 
   switch (error.message) {
     case 'DUPLICATE_USERNAME':

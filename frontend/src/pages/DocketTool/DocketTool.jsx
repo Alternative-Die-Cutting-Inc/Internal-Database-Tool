@@ -32,10 +32,10 @@ const PageDocketTool = () => {
 
   const saveDocket = (fields) => {
     if (editingDocket) {
-      if (fields) dispatch(updateDocket({ id: editingDocket._id, fields }));
+      if (fields) dispatch(updateDocket({ id: editingDocket?._id, fields }));
       else
         dispatch(
-          updateDocket({ id: editingDocket._id, fields: editingDocket })
+          updateDocket({ id: editingDocket?._id, fields: editingDocket })
         );
     }
   };
@@ -62,7 +62,7 @@ const PageDocketTool = () => {
   const handleCheckbox = (event) => {
     if (
       event.target.checked &&
-      !editingDocket.finishing
+      !editingDocket?.finishing
         .map((value) => value.value)
         .includes(event.target.id)
     ) {
@@ -82,18 +82,18 @@ const PageDocketTool = () => {
     }
     if (
       !event.target.checked &&
-      editingDocket.finishing
+      editingDocket?.finishing
         .map((value) => value.value)
         .includes(event.target.id)
     ) {
       setEditingDocket({
         ...editingDocket,
-        finishing: editingDocket.finishing.filter(
+        finishing: editingDocket?.finishing.filter(
           (f) => f.value !== event.target.id
         ),
       });
       saveDocket({
-        finishing: editingDocket.finishing.filter(
+        finishing: editingDocket?.finishing.filter(
           (f) => f.value !== event.target.id
         ),
       });
@@ -169,7 +169,7 @@ const PageDocketTool = () => {
                   value={editingDocket?.customerPO || ""}
                   onBlur={() => {
                     handleBlur({
-                      customerPO: editingDocket.customerPO,
+                      customerPO: editingDocket?.customerPO,
                     });
                   }}
                   onChange={(event) => {
@@ -188,7 +188,7 @@ const PageDocketTool = () => {
                   value={editingDocket?.jobName || ""}
                   onBlur={() => {
                     handleBlur({
-                      jobName: editingDocket.jobName,
+                      jobName: editingDocket?.jobName,
                     });
                   }}
                   onChange={(event) => {
@@ -210,7 +210,7 @@ const PageDocketTool = () => {
                   value={editingDocket?.quoteNumber || ""}
                   onBlur={() => {
                     handleBlur({
-                      quoteNumber: editingDocket.quoteNumber,
+                      quoteNumber: editingDocket?.quoteNumber,
                     });
                   }}
                   onChange={(event) => {
@@ -229,7 +229,7 @@ const PageDocketTool = () => {
                   value={editingDocket?.productionPerson || ""}
                   onBlur={() => {
                     handleBlur({
-                      productionPerson: editingDocket.productionPerson,
+                      productionPerson: editingDocket?.productionPerson,
                     });
                   }}
                   onChange={(event) => {
@@ -256,7 +256,7 @@ const PageDocketTool = () => {
                   }
                   onBlur={() => {
                     handleBlur({
-                      soldFor: editingDocket.soldFor,
+                      soldFor: editingDocket?.soldFor,
                     });
                   }}
                   onChange={(event) => {
@@ -273,7 +273,7 @@ const PageDocketTool = () => {
                   value={editingDocket?.jobType || ""}
                   onBlur={() => {
                     handleBlur({
-                      jobType: editingDocket.jobType,
+                      jobType: editingDocket?.jobType,
                     });
                   }}
                   onChange={(event) => {
@@ -295,7 +295,7 @@ const PageDocketTool = () => {
                   readOnly
                   // onBlur={() => {
                   //   handleBlur( {
-                  //     : editingDocket.,
+                  //     : editingDocket?.,
                   //   });
                   // }}
                   // onChange={(event) => {
@@ -338,7 +338,7 @@ const PageDocketTool = () => {
                             setEditingDocket({
                               ...editingDocket,
                               die: {
-                                ...editingDocket.die,
+                                ...editingDocket?.die,
                                 standing: true,
                               },
                             });
@@ -508,7 +508,7 @@ const PageDocketTool = () => {
                       <label htmlFor="crease">
                         <input
                           checked={
-                            editingDocket.finishing
+                            editingDocket?.finishing
                               ?.map((value) => value.value)
                               .includes("crease") || false
                           }
@@ -524,7 +524,7 @@ const PageDocketTool = () => {
                       <label htmlFor="carton">
                         <input
                           checked={
-                            editingDocket.finishing
+                            editingDocket?.finishing
                               ?.map((value) => value.value)
                               .includes("carton") || false
                           }
@@ -542,7 +542,7 @@ const PageDocketTool = () => {
                       <label htmlFor="stripHole">
                         <input
                           checked={
-                            editingDocket.finishing
+                            editingDocket?.finishing
                               ?.map((value) => value.value)
                               .includes("stripHole") || false
                           }
@@ -558,7 +558,7 @@ const PageDocketTool = () => {
                       <label htmlFor="skidFlat">
                         <input
                           checked={
-                            editingDocket.finishing
+                            editingDocket?.finishing
                               ?.map((value) => value.value)
                               .includes("skidFlat") || false
                           }
@@ -583,7 +583,7 @@ const PageDocketTool = () => {
                 value={editingDocket?.finishing || ""}
                 onBlur={() => {
                   handleBlur({
-                    finishing: editingDocket.finishing,
+                    finishing: editingDocket?.finishing,
                   });
                 }}
                 isClearable={false}
@@ -650,10 +650,10 @@ const PageDocketTool = () => {
                         type="text"
                         value={form.name || ""}
                         onBlur={() => {
-                          handleBlur({ forms: editingDocket.forms });
+                          handleBlur({ forms: editingDocket?.forms });
                         }}
                         onChange={(event) => {
-                          const newForms = editingDocket.forms.map((f, i) => {
+                          const newForms = editingDocket?.forms.map((f, i) => {
                             if (i === index) {
                               return { ...f, name: event.target.value };
                             }
@@ -672,10 +672,10 @@ const PageDocketTool = () => {
                         step={1000}
                         value={form.quantity || 0}
                         onBlur={() => {
-                          handleBlur({ forms: editingDocket.forms });
+                          handleBlur({ forms: editingDocket?.forms });
                         }}
                         onChange={(event) => {
-                          const newForms = editingDocket.forms.map((f, i) => {
+                          const newForms = editingDocket?.forms.map((f, i) => {
                             if (i === index) {
                               return {
                                 ...f,
@@ -696,12 +696,12 @@ const PageDocketTool = () => {
                         type="text"
                         value={form.notes || ""}
                         onBlur={() => {
-                          handleBlur({ forms: editingDocket.forms });
+                          handleBlur({ forms: editingDocket?.forms });
                         }}
                         onChange={(event) => {
                           setEditingDocket({
                             ...editingDocket,
-                            forms: editingDocket.forms.map((f, i) => {
+                            forms: editingDocket?.forms.map((f, i) => {
                               if (i === index) {
                                 return {
                                   ...f,
@@ -810,10 +810,10 @@ const PageDocketTool = () => {
                 id=""
                 className="instructions-input"
                 placeholder="Instructions"
-                value={editingDocket.specialInstructions || ""}
+                value={editingDocket?.specialInstructions || ""}
                 onBlur={() => {
                   handleBlur({
-                    specialInstructions: editingDocket.specialInstructions,
+                    specialInstructions: editingDocket?.specialInstructions,
                   });
                 }}
                 onChange={(event) => {
@@ -844,13 +844,13 @@ const PageDocketTool = () => {
                         value={charge.name || ""}
                         onBlur={() => {
                           handleBlur({
-                            extraCharges: editingDocket.extraCharges,
+                            extraCharges: editingDocket?.extraCharges,
                           });
                         }}
                         onChange={(event) => {
                           setEditingDocket({
                             ...editingDocket,
-                            extraCharges: editingDocket.extraCharges.map(
+                            extraCharges: editingDocket?.extraCharges.map(
                               (c, i) => {
                                 if (i === index) {
                                   return {
@@ -873,13 +873,13 @@ const PageDocketTool = () => {
                         value={charge.cost || 0}
                         onBlur={() => {
                           handleBlur({
-                            extraCharges: editingDocket.extraCharges,
+                            extraCharges: editingDocket?.extraCharges,
                           });
                         }}
                         onChange={(event) => {
                           setEditingDocket({
                             ...editingDocket,
-                            extraCharges: editingDocket.extraCharges.map(
+                            extraCharges: editingDocket?.extraCharges.map(
                               (c, i) => {
                                 if (i === index) {
                                   return {
@@ -900,13 +900,13 @@ const PageDocketTool = () => {
                         value={charge.notes || ""}
                         onBlur={() => {
                           handleBlur({
-                            extraCharges: editingDocket.extraCharges,
+                            extraCharges: editingDocket?.extraCharges,
                           });
                         }}
                         onChange={(event) => {
                           setEditingDocket({
                             ...editingDocket,
-                            extraCharges: editingDocket.extraCharges.map(
+                            extraCharges: editingDocket?.extraCharges.map(
                               (c, i) => {
                                 if (i === index) {
                                   return {
@@ -925,7 +925,9 @@ const PageDocketTool = () => {
                       <button
                         className="delete-extra-cost-button"
                         onClick={() => {
-                          let newExtraCharges = [...editingDocket.extraCharges];
+                          let newExtraCharges = [
+                            ...editingDocket.extraCharges,
+                          ];
                           newExtraCharges.splice(index, 1);
                           setEditingDocket({
                             ...editingDocket,
@@ -947,7 +949,7 @@ const PageDocketTool = () => {
                     <input
                       type="text"
                       value={
-                        editingDocket.extraCharges
+                        editingDocket?.extraCharges
                           ?.reduce(
                             (totalCost, charge) =>
                               parseFloat(totalCost) + parseFloat(charge.cost),
@@ -1020,15 +1022,15 @@ const PageDocketTool = () => {
                 console.log(event);
                 saveDocket(editingDocket);
                 navigator.clipboard.writeText(
-                  `${editingDocket.customer?.name} #${
-                    editingDocket.docketNumber
-                  }\n${editingDocket.jobName}\n${
-                    editingDocket.die.standing ? "Standing" : "New"
-                  } ${editingDocket.die.dieType}${
-                    editingDocket.die.standing
-                      ? " #" + editingDocket.die.dieID
+                  `${editingDocket?.customer?.name} #${
+                    editingDocket?.docketNumber
+                  }\n${editingDocket?.jobName}\n${
+                    editingDocket?.die.standing ? "Standing" : "New"
+                  } ${editingDocket?.die.dieType}${
+                    editingDocket?.die.standing
+                      ? " #" + editingDocket?.die.dieID
                       : ""
-                  }, ${editingDocket.finishing.reduce(
+                  }, ${editingDocket?.finishing.reduce(
                     (a, b) => b.label + ", " + a,
                     ""
                   )}`
@@ -1047,10 +1049,10 @@ const PageDocketTool = () => {
                 rows={7}
                 className="requote-memo-input"
                 placeholder="Memo"
-                value={editingDocket.requoteMemo || ""}
+                value={editingDocket?.requoteMemo || ""}
                 onBlur={() => {
                   handleBlur({
-                    requoteMemo: editingDocket.requoteMemo,
+                    requoteMemo: editingDocket?.requoteMemo,
                   });
                 }}
                 onChange={(event) => {
@@ -1069,13 +1071,13 @@ const PageDocketTool = () => {
                   name="closing-datetime"
                   id="closing-datetime"
                   value={
-                    editingDocket.closeDate
-                      ? editingDocket.closeDate.split("T")[0]
+                    editingDocket?.closeDate
+                      ? editingDocket?.closeDate.split("T")[0]
                       : "" || ""
                   }
                   onBlur={() => {
                     handleBlur({
-                      closeDate: editingDocket.closeDate,
+                      closeDate: editingDocket?.closeDate,
                     });
                   }}
                   onChange={(event) => {

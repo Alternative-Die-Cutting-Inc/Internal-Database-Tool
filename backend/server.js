@@ -4,7 +4,6 @@ const passportLoader = require('./loaders/passportLoader');
 const errorResponseMiddleware = require('./middlewares/errorResponseMiddleware');
 const routerLoader = require('./loaders/routerLoader');
 const app = require('./app');
-require('dotenv').config();
 
 mongoLoader(app).then(async () => {
   const server = http.createServer(app);

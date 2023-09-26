@@ -1,0 +1,9 @@
+*/node_modules/
+
+backend/coverage/
+
+backend/.nyc_output/
+
+.eslint.js
+
+yarn-error.log

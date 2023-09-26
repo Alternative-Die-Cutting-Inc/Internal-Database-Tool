@@ -82,6 +82,20 @@
       text-align: left;
       padding: 16px;
       border: none;
+      button {
+        border: none;
+        border-radius: 5px;
+        padding: 5px;
+        font-weight: 600;
+        color: var(--light-accent);
+        background-color: var(--dark-grey);
+        cursor: pointer;
+        &:hover {
+          background-color: var(--light-accent);
+          color: var(--dark-grey);
+          transition: background-color 200ms;
+        }
+      }
     }
   }
 }

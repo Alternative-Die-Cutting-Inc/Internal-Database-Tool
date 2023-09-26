@@ -252,7 +252,7 @@ const PlanningReport = () => {
             dispatch(deleteDocket({ id }));
           }}
         >
-          delete
+          Delete
         </button>
       ),
     }),
@@ -340,55 +340,12 @@ const SnapshotReport = ({ dateRange }) => {
               $and: [
                 {
                   closeDate: {
-                    $gte: dateRange.startDate,
+                    $gte: new Date(dateRange.startDate),
                   },
                 },
                 {
                   closeDate: {
-                    $lte: dateRange.endDate,
-                  },
-                },
-              ],
-            },
-          ],
-        },
-        filters: {
-          // closeDate: 1,
-          // creationDate: 1,
-          // status: 1,
-          // bill: 1,
-          // soldFor: 1,
-        },
-      })
-    );
-    dispatch(
-      searchQuotes({
-        query: {
-          $or: [
-            {
-              $and: [
-                {
-                  creationDate: {
-                    $gte: dateRange.startDate,
-                  },
-                },
-                {
-                  creationDate: {
-                    $lte: dateRange.endDate,
-                  },
-                },
-              ],
-            },
-            {
-              $and: [
-                {
-                  closeDate: {
-                    $gte: dateRange.startDate,
-                  },
-                },
-                {
-                  closeDate: {
-                    $lte: dateRange.endDate,
+                    $lte: new Date(dateRange.endDate),
                   },
                 },
               ],
@@ -399,6 +356,30 @@ const SnapshotReport = ({ dateRange }) => {
           closeDate: 1,
           creationDate: 1,
           status: 1,
+          bill: 1,
+          soldFor: 1,
+        },
+      })
+    );
+    dispatch(
+      searchQuotes({
+        query: {
+          $and: [
+            {
+              creationDate: {
+                $gte: new Date(dateRange.startDate),
+              },
+            },
+            {
+              creationDate: {
+                $lte: new Date(dateRange.endDate),
+              },
+            },
+          ],
+        },
+        filters: {
+          creationDate: 1,
+          status: 1,
           "quoteJobs.total": 1,
         },
       })
@@ -407,14 +388,13 @@ const SnapshotReport = ({ dateRange }) => {
 
   const data = useMemo(() => {
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-    const firstDate = new Date(dateRange.startDate);
-    firstDate.setDate(firstDate.getDate() + 1);
-    const secondDate = new Date(dateRange.endDate);
-    secondDate.setDate(secondDate.getDate() + 1);
-    const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
-
+    const startDate = new Date(dateRange.startDate);
+    startDate.setDate(startDate.getDate() + 1);
+    const endDate = new Date(dateRange.endDate);
+    endDate.setDate(endDate.getDate() + 1);
+    const diffDays = Math.round(Math.abs((startDate - endDate) / oneDay));
     return [...Array(diffDays)].map((_, index) => {
-      const day = new Date(firstDate);
+      const day = new Date(startDate);
       day.setDate(day.getDate() + index);
 
       let quotesInDay = 0;
@@ -436,6 +416,7 @@ const SnapshotReport = ({ dateRange }) => {
       }
 
       if (dockets?.length) {
+        console.log(dockets);
         dockets.forEach((docket) => {
           if (
             new Date(docket.creationDate).toLocaleDateString() ===
@@ -446,14 +427,12 @@ const SnapshotReport = ({ dateRange }) => {
           }
 
           if (
-            new Date(docket.closeDate).toLocaleDateString() ===
+            new Date(docket?.closeDate).toLocaleDateString() ===
             day.toLocaleDateString()
           ) {
             docketsClosed += docket?.soldFor || 0;
           }
-          // console.log(docket.creationDate);
         });
-        console.log(dockets);
       }
 
       return {
@@ -485,7 +464,7 @@ const SnapshotReport = ({ dateRange }) => {
         header: "Quoted",
         accessorKey: "quoted",
         cell: (value) =>
-          value.getValue()?.toLocaleString("en-CA", {
+          (value.getValue() || 0).toLocaleString("en-CA", {
             style: "currency",
             currency: "CAD",
           }),
@@ -498,7 +477,7 @@ const SnapshotReport = ({ dateRange }) => {
         header: "Dockets Opened",
         accessorKey: "docketsOpened",
         cell: (value) =>
-          value.getValue()?.toLocaleString("en-CA", {
+          (value.getValue() || 0).toLocaleString("en-CA", {
             style: "currency",
             currency: "CAD",
           }),
@@ -507,7 +486,7 @@ const SnapshotReport = ({ dateRange }) => {
         header: "Dockets Closed",
         accessorKey: "docketsClosed",
         cell: (value) =>
-          value.getValue()?.toLocaleString("en-CA", {
+          (value.getValue() || 0).toLocaleString("en-CA", {
             style: "currency",
             currency: "CAD",
             currencyDisplay: "symbol",
@@ -630,9 +609,7 @@ const SnapshotReport = ({ dateRange }) => {
           <tr>
             <td>Totals</td>
             <td>
-              {(
-                data.reduce((total, item) => total + item.quotesInDay, 0) || 0
-              ).toFixed(2)}
+              {data.reduce((total, item) => total + item.quotesInDay, 0) || 0}
             </td>
             <td>
               {(
@@ -643,9 +620,7 @@ const SnapshotReport = ({ dateRange }) => {
               })}
             </td>
             <td>
-              {(
-                data.reduce((total, item) => total + item.docketsInDay, 0) || 0
-              ).toFixed(2)}
+              {data.reduce((total, item) => total + item.docketsInDay, 0) || 0}
             </td>
             <td>
               {(
@@ -665,17 +640,87 @@ const SnapshotReport = ({ dateRange }) => {
             </td>
           </tr>
           <tr>
-            <td>All Open Dockets</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td colSpan={2}>All Open Dockets</td>
+            <td>
+              {dockets?.reduce((open, docket) => {
+                if (docket.status.some((status) => status.label === "Open")) {
+                  return open + 1;
+                }
+                return open;
+              }, 0)}
+            </td>
+            <td>Dockets On Floor</td>
+            <td>
+              {dockets
+                ?.reduce((open, docket) => {
+                  if (
+                    docket.status.some(
+                      (status) => status.label === "On The Floor"
+                    )
+                  ) {
+                    return open + docket?.soldFor || 0;
+                  }
+                  return open;
+                }, 0)
+                .toLocaleString("en-CA", {
+                  style: "currency",
+                  currency: "CAD",
+                })}
+            </td>
             <td></td>
           </tr>
           <tr>
-            <td colSpan={4}></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Billable</td>
+            <td>
+              {dockets
+                ?.reduce((prev, curr) => {
+                  if (
+                    curr.bill &&
+                    curr.status.every((status) => status.label !== "Closed")
+                  ) {
+                    return prev + curr?.soldFor || 0;
+                  }
+                  return prev;
+                }, 0)
+                .toLocaleString("en-CA", {
+                  style: "currency",
+                  currency: "CAD",
+                })}
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={2}>Hit Percentage</td>
+            <td>
+              {(
+                (data.reduce((total, item) => total + item.docketsInDay, 0) /
+                  data.reduce((total, item) => total + item.quotesInDay, 0)) *
+                  100 || 0
+              ).toFixed(2) + "%"}
+            </td>
+            <td></td>
             <td>Projected Billing</td>
-            <td>{"$120,000"}</td>
+            <td>
+              {(
+                dockets?.reduce((prev, curr) => {
+                  if (
+                    curr.bill &&
+                    curr.status.every((status) => status.label !== "Closed")
+                  ) {
+                    return prev + curr?.soldFor || 0;
+                  }
+                  return prev;
+                }, 0) +
+                  data.reduce((total, item) => total + item.docketsClosed, 0) ||
+                0
+              ).toLocaleString("en-CA", {
+                style: "currency",
+                currency: "CAD",
+              })}
+            </td>
           </tr>
         </tbody>
       </table>

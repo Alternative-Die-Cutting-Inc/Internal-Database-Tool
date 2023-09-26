@@ -23,6 +23,10 @@ const StatusLabels = ({ values }) => {
             backgroundColor = "yellow";
             color = "black";
             break;
+          case "Open":
+            backgroundColor = "yellow";
+            color = "black";
+            break;
           case "Closed":
             backgroundColor = "black";
             break;

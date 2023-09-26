@@ -33,7 +33,7 @@ export function* getQuotesSaga() {
     const response = yield call(axios.get, "/quotes");
     yield put(getQuotesSuccess(response.data?.quotes));
   } catch (error) {
-    yield put(getQuotesFailure(error.response.data?.errorMessage));
+    yield put(getQuotesFailure(error?.response?.data?.errorMessage));
   }
 }
 

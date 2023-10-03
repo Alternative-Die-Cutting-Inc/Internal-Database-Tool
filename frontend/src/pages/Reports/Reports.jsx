@@ -318,6 +318,8 @@ const SnapshotReport = ({ dateRange }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const startDate = new Date(dateRange.startDate).toISOString();
+    const endDate = new Date(dateRange.endDate).toISOString();
     dispatch(
       searchDockets({
         query: {
@@ -326,12 +328,12 @@ const SnapshotReport = ({ dateRange }) => {
               $and: [
                 {
                   creationDate: {
-                    $gte: dateRange.startDate,
+                    $gte: new Date(dateRange.startDate + "EST"),
                   },
                 },
                 {
                   creationDate: {
-                    $lte: dateRange.endDate,
+                    $lte: new Date(dateRange.endDate + "EST"),
                   },
                 },
               ],
@@ -340,12 +342,12 @@ const SnapshotReport = ({ dateRange }) => {
               $and: [
                 {
                   closeDate: {
-                    $gte: new Date(dateRange.startDate),
+                    $gte: startDate,
                   },
                 },
                 {
                   closeDate: {
-                    $lte: new Date(dateRange.endDate),
+                    $lte: endDate,
                   },
                 },
               ],
@@ -367,12 +369,12 @@ const SnapshotReport = ({ dateRange }) => {
           $and: [
             {
               creationDate: {
-                $gte: new Date(dateRange.startDate),
+                $gte: startDate,
               },
             },
             {
               creationDate: {
-                $lte: new Date(dateRange.endDate),
+                $lte: endDate,
               },
             },
           ],
@@ -389,10 +391,10 @@ const SnapshotReport = ({ dateRange }) => {
   const data = useMemo(() => {
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
     const startDate = new Date(dateRange.startDate);
-    startDate.setDate(startDate.getDate() + 1);
     const endDate = new Date(dateRange.endDate);
-    endDate.setDate(endDate.getDate() + 1);
+    endDate.setDate(endDate.getDate());
     const diffDays = Math.round(Math.abs((startDate - endDate) / oneDay));
+
     return [...Array(diffDays)].map((_, index) => {
       const day = new Date(startDate);
       day.setDate(day.getDate() + index);
@@ -416,19 +418,19 @@ const SnapshotReport = ({ dateRange }) => {
       }
 
       if (dockets?.length) {
-        console.log(dockets);
         dockets.forEach((docket) => {
           if (
             new Date(docket.creationDate).toLocaleDateString() ===
-            day.toLocaleDateString()
+            day.toISOString().split("T")[0]
           ) {
             docketsInDay++;
             docketsOpened += docket?.soldFor || 0;
           }
 
           if (
-            new Date(docket?.closeDate).toLocaleDateString() ===
-            day.toLocaleDateString()
+            docket?.closeDate &&
+            new Date(docket?.closeDate).toISOString().split("T")[0] ==
+              day.toISOString().split("T")[0]
           ) {
             docketsClosed += docket?.soldFor || 0;
           }
@@ -438,10 +440,7 @@ const SnapshotReport = ({ dateRange }) => {
       return {
         quotesInDay,
         docketsInDay,
-        date: day.toLocaleDateString("en-CA", {
-          month: "2-digit",
-          day: "2-digit",
-        }),
+        date: day.getUTCMonth() + 1 + "-" + day.getUTCDate(),
         quoted,
         docketsOpened,
         docketsClosed,

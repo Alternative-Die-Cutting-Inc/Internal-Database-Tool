@@ -5,9 +5,7 @@ on:
 
   push:
     branches:
-      - beta
       - dev
-      - 1-reports-page
 
 concurrency: beta-deployment
 

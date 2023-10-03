@@ -6,10 +6,11 @@
   "author": "Farbod Mohammadzadeh",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ./server.js localhost 8080",
+    "start": "node server.js",
     "test": "nyc --reporter=lcov --reporter=text --check-coverage=true mocha --recursive --exit ",
     "testing": "set JWT_RESET_TOKEN=123 && nodemon -x nyc --reporter=lcov --reporter=text mocha --recursive --exit",
-    "test:actions": "nyc --reporter=text-summary --check-coverage=true mocha --recursive --exit"
+    "test:actions": "nyc --reporter=text-summary --check-coverage=true mocha --recursive --exit",
+    "start:dev": "nodemon -L server.js"
   },
   "lint-staged": {
     "*.js": "eslint --quiet --fix && prettier --write"
@@ -44,6 +45,7 @@
     "eslint-config-prettier": "^8.9.0",
     "lint-staged": "^13.0.0",
     "mocha": "^10.2.0",
+    "nodemon": "^3.0.1",
     "nyc": "^15.1.0"
   }
 }

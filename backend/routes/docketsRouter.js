@@ -54,6 +54,21 @@ router.get('/number/:number', async (req, res, next) => {
 });
 
 /**
+ * @description search dockets
+ * @route POST /dockets/search
+ * @returns {Docket[]} docket objects
+ */
+router.post('/search', async (req, res, next) => {
+  try {
+    const { query, filters } = req.body;
+    const responseDockets = await docketServices.search(query, filters);
+    res.status(200).send({ dockets: responseDockets });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
  * @description create docket
  * @route POST /dockets
  * @returns {Docket} docket object

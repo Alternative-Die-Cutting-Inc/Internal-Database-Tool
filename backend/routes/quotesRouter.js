@@ -85,6 +85,21 @@ router.get('/number/:number', async (req, res, next) => {
 });
 
 /**
+ * @description search quotes
+ * @route POST /quotes/search
+ * @returns {Quote[]} quote objects
+ */
+router.post('/search', async (req, res, next) => {
+  try {
+    const { query, filters } = req.body;
+    const responseQuotes = await quoteServices.search(query, filters);
+    res.status(200).send({ quotes: responseQuotes });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
  * @description create quote
  * @route POST /quotes
  * @returns {Quote} quote object

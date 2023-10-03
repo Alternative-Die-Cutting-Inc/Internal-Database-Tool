@@ -8,3 +8,5 @@ backend/.nyc_output
 backend/coverage
 
 yarn-error.log
+
+dist

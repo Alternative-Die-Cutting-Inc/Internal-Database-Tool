@@ -139,7 +139,6 @@ const DocketSchema = new mongoose.Schema({
   creationDate: {
     type: Date,
     required: true,
-    default: Date.now(),
   },
   numOfUnits: {
     type: Number,
@@ -163,6 +162,11 @@ const DocketSchema = new mongoose.Schema({
       },
     ],
     required: false,
+  },
+  bill: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 });
 

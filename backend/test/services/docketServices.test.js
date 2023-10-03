@@ -17,39 +17,48 @@ describe('Testing Docket Services', () => {
     newDocket = await docketServices.create({
       customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 0',
+      creationDate: new Date(),
     });
   });
 
   it('.create()\t\t\t|\tAccurate Creation', async function () {
+    const creationDate = new Date();
     newDocket = await docketServices.create({
       customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 1',
+      creationDate,
     });
     assert.equal(newDocket.customer.name, 'Alt Die Cut Inc');
     assert.equal(newDocket.jobName, 'Test 1');
     assert.equal(newDocket.docketNumber, 45002);
+    assert.equal(newDocket.creationDate, creationDate);
   });
 
   it('.create()\t\t\t|\tCreate multiple Dockets', async function () {
     await docketServices.create({
       customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 2',
+      creationDate: new Date(),
     });
     await docketServices.create({
       customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 3',
+      creationDate: new Date(),
     });
     await docketServices.create({
       customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 4',
+      creationDate: new Date(),
     });
     await docketServices.create({
       customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 5',
+      creationDate: new Date(),
     });
     await docketServices.create({
       customer: { name: 'Alt Die Cut Inc', customerID: '12345' },
       jobName: 'Test 6',
+      creationDate: new Date(),
     });
   });
 

@@ -54,6 +54,26 @@ const docketServices = {
   },
 
   /**
+   * @description Search dockets
+   * @param {Object} query search paremeters
+   * @param {Object} filters response filters
+   * @returns {Docket[]}
+   */
+  async search(query, filters) {
+    return DocketModel.find(query, filters, {
+      sort: { docketNumber: -1 },
+    }).then(
+      (dockets) => {
+        if (!dockets.length) throw new Error('DOCKETS_NOT_FOUND');
+        return dockets;
+      },
+      (error) => {
+        throw new Error('UNABLE_TO_GET_DOCKETS', { cause: error });
+      },
+    );
+  },
+
+  /**
    * @description Create docket
    * @param {Docket} docket the object containing docket fields
    * @returns {Docket}

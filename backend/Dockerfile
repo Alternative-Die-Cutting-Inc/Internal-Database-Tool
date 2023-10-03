@@ -1,11 +1,10 @@
-FROM node:18-alpine
-
+FROM node:18-alpine as build
 WORKDIR /app
-
 COPY package.json yarn.lock ./
-
-RUN yarn install --include-dev
-
+RUN yarn install --production --frozen-lockfile
 COPY ./ ./
 
-CMD ["yarn", "test"]
+FROM node:18-alpine
+COPY --from=build /app /app
+WORKDIR /app
+CMD ["yarn", "start"]

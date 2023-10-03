@@ -1,0 +1,124 @@
+.reports-page-container {
+}
+
+.report-items-list-container {
+  margin: 2vh 0.5vw;
+  border-radius: 15px;
+
+  overflow-y: scroll;
+}
+
+.report-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+
+  h2 {
+    padding: 1.25vh 5vw 1.25vh 1vw;
+    background-color: var(--dark-grey);
+    font-size: 20px;
+    font-weight: 300;
+    cursor: pointer;
+    user-select: none;
+    color: var(--light-accent);
+
+    &:hover {
+      background-color: var(--light-accent);
+      transition: background-color 200ms;
+      color: black;
+    }
+  }
+  .selected {
+    background-color: #898989;
+  }
+}
+
+.report-tabs {
+  display: flex;
+  width: fit-content;
+}
+
+.report-date-range {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 40vw;
+  padding: 0 1vw;
+  border-radius: 15px 0 0 0;
+  background-color: var(--dark-grey);
+  color: var(--light-accent);
+  label {
+    width: 100%;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  input {
+    font-size: 20px;
+  }
+}
+
+.report-content-container {
+  background-color: var(--light-grey);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 0px 0px 15px 15px;
+}
+
+.planning-container {
+  .not-found {
+    padding: 1vh;
+  }
+  table {
+    th,
+    td {
+      text-align: left;
+      padding: 16px;
+      border: none;
+      button {
+        border: none;
+        border-radius: 5px;
+        padding: 5px;
+        font-weight: 600;
+        color: var(--light-accent);
+        background-color: var(--dark-grey);
+        cursor: pointer;
+        &:hover {
+          background-color: var(--light-accent);
+          color: var(--dark-grey);
+          transition: background-color 200ms;
+        }
+      }
+    }
+  }
+}
+
+.snapshot-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  background-color: var(--light-grey);
+  table {
+    th,
+    td {
+      text-align: left;
+      padding: 16px;
+      border: none;
+    }
+    tr:nth-child(even) {
+      background-color: #a5a5a5;
+    }
+  }
+  #report-table {
+    width: 100%;
+  }
+}

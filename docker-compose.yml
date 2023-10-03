@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mongodb:
     image: mongo
-    container_name: mongo-dev
+    container_name: mongo-database
     restart: unless-stopped
     environment:
       - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
@@ -17,16 +17,37 @@ services:
     image: mongo-express
     container_name: mongo-express
     restart: unless-stopped
-
     depends_on:
       mongodb:
         condition: service_started
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=$MONGODB_USER
       - ME_CONFIG_MONGODB_ADMINPASSWORD=$MONGODB_PASSWORD
-      - ME_CONFIG_MONGODB_SERVER=mongo-dev
+      - ME_CONFIG_MONGODB_SERVER=mongo-database
       - ME_CONFIG_BASICAUTH_USERNAME=$MONGO_WEB_USERNAME
       - ME_CONFIG_BASICAUTH_PASSWORD=$MONGO_WEB_PASSWORD
     ports:
       - "8081:8081"
-
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: dev.Dockerfile
+    container_name: backend
+    depends_on:
+      - mongodb
+    environment:
+      - NODE_ENV=$API_NODE_ENV
+      - PORT=$API_PORT
+      - MONGODB_USER=$MONGODB_USER
+      - MONGODB_PASSWORD=$MONGODB_PASSWORD
+      - MONGODB_DBNAME=$MONGODB_DBNAME
+      - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+      - CLIENT_BASE_URL=$CLIENT_BASE_URL
+      - API_BASE_URL=$API_BASE_URL
+      - USER_SESSION_SECRET=$USER_SESSION_SECRET
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/backend/
+      - /backend/node_modules/

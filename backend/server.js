@@ -4,7 +4,6 @@ const passportLoader = require('./loaders/passportLoader');
 const errorResponseMiddleware = require('./middlewares/errorResponseMiddleware');
 const routerLoader = require('./loaders/routerLoader');
 const app = require('./app');
-require('dotenv').config();
 
 mongoLoader(app).then(async () => {
   const server = http.createServer(app);
@@ -12,7 +11,7 @@ mongoLoader(app).then(async () => {
   routerLoader(app);
   app.use(errorResponseMiddleware);
 
-  server.listen(8080, () => {
-    console.log(`Server is running on port: 8080`);
+  server.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}`);
   });
 });

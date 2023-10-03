@@ -19,7 +19,7 @@ env:
   DIGITALOCEAN_API_KEY: ${{ secrets.DIGITALOCEAN_API_KEY }}
 
 jobs:
-  build_backend:
+  backend:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
@@ -48,7 +48,7 @@ jobs:
   frontend:
     runs-on: ubuntu-20.04
     needs:
-      - build_backend
+      - backend
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.5.3
@@ -87,7 +87,7 @@ jobs:
     runs-on: ubuntu-20.04
     needs:
       - frontend
-      - build_backend
+      - backend
 
     steps:
       - name: Deploy over SSH

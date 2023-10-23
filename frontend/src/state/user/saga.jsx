@@ -97,4 +97,5 @@ export default function* usersSaga() {
   yield takeLeading(signUp.type, createUserSaga);
   yield takeLeading(logout.type, logoutSaga);
   yield takeLeading(getUserInfo.type, getUserInfoSaga);
+  yield takeLeading(getUsers.type, getUsersSaga);
 }

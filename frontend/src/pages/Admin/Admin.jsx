@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./Admin.scss";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { usersSelector } from "../../state/user/userSlice";
 import { getUsers } from "../../state/user/saga";
+import { customersSelector } from "../../state/customers/customerSlice";
+import { getCustomers } from "../../state/customers/saga";
 
 export const PageAdmin = () => {
   const tabs = [
@@ -33,7 +35,11 @@ export const PageAdmin = () => {
         ))}
       </div>
       <div className="admin-page-content">
-        {tabs.map((tab, index) => (index == activeTab ? tab.component : null))}
+        {tabs.map((tab, index) =>
+          index == activeTab ? (
+            <Fragment key={index}>{tab.component}</Fragment>
+          ) : null
+        )}
       </div>
     </div>
   );
@@ -74,7 +80,39 @@ const UserTab = () => {
 };
 
 const CustomerTab = () => {
-  return <></>;
+  const dispatch = useDispatch();
+  const { customers } = useSelector(customersSelector);
+
+  useEffect(() => {
+    dispatch(getCustomers());
+  });
+  return (
+    <div className="customers-tab-container">
+      <div className="new-customer">
+        <form className="new-customer-form">
+          <input type="text" placeholder="Name" />
+          <input type="number" placeholder="Premium" />
+          <input type="text" placeholder="Memo" />
+          <input type="submit" value={"Create Customer"} />
+        </form>
+      </div>
+      <div className="customers-list">
+        <header>
+          <h2>Customers</h2>
+        </header>
+        {customers.length &&
+          customers.map((customer, index) => (
+            <div key={index} className="customer-list-item">
+              <h3>{customer.name}</h3>
+              {customer.contacts.length &&
+                customer.contacts.map((contact, index) => (
+                  <h3 key={index}>{contact.label + ": " + contact.info}</h3>
+                ))}
+            </div>
+          ))}
+      </div>
+    </div>
+  );
 };
 
 const RatesTab = () => {

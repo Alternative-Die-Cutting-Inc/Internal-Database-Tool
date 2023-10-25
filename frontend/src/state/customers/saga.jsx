@@ -9,6 +9,9 @@ import {
   getCustomerFailure,
   getCustomerSuccess,
   getCustomerStart,
+  getCustomersFailure,
+  getCustomersSuccess,
+  getCustomersStart,
   createCustomerFailure,
   createCustomerSuccess,
   createCustomerStart,
@@ -37,7 +40,7 @@ export function* getCustomerNamesSaga() {
 
 export const getCustomer = createAction("getCustomerSaga");
 
-export function* getCustomerSaga({ payload: { id, name } }) {
+export function* getCustomerSaga({ payload: { id } }) {
   const { axios } = useAxios();
 
   try {
@@ -46,6 +49,21 @@ export function* getCustomerSaga({ payload: { id, name } }) {
     yield put(getCustomerSuccess(response.data?.customer));
   } catch (error) {
     yield put(getCustomerFailure(error?.response?.data?.errorMessage));
+  }
+}
+
+export const getCustomers = createAction("getCustomersSaga");
+
+export function* getCustomersSaga() {
+  const { axios } = useAxios();
+
+  try {
+    yield put(getCustomersStart());
+    const response = yield call(axios.get, "/customers");
+    console.log(response.data?.customers);
+    yield put(getCustomersSuccess(response.data?.customers));
+  } catch (error) {
+    yield put(getCustomersFailure(error?.response?.data?.errorMessage));
   }
 }
 
@@ -100,6 +118,7 @@ export function* clearEmailSaga() {
 
 export default function* customerSaga() {
   yield takeLeading(getCustomer, getCustomerSaga);
+  yield takeLeading(getCustomers, getCustomersSaga);
   yield takeLeading(createCustomer, createCustomerSaga);
   yield takeLeading(updateCustomer, updateCustomerSaga);
   yield takeLeading(getCustomerNames, getCustomerNamesSaga);

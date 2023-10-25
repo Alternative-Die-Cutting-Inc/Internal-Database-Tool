@@ -60,7 +60,6 @@ export function* getCustomersSaga() {
   try {
     yield put(getCustomersStart());
     const response = yield call(axios.get, "/customers");
-    console.log(response.data?.customers);
     yield put(getCustomersSuccess(response.data?.customers));
   } catch (error) {
     yield put(getCustomersFailure(error?.response?.data?.errorMessage));

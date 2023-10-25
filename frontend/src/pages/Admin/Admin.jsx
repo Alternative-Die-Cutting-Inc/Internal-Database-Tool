@@ -82,19 +82,81 @@ const UserTab = () => {
 const CustomerTab = () => {
   const dispatch = useDispatch();
   const { customers } = useSelector(customersSelector);
+  const [newCustomer, setNewCustomer] = useState({
+    contacts: [
+      {
+        type: "phone",
+        label: "Phone",
+        info: "",
+      },
+    ],
+  });
 
   useEffect(() => {
     dispatch(getCustomers());
   });
   return (
     <div className="customers-tab-container">
-      <div className="new-customer">
-        <form className="new-customer-form">
-          <input type="text" placeholder="Name" />
-          <input type="number" placeholder="Premium" />
-          <input type="text" placeholder="Memo" />
+      <div className="new-customer-form">
+        <header>
+          <h2>New Customer</h2>
+        </header>
+        <div className="customer-form-info">
+          <div className="form-column" id="customer-form-column1">
+            <input type="text" placeholder="Name" required />
+            <input type="number" placeholder="Premium" required />
+            <input type="text" placeholder="Memo" />
+            <select name="type" id="type">
+              <option value="customer">Customer</option>
+              <option value="supplier">Supplier</option>
+              <option value="perspective">Perspective</option>
+              <option value="client">Client</option>
+            </select>
+          </div>
+          <div className="form-column" id="customer-form-column2">
+            <button
+              onClick={(event) => {
+                event.preventDefault();
+                setNewCustomer({
+                  ...newCustomer,
+                  contacts: [
+                    ...newCustomer.contacts,
+                    {
+                      type: "phone",
+                      label: "Phone",
+                      info: "",
+                    },
+                  ],
+                });
+              }}
+            >
+              Add Contact
+            </button>
+            {newCustomer.contacts.map((contact, index) => (
+              <div key={index} className="customer-form-contact">
+                <select name="type" id="type">
+                  <option value="phone">Phone</option>
+                  <option value="email">Email</option>
+                  <option value="fax">Fax</option>
+                </select>
+                <input type="text" placeholder="Label" required />
+                <input type="text" placeholder="Info" required />
+              </div>
+            ))}
+          </div>
+          <div className="form-column" id="customer-form-column3">
+            <input type="text" placeholder="Address Line 1" />
+            <input type="text" placeholder="Address Line 2" />
+            <input type="text" placeholder="City" />
+          </div>
+          <div className="form-column" id="customer-form-column4">
+            <input type="text" placeholder="Province" />
+            <input type="text" placeholder="Postal Code" />
+            <input type="text" placeholder="Notes" />
+          </div>
+
           <input type="submit" value={"Create Customer"} />
-        </form>
+        </div>
       </div>
       <div className="customers-list">
         <header>
@@ -103,11 +165,53 @@ const CustomerTab = () => {
         {customers.length &&
           customers.map((customer, index) => (
             <div key={index} className="customer-list-item">
-              <h3>{customer.name}</h3>
-              {customer.contacts.length &&
-                customer.contacts.map((contact, index) => (
-                  <h3 key={index}>{contact.label + ": " + contact.info}</h3>
+              <div className="form-column" id="customer-form-column1">
+                <input type="text" value={customer.name} />
+                <input type="number" value={customer.premium} />
+                <input type="text" value={customer.memo} />
+                <select name="type" id="type" value={customer.type}>
+                  <option value="customer">Customer</option>
+                  <option value="supplier">Supplier</option>
+                  <option value="perspective">Perspective</option>
+                  <option value="client">Client</option>
+                </select>
+              </div>
+              <div className="form-column" id="customer-form-column2">
+                <button>Add Contact</button>
+                {customer.contacts.map((contact, index) => (
+                  <div key={index} className="customer-form-contact">
+                    <select name="type" id="type" value={contact.type}>
+                      <option value="phone">Phone</option>
+                      <option value="email">Email</option>
+                      <option value="fax">Fax</option>
+                    </select>
+                    <input
+                      type="text"
+                      placeholder="Label"
+                      value={contact.label}
+                    />
+                    <input
+                      type="text"
+                      placeholder="Info"
+                      value={contact.info}
+                    />
+                  </div>
                 ))}
+              </div>
+              <div className="form-column" id="customer-form-column3">
+                <input type="text" placeholder="Address Line 1" />
+                <input type="text" placeholder="Address Line 2" />
+                <input type="text" placeholder="City" />
+              </div>
+              <div className="form-column" id="customer-form-column4">
+                <input type="text" placeholder="Province" />
+                <input type="text" placeholder="Postal Code" />
+                <input type="text" placeholder="Notes" />
+              </div>
+              <div className="form-column">
+                <input type="submit" value={"Edit Customer"} />
+                <input type="submit" value={"Delete Customer"} />
+              </div>
             </div>
           ))}
       </div>

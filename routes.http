@@ -1,4 +1,4 @@
-GET {{$dotenv API_BASE_URL}}/customers/
+GET http://localhost:8080/customers/
 
 ###
 

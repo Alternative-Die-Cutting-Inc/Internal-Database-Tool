@@ -7,14 +7,9 @@ import {
   updateQuote,
   updateJob,
   createJob,
-  changeRates,
   getRates,
 } from "../../state/quotes/saga";
-import {
-  quoteSelector,
-  ratesSelector,
-  ratesEditorSelector,
-} from "../../state/quotes/quoteSlice";
+import { quoteSelector } from "../../state/quotes/quoteSlice";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { getCustomerNames } from "../../state/customers/saga";
@@ -28,12 +23,10 @@ function useQuery() {
 const PageQuoteTool = () => {
   let query = useQuery();
   const dispatch = useDispatch();
-  const { rates } = useSelector(ratesSelector);
   const { quote, error } = useSelector(quoteSelector);
-  const { ratesEditor } = useSelector(ratesEditorSelector);
   const { customerNames } = useSelector(customerNamesSelector);
   const [editingQuote, setEditingQuote] = useState(quote);
-  const [editingRates, setEditingRates] = useState(rates);
+  const [editingRates, setEditingRates] = useState({ show: false });
   const [fillCheckboxes, setFillCheckboxes] = useState([]);
 
   useEffect(() => {
@@ -105,23 +98,17 @@ const PageQuoteTool = () => {
     setEditingQuote(quote);
     setFillCheckboxes(new Array(quote?.quoteJobs?.length).fill(false));
   }, [quote]);
-
-  useEffect(() => {
-    setEditingRates({ job: undefined, rates });
-  }, [rates]);
   return (
     <>
       {!error ? (
         <div className="quote-tool-container">
           <div
             className="rate-editor-popup"
-            style={ratesEditor ? { display: "flex" } : {}}
+            style={editingRates.show ? { display: "flex" } : {}}
           >
             <h1>Rate Editor</h1>
-            <h3 style={!editingRates?.job ? { color: "red" } : {}}>
-              {editingRates?.job ? "Editing Job Rates" : "Editing Global Rates"}
-            </h3>
-            {editingRates?.rates &&
+            <h3>Editing Job Rates</h3>
+            {editingRates.show &&
               Object.keys(editingRates.rates).map((rate, index) => {
                 if (rate === "_id" || rate === "__v")
                   return <div key={index}></div>;
@@ -149,18 +136,10 @@ const PageQuoteTool = () => {
               })}
             <button
               onClick={() => {
-                if (editingRates.job) {
-                  saveJob(editingRates.job._id, {
-                    rates: editingRates.rates,
-                  });
-                  dispatch(changeRates({}));
-                  setEditingRates({ job: undefined, rates });
-                } else {
-                  dispatch(changeRates({ rates: editingRates.rates }));
-                  // saveJob(editingRates.job._id, {
-                  //   rates: editingRates.rates,
-                  // });
-                }
+                saveJob(editingRates.jobID, {
+                  rates: editingRates.rates,
+                });
+                setEditingRates({ show: false });
               }}
             >
               Save
@@ -1135,9 +1114,12 @@ const PageQuoteTool = () => {
                           <button
                             className="job-input-button"
                             onClick={() => {
-                              if (!ratesEditor) {
-                                dispatch(changeRates({}));
-                                setEditingRates({ job, rates: job.rates });
+                              if (!editingRates.show) {
+                                setEditingRates({
+                                  jobID: job._id,
+                                  show: true,
+                                  rates: job.rates,
+                                });
                               }
                             }}
                           >
@@ -1286,12 +1268,5 @@ const PageQuoteTool = () => {
     </>
   );
 };
-
-// const QuoteInfo = () => {
-//
-//   return (
-
-//   );
-// };
 
 export { PageQuoteTool };

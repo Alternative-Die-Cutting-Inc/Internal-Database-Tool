@@ -5,6 +5,8 @@ import { usersSelector } from "../../state/user/userSlice";
 import { getUsers } from "../../state/user/saga";
 import { customersSelector } from "../../state/customers/customerSlice";
 import { getCustomers } from "../../state/customers/saga";
+import { changeRates, getRates } from "../../state/quotes/saga";
+import { ratesSelector } from "../../state/quotes/quoteSlice";
 
 export const PageAdmin = () => {
   const tabs = [
@@ -220,5 +222,46 @@ const CustomerTab = () => {
 };
 
 const RatesTab = () => {
-  return <></>;
+  const dispatch = useDispatch();
+  const { rates } = useSelector(ratesSelector);
+  const [editingRates, setEditingRates] = useState(null);
+  useEffect(() => {
+    if (!rates) dispatch(getRates());
+    else setEditingRates(rates);
+  }, [rates, dispatch]);
+  return (
+    <div className="rates-tab-container">
+      <div className="admin-rate-editor">
+        <h1>Rate Editor</h1>
+        <h3>Editing Global Rates</h3>
+        {editingRates &&
+          Object.keys(editingRates).map((rate, index) => {
+            return (
+              <label key={index} htmlFor={rate}>
+                {rate}
+                <br />
+                <input
+                  name={rate}
+                  type={"number"}
+                  value={editingRates[rate] || 0}
+                  onChange={(event) => {
+                    setEditingRates({
+                      ...editingRates,
+                      [rate]: parseFloat(event.target.value),
+                    });
+                  }}
+                />
+              </label>
+            );
+          })}
+        <button
+          onClick={() => {
+            dispatch(changeRates({ rates: editingRates }));
+          }}
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  );
 };

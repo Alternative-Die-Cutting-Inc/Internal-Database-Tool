@@ -94,7 +94,7 @@
     padding: 2vh 1vw;
     header {
       align-self: flex-start;
-      padding-bottom: 10px;
+      padding-bottom: 1.5vh;
     }
     .new-customer-form {
       width: 100%;
@@ -139,6 +139,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding-top: 1vh;
       .customer-list-item {
         width: 100%;
         background-color: var(--dark-grey);
@@ -149,6 +150,51 @@
         justify-content: space-evenly;
         margin: 1.5vh 0;
         padding: 1vh 0;
+      }
+    }
+  }
+
+  .rates-tab-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2vh 0;
+    .admin-rate-editor {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      border-radius: 15px;
+      background-color: var(--dark-grey);
+      color: var(--light-accent);
+      padding: 1vh 2.5vw;
+      h1 {
+        user-select: none;
+        padding: 0.5vh 0;
+      }
+      h3 {
+        user-select: none;
+        padding: 0.5vh 0;
+        color: red;
+      }
+      label {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        text-align: left;
+        font-size: 1.2vw;
+        padding: 1vh 0;
+      }
+      input {
+        font-size: 1.2vw;
+        margin-left: 1vw;
+        padding: 0.25vw;
+      }
+      button {
+        margin: 1.5vh 0;
+        padding: 0.5vh 0;
       }
     }
   }

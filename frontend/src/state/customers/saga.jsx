@@ -94,6 +94,19 @@ export function* updateCustomerSaga({ payload: { id, fields } }) {
   }
 }
 
+export const deleteCustomer = createAction("deleteCustomerSaga");
+
+export function* deleteCustomerSaga({ payload: { id } }) {
+  const { axios } = useAxios();
+  try {
+    yield put(getCustomersStart());
+    const response = yield call(axios.delete, `/customers/${id}`);
+    yield put(getCustomersSuccess(response.data?.customers));
+  } catch (error) {
+    yield put(getCustomersFailure(error?.response?.data?.errorMessage));
+  }
+}
+
 export const sendToCustomer = createAction("sendToCustomerSaga");
 
 export function* sendToCustomerSaga({ payload: { formData } }) {
@@ -121,6 +134,7 @@ export default function* customerSaga() {
   yield takeLeading(createCustomer, createCustomerSaga);
   yield takeLeading(updateCustomer, updateCustomerSaga);
   yield takeLeading(getCustomerNames, getCustomerNamesSaga);
+  yield takeLeading(deleteCustomer, deleteCustomerSaga);
   yield takeLeading(sendToCustomer, sendToCustomerSaga);
   yield takeLeading(clearEmail, clearEmailSaga);
 }

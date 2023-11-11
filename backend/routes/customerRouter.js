@@ -96,8 +96,8 @@ router.put('/:id', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
-    const responseCustomer = await customerServices.delete(id);
-    res.status(200).send(responseCustomer);
+    const newCustomerList = await customerServices.delete(id);
+    res.status(200).send({ customers: newCustomerList });
   } catch (error) {
     next(error);
   }

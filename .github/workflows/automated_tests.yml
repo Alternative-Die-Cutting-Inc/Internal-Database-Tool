@@ -1,6 +1,6 @@
 name: Automated Tests
 
-on: ["push"]
+on: [workflow_dispatch, push]  
 
 jobs:
   build_frontend:

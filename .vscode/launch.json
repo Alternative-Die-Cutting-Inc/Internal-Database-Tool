@@ -6,7 +6,7 @@
       "request": "launch",
       "runtimeArgs": ["--remote-debugging-port=9222"],
       "url": "http://localhost:5173",
-      "webRoot": "${workspaceFolder}/Frontend/",
+      "webRoot": "${workspaceFolder}/frontend/",
       "presentation": {
         "hidden": true
       }

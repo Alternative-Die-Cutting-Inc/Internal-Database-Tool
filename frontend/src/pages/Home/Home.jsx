@@ -40,7 +40,7 @@ const PageHome = () => {
     <div className="homepage-container">
       {/* MENU */}
       <div className="menus-container">
-        <div className="search-menu">
+        {/* <div className="search-menu">
           <div className="search-container">
             <div className="search-header">
               <div className="search-title">
@@ -136,7 +136,7 @@ const PageHome = () => {
               placeholder="Die Number:"
             />
           </div>
-        </div>
+        </div> */}
         <div id="homepage-new-quote" className="new-quote-menu-container">
           <header className="new-quote-title">
             <h1>New Quote</h1>

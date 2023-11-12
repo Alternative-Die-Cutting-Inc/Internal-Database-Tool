@@ -28,7 +28,7 @@ import {
   getCustomer,
   sendToCustomer,
 } from "../../state/customers/saga";
-import { getDocket } from "../../state/dockets/saga";
+import { getDocket, updateDocket } from "../../state/dockets/saga";
 import { getQuote } from "../../state/quotes/saga";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
@@ -81,6 +81,25 @@ const PageDeliverySlip = () => {
     if (docket && docket.quoteNumber)
       dispatch(getQuote({ id: docket.quoteNumber }));
     if (docket) dispatch(getCustomer({ id: docket.customer.customerID }));
+
+    if (
+      docket?.status?.every((status) => {
+        return status.label !== "New Shipment";
+      })
+    ) {
+      console.log("updating docket");
+      dispatch(
+        updateDocket({
+          id: docket._id,
+          fields: {
+            status: [
+              ...docket.status,
+              { value: "New Shipment", label: "New Shipment" },
+            ],
+          },
+        })
+      );
+    }
   }, [dispatch, docket]);
 
   useEffect(() => {

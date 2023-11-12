@@ -16,7 +16,7 @@ const StatusLabels = ({ values }) => {
           case "Done":
             backgroundColor = "green";
             break;
-          case "Shipped":
+          case "New Shipment":
             backgroundColor = "gray";
             break;
           case "Created":

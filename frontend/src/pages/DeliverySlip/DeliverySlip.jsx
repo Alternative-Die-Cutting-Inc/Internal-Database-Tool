@@ -87,7 +87,6 @@ const PageDeliverySlip = () => {
         return status.label !== "New Shipment";
       })
     ) {
-      console.log("updating docket");
       dispatch(
         updateDocket({
           id: docket._id,

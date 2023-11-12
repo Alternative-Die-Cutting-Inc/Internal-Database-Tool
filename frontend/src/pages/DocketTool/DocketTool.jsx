@@ -200,6 +200,27 @@ const PageDocketTool = () => {
                 />
               </td>
               <td>Quote Job:</td>
+              <td>
+                <select
+                  value={editingDocket?.quoteJob || ""}
+                  readOnly
+                  // onBlur={() => {
+                  //   handleBlur( {
+                  //     : editingDocket?.,
+                  //   });
+                  // }}
+                  // onChange={(event) => {
+                  //   setEditingDocket({
+                  //     ...editingDocket,
+                  //     : event.target.value,
+                  //   });
+                  // }}
+                >
+                  <option value={editingDocket?.quoteJob || ""}>
+                    {editingDocket?.quoteJob}
+                  </option>
+                </select>
+              </td>
             </tr>
             <tr>
               <td>Quote #:</td>
@@ -289,26 +310,32 @@ const PageDocketTool = () => {
                   <option value="other">Other</option>
                 </select>
               </td>
+              <td>Status:</td>
               <td>
-                <select
-                  value={editingDocket?.quoteJob || ""}
-                  readOnly
-                  // onBlur={() => {
-                  //   handleBlur( {
-                  //     : editingDocket?.,
-                  //   });
-                  // }}
-                  // onChange={(event) => {
-                  //   setEditingDocket({
-                  //     ...editingDocket,
-                  //     : event.target.value,
-                  //   });
-                  // }}
-                >
-                  <option value={editingDocket?.quoteJob || ""}>
-                    {editingDocket?.quoteJob}
-                  </option>
-                </select>
+                <CreatableSelect
+                  className="status-select"
+                  classNamePrefix="status-select"
+                  isMulti
+                  menuPosition="fixed"
+                  closeMenuOnSelect={false}
+                  value={editingDocket?.status}
+                  onBlur={() => {
+                    saveDocket({ status: editingDocket.status });
+                  }}
+                  isClearable={false}
+                  onChange={(options) => {
+                    setEditingDocket({
+                      ...editingDocket,
+                      status: options,
+                    });
+                  }}
+                  options={[
+                    { value: "Stopped", label: "Stopped" },
+                    { value: "On The Floor", label: "On The Floor" },
+                    { value: "In Progress", label: "In Progress" },
+                    { value: "Closed", label: "Closed" },
+                  ]}
+                />
               </td>
             </tr>
           </tbody>
@@ -925,9 +952,7 @@ const PageDocketTool = () => {
                       <button
                         className="delete-extra-cost-button"
                         onClick={() => {
-                          let newExtraCharges = [
-                            ...editingDocket.extraCharges,
-                          ];
+                          let newExtraCharges = [...editingDocket.extraCharges];
                           newExtraCharges.splice(index, 1);
                           setEditingDocket({
                             ...editingDocket,
@@ -1076,11 +1101,30 @@ const PageDocketTool = () => {
                       : "" || ""
                   }
                   onBlur={() => {
+                    let statusArray = docket.status;
+                    if (!editingDocket?.closeDate) {
+                      statusArray = docket.status.filter((status) => {
+                        return status.label !== "Closed";
+                      });
+                      statusArray.push({ label: "Open", value: "Open" });
+                    } else if (
+                      docket.status.every((status) => {
+                        return status.label !== "Closed";
+                      })
+                    ) {
+                      statusArray = docket.status.filter((status) => {
+                        return status.label !== "Open";
+                      });
+                      statusArray.push({ label: "Closed", value: "Closed" });
+                    }
+
                     handleBlur({
                       closeDate: editingDocket?.closeDate,
+                      status: statusArray,
                     });
                   }}
                   onChange={(event) => {
+                    console.log(event.target.value);
                     setEditingDocket({
                       ...editingDocket,
                       closeDate: event.target.value,

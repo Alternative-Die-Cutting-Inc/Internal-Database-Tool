@@ -16,7 +16,7 @@ const StatusLabels = ({ values }) => {
           case "Done":
             backgroundColor = "green";
             break;
-          case "Shipped":
+          case "New Shipment":
             backgroundColor = "gray";
             break;
           case "Created":
@@ -31,7 +31,6 @@ const StatusLabels = ({ values }) => {
             backgroundColor = "black";
             break;
           case "In Progress":
-          case "Inprogress":
             backgroundColor = "blue";
             break;
           case "On The Floor":
@@ -47,8 +46,7 @@ const StatusLabels = ({ values }) => {
             backgroundColor = "blue";
             break;
           default:
-            backgroundColor =
-              "#" + Math.floor(Math.random() * 16777215).toString(16);
+            backgroundColor = "var(--dark-grey)";
         }
         return (
           <span key={idx} className="badge" style={{ backgroundColor, color }}>

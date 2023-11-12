@@ -514,6 +514,11 @@ const PageShipments = () => {
                 className="notes-input"
                 name="additional-notes"
                 id="additional-notes"
+                onChange={(event) => {
+                  saveShipment({
+                    additionalNotes: event.target.value,
+                  });
+                }}
               />
             </label>
 
@@ -523,6 +528,11 @@ const PageShipments = () => {
                 className="notes-input"
                 name="additional-notes"
                 id="additional-notes"
+                onChange={(event) => {
+                  saveShipment({
+                    label1: event.target.value,
+                  });
+                }}
               />
             </label>
 
@@ -532,6 +542,11 @@ const PageShipments = () => {
                 className="notes-input"
                 name="additional-notes"
                 id="additional-notes"
+                onChange={(event) => {
+                  saveShipment({
+                    label2: event.target.value,
+                  });
+                }}
               />
             </label>
           </div>

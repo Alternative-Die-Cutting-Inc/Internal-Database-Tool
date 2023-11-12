@@ -111,7 +111,14 @@ const CustomerTab = () => {
   });
   return (
     <div className="customers-tab-container">
-      <div className="new-customer-form">
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          console.log("submit");
+          dispatch(createCustomer({ customer: newCustomer }));
+        }}
+        className="new-customer-form"
+      >
         <header>
           <h2>New Customer</h2>
         </header>
@@ -120,6 +127,7 @@ const CustomerTab = () => {
             <input
               type="text"
               placeholder="Name"
+              required
               onChange={(event) => {
                 setNewCustomer({
                   ...newCustomer,
@@ -151,7 +159,8 @@ const CustomerTab = () => {
             <select
               name="type"
               id="type"
-              onChange={(event) => {
+              value={newCustomer.type}
+              onSelect={(event) => {
                 setNewCustomer({
                   ...newCustomer,
                   type: event.target.value,
@@ -168,21 +177,23 @@ const CustomerTab = () => {
             <button
               onClick={(event) => {
                 event.preventDefault();
-                setNewCustomer({
-                  ...newCustomer,
-                  contacts: [
-                    ...newCustomer.contacts,
-                    {
-                      type: "phone",
-                      label: "Phone",
-                      info: "",
-                    },
-                  ],
-                });
+                if (event.detail)
+                  setNewCustomer({
+                    ...newCustomer,
+                    contacts: [
+                      ...newCustomer.contacts,
+                      {
+                        type: "phone",
+                        label: "",
+                        info: "",
+                      },
+                    ],
+                  });
               }}
             >
               Add Contact
             </button>
+
             {newCustomer.contacts.map((contact, index) => (
               <div key={index} className="customer-form-contact">
                 <select
@@ -329,21 +340,15 @@ const CustomerTab = () => {
             />
           </div>
 
-          <input
-            type="submit"
-            value={"Create Customer"}
-            onClick={() => {
-              dispatch(createCustomer({ customer: newCustomer }));
-            }}
-          />
+          <input type="submit" value={"Create Customer"} />
         </div>
-      </div>
+      </form>
       <div className="customers-list">
         <header>
           <h2>Customers</h2>
         </header>
         {customers.length &&
-          customers.map((customer, index) => ( 
+          customers.map((customer, index) => (
             <div key={index} className="customer-list-item">
               <div className="form-column" id="customer-form-column1">
                 <input type="text" value={customer.name} />

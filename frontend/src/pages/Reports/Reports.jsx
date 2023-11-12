@@ -174,10 +174,15 @@ const PlanningReport = () => {
             onChange={(e) => {
               setValue(e.target.value);
               tableMeta?.updateData(row.index, column.id, e.target.value);
+              let statusArray = row.original.status.filter((status) => {
+                return status.label !== "Open";
+              });
+              statusArray.push({ label: "Closed", value: "Closed" });
+
               dispatch(
                 updateDocket({
                   id: row.original._id,
-                  fields: { closeDate: e.target.value },
+                  fields: { closeDate: e.target.value, status: statusArray },
                 })
               );
             }}

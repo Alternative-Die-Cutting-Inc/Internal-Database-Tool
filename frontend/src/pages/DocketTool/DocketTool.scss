@@ -295,6 +295,19 @@
   border-radius: 15px;
   overflow: auto;
   margin: 0.5vh 0;
+  .closing-date {
+    label {
+      font-size: 1.25vw;
+      padding-left: 0.75vw;
+      color: var(--light-accent);
+      input {
+        font-size: 1.25vw;
+        width: 10vw;
+        padding-left: 0.25vw;
+        margin-left: 0.5vw;
+      }
+    }
+  }
 }
 
 .requote-memo-input {

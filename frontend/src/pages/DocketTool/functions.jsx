@@ -1,33 +1,34 @@
-import { docketSelector } from "../../state/dockets/docketSlice";
-import { updateDocket, getDockets } from "../../state/dockets/saga";
-import { useSelector } from "react-redux";
-
 export const PageDocketToolFunctions = [
-  {
-    label: "Save",
-    function: function SaveDocket() {
-      const { docket } = useSelector(docketSelector);
-      console.log("hello world");
-    },
-  },
-  {
-    label: "Close",
-    function: function () {
-      console.log("hello world");
-    },
-  },
-  {
-    label: "Reopen",
-    function: function () {
-      console.log("hello world");
-    },
-  },
-  {
-    label: "Delete",
-    function: function (dispatch) {
-      dispatch(updateDocket);
-    },
-  },
+  // {
+  //   label: "Save",
+  //   function: function SaveDocket() {
+  //     const { docket } = useSelector(docketSelector);
+  //   },
+  // },
+  // {
+  //   label: "Close",
+  //   function: function () {
+  //     console.log("hello world");
+  //   },
+  // },
+  // {
+  //   label: "Reopen",
+  //   function: function () {
+  //     console.log("hello world");
+  //   },
+  // },
+  // {
+  //   label: "Delete",
+  //   function: function DeleteDocket(_, navigate) {
+  //     const dispatch = useDispatch();
+  //     const { docket } = useSelector(docketSelector);
+  //     return useEffect(() => {
+  //       console.log(docket);
+  //       dispatch(deleteDocket({ id: docket._id }));
+  //       navigate("/dockets");
+  //     });
+  //   },
+  // },
   {
     label: "New Shipment",
     function: function (_, navigate) {

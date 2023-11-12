@@ -1101,11 +1101,30 @@ const PageDocketTool = () => {
                       : "" || ""
                   }
                   onBlur={() => {
+                    let statusArray = docket.status;
+                    if (!editingDocket?.closeDate) {
+                      statusArray = docket.status.filter((status) => {
+                        return status.label !== "Closed";
+                      });
+                      statusArray.push({ label: "Open", value: "Open" });
+                    } else if (
+                      docket.status.every((status) => {
+                        return status.label !== "Closed";
+                      })
+                    ) {
+                      statusArray = docket.status.filter((status) => {
+                        return status.label !== "Open";
+                      });
+                      statusArray.push({ label: "Closed", value: "Closed" });
+                    }
+
                     handleBlur({
                       closeDate: editingDocket?.closeDate,
+                      status: statusArray,
                     });
                   }}
                   onChange={(event) => {
+                    console.log(event.target.value);
                     setEditingDocket({
                       ...editingDocket,
                       closeDate: event.target.value,

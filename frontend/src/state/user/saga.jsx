@@ -34,11 +34,11 @@ export function* getUsersSaga() {
 
 export const signUp = createAction("createUserSaga");
 
-export function* createUserSaga({ payload: { user } }) {
+export function* createUserSaga({ payload: { newUser } }) {
   try {
     const { axios } = useAxios();
     yield put(signupStart());
-    const result = yield call(axios.post, "/user/signup", user);
+    const result = yield call(axios.post, "/user/signup", { user: newUser });
     yield put(signupSuccess(result.data.user));
   } catch (error) {
     yield put(signupFail(error.response.data));
@@ -55,7 +55,7 @@ export function* signinSaga({ payload: { username, password } }) {
       username,
       password,
     });
-    yield put(signinSuccess(result.data.user));
+    yield put(signinSuccess(result?.data?.user));
   } catch (error) {
     console.error(error.response.data?.errorMessage);
     yield put(signinFail(error.response.data?.errorMessage));

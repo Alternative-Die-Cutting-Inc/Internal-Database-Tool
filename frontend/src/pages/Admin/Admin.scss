@@ -43,7 +43,8 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 2vh 0;
+    padding: 2vh 1vw;
+
     .new-user {
       width: 100%;
       display: flex;
@@ -69,18 +70,27 @@
       align-items: center;
       header {
         font-size: large;
-        padding-left: 1vw;
         align-self: flex-start;
       }
       .user-list-item {
-        width: 50%;
-        padding: 1vh 1vw;
+        width: 100%;
         background-color: var(--dark-grey);
-        color: var(--light-accent);
+        border-radius: 5px;
         display: flex;
         flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        margin: 1.5vh 0;
+        padding: 1vh 0;
+        input,
+        label {
+          font-size: 20px;
+          margin: 0 1vw;
+          padding: 0.25vw;
+        }
+        label {
+          color: var(--light-accent);
+        }
       }
     }
   }

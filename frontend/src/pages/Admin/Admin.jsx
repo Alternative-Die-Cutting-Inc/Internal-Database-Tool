@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Admin.scss";
 import { Fragment, useEffect, useState } from "react";
 import { usersSelector } from "../../state/user/userSlice";
-import { getUsers } from "../../state/user/saga";
+import { getUsers, signUp } from "../../state/user/saga";
 import { customersSelector } from "../../state/customers/customerSlice";
 import {
   createCustomer,
@@ -53,7 +53,7 @@ export const PageAdmin = () => {
 
 const UserTab = () => {
   const dispatch = useDispatch();
-  const { users } = useSelector(usersSelector);
+  const { users, error } = useSelector(usersSelector);
 
   useEffect(() => {
     dispatch(getUsers());
@@ -62,10 +62,23 @@ const UserTab = () => {
   return (
     <div className="user-tab-container">
       <div className="new-user">
-        <form className="new-user-form">
-          <input type="username" placeholder="Username" />
-          <input type="email" placeholder="Email" />
-          <input type="text" placeholder="Password" />
+        <form
+          className="new-user-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            const newUser = {
+              username: event.target[0].value,
+              email: event.target[1].value,
+              password: event.target[2].value,
+            };
+            console.log(newUser);
+            dispatch(signUp({ newUser }));
+            dispatch(getUsers());
+          }}
+        >
+          <input type="username" placeholder="Username" required />
+          <input type="email" placeholder="Email" required />
+          <input type="password" placeholder="Password" required />
           <input type="submit" value={"Create User"} />
         </form>
       </div>
@@ -76,8 +89,14 @@ const UserTab = () => {
         {users.length &&
           users.map((user, index) => (
             <div key={index} className="user-list-item">
-              <h3>{user.username}</h3>
-              <h3>{user.email}</h3>
+              <label htmlFor="">
+                Username
+                <input type="username" value={user.username} readOnly />
+              </label>
+              <label htmlFor="">
+                Email
+                <input type="email" value={user.email} readOnly />
+              </label>
             </div>
           ))}
       </div>

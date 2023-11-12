@@ -96,14 +96,7 @@ const CustomerTab = () => {
         info: "",
       },
     ],
-    address: {
-      line1: null,
-      line2: null,
-      city: null,
-      province: null,
-      postalCode: null,
-      notes: null,
-    },
+    type: "customer",
   });
 
   useEffect(() => {
@@ -114,7 +107,6 @@ const CustomerTab = () => {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          console.log("submit");
           dispatch(createCustomer({ customer: newCustomer }));
         }}
         className="new-customer-form"
@@ -159,8 +151,8 @@ const CustomerTab = () => {
             <select
               name="type"
               id="type"
-              value={newCustomer.type}
-              onSelect={(event) => {
+              defaultValue={newCustomer.type}
+              onChange={(event) => {
                 setNewCustomer({
                   ...newCustomer,
                   type: event.target.value,
@@ -351,10 +343,10 @@ const CustomerTab = () => {
           customers.map((customer, index) => (
             <div key={index} className="customer-list-item">
               <div className="form-column" id="customer-form-column1">
-                <input type="text" value={customer.name} />
-                <input type="number" value={customer.premium} />
-                <input type="text" value={customer.memo} />
-                <select name="type" id="type" value={customer.type}>
+                <input type="text" value={customer.name} readOnly />
+                <input type="number" value={customer.premium} readOnly />
+                <input type="text" value={customer.memo} readOnly />
+                <select name="type" id="type" value={customer.type} readOnly>
                   <option value="customer">Customer</option>
                   <option value="supplier">Supplier</option>
                   <option value="perspective">Perspective</option>
@@ -362,10 +354,10 @@ const CustomerTab = () => {
                 </select>
               </div>
               <div className="form-column" id="customer-form-column2">
-                <button>Add Contact</button>
+                {/* <button>Add Contact</button> */}
                 {customer.contacts.map((contact, index) => (
                   <div key={index} className="customer-form-contact">
-                    <select name="type" id="type" value={contact.type}>
+                    <select name="type" id="type" value={contact.type} readOnly>
                       <option value="phone">Phone</option>
                       <option value="email">Email</option>
                       <option value="fax">Fax</option>
@@ -374,11 +366,13 @@ const CustomerTab = () => {
                       type="text"
                       placeholder="Label"
                       value={contact.label}
+                      readOnly
                     />
                     <input
                       type="text"
                       placeholder="Info"
                       value={contact.info}
+                      readOnly
                     />
                   </div>
                 ))}
@@ -388,16 +382,19 @@ const CustomerTab = () => {
                   type="text"
                   placeholder="Address Line 1"
                   value={customer?.address?.line1 || ""}
+                  readOnly
                 />
                 <input
                   type="text"
                   placeholder="Address Line 2"
                   value={customer?.address?.line2 || ""}
+                  readOnly
                 />
                 <input
                   type="text"
                   placeholder="City"
                   value={customer?.address?.city || ""}
+                  readOnly
                 />
               </div>
               <div className="form-column" id="customer-form-column4">
@@ -405,24 +402,22 @@ const CustomerTab = () => {
                   type="text"
                   placeholder="Province"
                   value={customer?.address?.province || ""}
+                  readOnly
                 />
                 <input
                   type="text"
                   placeholder="Postal Code"
                   value={customer?.address?.postalCode || ""}
+                  readOnly
                 />
                 <input
                   type="text"
                   placeholder="Notes"
                   value={customer?.address?.notes || ""}
+                  readOnly
                 />
               </div>
               <div className="form-column">
-                <input
-                  type="submit"
-                  value={"Edit Customer"}
-                  style={{ backgroundColor: "yellow" }}
-                />
                 <input
                   type="submit"
                   value={"Delete Customer"}

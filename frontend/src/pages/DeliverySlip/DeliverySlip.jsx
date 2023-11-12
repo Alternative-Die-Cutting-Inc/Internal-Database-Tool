@@ -135,6 +135,16 @@ const PageDeliverySlip = () => {
     section2: {
       flexDirection: "column",
       justifyContent: "center",
+      alignItems: "flex-start",
+      border: "1px solid #000",
+      padding: "0.25cm",
+      marginBottom: "0.25cm",
+      width: "100%",
+    },
+    section3: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
       alignItems: "center",
       border: "1px solid #000",
       padding: "0.25cm",
@@ -309,12 +319,13 @@ const PageDeliverySlip = () => {
             ) : null}
           </View>
         </View>
-        <View style={styles.section2}>
+        <View debug style={styles.section2}>
           <Text
             style={{
               fontSize: "16px",
               fontFamily: "Times-Bold",
               marginBottom: "15px",
+              alignSelf: "center",
             }}
           >
             {quote?.jobName}
@@ -326,6 +337,14 @@ const PageDeliverySlip = () => {
             }}
           >
             {"Customer PO: " + (docket?.customerPO || "")}
+          </Text>
+          <Text
+            style={{
+              fontSize: "12px",
+              marginBottom: "15px",
+            }}
+          >
+            {"Notes: " + (shipment?.additionalNotes || "")}
           </Text>
         </View>
         <View style={styles.table}>
@@ -388,6 +407,26 @@ const PageDeliverySlip = () => {
               </View>
             );
           })}
+        </View>
+        <View style={styles.section3}>
+          <Text
+            style={{
+              fontSize: "14px",
+
+              marginBottom: "15px",
+            }}
+          >
+            {shipment?.label1}
+          </Text>
+          <Text
+            style={{
+              fontSize: "14px",
+
+              marginBottom: "15px",
+            }}
+          >
+            {shipment?.label2}
+          </Text>
         </View>
       </Page>
     </Document>

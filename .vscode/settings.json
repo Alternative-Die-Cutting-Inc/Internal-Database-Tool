@@ -5,6 +5,6 @@
         "diecut",
         "requote"
     ],
-    "vscode-edge-devtools.defaultUrl": "${workspaceFolder}/Frontend/",
-    "vscode-edge-devtools.webRoot": "${workspaceFolder}/Frontend/"
+    "vscode-edge-devtools.defaultUrl": "${workspaceFolder}/frontend/",
+    "vscode-edge-devtools.webRoot": "${workspaceFolder}/frontend/"
 }

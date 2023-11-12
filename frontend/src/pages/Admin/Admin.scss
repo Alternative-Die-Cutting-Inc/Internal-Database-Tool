@@ -1,0 +1,211 @@
+.admin-page-container {
+  margin: 2vh 0.5vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  h2 {
+    padding: 1.25vh 5vw 1.25vh 1vw;
+    background-color: var(--dark-grey);
+    font-size: 20px;
+    font-weight: 300;
+    cursor: pointer;
+    user-select: none;
+    color: var(--light-accent);
+
+    &:hover {
+      background-color: var(--light-accent);
+      transition: background-color 200ms;
+      color: black;
+    }
+  }
+  .selected {
+    background-color: #898989;
+  }
+}
+
+.admin-page-content {
+  background-color: var(--light-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 0px 15px 15px 15px;
+
+  .user-tab-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2vh 1vw;
+
+    .new-user {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .new-user-form {
+        width: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        input {
+          width: 100%;
+          font-size: 20px;
+          margin: 0 1vw;
+          padding: 2px;
+        }
+      }
+    }
+    .users-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      header {
+        font-size: large;
+        align-self: flex-start;
+      }
+      .user-list-item {
+        width: 100%;
+        background-color: var(--dark-grey);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        margin: 1.5vh 0;
+        padding: 1vh 0;
+        input,
+        label {
+          font-size: 20px;
+          margin: 0 1vw;
+          padding: 0.25vw;
+        }
+        label {
+          color: var(--light-accent);
+        }
+      }
+    }
+  }
+
+  .customers-tab-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2vh 1vw;
+    header {
+      align-self: flex-start;
+      padding-bottom: 1.5vh;
+    }
+    .new-customer-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      .customer-form-info {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+      }
+    }
+    .form-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      button {
+        width: 100%;
+        padding: 2px;
+        font-size: 20px;
+        margin-bottom: 0.5vh;
+      }
+    }
+    #customer-form-column2 {
+      .customer-form-contact {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+    input,
+    select {
+      width: 12vw;
+      font-size: 20px;
+      padding: 2px;
+      margin-bottom: 0.5vh;
+    }
+
+    .customers-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 1vh;
+      .customer-list-item {
+        width: 100%;
+        background-color: var(--dark-grey);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        margin: 1.5vh 0;
+        padding: 1vh 0;
+      }
+    }
+  }
+
+  .rates-tab-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2vh 0;
+    .admin-rate-editor {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      border-radius: 15px;
+      background-color: var(--dark-grey);
+      color: var(--light-accent);
+      padding: 1vh 2.5vw;
+      h1 {
+        user-select: none;
+        padding: 0.5vh 0;
+      }
+      h3 {
+        user-select: none;
+        padding: 0.5vh 0;
+        color: red;
+      }
+      label {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        text-align: left;
+        font-size: 1.2vw;
+        padding: 1vh 0;
+      }
+      input {
+        font-size: 1.2vw;
+        margin-left: 1vw;
+        padding: 0.25vw;
+      }
+      button {
+        margin: 1.5vh 0;
+        padding: 0.5vh 0;
+      }
+    }
+  }
+}

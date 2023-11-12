@@ -55,7 +55,7 @@ const quoteServices = {
    * @returns {Rates[]}
    */
   async getRates() {
-    return RatesModel.findOne({}).then(
+    return RatesModel.findOne({}, { _id: 0, __v: 0 }).then(
       (rates) => {
         if (!rates) throw new Error('RATES_NOT_FOUND');
         return rates;
@@ -165,11 +165,17 @@ const quoteServices = {
 
   /**
    * @description Update rates
-   * @param {Rates} rates An array of rates
+   * @param {Rates} newRates An array of rates
    * @returns {Rates} updated rates
    */
-  async updateRates(rates) {
-    return RatesModel.findOneAndUpdate({}, rates, { new: true }).then(
+  async updateRates(newRates) {
+    return RatesModel.findOneAndUpdate({}, newRates, {
+      projection: {
+        _id: 0,
+        __v: 0,
+      },
+      returnDocument: 'after',
+    }).then(
       (rates) => {
         if (!rates) throw new Error('RATES_NOT_FOUND');
         return rates;

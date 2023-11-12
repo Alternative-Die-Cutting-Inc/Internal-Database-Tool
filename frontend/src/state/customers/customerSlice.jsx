@@ -4,8 +4,9 @@ import { createSelector } from "reselect";
 export const initialState = {
   loading: false,
   error: null,
-  customerNames: null,
+  customerNames: [],
   customer: null,
+  customers: [],
   email: null,
 };
 
@@ -36,6 +37,19 @@ const customerSlice = createSlice({
       state.customer = customer;
     },
     getCustomerFailure: (state, { payload: error }) => {
+      state.loading = false;
+      state.error = error;
+    },
+    getCustomersStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    getCustomersSuccess: (state, { payload: customers }) => {
+      state.loading = false;
+      state.error = null;
+      state.customers = customers;
+    },
+    getCustomersFailure: (state, { payload: error }) => {
       state.loading = false;
       state.error = error;
     },
@@ -93,6 +107,9 @@ export const {
   getCustomerFailure,
   getCustomerSuccess,
   getCustomerStart,
+  getCustomersFailure,
+  getCustomersSuccess,
+  getCustomersStart,
   createCustomerFailure,
   createCustomerSuccess,
   createCustomerStart,
@@ -120,6 +137,11 @@ export const customerNamesSelector = createSelector(
 export const customerSelector = createSelector(
   customerReducerSelector,
   ({ customer, loading, error }) => ({ customer, loading, error })
+);
+
+export const customersSelector = createSelector(
+  customerReducerSelector,
+  ({ customers, loading, error }) => ({ customers, loading, error })
 );
 
 export const emailSelector = createSelector(

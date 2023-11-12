@@ -4,7 +4,7 @@ import { createSelector } from "reselect";
 export const initialState = {
   loading: false,
   error: null,
-  users: null,
+  users: [],
   user: null,
 };
 

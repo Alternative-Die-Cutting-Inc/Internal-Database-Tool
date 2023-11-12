@@ -12,6 +12,20 @@ const checkLoggedIn = require('../middlewares/checkLoggedIn');
 const router = express.Router();
 
 /**
+ * Get all users.
+ * @route GET /user
+ * @return {User[]} user object
+ */
+router.get('/', checkLoggedIn, async (req, res, next) => {
+  try {
+    const users = await userServices.getAll();
+    res.status(200).send({ users });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
  * @description create user
  * @route POST /user/signup
  * @returns {User} user object

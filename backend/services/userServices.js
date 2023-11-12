@@ -57,6 +57,15 @@ const userServices = {
 
     return responseUser;
   },
+
+  /**
+   * Get all users.
+   * @return {User[]} user object
+   */
+  async getAll() {
+    const users = await UserModel.find({});
+    return users;
+  },
 };
 
 module.exports = userServices;

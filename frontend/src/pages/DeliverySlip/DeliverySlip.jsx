@@ -319,7 +319,7 @@ const PageDeliverySlip = () => {
             ) : null}
           </View>
         </View>
-        <View debug style={styles.section2}>
+        <View style={styles.section2}>
           <Text
             style={{
               fontSize: "16px",

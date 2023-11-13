@@ -5,8 +5,9 @@ import {
   getCoreRowModel,
   flexRender,
   getPaginationRowModel,
+  getFilteredRowModel,
 } from "@tanstack/react-table";
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useState } from "react";
 import "../../scssStyles/tableStyle.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { docketsSelector } from "../../state/dockets/docketSlice";
@@ -48,8 +49,7 @@ const JobsTable = () => {
       },
       {
         header: "Customer",
-        accessorKey: "customer",
-        cell: (value) => value.getValue()?.name,
+        accessorFn: (row) => row.customer.name,
       },
       {
         header: "Customer PO",
@@ -65,13 +65,12 @@ const JobsTable = () => {
       },
       {
         header: "Finishing",
-        accessorKey: "finishing",
-        cell: (info) =>
-          info.getValue()?.reduce((a, b) => b.label + ", " + a, ""),
+        accessorFn: (row) =>
+          row.finishing?.reduce((a, b) => b.label + ", " + a, ""),
       },
       {
         header: "Special Instructions",
-        accessorKey: "specialInstructions",
+        accessorFn: (row) => row.specialInstructions?.toString(),
       },
       {
         header: "Number of Units",
@@ -89,13 +88,22 @@ const JobsTable = () => {
       },
       {
         header: "Date Created",
-        accessorKey: "creationDate",
-        cell: (value) => new Date(value.getValue()).toLocaleDateString(),
+        accessorFn: (row) => new Date(row.creationDate).toLocaleDateString(),
       },
       {
         header: "Status",
-        accessorKey: "status",
-        cell: (value) => <StatusLabels values={value.getValue()} />,
+        accessorFn: (row) => row.status.map((status) => status.label).join(","),
+        cell: (value) => {
+          const labels = value.getValue()?.split(",");
+          return (
+            <StatusLabels
+              values={labels.map((status) => ({
+                label: status,
+                value: status,
+              }))}
+            />
+          );
+        },
       },
       {
         header: "Shipping",
@@ -110,7 +118,7 @@ const JobsTable = () => {
     ],
     []
   );
-
+  const [globalFilter, setGlobalFilter] = useState("");
   const {
     getHeaderGroups,
     getRowModel,
@@ -127,11 +135,29 @@ const JobsTable = () => {
     data: dockets || [],
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    state: {
+      globalFilter,
+    },
     autoResetPageIndex: true,
+    onGlobalFilterChange: setGlobalFilter,
   });
 
   return (
     <>
+      <div className="global-search">
+        <label htmlFor="globalFilter">
+          Search:{" "}
+          <input
+            name="globalFilter"
+            type="text"
+            value={globalFilter}
+            onChange={(event) => {
+              setGlobalFilter(event.target.value);
+            }}
+          />
+        </label>
+      </div>
       <table>
         <thead>
           {getHeaderGroups().map((headerGroup) => (

@@ -6,8 +6,9 @@ import {
   getCoreRowModel,
   flexRender,
   getPaginationRowModel,
+  getFilteredRowModel,
 } from "@tanstack/react-table";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "../../scssStyles/tableStyle.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -85,13 +86,12 @@ const QuotesTable = () => {
       },
       {
         header: "Date Created",
-        accessorKey: "creationDate",
-        cell: (value) => new Date(value.getValue()).toLocaleDateString(),
+        accessorFn: (row) => new Date(row.creationDate).toLocaleDateString(),
       },
     ],
     []
   );
-
+  const [globalFilter, setGlobalFilter] = useState("");
   const {
     getHeaderGroups,
     getRowModel,
@@ -108,10 +108,28 @@ const QuotesTable = () => {
     data: quotes || [],
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    state: {
+      globalFilter,
+    },
     autoResetPageIndex: true,
+    onGlobalFilterChange: setGlobalFilter,
   });
   return (
     <>
+      <div className="global-search">
+        <label htmlFor="globalFilter">
+          Search:{" "}
+          <input
+            name="globalFilter"
+            type="text"
+            value={globalFilter}
+            onChange={(event) => {
+              setGlobalFilter(event.target.value);
+            }}
+          />
+        </label>
+      </div>
       {!loading ? (
         <table>
           <thead>

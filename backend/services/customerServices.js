@@ -52,12 +52,13 @@ const customerServices = {
    * @returns {Customer}
    */
   async create(customer) {
-    return CustomerModel.create(customer).then(
+    await CustomerModel.create(customer).then(
       (customer) => customer,
       (error) => {
         throw new Error('UNABLE_TO_CREATE_CUSTOMER', { cause: error });
       },
     );
+    return await CustomerModel.find({});
   },
 
   /**

@@ -57,10 +57,10 @@ const customerSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    createCustomerSuccess: (state, { payload: customer }) => {
+    createCustomerSuccess: (state, { payload: customers }) => {
       state.loading = false;
       state.error = null;
-      state.customer = customer;
+      state.customers = customers;
     },
     createCustomerFailure: (state, { payload: error }) => {
       state.loading = false;

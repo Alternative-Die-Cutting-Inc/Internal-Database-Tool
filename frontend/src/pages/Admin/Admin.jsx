@@ -56,8 +56,11 @@ const UserTab = () => {
   const { users } = useSelector(usersSelector);
 
   useEffect(() => {
-    if (!users) dispatch(getUsers());
+    if (!users.length) dispatch(getUsers());
   });
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
 
   return (
     <div className="user-tab-container">
@@ -71,9 +74,7 @@ const UserTab = () => {
               email: event.target[1].value,
               password: event.target[2].value,
             };
-            console.log(newUser);
             dispatch(signUp({ newUser }));
-            dispatch(getUsers());
           }}
         >
           <input type="username" placeholder="Username" required />
@@ -119,7 +120,7 @@ const CustomerTab = () => {
   });
 
   useEffect(() => {
-    if (!customers) dispatch(getCustomers());
+    if (!customers.length) dispatch(getCustomers());
   });
   return (
     <div className="customers-tab-container">

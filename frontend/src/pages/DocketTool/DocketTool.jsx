@@ -131,7 +131,7 @@ const PageDocketTool = () => {
           },
         })
       );
-  }, [quote, docket, dispatch]);
+  }, [quote, dispatch]);
 
   if (!docket)
     return (

@@ -65,24 +65,27 @@ const PageBillingReport = () => {
   };
 
   useEffect(() => {
-    if (docket?.customer?.customerID) {
-      setCustomerSelected({
-        value: docket.customer.customerID,
-        label: docket.customer.name,
-      });
-    }
-  }, [dispatch, docket]);
+    dispatch(getCustomerNames());
+    dispatch(getDocket({ id: query.get("docketNumber") }));
+  }, [dispatch, query]);
 
   useEffect(() => {
     if (docket && docket.quoteNumber)
       dispatch(getQuote({ id: docket.quoteNumber }));
-    if (docket) dispatch(getCustomer({ id: docket.customer.customerID }));
+    if (docket) {
+      setCustomerSelected({
+        value: docket.customer.customerID,
+        label: docket.customer.name,
+      });
+      dispatch(getCustomer({ id: docket.customer.customerID }));
+    }
   }, [dispatch, docket]);
 
   useEffect(() => {
-    dispatch(getCustomerNames());
-    dispatch(getDocket({ id: query.get("docketNumber") }));
-  }, [dispatch, query]);
+    if (customerSelected) {
+      dispatch(getCustomer({ id: customerSelected.value }));
+    }
+  }, [customerSelected]);
 
   const styles = StyleSheet.create({
     page: {
@@ -286,10 +289,17 @@ const PageBillingReport = () => {
                 marginBottom: "15px",
               }}
             >
-              {(0).toLocaleString("en-CA", {
-                style: "currency",
-                currency: "CAD",
-              })}
+              {quote.quoteJobs
+                .reduce((total, job) => {
+                  if (job._id == docket.quoteJob.id) {
+                    return job.total;
+                  }
+                  return total;
+                }, 0)
+                .toLocaleString("en-CA", {
+                  style: "currency",
+                  currency: "CAD",
+                })}
             </Text>
           </View>
           <View
@@ -355,12 +365,17 @@ const PageBillingReport = () => {
                   (totalCost, charge) =>
                     parseFloat(totalCost) + parseFloat(charge.cost),
                   0.0
-                ) + 0
-              ) // TODO: Add price before extras with quote
-                .toLocaleString("en-CA", {
-                  style: "currency",
-                  currency: "CAD",
-                })}
+                ) +
+                quote.quoteJobs.reduce((total, job) => {
+                  if (job._id == docket.quoteJob.id) {
+                    return job.total;
+                  }
+                  return total;
+                }, 0)
+              ).toLocaleString("en-CA", {
+                style: "currency",
+                currency: "CAD",
+              })}
             </Text>
           </View>
         </View>
@@ -404,6 +419,34 @@ const PageBillingReport = () => {
       </Page>
     </Document>
   );
+
+  if (!quote || !docket.quoteJob)
+    return (
+      <div
+        style={{
+          width: "100%",
+          textAlign: "center",
+          padding: "3vh 5vw",
+        }}
+      >
+        <h1
+          style={{
+            backgroundColor: "var(--light-grey)",
+            padding: "1vh 2vw",
+            borderRadius: "15px",
+          }}
+        >
+          Quote Not Found. Please add a valid quote number and quote job to the{" "}
+          <a
+            onClick={() => {
+              navigate("/dockettool" + window.location.search);
+            }}
+          >
+            docket
+          </a>
+        </h1>
+      </div>
+    );
 
   if (!user || !docket) return null;
 

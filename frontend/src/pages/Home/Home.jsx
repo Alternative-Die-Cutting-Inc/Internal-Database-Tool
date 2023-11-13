@@ -289,7 +289,7 @@ const PageHome = () => {
             Quotes
           </h2>
         </div>
-        <TableControls
+        {/* <TableControls
           filterCustomers={true}
           customersArray={customerNames}
           filterStatus={true}
@@ -300,9 +300,10 @@ const PageHome = () => {
             { name: "On The Floor" },
             { name: "Stopped" },
           ]}
-          sortDate={true}
+          sortDate={true} 
           Table={jobsTable ? JobsTable : QuotesTable}
-        />
+         /> */}
+        {jobsTable ? <JobsTable></JobsTable> : <QuotesTable></QuotesTable>}
       </div>
     </div>
   );

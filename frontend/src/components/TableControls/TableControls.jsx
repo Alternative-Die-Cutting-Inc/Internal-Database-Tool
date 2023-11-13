@@ -93,9 +93,7 @@ const TableControls = ({
                 placeholderText="Creation Date End"
               />
             </>
-          ) : (
-            <></>
-          )}
+          ) : null}
         </div>
         <div className="sorter">
           {sortDate ? (
@@ -103,9 +101,7 @@ const TableControls = ({
               <option value={"newToOld"}>Newest to Oldest</option>
               <option value={"oldToNew"}>Oldest to Newest</option>
             </select>
-          ) : (
-            <></>
-          )}
+          ) : null}
         </div>
       </div>
       <Table />

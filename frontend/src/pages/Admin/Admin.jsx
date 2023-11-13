@@ -149,6 +149,7 @@ const CustomerTab = () => {
             <input
               type="number"
               placeholder="Premium"
+              step={0.001}
               required
               onChange={(event) => {
                 setNewCustomer({

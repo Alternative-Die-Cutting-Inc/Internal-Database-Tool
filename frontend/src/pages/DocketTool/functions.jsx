@@ -43,8 +43,8 @@ export const PageDocketToolFunctions = [
   },
   {
     label: "Work Order",
-    function: function () {
-      console.log("hello world");
+    function: function (_, navigate) {
+      navigate("/work-order" + window.location.search);
     },
   },
 ];

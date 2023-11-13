@@ -51,7 +51,16 @@ const DocketSchema = new mongoose.Schema({
     required: false,
   },
   quoteJob: {
-    type: String,
+    type: {
+      id: {
+        type: String,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+    },
     required: false,
   },
   customer: {

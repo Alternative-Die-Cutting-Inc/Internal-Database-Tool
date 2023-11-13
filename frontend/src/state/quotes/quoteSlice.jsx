@@ -40,6 +40,7 @@ const quoteSlice = createSlice({
     getQuoteFailure: (state, { payload: error }) => {
       state.loading = false;
       state.error = error;
+      state.quote = null;
     },
     createQuoteStart: (state) => {
       state.loading = true;

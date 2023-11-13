@@ -53,10 +53,10 @@ export const PageAdmin = () => {
 
 const UserTab = () => {
   const dispatch = useDispatch();
-  const { users, error } = useSelector(usersSelector);
+  const { users } = useSelector(usersSelector);
 
   useEffect(() => {
-    dispatch(getUsers());
+    if (!users) dispatch(getUsers());
   });
 
   return (
@@ -119,7 +119,7 @@ const CustomerTab = () => {
   });
 
   useEffect(() => {
-    dispatch(getCustomers());
+    if (!customers) dispatch(getCustomers());
   });
   return (
     <div className="customers-tab-container">
@@ -149,6 +149,7 @@ const CustomerTab = () => {
             <input
               type="number"
               placeholder="Premium"
+              step={0.001}
               required
               onChange={(event) => {
                 setNewCustomer({

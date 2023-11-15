@@ -34,7 +34,8 @@ describe('Testing Customer Services', () => {
       },
       type: 'Customer',
     };
-    newCustomer = await customerServices.create(customer);
+    let newCustomersList = await customerServices.create(customer);
+    newCustomer = newCustomersList[0];
 
     assert.equal(newCustomer.name, 'Alt Die Cut Inc');
     assert.equal(newCustomer.contacts.length, 3);

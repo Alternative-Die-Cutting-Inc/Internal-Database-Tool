@@ -47,7 +47,6 @@ export function* getQuoteSaga({ payload: { id } }) {
     const response = yield call(axios.get, `/quotes/number/${id}`);
     yield put(getQuoteSuccess(response.data?.quote));
   } catch (error) {
-    console.log(error);
     yield put(getQuoteFailure(error.response.data?.errorMessage));
   }
 }

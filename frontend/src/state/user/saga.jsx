@@ -39,7 +39,7 @@ export function* createUserSaga({ payload: { newUser } }) {
     const { axios } = useAxios();
     yield put(signupStart());
     const result = yield call(axios.post, "/user/signup", { user: newUser });
-    yield put(signupSuccess(result.data.user));
+    yield put(signupSuccess(result.data.users));
   } catch (error) {
     yield put(signupFail(error.response.data));
   }

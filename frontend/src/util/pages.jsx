@@ -12,6 +12,7 @@ import PageClientSheet from "../pages/ClientSheet/ClientSheet";
 import PageWorkSheet from "../pages/WorkSheet/WorkSheet";
 import PageDeliverySlip from "../pages/DeliverySlip/DeliverySlip";
 import PageWorkOrder from "../pages/WorkOrder/WorkOrder";
+import PageBillingReport from "../pages/BillingReport/BillingReport";
 import { PageQuoteToolFunctions } from "../pages/QuoteTool/functions";
 import { PageShipmentsFunctions } from "../pages/Shipments/functions";
 import { PageDocketToolFunctions } from "../pages/DocketTool/functions";
@@ -89,6 +90,11 @@ export const pages = {
       label: "Work Order",
       component: <PageWorkOrder />,
       path: "/work-order",
+    },
+    {
+      label: "Billing Report",
+      component: <PageBillingReport />,
+      path: "/billing-report",
     },
   ],
 

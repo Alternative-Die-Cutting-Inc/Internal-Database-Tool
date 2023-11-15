@@ -55,9 +55,10 @@ const userSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    signupSuccess: (state) => {
+    signupSuccess: (state, { payload: users }) => {
       state.loading = false;
       state.error = null;
+      state.users = users;
     },
     signupFail: (state, { payload: error }) => {
       state.loading = false;

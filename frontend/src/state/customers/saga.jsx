@@ -73,7 +73,7 @@ export function* createCustomerSaga({ payload: { customer } }) {
   try {
     yield put(createCustomerStart());
     const response = yield call(axios.post, `/customers/`, { customer });
-    yield put(createCustomerSuccess(response.data?.customer));
+    yield put(createCustomerSuccess(response.data?.customers));
   } catch (error) {
     yield put(createCustomerFailure(error?.response?.data?.errorMessage));
   }

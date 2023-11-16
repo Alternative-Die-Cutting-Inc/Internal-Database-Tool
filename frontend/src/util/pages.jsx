@@ -11,7 +11,8 @@ import { PageDocketTool } from "../pages/DocketTool/DocketTool";
 import PageClientSheet from "../pages/ClientSheet/ClientSheet";
 import PageWorkSheet from "../pages/WorkSheet/WorkSheet";
 import PageDeliverySlip from "../pages/DeliverySlip/DeliverySlip";
-import PageBillingReport  from "../pages/BillingReport/BillingReport";
+import PageWorkOrder from "../pages/WorkOrder/WorkOrder";
+import PageBillingReport from "../pages/BillingReport/BillingReport";
 import { PageQuoteToolFunctions } from "../pages/QuoteTool/functions";
 import { PageShipmentsFunctions } from "../pages/Shipments/functions";
 import { PageDocketToolFunctions } from "../pages/DocketTool/functions";
@@ -84,6 +85,11 @@ export const pages = {
       label: "Work Sheet",
       component: <PageWorkSheet />,
       path: "/work-sheet",
+    },
+    {
+      label: "Work Order",
+      component: <PageWorkOrder />,
+      path: "/work-order",
     },
     {
       label: "Billing Report",

@@ -480,7 +480,11 @@ const PageWorkOrder = () => {
                 <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
                   {quote.quoteJobs.reduce((pressHours, job) => {
                     if (job._id == docket.quoteJob.id) {
-                      return job.units / job.perSheet / job.dieRunSpeed; //quote_info.sheets / quote_info.press_runspeed
+                      return (
+                        job.units /
+                        job.perSheet /
+                        job.dieRunSpeed
+                      ).toFixed(2); //quote_info.sheets / quote_info.press_runspeed
                     }
                     return pressHours;
                   }, 0)}
@@ -708,7 +712,7 @@ const PageWorkOrder = () => {
                 <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
                   {quote.quoteJobs.reduce((gluerSpeed, job) => {
                     if (job._id == docket.quoteJob.id) {
-                      return job.units / job.gluerRunSpeed;
+                      return (job.units / job.gluerRunSpeed).toFixed(2);
                     }
                     return gluerSpeed;
                   }, 0)}
@@ -892,7 +896,7 @@ const PageWorkOrder = () => {
                 <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
                   {quote.quoteJobs.reduce((gluerSpeed, job) => {
                     if (job._id == docket.quoteJob.id) {
-                      return job.units / job.stripRunSpeed;
+                      return (job.units / job.stripRunSpeed).toFixed(2);
                     }
                     return gluerSpeed;
                   }, 0)}
@@ -955,13 +959,7 @@ const PageWorkOrder = () => {
           }}
         >
           Quote Not Found. Please add a valid quote number and quote job to the{" "}
-          <a
-            onClick={() => {
-              navigate("/dockettool" + window.location.search);
-            }}
-          >
-            docket
-          </a>
+          <a href={"/dockettool" + window.location.search}>docket</a>
         </h1>
       </div>
     );

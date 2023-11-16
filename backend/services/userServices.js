@@ -35,8 +35,7 @@ const userServices = {
    * @return {User} user object
    */
   async create({ username, password, email, firstName, lastName }) {
-    let responseUser = null;
-    responseUser = bcrypt.hash(password, 10).then(
+    await bcrypt.hash(password, 10).then(
       (hashedPassword) =>
         UserModel.create({
           email,
@@ -55,7 +54,7 @@ const userServices = {
       },
     );
 
-    return responseUser;
+    return await UserModel.find({});
   },
 
   /**

@@ -8,6 +8,8 @@ import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { getCustomerNames, clearEmail } from "../../state/customers/saga";
 import { customerNamesSelector } from "../../state/customers/customerSlice";
+import { getQuote } from "../../state/quotes/saga";
+import { quoteSelector } from "../../state/quotes/quoteSlice";
 
 function useQuery() {
   const { search } = useLocation();
@@ -18,6 +20,7 @@ const PageDocketTool = () => {
   let query = useQuery();
   const dispatch = useDispatch();
   const { docket } = useSelector(docketSelector);
+  const { quote } = useSelector(quoteSelector);
   const { customerNames } = useSelector(customerNamesSelector);
   const [editingDocket, setEditingDocket] = useState();
 
@@ -41,6 +44,7 @@ const PageDocketTool = () => {
   };
 
   const handleBlur = (fields) => {
+    // if total quantity doesnt match, update it
     if (
       editingDocket?.forms?.reduce(
         (totalQuantity, form) =>
@@ -56,7 +60,7 @@ const PageDocketTool = () => {
           0
         ),
       });
-    saveDocket(fields);
+    else saveDocket(fields);
   };
 
   const handleCheckbox = (event) => {
@@ -113,6 +117,22 @@ const PageDocketTool = () => {
     });
   }, [docket]);
 
+  useEffect(() => {
+    if (docket?.quoteNumber) dispatch(getQuote({ id: docket?.quoteNumber }));
+  }, [docket?.quoteNumber, dispatch]);
+
+  useEffect(() => {
+    if (docket && (!quote || !quote?.quoteJobs))
+      dispatch(
+        updateDocket({
+          id: docket?._id,
+          fields: {
+            quoteJob: null,
+          },
+        })
+      );
+  }, [quote, dispatch]);
+
   if (!docket)
     return (
       <div className="docket-tool-container">
@@ -128,7 +148,7 @@ const PageDocketTool = () => {
         <table className="docket-info-table" id="docket-info-table">
           <tbody>
             <tr>
-              <td>Docket #:</td>
+              <td className="docket-info-label">Docket #:</td>
               <td>
                 <input
                   type="text"
@@ -137,7 +157,7 @@ const PageDocketTool = () => {
                   readOnly
                 />
               </td>
-              <td>Customer:</td>
+              <td className="docket-info-label">Customer:</td>
               <td>
                 <Select
                   className="docket-info-select"
@@ -161,7 +181,7 @@ const PageDocketTool = () => {
                   }}
                 />
               </td>
-              <td>Customer PO:</td>
+              <td className="docket-info-label">Customer PO:</td>
               <td>
                 <input
                   type="text"
@@ -180,7 +200,7 @@ const PageDocketTool = () => {
                   }}
                 />
               </td>
-              <td>Job Name:</td>
+              <td className="docket-info-label">Job Name:</td>
               <td>
                 <input
                   type="text"
@@ -199,40 +219,73 @@ const PageDocketTool = () => {
                   }}
                 />
               </td>
-              <td>Quote Job:</td>
+              <td className="docket-info-label">Quote Job:</td>
               <td>
                 <select
-                  value={editingDocket?.quoteJob || ""}
-                  readOnly
-                  // onBlur={() => {
-                  //   handleBlur( {
-                  //     : editingDocket?.,
-                  //   });
-                  // }}
-                  // onChange={(event) => {
-                  //   setEditingDocket({
-                  //     ...editingDocket,
-                  //     : event.target.value,
-                  //   });
-                  // }}
+                  className="docket-info-input"
+                  value={editingDocket?.quoteJob?.id || ""}
+                  onBlur={() => {
+                    handleBlur({
+                      quoteJob: editingDocket.quoteJob,
+                    });
+                  }}
+                  onChange={(event) => {
+                    setEditingDocket({
+                      ...editingDocket,
+                      quoteJob: {
+                        id: event.target.selectedOptions[0].value,
+                        name: event.target.selectedOptions[0].textContent,
+                      },
+                    });
+                  }}
                 >
-                  <option value={editingDocket?.quoteJob || ""}>
-                    {editingDocket?.quoteJob}
-                  </option>
+                  <option value="">Select a quote job</option>
+                  {quote ? (
+                    quote.quoteJobs?.map((job, index) => (
+                      <option key={index} value={job._id}>
+                        {job.units +
+                          " units, " +
+                          job.total.toLocaleString("en-CA", {
+                            style: "currency",
+                            currency: "CAD",
+                          }) +
+                          " at " +
+                          (job.total / (job.units / 1000)).toLocaleString(
+                            "en-CA",
+                            {
+                              style: "currency",
+                              currency: "CAD",
+                            }
+                          ) +
+                          "/M"}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="">No quote found</option>
+                  )}
                 </select>
               </td>
             </tr>
             <tr>
-              <td>Quote #:</td>
+              <td className="docket-info-label">Quote #:</td>
               <td>
                 <input
                   type="text"
                   className="docket-info-input"
                   value={editingDocket?.quoteNumber || ""}
                   onBlur={() => {
-                    handleBlur({
-                      quoteNumber: editingDocket?.quoteNumber,
-                    });
+                    console.log(
+                      editingDocket?.quoteNumber,
+                      docket?.quoteNumber
+                    );
+                    if (
+                      docket.quoteNumber !==
+                      parseInt(editingDocket?.quoteNumber)
+                    )
+                      handleBlur({
+                        quoteNumber: editingDocket?.quoteNumber,
+                        quoteJob: null,
+                      });
                   }}
                   onChange={(event) => {
                     setEditingDocket({
@@ -242,7 +295,7 @@ const PageDocketTool = () => {
                   }}
                 />
               </td>
-              <td>Production Person:</td>
+              <td className="docket-info-label">Production Person:</td>
               <td>
                 <input
                   type="text"
@@ -261,7 +314,7 @@ const PageDocketTool = () => {
                   }}
                 />
               </td>
-              <td>Sold For:</td>
+              <td className="docket-info-label">Sold For:</td>
               <td>
                 <input
                   type="text"
@@ -288,9 +341,10 @@ const PageDocketTool = () => {
                   }}
                 />
               </td>
-              <td>Job Type:</td>
+              <td className="docket-info-label">Job Type:</td>
               <td>
                 <select
+                  className="docket-info-input"
                   value={editingDocket?.jobType || ""}
                   onBlur={() => {
                     handleBlur({
@@ -310,10 +364,10 @@ const PageDocketTool = () => {
                   <option value="other">Other</option>
                 </select>
               </td>
-              <td>Status:</td>
+              <td className="docket-info-label">Status:</td>
               <td>
                 <CreatableSelect
-                  className="status-select"
+                  className="status-select docket-info-input"
                   classNamePrefix="status-select"
                   isMulti
                   menuPosition="fixed"
@@ -1045,7 +1099,7 @@ const PageDocketTool = () => {
             <button
               onClick={(event) => {
                 console.log(event);
-                saveDocket(editingDocket);
+                saveDocket();
                 navigator.clipboard.writeText(
                   `${editingDocket?.customer?.name} #${
                     editingDocket?.docketNumber

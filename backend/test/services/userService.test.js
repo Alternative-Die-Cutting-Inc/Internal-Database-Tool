@@ -40,13 +40,14 @@ describe('Testing User Services', () => {
   let newUser = null;
 
   it('.create()\t\t\t|\tCreate a User', async function () {
-    newUser = await userServices.create({
+    let newUsersList = await userServices.create({
       username: 'dev',
       password: 'Password1!',
       email: 'dev@alternativeDC.com',
       firstName: 'John',
       lastName: 'Doe',
     });
+    newUser = newUsersList.pop();
   });
 
   it('.create()\t\t\t|\tAccurate creation', async function () {

@@ -37,14 +37,14 @@ export const PageDocketToolFunctions = [
   },
   {
     label: "Billing",
-    function: function () {
-      console.log("hello world");
+    function: function (_, navigate) {
+      navigate("/billing-report" + window.location.search);
     },
   },
   {
     label: "Work Order",
-    function: function () {
-      console.log("hello world");
+    function: function (_, navigate) {
+      navigate("/work-order" + window.location.search);
     },
   },
 ];

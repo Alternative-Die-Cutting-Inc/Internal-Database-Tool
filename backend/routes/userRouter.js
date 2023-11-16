@@ -34,8 +34,8 @@ router.post('/signup', async (req, res, next) => {
   try {
     const newUser = req.body.user;
     await userServices.validateUser(newUser.username, newUser.password);
-    const responseUser = await userServices.create({ ...newUser });
-    res.status(201).send(responseUser);
+    const newUsersList = await userServices.create({ ...newUser });
+    res.status(201).send({ users: newUsersList });
   } catch (error) {
     next(error);
   }

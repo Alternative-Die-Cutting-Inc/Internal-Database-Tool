@@ -53,11 +53,14 @@ export const PageAdmin = () => {
 
 const UserTab = () => {
   const dispatch = useDispatch();
-  const { users, error } = useSelector(usersSelector);
+  const { users } = useSelector(usersSelector);
 
   useEffect(() => {
-    dispatch(getUsers());
+    if (!users.length) dispatch(getUsers());
   });
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
 
   return (
     <div className="user-tab-container">
@@ -71,9 +74,7 @@ const UserTab = () => {
               email: event.target[1].value,
               password: event.target[2].value,
             };
-            console.log(newUser);
             dispatch(signUp({ newUser }));
-            dispatch(getUsers());
           }}
         >
           <input type="username" placeholder="Username" required />
@@ -119,7 +120,7 @@ const CustomerTab = () => {
   });
 
   useEffect(() => {
-    dispatch(getCustomers());
+    if (!customers.length) dispatch(getCustomers());
   });
   return (
     <div className="customers-tab-container">
@@ -149,6 +150,7 @@ const CustomerTab = () => {
             <input
               type="number"
               placeholder="Premium"
+              step={0.001}
               required
               onChange={(event) => {
                 setNewCustomer({

@@ -65,8 +65,8 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const newCustomer = req.body.customer;
-    const responseCustomer = await customerServices.create(newCustomer);
-    res.status(201).send({ customer: responseCustomer });
+    const responseCustomers = await customerServices.create(newCustomer);
+    res.status(201).send({ customers: responseCustomers });
   } catch (error) {
     next(error);
   }

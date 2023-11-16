@@ -65,18 +65,15 @@ const PageWorkOrder = () => {
   };
 
   useEffect(() => {
-    if (docket?.customer?.customerID) {
+    if (docket && docket.quoteNumber)
+      dispatch(getQuote({ id: docket.quoteNumber }));
+    if (docket) {
       setCustomerSelected({
         value: docket.customer.customerID,
         label: docket.customer.name,
       });
+      dispatch(getCustomer({ id: docket.customer.customerID }));
     }
-  }, [dispatch, docket]);
-
-  useEffect(() => {
-    if (docket && docket.quoteNumber)
-      dispatch(getQuote({ id: docket.quoteNumber }));
-    if (docket) dispatch(getCustomer({ id: docket.customer.customerID }));
   }, [dispatch, docket]);
 
   useEffect(() => {
@@ -403,7 +400,12 @@ const PageWorkOrder = () => {
                 }}
               >
                 <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {"1"}
+                  {quote.quoteJobs.reduce((pressSetup, job) => {
+                    if (job._id == docket.quoteJob.id) {
+                      return job.dieSetup;
+                    }
+                    return pressSetup;
+                  }, 0)}
                 </Text>
               </View>
             </View>
@@ -437,7 +439,12 @@ const PageWorkOrder = () => {
                 }}
               >
                 <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {"1000"}
+                  {quote.quoteJobs.reduce((pressSpeed, job) => {
+                    if (job._id == docket.quoteJob.id) {
+                      return job.dieRunSpeed;
+                    }
+                    return pressSpeed;
+                  }, 0)}
                 </Text>
               </View>
             </View>
@@ -471,7 +478,12 @@ const PageWorkOrder = () => {
                 }}
               >
                 <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {"5.00"}
+                  {quote.quoteJobs.reduce((pressHours, job) => {
+                    if (job._id == docket.quoteJob.id) {
+                      return job.units / job.perSheet / job.dieRunSpeed; //quote_info.sheets / quote_info.press_runspeed
+                    }
+                    return pressHours;
+                  }, 0)}
                 </Text>
               </View>
             </View>
@@ -616,7 +628,12 @@ const PageWorkOrder = () => {
                 }}
               >
                 <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {"1"}
+                  {quote.quoteJobs.reduce((gluerSetup, job) => {
+                    if (job._id == docket.quoteJob.id) {
+                      return job.gluerSetupHours;
+                    }
+                    return gluerSetup;
+                  }, 0)}
                 </Text>
               </View>
             </View>
@@ -650,7 +667,12 @@ const PageWorkOrder = () => {
                 }}
               >
                 <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {"1000"}
+                  {quote.quoteJobs.reduce((gluerSpeed, job) => {
+                    if (job._id == docket.quoteJob.id) {
+                      return job.gluerRunSpeed;
+                    }
+                    return gluerSpeed;
+                  }, 0)}
                 </Text>
               </View>
             </View>
@@ -684,7 +706,12 @@ const PageWorkOrder = () => {
                 }}
               >
                 <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {"5.00"}
+                  {quote.quoteJobs.reduce((gluerSpeed, job) => {
+                    if (job._id == docket.quoteJob.id) {
+                      return job.units / job.gluerRunSpeed;
+                    }
+                    return gluerSpeed;
+                  }, 0)}
                 </Text>
               </View>
             </View>
@@ -863,7 +890,12 @@ const PageWorkOrder = () => {
                 }}
               >
                 <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {"5.00"}
+                  {quote.quoteJobs.reduce((gluerSpeed, job) => {
+                    if (job._id == docket.quoteJob.id) {
+                      return job.units / job.stripRunSpeed;
+                    }
+                    return gluerSpeed;
+                  }, 0)}
                 </Text>
               </View>
             </View>
@@ -906,7 +938,33 @@ const PageWorkOrder = () => {
   );
 
   if (!user || !docket) return null;
-
+  if (!quote || !docket.quoteJob)
+    return (
+      <div
+        style={{
+          width: "100%",
+          textAlign: "center",
+          padding: "3vh 5vw",
+        }}
+      >
+        <h1
+          style={{
+            backgroundColor: "var(--light-grey)",
+            padding: "1vh 2vw",
+            borderRadius: "15px",
+          }}
+        >
+          Quote Not Found. Please add a valid quote number and quote job to the{" "}
+          <a
+            onClick={() => {
+              navigate("/dockettool" + window.location.search);
+            }}
+          >
+            docket
+          </a>
+        </h1>
+      </div>
+    );
   return (
     <div className="pdf-container">
       <div className="pdf-viewer-container">

@@ -31,7 +31,7 @@ const QuotesTable = () => {
     () => [
       {
         header: "Quote Number",
-        accessorKey: "quoteNumber",
+        accessorFn: (row) => row.quoteNumber?.toString(),
         // eslint-disable-next-line react/prop-types
         cell: (value) => (
           <Link to={`/quotetool?quoteNumber=${value.getValue()}`}>
@@ -61,37 +61,50 @@ const QuotesTable = () => {
             return acc;
           }, []),
         cell: (value) => {
-          return value.getValue()?.map((val, index) => (
-            <div key={index}>{`${val?.units?.toLocaleString(
-              "en-CA"
-            )} + ${val?.sheets?.toLocaleString(
-              "en-CA"
-            )} + ${val?.perM?.toLocaleString("en-CA", {
+          return value.getValue()?.map((val, index) => {
+            let options = {
               style: "currency",
               currency: "CAD",
               currencyDisplay: "symbol",
-            })} + ${val?.total?.toLocaleString("en-CA", {
-              style: "currency",
-              currency: "CAD",
-              currencyDisplay: "symbol",
-            })}`}</div>
-          ));
+            };
+            return (
+              <div key={index}>{`${val?.units?.toLocaleString(
+                "en-CA"
+              )} + ${val?.sheets?.toLocaleString(
+                "en-CA"
+              )} + ${val?.perM?.toLocaleString(
+                "en-CA",
+                options
+              )} + ${val?.total?.toLocaleString("en-CA", options)}`}</div>
+            );
+          });
         },
-      },
-      {
-        header: "Status",
-        accessorKey: "status",
-        // eslint-disable-next-line react/prop-types
-        cell: (value) => <StatusLabels values={value.getValue()} />,
       },
       {
         header: "Date Created",
         accessorFn: (row) => new Date(row.creationDate).toLocaleDateString(),
       },
+      {
+        header: "Status",
+        accessorFn: (row) => row.status.map((status) => status.label).join(","),
+        cell: (value) => {
+          const labels = value.getValue()?.split(",");
+          return (
+            <StatusLabels
+              values={labels.map((status) => ({
+                label: status,
+                value: status,
+              }))}
+            />
+          );
+        },
+      },
     ],
     []
   );
   const [globalFilter, setGlobalFilter] = useState("");
+  const [columnFilters, setColumnFilters] = useState([]);
+
   const {
     getHeaderGroups,
     getRowModel,
@@ -111,9 +124,11 @@ const QuotesTable = () => {
     getFilteredRowModel: getFilteredRowModel(),
     state: {
       globalFilter,
+      columnFilters,
     },
     autoResetPageIndex: true,
     onGlobalFilterChange: setGlobalFilter,
+    onColumnFiltersChange: setColumnFilters,
   });
   return (
     <>
@@ -146,6 +161,11 @@ const QuotesTable = () => {
                           )}
                         </div>
                       )}
+                      {header.column.getCanFilter() ? (
+                        <div>
+                          <TableFilter column={header.column} />
+                        </div>
+                      ) : null}
                     </th>
                   );
                 })}
@@ -188,5 +208,26 @@ const QuotesTable = () => {
     </>
   );
 };
-
+function TableFilter({ column }) {
+  const columnFilterValue = column.getFilterValue();
+  if (!["Date Created", "shipping", "Status"].includes(column.id)) {
+    return (
+      <input
+        className="filter-input"
+        type="text"
+        value={columnFilterValue ?? ""}
+        onChange={(event) => column.setFilterValue(event.target.value)}
+      />
+    );
+  } else if (column.id == "Date Created") {
+    return (
+      <>
+        <input className="filter-input" type="date" />
+        <input className="filter-input" type="date" />
+      </>
+    );
+  } else {
+    return null;
+  }
+}
 export { QuotesTable };

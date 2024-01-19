@@ -30,7 +30,7 @@ const JobsTable = () => {
     () => [
       {
         header: "Docket Number",
-        accessorKey: "docketNumber",
+        accessorFn: (row) => row.docketNumber?.toString(),
         // eslint-disable-next-line react/prop-types
         cell: (value) => (
           <Link to={`/dockettool?docketNumber=${value.getValue()}`}>
@@ -40,7 +40,7 @@ const JobsTable = () => {
       },
       {
         header: "Quote Number",
-        accessorKey: "quoteNumber",
+        accessorFn: (row) => row.quoteNumber?.toString(),
         cell: (value) => (
           <Link to={`/quotetool?quoteNumber=${value.getValue()}`}>
             {value.getValue()}
@@ -74,7 +74,7 @@ const JobsTable = () => {
       },
       {
         header: "Number of Units",
-        accessorKey: "numOfUnits",
+        accessorFn: (row) => row.numOfUnits?.toString(),
       },
       {
         header: "Sold For",
@@ -119,6 +119,7 @@ const JobsTable = () => {
     []
   );
   const [globalFilter, setGlobalFilter] = useState("");
+  const [columnFilters, setColumnFilters] = useState([]);
   const {
     getHeaderGroups,
     getRowModel,
@@ -138,9 +139,11 @@ const JobsTable = () => {
     getFilteredRowModel: getFilteredRowModel(),
     state: {
       globalFilter,
+      columnFilters,
     },
     autoResetPageIndex: true,
     onGlobalFilterChange: setGlobalFilter,
+    onColumnFiltersChange: setColumnFilters,
   });
 
   return (
@@ -173,6 +176,11 @@ const JobsTable = () => {
                         )}
                       </div>
                     )}
+                    {header.column.getCanFilter() ? (
+                      <div>
+                        <TableFilter column={header.column} />
+                      </div>
+                    ) : null}
                   </th>
                 );
               })}
@@ -221,5 +229,28 @@ const JobsTable = () => {
     </>
   );
 };
+
+function TableFilter({ column }) {
+  const columnFilterValue = column.getFilterValue();
+  if (!["Date Created", "shipping", "Status"].includes(column.id)) {
+    return (
+      <input
+        className="filter-input"
+        type="text"
+        value={columnFilterValue ?? ""}
+        onChange={(event) => column.setFilterValue(event.target.value)}
+      />
+    );
+  } else if (column.id == "Date Created") {
+    return (
+      <>
+        <input className="filter-input" type="date" />
+        <input className="filter-input" type="date" />
+      </>
+    );
+  } else {
+    return null;
+  }
+}
 
 export { JobsTable };

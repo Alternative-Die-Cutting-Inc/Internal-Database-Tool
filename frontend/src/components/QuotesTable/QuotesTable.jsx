@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { quotesSelector } from "../../state/quotes/quoteSlice";
 import { getQuotes } from "../../state/quotes/saga";
+import { PropTypes } from "prop-types";
 
 /** The quotes table component.
  * @returns a table of quotes
@@ -42,8 +43,8 @@ const QuotesTable = () => {
       },
       {
         header: "Customer",
-        accessorKey: "customer",
-        cell: (value) => value.getValue()?.name,
+        accessorFn: (row) => row?.customer?.name,
+        cell: (value) => value.getValue(),
       },
       { header: "Job Name", accessorKey: "jobName" },
       { header: "Description", accessorKey: "description" },
@@ -83,9 +84,19 @@ const QuotesTable = () => {
       {
         header: "Date Created",
         accessorFn: (row) => new Date(row.creationDate).toLocaleDateString(),
+        id: "creationDate",
+        filterFn: (row, columnId, filterValue) => {
+          const [startDate, endDate] = filterValue;
+          if (startDate == "" && endDate == "") return true;
+          return (
+            Date.parse(startDate) <= Date.parse(row.getValue(columnId)) &&
+            Date.parse(row.getValue(columnId)) <= Date.parse(endDate)
+          );
+        },
       },
       {
         header: "Status",
+        enableColumnFilter: false,
         accessorFn: (row) => row.status.map((status) => status.label).join(","),
         cell: (value) => {
           const labels = value.getValue()?.split(",");
@@ -153,19 +164,19 @@ const QuotesTable = () => {
                 {headerGroup.headers.map((header) => {
                   return (
                     <th key={header.id} colSpan={header.colSpan}>
-                      {header.isPlaceholder ? null : (
-                        <div>
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                        </div>
-                      )}
-                      {header.column.getCanFilter() ? (
-                        <div>
-                          <TableFilter column={header.column} />
-                        </div>
-                      ) : null}
+                      <div className="header-container">
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                        {header.column.getCanFilter() ? (
+                          <div>
+                            <TableFilter column={header.column} />
+                          </div>
+                        ) : null}
+                      </div>
                     </th>
                   );
                 })}
@@ -191,9 +202,7 @@ const QuotesTable = () => {
             })}
           </tbody>
         </table>
-      ) : (
-        <> </>
-      )}
+      ) : null}
 
       <PaginationControls
         getCanPreviousPage={getCanPreviousPage}
@@ -210,7 +219,26 @@ const QuotesTable = () => {
 };
 function TableFilter({ column }) {
   const columnFilterValue = column.getFilterValue();
-  if (!["Date Created", "shipping", "Status"].includes(column.id)) {
+  if (column.id == "creationDate") {
+    return (
+      <>
+        <input
+          className="filter-input"
+          type="date"
+          onChange={(event) => {
+            column.setFilterValue((old) => [event.target.value, old?.[1]]);
+          }}
+        />
+        <input
+          className="filter-input"
+          type="date"
+          onChange={(event) => {
+            column.setFilterValue((old) => [old?.[0], event.target.value]);
+          }}
+        />
+      </>
+    );
+  } else {
     return (
       <input
         className="filter-input"
@@ -219,15 +247,9 @@ function TableFilter({ column }) {
         onChange={(event) => column.setFilterValue(event.target.value)}
       />
     );
-  } else if (column.id == "Date Created") {
-    return (
-      <>
-        <input className="filter-input" type="date" />
-        <input className="filter-input" type="date" />
-      </>
-    );
-  } else {
-    return null;
   }
 }
+TableFilter.propTypes = {
+  column: PropTypes.any,
+};
 export { QuotesTable };

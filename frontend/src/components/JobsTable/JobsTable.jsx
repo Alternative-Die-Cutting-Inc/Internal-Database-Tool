@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { docketsSelector } from "../../state/dockets/docketSlice";
 import { getDockets } from "../../state/dockets/saga";
 import { Link } from "react-router-dom";
+import { PropTypes } from "prop-types";
+
 
 /**
  * The jobs table component.
@@ -70,17 +72,17 @@ const JobsTable = () => {
       },
       {
         header: "Special Instructions",
-        accessorFn: (row) => row.specialInstructions?.toString(),
+        accessorFn: (row) => row?.specialInstructions?.toString(),
       },
       {
         header: "Number of Units",
-        accessorFn: (row) => row.numOfUnits?.toString(),
+        accessorFn: (row) => row?.numOfUnits?.toString(),
       },
       {
         header: "Sold For",
-        accessorKey: "soldFor",
+        accessorFn: (row) => row?.soldFor?.toString(),
         cell: (value) =>
-          value.getValue()?.toLocaleString("en-CA", {
+          (parseFloat(value.getValue()) || 0).toLocaleString("en-CA", {
             style: "currency",
             currency: "CAD",
             currencyDisplay: "symbol",
@@ -88,10 +90,20 @@ const JobsTable = () => {
       },
       {
         header: "Date Created",
+        id: "creationDate",
         accessorFn: (row) => new Date(row.creationDate).toLocaleDateString(),
+        filterFn: (row, columnId, filterValue) => {
+          const [startDate, endDate] = filterValue;
+          if (startDate == "" && endDate == "") return true;
+          return (
+            Date.parse(startDate) <= Date.parse(row.getValue(columnId)) &&
+            Date.parse(row.getValue(columnId)) <= Date.parse(endDate)
+          );
+        },
       },
       {
         header: "Status",
+        enableColumnFilter: false,
         accessorFn: (row) => row.status.map((status) => status.label).join(","),
         cell: (value) => {
           const labels = value.getValue()?.split(",");
@@ -109,6 +121,7 @@ const JobsTable = () => {
         header: "Shipping",
         accessorKey: "docketNumber",
         id: "shipping",
+        enableColumnFilter: false,
         cell: (value) => (
           <Link to={`/shipments?docketNumber=${value.getValue()}`}>
             Make New Shipment
@@ -168,19 +181,19 @@ const JobsTable = () => {
               {headerGroup.headers.map((header) => {
                 return (
                   <th key={header.id} colSpan={header.colSpan}>
-                    {header.isPlaceholder ? null : (
-                      <div>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </div>
-                    )}
-                    {header.column.getCanFilter() ? (
-                      <div>
-                        <TableFilter column={header.column} />
-                      </div>
-                    ) : null}
+                    <div className="header-container">
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                      {header.column.getCanFilter() ? (
+                        <div>
+                          <TableFilter column={header.column} />
+                        </div>
+                      ) : null}
+                    </div>
                   </th>
                 );
               })}
@@ -232,7 +245,26 @@ const JobsTable = () => {
 
 function TableFilter({ column }) {
   const columnFilterValue = column.getFilterValue();
-  if (!["Date Created", "shipping", "Status"].includes(column.id)) {
+  if (column.id == "creationDate") {
+    return (
+      <>
+        <input
+          className="filter-input"
+          type="date"
+          onChange={(event) => {
+            column.setFilterValue((old) => [event.target.value, old?.[1]]);
+          }}
+        />
+        <input
+          className="filter-input"
+          type="date"
+          onChange={(event) => {
+            column.setFilterValue((old) => [old?.[0], event.target.value]);
+          }}
+        />
+      </>
+    );
+  } else {
     return (
       <input
         className="filter-input"
@@ -241,16 +273,9 @@ function TableFilter({ column }) {
         onChange={(event) => column.setFilterValue(event.target.value)}
       />
     );
-  } else if (column.id == "Date Created") {
-    return (
-      <>
-        <input className="filter-input" type="date" />
-        <input className="filter-input" type="date" />
-      </>
-    );
-  } else {
-    return null;
   }
 }
-
+TableFilter.propTypes = {
+  column: PropTypes.any,
+};
 export { JobsTable };

@@ -7,12 +7,9 @@ table {
 
 th,
 td {
-  padding: 1.5vh 0.5vw;
+  padding: 0.75vh 0.5vw;
   background-color: rgba(255, 255, 255, 0.2);
   color: var(--black);
-}
-th {
-  text-align: center;
 }
 thead {
   background-color: var(--light-grey);
@@ -20,7 +17,18 @@ thead {
     border-bottom: 1px solid #000000;
   }
   th {
+    text-align: center;
     border-right: 1px solid #000000;
+    .header-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 10vh;
+    }
+    .filter-input {
+      font-size: large;
+      width: 100%;
+    }
   }
 }
 tbody {
@@ -69,10 +77,4 @@ tbody {
       }
     }
   }
-}
-
-.filter-input {
-  margin-top: 10px;
-  font-size: large;
-  width: 100%;
 }

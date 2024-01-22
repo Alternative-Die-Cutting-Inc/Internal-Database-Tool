@@ -52,17 +52,19 @@ const QuotesTable = () => {
       {
         header: "Units + Sheets + Per M + Total",
         accessorFn: (quote) =>
-          quote.quoteJobs.reduce((acc, job) => {
-            acc.push({
-              units: job.units,
-              sheets: parseInt(job.units / job.perSheet) || 0,
-              perM: job.total / (job.units / 1000) || 0,
-              total: job.total,
-            });
-            return acc;
-          }, []),
+          JSON.stringify(
+            quote.quoteJobs.reduce((acc, job) => {
+              acc.push({
+                units: job.units,
+                sheets: parseInt(job.units / job.perSheet) || 0,
+                perM: job.total / (job.units / 1000) || 0,
+                total: job.total,
+              });
+              return acc;
+            }, [])
+          ),
         cell: (value) => {
-          return value.getValue()?.map((val, index) => {
+          return JSON.parse(value.getValue())?.map((val, index) => {
             let options = {
               style: "currency",
               currency: "CAD",

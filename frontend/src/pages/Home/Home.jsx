@@ -9,7 +9,6 @@
 
 import { useState } from "react";
 import "./Home.scss";
-import { TableControls } from "../../components/TableControls/TableControls";
 import { QuotesTable } from "../../components/QuotesTable/QuotesTable";
 import { JobsTable } from "../../components/JobsTable/JobsTable";
 import { useEffect } from "react";
@@ -40,103 +39,6 @@ const PageHome = () => {
     <div className="homepage-container">
       {/* MENU */}
       <div className="menus-container">
-        {/* <div className="search-menu">
-          <div className="search-container">
-            <div className="search-header">
-              <div className="search-title">
-                <h2>Jobs</h2>
-              </div>
-            </div>
-            <div className="search-fields-container">
-              <form className="job-search-form">
-                <input
-                  className="search-field"
-                  type="search"
-                  name="docker-number"
-                  placeholder="Docket Number:"
-                />
-                <Select
-                  className="search-field-customer-select"
-                  classNamePrefix="search-field-customer-select"
-                  options={customerNames}
-                />
-                <input
-                  className="search-field"
-                  type="search"
-                  name="quote-number"
-                  placeholder="Quote Number:"
-                />
-                <input
-                  className="search-field"
-                  type="search"
-                  name="docker-number"
-                  placeholder="Number of Units:"
-                />
-                <input
-                  className="search-field"
-                  type="search"
-                  name="quote-number"
-                  placeholder="Quote Number:"
-                />
-                <input className="search-submit" type="submit" value="Search" />
-              </form>
-            </div>
-          </div>
-          <div className="search-container">
-            <div className="search-header">
-              <div className="search-title">
-                <h2>Quotes</h2>
-              </div>
-            </div>
-            <div className="search-fields-container">
-              <form className="quote-search-form">
-                <input
-                  className="search-field"
-                  type="search"
-                  name="quote-number"
-                  placeholder="Quote Number:"
-                />
-                <Select
-                  className="search-field-customer-select"
-                  classNamePrefix="search-field-customer-select"
-                  options={customerNames}
-                />
-                <input
-                  className="search-field"
-                  type="search"
-                  name="docker-number"
-                  placeholder="Number of Units:"
-                />
-                <input
-                  className="search-field"
-                  type="search"
-                  name="quote-number"
-                  placeholder="Quote Number:"
-                />
-                <input
-                  className="search-field"
-                  type="search"
-                  name="key-word"
-                  placeholder="Key Word:"
-                />
-                <input className="search-submit" type="submit" value="Search" />
-              </form>
-            </div>
-          </div>
-          <div className="search-container">
-            <div className="search-header">
-              <div className="search-title">
-                <h2>Die Search</h2>
-              </div>
-            </div>
-            <input
-              className="search-field"
-              type="search"
-              name="Die Number"
-              placeholder="Die Number:"
-            />
-          </div>
-        </div> */}
         <div id="homepage-new-quote" className="new-quote-menu-container">
           <header className="new-quote-title">
             <h1>New Quote</h1>

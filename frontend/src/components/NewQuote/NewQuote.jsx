@@ -27,6 +27,7 @@ function NewQuote({ customerNames, dispatch, navigate }) {
               description: e.target.description.value,
               notes: e.target.notes.value,
               status: [{ value: "Created", label: "Created" }],
+              copy: e.target.copyQuoteNumber.value
             };
             dispatch(createQuote({ quote, navigate }));
           }}

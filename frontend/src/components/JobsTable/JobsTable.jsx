@@ -163,7 +163,7 @@ const JobsTable = () => {
     <>
       <div className="global-search">
         <label htmlFor="globalFilter">
-          Search:{" "}
+          Search All:{" "}
           <input
             name="globalFilter"
             type="text"

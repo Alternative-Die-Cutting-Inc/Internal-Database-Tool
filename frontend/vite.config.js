@@ -14,6 +14,12 @@ function renderChunks(deps) {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    host: true,
+    watch: {
+      usePolling: true,
+    },
+  },
   build: {
     sourcemap: true,
     rollupOptions: {

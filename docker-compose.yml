@@ -9,8 +9,6 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
       - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
       - MONGO_INITDB_DATABASE=$MONGODB_DBNAME
-    ports:
-      - "27017:27017"
     volumes:
       - ./mongo-volume:/data/db
   mongo-express:
@@ -51,3 +49,17 @@ services:
     volumes:
       - ./backend:/backend/
       - /backend/node_modules/
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    container_name: frontend
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_BASE_URL=$VITE_API_BASE_URL
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/frontend/
+      - /frontend/node_modules/      

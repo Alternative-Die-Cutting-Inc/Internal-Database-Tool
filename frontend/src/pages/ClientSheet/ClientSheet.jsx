@@ -22,7 +22,6 @@ import {
   emailSelector,
 } from "../../state/customers/customerSlice";
 import {
-  getCustomerNames,
   getCustomer,
   sendToCustomer,
 } from "../../state/customers/saga";
@@ -335,7 +334,6 @@ const PageClientSheet = () => {
 
   useEffect(() => {
     dispatch(getQuote({ id: query.get("quoteNumber") }));
-    dispatch(getCustomerNames());
   }, [dispatch, query]);
 
   return (

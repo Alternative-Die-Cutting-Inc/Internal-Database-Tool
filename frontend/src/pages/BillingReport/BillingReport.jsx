@@ -21,7 +21,6 @@ import {
   emailSelector,
 } from "../../state/customers/customerSlice";
 import {
-  getCustomerNames,
   getCustomer,
   sendToCustomer,
 } from "../../state/customers/saga";
@@ -65,7 +64,6 @@ const PageBillingReport = () => {
   };
 
   useEffect(() => {
-    dispatch(getCustomerNames());
     dispatch(getDocket({ id: query.get("docketNumber") }));
   }, [dispatch, query]);
 

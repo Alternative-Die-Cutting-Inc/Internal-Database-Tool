@@ -22,9 +22,6 @@ import { PropTypes } from "prop-types";
 const QuotesTable = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getQuotes());
-  }, [dispatch]);
 
   const { quotes, loading } = useSelector(quotesSelector);
 

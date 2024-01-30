@@ -102,7 +102,6 @@ const PageDeliverySlip = () => {
   }, [dispatch, docket]);
 
   useEffect(() => {
-    dispatch(getCustomerNames());
     dispatch(getDocket({ id: query.get("docketNumber") }));
   }, [dispatch, query]);
 

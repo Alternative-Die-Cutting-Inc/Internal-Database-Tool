@@ -34,10 +34,6 @@ const PageQuoteTool = () => {
     dispatch(getRates());
   }, [dispatch, query]);
 
-  useEffect(() => {
-    dispatch(getCustomerNames());
-  }, [dispatch]);
-
   const saveQuote = (fields) => {
     if (editingQuote) {
       if (fields) dispatch(updateQuote({ id: editingQuote._id, fields }));

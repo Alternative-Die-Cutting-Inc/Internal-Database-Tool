@@ -23,9 +23,7 @@ import { PropTypes } from "prop-types";
 const JobsTable = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getDockets());
-  }, [dispatch]);
+
   const { dockets } = useSelector(docketsSelector);
 
   const columns = useMemo(

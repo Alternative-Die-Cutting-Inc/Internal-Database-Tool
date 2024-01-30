@@ -29,7 +29,6 @@ const PageDocketTool = () => {
   }, [dispatch, query]);
 
   useEffect(() => {
-    dispatch(getCustomerNames());
     dispatch(clearEmail());
   }, [dispatch]);
 

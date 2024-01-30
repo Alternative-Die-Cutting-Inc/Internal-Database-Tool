@@ -27,9 +27,6 @@ const PageHome = () => {
   const { customerNames } = useSelector(customerNamesSelector);
   const [jobsTable, setJobTable] = useState(true);
 
-  useEffect(() => {
-    dispatch(getCustomerNames());
-  }, [dispatch]);
 
   return (
     <div className="homepage-container">

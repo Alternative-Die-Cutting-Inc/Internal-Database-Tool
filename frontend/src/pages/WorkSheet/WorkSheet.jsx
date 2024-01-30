@@ -13,8 +13,7 @@ import {
   customerSelector,
   emailSelector,
 } from "../../state/customers/customerSlice";
-import {
-  getCustomerNames,
+import { 
   getCustomer,
   sendToCustomer,
 } from "../../state/customers/saga";
@@ -441,10 +440,6 @@ const PageWorkSheet = () => {
   useEffect(() => {
     dispatch(getQuote({ id: query.get("quoteNumber") }));
   }, [dispatch, query]);
-
-  useEffect(() => {
-    dispatch(getCustomerNames());
-  }, [dispatch]);
 
   useEffect(() => {
     const customerID = customerNames?.find(

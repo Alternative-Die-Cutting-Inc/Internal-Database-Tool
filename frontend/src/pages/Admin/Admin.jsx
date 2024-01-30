@@ -56,9 +56,6 @@ const UserTab = () => {
   const { users } = useSelector(usersSelector);
 
   useEffect(() => {
-    if (!users.length) dispatch(getUsers());
-  });
-  useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
 

@@ -101,6 +101,48 @@ const quoteServices = {
    * @returns {Quote}
    */
   async create(quote) {
+    if (quote?.copy && quote?.copy !== '') {
+      const copyQuote = await QuoteModel.findOne({ quoteNumber: quote.copy }).then(
+        (quote) => {
+          if (!quote) throw new Error('QUOTE_NOT_FOUND');
+          return quote;
+        },
+        (error) => {
+          throw new Error('UNABLE_TO_GET_QUOTE', { cause: error });
+        },
+      );
+      const newQuote = await QuoteModel.create(quote).then(
+        (quote) => quote,
+        (error) => {
+          throw new Error('UNABLE_TO_CREATE_QUOTE', { cause: error });
+        },
+      );
+      copyQuote.quoteJobs.map((job) => {
+        newQuote.quoteJobs.push({
+          units: job.units,
+          perSheet: job.perSheet,
+          clientNotes: job.clientNotes,
+          internalNotes: job.internalNotes,
+          extraCharges: job.extraCharges,
+          dieHours: job.dieHours,
+          dieSetup: job.dieSetup,
+          dieRunSpeed: job.dieRunSpeed,
+          dieRunM: job.dieRunM,
+          gluerSetupHours: job.gluerSetupHours,
+          gluerRunSpeed: job.gluerRunSpeed,
+          gluerRunM: job.gluerRunM,
+          stripRunSpeed: job.stripRunSpeed,
+          stripRunM: job.stripRunM,
+          pressMachine: job.pressMachine,
+        });
+      });
+      return newQuote.save().then(
+        (quote) => quote,
+        (error) => {
+          throw new Error('UNABLE_TO_UPDATE_QUOTE', { cause: error });
+        },
+      );
+    }
     return QuoteModel.create(quote).then(
       (quote) => quote,
       (error) => {

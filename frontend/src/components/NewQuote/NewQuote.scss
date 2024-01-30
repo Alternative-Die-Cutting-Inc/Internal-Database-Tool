@@ -1,37 +1,37 @@
-.docketspage-container {
+.quotespage-container {
   display: flex;
 }
 
-.new-docket-menu-container {
+.new-quote-menu-container {
   width: 20vw;
   height: max-content;
   background-color: var(--dark-grey);
   margin: 1vh 0.5vw;
   border-radius: 15px;
   height: 100%;
-
 }
 
-.new-docket-title {
+.new-quote-title {
   text-align: center;
   h1 {
     padding-top: 0.25rem;
     font-size: 2rem;
   }
+
   font-weight: bold;
   color: var(--light-accent);
   margin: 0.75vh 0;
   user-select: none;
 }
 
-.new-docket-fields {
+.new-quote-fields {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
 }
 
-.new-docket-field {
+.new-quote-field {
   width: 80%;
   height: 2rem;
   border: 1px solid #000;
@@ -41,7 +41,7 @@
   font-size: 16px;
 }
 
-.new-docket-submit {
+.new-quote-submit {
   width: 80%;
   height: 5vh;
   border: 1px solid #000;
@@ -50,7 +50,7 @@
   margin: 0.5vh 0 1vh 0;
   font-size: 20px;
   background-color: #728ef4;
-  color: var(--light-accent);
+  color: var(--white);
   cursor: pointer;
   &:hover {
     background-color: var(--light-accent);
@@ -59,14 +59,14 @@
   }
 }
 
-.dockets-list-container {
+.quotes-list-container {
   width: 100%;
   margin: 1vh 0.5vw;
   border-radius: 15px;
   overflow: auto;
 }
 
-.new-docket-customer-select {
+.new-quote-customer-select {
   width: 80%;
   height: 2rem;
   border: 1px solid #000;
@@ -79,11 +79,11 @@
   cursor: pointer;
 }
 
-.new-docket-customer-select__menu {
+.new-quote-customer-select__menu {
   background-color: none;
   color: var(--dark-grey);
 }
-.new-docket-customer-select__menu-list {
+.new-quote-customer-select__menu-list {
   border: 1px solid #000;
 
   border-radius: 15px;
@@ -93,7 +93,7 @@
   color: var(--dark-grey);
 }
 
-.new-docket-customer-select__option {
+.new-quote-customer-select__option {
   border-radius: 15px;
   padding: 0.5vh 0.5vw;
   &:hover,

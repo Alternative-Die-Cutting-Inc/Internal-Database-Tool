@@ -2,8 +2,6 @@ import { Page404 } from "../pages/404/404";
 import { PageHome } from "../pages/Home/Home";
 import { PageAdmin } from "../pages/Admin/Admin";
 import { PageLogin } from "../pages/Login/Login";
-import { PageQuotes } from "../pages/Quotes/Quotes";
-import { PageDockets } from "../pages/Dockets/Dockets";
 import { PageReports } from "../pages/Reports/Reports";
 import { PageShipments } from "../pages/Shipments/Shipments";
 import { PageQuoteTool } from "../pages/QuoteTool/QuoteTool";
@@ -29,16 +27,6 @@ export const pages = {
     path: "/login",
   },
   main: [
-    {
-      label: "Quotes",
-      component: <PageQuotes />,
-      path: "/quotes",
-    },
-    {
-      label: "Dockets",
-      component: <PageDockets />,
-      path: "/dockets",
-    },
     {
       label: "Reports",
       component: <PageReports />,

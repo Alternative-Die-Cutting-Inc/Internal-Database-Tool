@@ -1,16 +1,33 @@
 {
-  "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Debugger",
-      "type": "firefox",
+      "type": "pwa-msedge",
+      "name": "Launch Microsoft Edge",
+      "request": "launch",
+      "runtimeArgs": ["--remote-debugging-port=9222"],
+      "url": "http://localhost:5173",
       "webRoot": "${workspaceFolder}/frontend/",
-      "url": "http://localhost:5173/",
-      "skipFiles": [
-        "${workspaceFolder}/frontend/node_modules/**/*"
-      ],
-      "showConsoleCallLocation": true,
-      "request": "launch"
+      "presentation": {
+        "hidden": true
+      }
+    },
+    {
+      "type": "vscode-edge-devtools.debug",
+      "name": "Open Edge DevTools",
+      "request": "attach",
+      "url": "http://localhost:5173",
+      "presentation": {
+        "hidden": true
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Launch Edge and attach DevTools",
+      "configurations": [
+        "Launch Microsoft Edge",
+        "Open Edge DevTools"
+      ]
     }
   ]
 }

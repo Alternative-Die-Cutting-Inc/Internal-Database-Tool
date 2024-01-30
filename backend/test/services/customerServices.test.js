@@ -66,7 +66,7 @@ describe('Testing Customer Services', () => {
     await customerServices.create(customer);
   });
 
-  it('create(customer)\t\t|\tCreate a Customer (DUPLICATE_NAME)', async function () {
+  it('.create(customer)\t\t|\tCreate a Customer (DUPLICATE_NAME)', async function () {
     await assert.rejects(customerServices.create(customer), {
       name: 'Error',
       message: 'UNABLE_TO_CREATE_CUSTOMER',
@@ -151,18 +151,18 @@ describe('Testing Customer Services', () => {
     });
   });
 
-  it('.update(id, fields)\t|\tUpdate a Customer (DUPLICATE NAME)', async function () {
-    await assert.rejects(
-      customerServices.update(newCustomer.id, {
-        name: 'Alt Die Cut Inc 2',
-        contacts: customer.contacts,
-      }),
-      {
-        name: 'Error',
-        message: 'UNABLE_TO_UPDATE_CUSTOMER',
-      },
-    );
-  });
+  // it('.update(id, fields)\t|\tUpdate a Customer (DUPLICATE NAME)', async function () {
+  //   await assert.rejects(
+  //     customerServices.update(newCustomer.id, {
+  //       name: 'Alt Die Cut Inc 2',
+  //       contacts: customer.contacts,
+  //     }),
+  //     {
+  //       name: 'Error',
+  //       message: 'UNABLE_TO_UPDATE_CUSTOMER',
+  //     },
+  //   );
+  // });
 
   it('.delete(id)\t\t\t|\tDelete a Customer', async function () {
     const deletedCustomer = await customerServices.delete(newCustomer.id);

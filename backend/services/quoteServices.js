@@ -101,7 +101,7 @@ const quoteServices = {
    * @returns {Quote}
    */
   async create(quote) {
-    if (quote.copy !== '') {
+    if (quote?.copy && quote?.copy !== '') {
       const copyQuote = await QuoteModel.findOne({ quoteNumber: quote.copy }).then(
         (quote) => {
           if (!quote) throw new Error('QUOTE_NOT_FOUND');

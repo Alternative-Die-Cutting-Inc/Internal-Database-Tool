@@ -24,7 +24,7 @@ const JobsTable = () => {
   const dispatch = useDispatch();
 
 
-  const { dockets } = useSelector(docketsSelector);
+  const { dockets, loading } = useSelector(docketsSelector);
 
   const columns = useMemo(
     () => [
@@ -172,7 +172,9 @@ const JobsTable = () => {
           />
         </label>
       </div>
-      <table>
+      {loading ? <div className="data-loading">
+        <h1>Data is loading</h1><div class="dot-flashing"></div>
+      </div> : <table>
         <thead>
           {getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -225,7 +227,8 @@ const JobsTable = () => {
             );
           })}
         </tbody>
-      </table>
+      </table>}
+      
 
       <PaginationControls
         getCanPreviousPage={getCanPreviousPage}

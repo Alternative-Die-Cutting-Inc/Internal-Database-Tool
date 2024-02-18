@@ -4,7 +4,7 @@ import { createSelector } from "reselect";
 export const initialState = {
   loading: false,
   error: null,
-  quotes: null,
+  quotes: [],
   quote: null,
   ratesEditor: false,
   rates: null,
@@ -50,6 +50,7 @@ const quoteSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.quote = quote;
+      state.quotes.unshift(quote);
     },
     createQuoteFailure: (state, { payload: error }) => {
       state.loading = false;
@@ -63,6 +64,10 @@ const quoteSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.quote = quote;
+      let index = state.quotes.findIndex(listQuote => listQuote._id === quote._id);
+      if (index !== -1) {
+        state.quotes[index] = quote;
+      } else state.quotes.unshift(quote)
     },
     updateQuoteFailure: (state, { payload: error }) => {
       state.loading = false;

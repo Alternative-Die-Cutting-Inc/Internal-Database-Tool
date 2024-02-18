@@ -4,7 +4,7 @@ import { createSelector } from "reselect";
 export const initialState = {
   loading: false,
   error: null,
-  dockets: null,
+  dockets: [],
   docket: null,
 };
 
@@ -47,6 +47,7 @@ const docketSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.docket = docket;
+      state.dockets.unshift(docket);
     },
     createDocketFailure: (state, { payload: error }) => {
       state.loading = false;
@@ -60,6 +61,11 @@ const docketSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.docket = docket;
+      let index = state.dockets.findIndex(listDocket => listDocket._id === docket._id);
+      if (index !== -1) {
+        state.dockets[index] = docket;
+      } else state.dockets.unshift(docket)
+
     },
     updateDocketFailure: (state, { payload: error }) => {
       state.loading = false;

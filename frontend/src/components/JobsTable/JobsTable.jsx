@@ -7,11 +7,10 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
 } from "@tanstack/react-table";
-import { useMemo, useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import "../../scssStyles/tableStyle.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { docketsSelector } from "../../state/dockets/docketSlice";
-import { getDockets } from "../../state/dockets/saga";
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
 
@@ -21,15 +20,13 @@ import { PropTypes } from "prop-types";
  * @returns a table of jobs
  */
 const JobsTable = () => {
-  const dispatch = useDispatch();
-
-
-  const { dockets } = useSelector(docketsSelector);
+  const { dockets, loading } = useSelector(docketsSelector);
 
   const columns = useMemo(
     () => [
       {
         header: "Docket Number",
+        id: "docketNumber",
         accessorFn: (row) => row.docketNumber?.toString(),
         // eslint-disable-next-line react/prop-types
         cell: (value) => (
@@ -172,60 +169,64 @@ const JobsTable = () => {
           />
         </label>
       </div>
-      <table>
-        <thead>
-          {getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <th key={header.id} colSpan={header.colSpan}>
-                    <div className="header-container">
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
+      {loading ? <div className="data-loading">
+        <h1>Data is loading</h1><div className="dot-flashing"></div>
+      </div> :
+        <table>
+          <thead>
+            {getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <th key={header.id} colSpan={header.colSpan}>
+                      <div className="header-container">
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
                             header.column.columnDef.header,
                             header.getContext()
                           )}
-                      {header.column.getCanFilter() ? (
-                        <div>
-                          <TableFilter column={header.column} />
-                        </div>
-                      ) : null}
-                    </div>
-                  </th>
-                );
-              })}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {getRowModel().rows.map((row) => {
-            return (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
-                  return (
-                    <td
-                      key={cell.id}
-                      style={
-                        cell.column.columnDef.accessorKey == "jobName"
-                          ? {
-                              wordBreak: "break-all",
-                            }
-                          : {}
-                      }
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
+                        {header.column.getCanFilter() ? (
+                          <div>
+                            <TableFilter column={header.column} />
+                          </div>
+                        ) : null}
+                      </div>
+                    </th>
                   );
                 })}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody>
+            {getRowModel().rows.map((row) => {
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <td
+                        key={cell.id}
+                        style={
+                          cell.column.columnDef.accessorKey == "jobName"
+                            ? {
+                              wordBreak: "break-all",
+                            }
+                            : null
+                        }
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>}
+
 
       <PaginationControls
         getCanPreviousPage={getCanPreviousPage}

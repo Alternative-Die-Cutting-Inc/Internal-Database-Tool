@@ -10,12 +10,11 @@
 import { customerNamesSelector } from "../../state/customers/customerSlice";
 import { QuotesTable } from "../../components/QuotesTable/QuotesTable";
 import { JobsTable } from "../../components/JobsTable/JobsTable";
-import { getCustomerNames } from "../../state/customers/saga";
 import NewDocket from "../../components/NewDocket/NewDocket";
 import NewQuote from "../../components/NewQuote/NewQuote";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Home.scss";
 
 /** The home page component. Renders the search menu and the jobs and quotes table.

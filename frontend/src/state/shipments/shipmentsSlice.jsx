@@ -5,7 +5,7 @@ export const initialState = {
   loading: false,
   error: null,
   shipments: [],
-  shipment: null,
+  shipment: {},
 };
 
 const shipmentsSlice = createSlice({

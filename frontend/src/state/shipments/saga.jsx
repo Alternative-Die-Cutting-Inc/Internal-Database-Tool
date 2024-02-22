@@ -61,13 +61,11 @@ export function* createShipmentSaga({ payload: shipment }) {
 
 export const updateShipment = createAction("updateShipmentSaga");
 
-export function* updateShipmentSaga({ payload: { id, fields } }) {
-  const { axios } = useAxios();
+export function* updateShipmentSaga({ payload: { shipment } }) {
 
   try {
     yield put(updateShipmentStart());
-    const response = yield call(axios.put, `/shipments/${id}`, { fields });
-    yield put(updateShipmentSuccess(response?.data));
+    yield put(updateShipmentSuccess(shipment));
   } catch (error) {
     yield put(updateShipmentFailure(error.response?.data?.errorMessage));
   }

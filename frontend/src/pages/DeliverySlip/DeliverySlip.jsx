@@ -32,6 +32,7 @@ import { getDocket, updateDocket } from "../../state/dockets/saga";
 import { getQuote } from "../../state/quotes/saga";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
+import { createShipment } from "../../state/shipments/saga";
 
 function useQuery() {
   const { search } = useLocation();
@@ -53,6 +54,10 @@ const PageDeliverySlip = () => {
 
   const [emails, setEmails] = useState([]);
   const [customerSelected, setCustomerSelected] = useState();
+
+  useEffect(() => {
+    dispatch(createShipment(shipment));
+  }, [dispatch]);
 
   const handleSend = async (event) => {
     event.preventDefault();
@@ -210,7 +215,7 @@ const PageDeliverySlip = () => {
       <Page size="LETTER" style={styles.page}>
         <View style={styles.internalInfo}>
           <View style={{ flexDirection: "column" }}>
-            <Image source={Logo} style={styles.logo} />
+            {shipment.address.show.adc && <Image source={Logo} style={styles.logo} />}
             <View>
               <Text
                 style={{
@@ -218,21 +223,15 @@ const PageDeliverySlip = () => {
                   fontWeight: "light",
                 }}
               >
-                {shipment?.address.show.adc
-                  ? AltDieIncInfo.address +
-                    `\n` +
-                    AltDieIncInfo.postalCode +
-                    `\n` +
-                    "Tel: " +
-                    AltDieIncInfo.tel +
-                    `\n` +
-                    AltDieIncInfo.website +
-                    `\n`
-                  : "Tel: " +
-                    AltDieIncInfo.tel +
-                    `\n` +
-                    AltDieIncInfo.website +
-                    `\n`}
+                {shipment.address.show.adc
+                  && (AltDieIncInfo.address +
+                  `\n` +
+                  AltDieIncInfo.postalCode +
+                  `\n` +
+                  "Tel: " +
+                  AltDieIncInfo.tel +
+                  `\n` +
+                  AltDieIncInfo.website)}
               </Text>
             </View>
           </View>
@@ -308,11 +307,9 @@ const PageDeliverySlip = () => {
                     fontSize: "12px",
                   }}
                 >
-                  {`${shipment?.address.line1 || ""}\n${
-                    shipment?.address.line2 || ""
-                  }\n${shipment?.address.city || ""}\n${
-                    shipment?.address.province || ""
-                  }\n${shipment?.address.postalCode || ""}`}
+                  {`${shipment?.address.line1 || ""}\n${shipment?.address.line2 || ""
+                    }\n${shipment?.address.city || ""}\n${shipment?.address.province || ""
+                    }\n${shipment?.address.postalCode || ""}`}
                 </Text>
               </>
             ) : null}
@@ -378,13 +375,13 @@ const PageDeliverySlip = () => {
                 <Text style={styles.row2}>
                   {form.type === "cartons"
                     ? form.quantity +
-                      " " +
-                      form.type +
-                      `\n` +
-                      form.cartonQuantity +
-                      " pieces per carton and partial of " +
-                      form.partialCartonQuantity +
-                      " pieces"
+                    " " +
+                    form.type +
+                    `\n` +
+                    form.cartonQuantity +
+                    " pieces per carton and partial of " +
+                    form.partialCartonQuantity +
+                    " pieces"
                     : form.quantity + " " + form.type}
                 </Text>
                 <Text style={styles.row3}>{form.skids}</Text>
@@ -392,7 +389,7 @@ const PageDeliverySlip = () => {
                 <Text style={[styles.row5, styles.bold]}>
                   {form.type === "cartons"
                     ? form.quantity * form.cartonQuantity +
-                      form.partialCartonQuantity
+                    form.partialCartonQuantity
                     : form.quantity}
                 </Text>
                 <Text

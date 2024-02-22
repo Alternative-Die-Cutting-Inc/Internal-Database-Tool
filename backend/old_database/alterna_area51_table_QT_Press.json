@@ -1,0 +1,27 @@
+,{
+    "type": "table",
+    "name": "QT_Press",
+    "database": "alterna_area51",
+    "data": 
+[
+{
+    "press_id": "1",
+    "name": "Bobst",
+    "rate": "160",
+    "visible": "1"
+},
+{
+    "press_id": "2",
+    "name": "Ijima",
+    "rate": "152",
+    "visible": "1"
+},
+{
+    "press_id": "3",
+    "name": "Heidelberg",
+    "rate": "90",
+    "visible": "1"
+}
+]
+
+}

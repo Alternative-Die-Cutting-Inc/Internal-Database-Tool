@@ -1,0 +1,3957 @@
+{
+    "type": "table",
+    "name": "CustomerContactEmails",
+    "database": "alterna_area51",
+    "data": 
+[
+{
+    "Customer": "",
+    "Email": "bannan@annanandsons.com"
+},
+{
+    "Customer": "",
+    "Email": "bmathias@ellispaperbox.com"
+},
+{
+    "Customer": "",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "",
+    "Email": "gus.petsails@rrd.com"
+},
+{
+    "Customer": "",
+    "Email": "jai.gossai@rrd.com"
+},
+{
+    "Customer": "",
+    "Email": "Leon@platinumreproductions.com"
+},
+{
+    "Customer": "",
+    "Email": "pete.tran02@gmail.com"
+},
+{
+    "Customer": "",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "",
+    "Email": "rowena@swanprinting.ca"
+},
+{
+    "Customer": "",
+    "Email": "tanya@ibrandprint.com"
+},
+{
+    "Customer": "1st forms inc",
+    "Email": "dean@iopgraphics.com"
+},
+{
+    "Customer": "247 Integrated Inc",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "2nd Avenue Printing Ltd",
+    "Email": "jeff@secondaveprinting.com"
+},
+{
+    "Customer": "2nd Avenue Printing Ltd",
+    "Email": "tom@secondaveprinting.com"
+},
+{
+    "Customer": "ACM Print",
+    "Email": "ashtonsingh@acmprint.ca"
+},
+{
+    "Customer": "ACM Print",
+    "Email": "doncurrie@acmprint.ca"
+},
+{
+    "Customer": "ACM Print",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "acorn print production",
+    "Email": "romy@acornprintproduction.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "agandhi@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "awarwood@ellispaperbox.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "bsomerville@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "casmontalbano@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "ccorti@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "cmartin@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "dbarata@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "dgray@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "dkosinski@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "dmurphy@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "etan@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "ffarahani@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "frankp@alternativedc.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "fteixeira@peelgraphics.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "hvirdi@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "jbernardo@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "jbond@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "jgedney@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "jimgedney@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "jmontalbano@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "kpinto@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "mr.carmine.dodaro@gmail.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "npalumbo@advertekprinting.com "
+},
+{
+    "Customer": "Advertek",
+    "Email": "r"
+},
+{
+    "Customer": "Advertek",
+    "Email": "rbrown@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "rkhan@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "shipping@advertekprinting.com"
+},
+{
+    "Customer": "advertek",
+    "Email": "shipping@alternativedc.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "snyilas@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "vbrown@advertekprinting"
+},
+{
+    "Customer": "Advertek",
+    "Email": "vbrown@advertekprinting.com"
+},
+{
+    "Customer": "Advertek",
+    "Email": "vcox@advertekprinting.com"
+},
+{
+    "Customer": "AIIM-Avant Imaging & Information Management Inc",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "AIIM-Avant Imaging & Information Management Inc",
+    "Email": "Ccarroll@aiim.com"
+},
+{
+    "Customer": "AIIM-Avant Imaging & Information Management Inc",
+    "Email": "fgiorgio@aiim.com"
+},
+{
+    "Customer": "AIIM-Avant Imaging & Information Management Inc",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "AIIM-Avant Imaging & Information Management Inc",
+    "Email": "mmceachern@aiim.com"
+},
+{
+    "Customer": "AIIM-Avant Imaging & Information Management Inc",
+    "Email": "peter@aiim.com"
+},
+{
+    "Customer": "AIIM-Avant Imaging & Information Management Inc",
+    "Email": "pgardiner@aiim.com"
+},
+{
+    "Customer": "Allcard limited",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Allcard limited",
+    "Email": "carmine@alternativedc.om"
+},
+{
+    "Customer": "Allcard limited",
+    "Email": "jared@allcard.ca"
+},
+{
+    "Customer": "Allcard limited",
+    "Email": "mark@allcard.ca"
+},
+{
+    "Customer": "Allcard limited",
+    "Email": "r"
+},
+{
+    "Customer": "Allcard limited",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Allcard limited",
+    "Email": "ruth@allcard.ca"
+},
+{
+    "Customer": "Allcard limited",
+    "Email": "ryan@allcard.ca"
+},
+{
+    "Customer": "Allcard limited",
+    "Email": "warehouse@allcard.ca"
+},
+{
+    "Customer": "Alternative die cutting inc.",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Alternative die cutting inc.",
+    "Email": "info@alternativedc.com"
+},
+{
+    "Customer": "Alternative die cutting inc.",
+    "Email": "petah.tran@utoronto.ca"
+},
+{
+    "Customer": "Alternative die cutting inc.",
+    "Email": "petahhh.tran@utoronto.ca"
+},
+{
+    "Customer": "Alternative die cutting inc.",
+    "Email": "petahhhhh.tran@utoronto.ca"
+},
+{
+    "Customer": "Alternative die cutting inc.",
+    "Email": "pete.tran02@gmail.com"
+},
+{
+    "Customer": "Alternative die cutting inc.",
+    "Email": "petertran02@gmail.com"
+},
+{
+    "Customer": "Alternative die cutting inc.",
+    "Email": "petertrantesting@utoronto.ca"
+},
+{
+    "Customer": "Alternative die cutting inc.",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Alternative die cutting inc.",
+    "Email": "shipping@alternativedc.com"
+},
+{
+    "Customer": "Alternative die cutting inc.",
+    "Email": "testingpetertran@utoronto.ca"
+},
+{
+    "Customer": "Ampersand Printing",
+    "Email": "damian@ampersand.ca"
+},
+{
+    "Customer": "Ampersand Printing",
+    "Email": "dan@ampersand.ca"
+},
+{
+    "Customer": "Ampersand Printing",
+    "Email": "mike@ampersand.ca"
+},
+{
+    "Customer": "Ampersand Printing",
+    "Email": "pbromby@ampersand.ca"
+},
+{
+    "Customer": "Ampersand Printing",
+    "Email": "production@ampersand.ca"
+},
+{
+    "Customer": "Ampersand Printing",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Ampersand Printing",
+    "Email": "rob@alternativdc.com"
+},
+{
+    "Customer": "Ampersand Printing",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Ampersand Printing",
+    "Email": "sduncan@ampersand.ca"
+},
+{
+    "Customer": "Andora Graphics Inc",
+    "Email": " mike@andoragraphics.com"
+},
+{
+    "Customer": "Andora Graphics Inc",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Andora Graphics Inc",
+    "Email": "dimas1@andoragraphics.com"
+},
+{
+    "Customer": "Andora Graphics Inc",
+    "Email": "dimas@andoragraphics.com"
+},
+{
+    "Customer": "Andora Graphics Inc",
+    "Email": "irena@andoragraphics.com "
+},
+{
+    "Customer": "Andora Graphics Inc",
+    "Email": "kevin.transonic@bellnet.ca"
+},
+{
+    "Customer": "Andora Graphics Inc",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "Andora Graphics Inc",
+    "Email": "mark@andoragraphics.com"
+},
+{
+    "Customer": "Andora Graphics Inc",
+    "Email": "myles@andoragraphics.com"
+},
+{
+    "Customer": "Andora Graphics Inc",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Andora Graphics Inc",
+    "Email": "sharon@andoragraphics.com"
+},
+{
+    "Customer": "Andora Graphics Inc",
+    "Email": "stan@andoragraphics.com"
+},
+{
+    "Customer": "Andrus Direct",
+    "Email": "mark.vickers@andrusdirect.com"
+},
+{
+    "Customer": "Annan & Bird Lithographers RRD",
+    "Email": "kellydaguilar@annan-bird.co"
+},
+{
+    "Customer": "Annan & Bird Lithographers RRD",
+    "Email": "kellydaguilar@annan-bird.com"
+},
+{
+    "Customer": "Annan & Bird Lithographers RRD",
+    "Email": "peterskupiewski@annan-bird.com"
+},
+{
+    "Customer": "Annan & Bird Lithographers RRD",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Annan & Sons Ltd.",
+    "Email": "bannan@annandsons.com"
+},
+{
+    "Customer": "Annan & Sons Ltd.",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Annan & Sons Trade Lithographer",
+    "Email": "bannan@annanandsons.com"
+},
+{
+    "Customer": "Annan & Sons Trade Lithographer",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Annan & Sons Trade Lithographer",
+    "Email": "duotone@rogers.com"
+},
+{
+    "Customer": "Annan & Sons Trade Lithographer",
+    "Email": "jannan@annanandsons.com"
+},
+{
+    "Customer": "Annan & Sons Trade Lithographer",
+    "Email": "mannan@annanandsons.com"
+},
+{
+    "Customer": "Annan & Sons Trade Lithographer",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Annan & Sons Trade Lithographer",
+    "Email": "soledade@annanandsons.com"
+},
+{
+    "Customer": "Apex Graphics inc",
+    "Email": "<maya.flikkema@apexgraphics.com"
+},
+{
+    "Customer": "Apex Graphics inc",
+    "Email": "accounting@apexgraphics.com"
+},
+{
+    "Customer": "Apex Graphics inc",
+    "Email": "chris.hie@apexgraphics.com"
+},
+{
+    "Customer": "Apex Graphics inc",
+    "Email": "christi@apexgraphics.com"
+},
+{
+    "Customer": "Apex Graphics inc",
+    "Email": "laryn.daly@apexgraphics.com"
+},
+{
+    "Customer": "Apex Graphics inc",
+    "Email": "Lisa.Parliament@apexgraphics.com"
+},
+{
+    "Customer": "Apex Graphics inc",
+    "Email": "maya.flikkema@apexgraphics.com"
+},
+{
+    "Customer": "Apollo Health and Beauty Care",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Arcade press",
+    "Email": "dennis.zammit@bellnet.ca"
+},
+{
+    "Customer": "Astley Gilbert Limited",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Astley Gilbert Limited",
+    "Email": "CarolynB@astleygilbert.com"
+},
+{
+    "Customer": "Astley Gilbert Limited",
+    "Email": "lorid@astleygilbert.com"
+},
+{
+    "Customer": "Astley Gilbert Limited",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Astley Gilbert Limited",
+    "Email": "ScottB@astleygilbert.com"
+},
+{
+    "Customer": "Astley Gilbert Limited",
+    "Email": "stevef@astleygilbert.com"
+},
+{
+    "Customer": "Astro box corp",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Attitude Communications",
+    "Email": "bruce@attitudecommunications.com"
+},
+{
+    "Customer": "Attitude Communications",
+    "Email": "sonny@attitudecommunications.com"
+},
+{
+    "Customer": "Battlefield Graphics Inc.",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Battlefield Graphics Inc.",
+    "Email": "CBularan@battlefield.press"
+},
+{
+    "Customer": "Battlefield Graphics Inc.",
+    "Email": "Dgedeon@battlefieldgraphics.com"
+},
+{
+    "Customer": "Battlefield Graphics Inc.",
+    "Email": "DMilne@battlefieldgraphics.com"
+},
+{
+    "Customer": "Battlefield Graphics Inc.",
+    "Email": "MTheoret@battlefieldgraphics.com"
+},
+{
+    "Customer": "Battlefield Graphics Inc.",
+    "Email": "mtrebilcock@battlefieldgraphics.com"
+},
+{
+    "Customer": "Battlefield Graphics Inc.",
+    "Email": "shipping@battlefield.press"
+},
+{
+    "Customer": "Belanger Lambeau & associates inc",
+    "Email": "acook@advertekprinting.com"
+},
+{
+    "Customer": "Belanger Lambeau & associates inc",
+    "Email": "belambea1@rogers.com"
+},
+{
+    "Customer": "Belanger Lambeau & associates inc",
+    "Email": "belangerlambeau.com"
+},
+{
+    "Customer": "Belanger Lambeau & associates inc",
+    "Email": "belangerlambeau@bell.net"
+},
+{
+    "Customer": "Belanger Lambeau & associates inc",
+    "Email": "bruce@belangerlambeau.com"
+},
+{
+    "Customer": "Belanger Lambeau & associates inc",
+    "Email": "earld@colourinnovations.com"
+},
+{
+    "Customer": "Bellwyck package smart",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Bertie Printers Ltd",
+    "Email": "kirstie@bertieprinters.com"
+},
+{
+    "Customer": "Bertie Printers Ltd",
+    "Email": "swillock@bertieprinters.com"
+},
+{
+    "Customer": "Boorne Canadian Graphics",
+    "Email": "cschmid@boorne.com"
+},
+{
+    "Customer": "Boorne Canadian Graphics",
+    "Email": "jmayne@boorne.com"
+},
+{
+    "Customer": "Boorne Canadian Graphics",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "BPG Graphic Solutions",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "BPG Graphic Solutions",
+    "Email": "clarmer@bpggraphics.com"
+},
+{
+    "Customer": "BPG Graphic Solutions",
+    "Email": "DKemp@bpggraphics.com"
+},
+{
+    "Customer": "BPG Graphic Solutions",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "BPG Graphic Solutions",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Branded Productions",
+    "Email": "mario@brandedproductions.ca"
+},
+{
+    "Customer": "Brant Instore",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "Brant Instore",
+    "Email": "tami.johnston@brantinstore.com"
+},
+{
+    "Customer": "Brant Screen Craft",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "Brunel Graphics",
+    "Email": "ron.lavender@sympatico.ca"
+},
+{
+    "Customer": "Canadian Printing Resources Inc",
+    "Email": "seymour@canadianprintingresources.com"
+},
+{
+    "Customer": "capital colour graphics",
+    "Email": "jmac@capitalcolour.ca"
+},
+{
+    "Customer": "capital colour graphics",
+    "Email": "mandy@capitalcolour.ca"
+},
+{
+    "Customer": "capital colour graphics",
+    "Email": "production@capitalcolour.ca"
+},
+{
+    "Customer": "Cardinal Boxes",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Cascades",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Cenveo MM&T",
+    "Email": "Angie.Oppedisano@cenveo.com"
+},
+{
+    "Customer": "Cenveo MM&T",
+    "Email": "Gary.Peter@cenveo.com"
+},
+{
+    "Customer": "Cenveo MM&T",
+    "Email": "Jason.DeLuca@cenveo.com"
+},
+{
+    "Customer": "Cenveo MM&T",
+    "Email": "pete.tran02@gmail.com"
+},
+{
+    "Customer": "Cenveo MM&T",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Cenveo MM&T",
+    "Email": "t.gaspar@westrock.com"
+},
+{
+    "Customer": "Cenveo MM&T",
+    "Email": "tomoko.gaspar@cenveo.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": " don@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "alison@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "avanbeilen@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "Brian@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "christine@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "dan@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "davidt@lithoclr.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "jannan@annanandsons.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "jennifer@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "june@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "leslie@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "Parry@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "patrick@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "Ray@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "richard@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "rosanna@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "Rossana@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "Sean@cjgraphics.com"
+},
+{
+    "Customer": "CJ Graphics",
+    "Email": "solly@cjgraphics.com"
+},
+{
+    "Customer": "CJC Graphic Management",
+    "Email": "cjcgraphicmanagement@gmail.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "brad.whalen@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "carol.carnduff@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "carol.neil@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "jennifer.shaw@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "karen.smith@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "kari-ann.schmidt@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "kerri.kuhl@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "lisa.mitchelitis@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "mark.vickers@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "mary.ridler@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "mike.mcmannis@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "paul.woods@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "richard.boyd@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "roger.murray@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "sheila.barfoot@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "steve.mcphee@cobersolutions.com"
+},
+{
+    "Customer": "Cober Evolving Solutions",
+    "Email": "terrynelson@wonderlandprinting.com"
+},
+{
+    "Customer": "Cober Printing Limited",
+    "Email": "carol.carnduff@cobersolutions.com"
+},
+{
+    "Customer": "Cober Printing Limited",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Code Communications",
+    "Email": "phillip@codecommunications.ca"
+},
+{
+    "Customer": "Code Fullfilment",
+    "Email": "phillip@codecommunications.ca"
+},
+{
+    "Customer": "Colormark Ltd.",
+    "Email": "akirchmeyer@colormarkltd.com"
+},
+{
+    "Customer": "Colormark Ltd.",
+    "Email": "DPetty@colormarkltd.com"
+},
+{
+    "Customer": "Colormark Ltd.",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "bryanm@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "carlo.manduca@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "carlod@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "ericp@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "geoffm@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "kerryf@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "margaritaf@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "matthewa@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "mattyg@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "robynm@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "sophiah@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "traceyj@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "valettac@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "wayne.kinmond@colourinnovations.com"
+},
+{
+    "Customer": "Colour Innovations",
+    "Email": "wrongemail@alternativedc.com"
+},
+{
+    "Customer": "Colwell North America",
+    "Email": "drichardson@colwellcolour.com"
+},
+{
+    "Customer": "Colwell North America",
+    "Email": "spatterson@colwellcolour.com"
+},
+{
+    "Customer": "Commerce Press",
+    "Email": "acortez@cpress.ca"
+},
+{
+    "Customer": "Commerce Press",
+    "Email": "ajiang@cpress.ca"
+},
+{
+    "Customer": "Commerce Press",
+    "Email": "celmaleh@cpress.ca"
+},
+{
+    "Customer": "Commerce Press",
+    "Email": "dburgess@cpress.ca"
+},
+{
+    "Customer": "Commerce Press",
+    "Email": "eelmaleh@cpress.ca"
+},
+{
+    "Customer": "Commerce Press",
+    "Email": "jmechali@cpress.ca"
+},
+{
+    "Customer": "Commerce Press",
+    "Email": "pskilton@cpress.ca"
+},
+{
+    "Customer": "Commerce Press",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Commerce Press",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Commersive Solutions",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Concept Manufakt Co",
+    "Email": "jeff@manufakt.co"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "cathy@continentalpress.ca"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "charles@continentalpress.ca"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "daniel@continentalpress.ca"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "debbi@continentalpress.ca"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "heather@continentalpress.ca"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "ian@continentalpress.ca"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "jack@continentalpress.ca "
+},
+{
+    "Customer": "Continental Press",
+    "Email": "jason@continentalpress.ca"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "marla@continentalpress.ca"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "mike@continentalpress.ca"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "raja@continentalpress.ca"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "richard@continentalpress.ca"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "sabrina@continentalpress.ca"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "sam@continentalpress.ca"
+},
+{
+    "Customer": "Continental Press",
+    "Email": "violeta@continentalpress.ca"
+},
+{
+    "Customer": "Corporate Printing Services",
+    "Email": "isaac@cpsonline.ca"
+},
+{
+    "Customer": "Corr\/Pak Merchandising, Inc.",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Corr\/Pak Merchandising, Inc.",
+    "Email": "ltomlin@corrpak.ca"
+},
+{
+    "Customer": "Corr\/Pak Merchandising, Inc.",
+    "Email": "sarabanian@corrpak.ca"
+},
+{
+    "Customer": "Corr\/Pak Merchandising, Inc.",
+    "Email": "shipping@alternativedc.com"
+},
+{
+    "Customer": "CorrPak Merchandising, Inc.",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "CorrPak Merchandising, Inc.",
+    "Email": "ealbright@tigroup.ca"
+},
+{
+    "Customer": "CorrPak Merchandising, Inc.",
+    "Email": "ltomlin@corrpak.ca"
+},
+{
+    "Customer": "CorrPak Merchandising, Inc.",
+    "Email": "sarabanian@corrpak.ca"
+},
+{
+    "Customer": "Cover-All",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Cover-All",
+    "Email": "tdraper@cover-all.ca"
+},
+{
+    "Customer": "CPI card group",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "CPI card group",
+    "Email": "dpella@reverbgroup.com"
+},
+{
+    "Customer": "CPI card group",
+    "Email": "dprestage@cpicardgroup.com"
+},
+{
+    "Customer": "CPI card group",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "CPI card group",
+    "Email": "skourtidis@cpicardgroup.com"
+},
+{
+    "Customer": "Crackerjack",
+    "Email": "rocky@crackerjackpromotions.com"
+},
+{
+    "Customer": "CYL Printing",
+    "Email": "dp.ajax@on.aibn.com"
+},
+{
+    "Customer": "CYL Printing",
+    "Email": "idp.ajax@on.aibn.com"
+},
+{
+    "Customer": "CYL Printing",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Data Direct",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Diginess Creative Studio",
+    "Email": "robert@diginess.ca"
+},
+{
+    "Customer": "Digital Edge Print and Media Services",
+    "Email": "brian@digitaledgeservices.ca"
+},
+{
+    "Customer": "Digital Edge Print and Media Services",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Digital joint",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Digital joint",
+    "Email": "mark@huroniatrans.com"
+},
+{
+    "Customer": "Digital joint",
+    "Email": "yaz@digitaljoint.ca"
+},
+{
+    "Customer": "Display finishers",
+    "Email": "Here you go."
+},
+{
+    "Customer": "Display finishers",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Display Works",
+    "Email": "rgcook62@gmail.com"
+},
+{
+    "Customer": "Diverse Die & Design",
+    "Email": "diverse@bellnet.ca"
+},
+{
+    "Customer": "Diverse Die & Design",
+    "Email": "diversepkgdesign@gmail.com"
+},
+{
+    "Customer": "Dobbie Media Solutions LTD.",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Dots Creative Inc",
+    "Email": "robertp@dotscreative.ca"
+},
+{
+    "Customer": "duotone",
+    "Email": "duotone@rogers.com"
+},
+{
+    "Customer": "Dynatex Textiles",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "Ellis Packaging Limited",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Ellis Packaging Limited",
+    "Email": "dsmart@ellispkg.com"
+},
+{
+    "Customer": "Ellis Packaging Limited",
+    "Email": "olang@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Packaging Limited",
+    "Email": "pisanan@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Packaging Limited",
+    "Email": "rblackall@ellispkg.com"
+},
+{
+    "Customer": "Ellis Packaging Limited",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Ellis Packaging Limited",
+    "Email": "sroti@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Packaging West",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Ellis Packaging West",
+    "Email": "sdostal@elliswest.com>"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "atenuta@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "awarwood@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "bmathias@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "brogers@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "dtenuta@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "jciufo@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "olang@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "pisanan@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "sbass@elispaperbox.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "sbass@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "sfleming@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "spazzano@ellispaperbox.com"
+},
+{
+    "Customer": "Ellis Paper Box",
+    "Email": "sroti@ellispaperbox.com"
+},
+{
+    "Customer": "Enfigo",
+    "Email": "aimeeb@enfigo.com"
+},
+{
+    "Customer": "Exodus Graphics corp",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Exodus Graphics corp",
+    "Email": "sherry@exodusgraphics.com"
+},
+{
+    "Customer": "fixed address marketing",
+    "Email": "fixedaddressmarketing@gmail.com"
+},
+{
+    "Customer": "Flash Reproductions Ltd",
+    "Email": "ca"
+},
+{
+    "Customer": "Flash Reproductions Ltd",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Flash Reproductions Ltd",
+    "Email": "david@flashreproductions.com"
+},
+{
+    "Customer": "Flash Reproductions Ltd",
+    "Email": "hanniel@flashreproductions.com"
+},
+{
+    "Customer": "Flash Reproductions Ltd",
+    "Email": "ian@flashreproductions.com"
+},
+{
+    "Customer": "Flash Reproductions Ltd",
+    "Email": "jay@flashreproductions.com"
+},
+{
+    "Customer": "Flash Reproductions Ltd",
+    "Email": "jennifer@flashreproductions.com"
+},
+{
+    "Customer": "Flash Reproductions Ltd",
+    "Email": "jessica@flashreproductions.com"
+},
+{
+    "Customer": "Flash Reproductions Ltd",
+    "Email": "julie@flashreproductions.com"
+},
+{
+    "Customer": "Flash Reproductions Ltd",
+    "Email": "keith@flashreproductions.com"
+},
+{
+    "Customer": "Flash Reproductions Ltd",
+    "Email": "leslie@flashreproductions.com"
+},
+{
+    "Customer": "Flash Reproductions Ltd",
+    "Email": "lorna@flashreproductions.com"
+},
+{
+    "Customer": "Flash Reproductions Ltd",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Flora Graphic & Printing Inc",
+    "Email": "iflora@gmail.com"
+},
+{
+    "Customer": "Flywheel Impact",
+    "Email": "herman.ho@flywheelimpact.com"
+},
+{
+    "Customer": "Flywheel Impact",
+    "Email": "ho@flywheelimpact.com"
+},
+{
+    "Customer": "Flywheel Impact",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Formcor",
+    "Email": "bruce@formcor.com"
+},
+{
+    "Customer": "Formcor",
+    "Email": "darren@formcor.com"
+},
+{
+    "Customer": "Formcor",
+    "Email": "dianne@formcor.com"
+},
+{
+    "Customer": "Formcor",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Forte Labels and Shrink Sleeves Inc.",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Fortescue Bindery Ltd.",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Foy Ink Design",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Garson Graphic Services Inc.",
+    "Email": "gary.welch\"garsongraphics.com"
+},
+{
+    "Customer": "Garson Graphic Services Inc.",
+    "Email": "Gary.welch@garsographics.com"
+},
+{
+    "Customer": "Garson Graphic Services Inc.",
+    "Email": "gary.welch@garsongraphics.com"
+},
+{
+    "Customer": "General Printers",
+    "Email": "mdavis@generalprinters.ca"
+},
+{
+    "Customer": "Global Packaging Corp",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Global Packaging Corp",
+    "Email": "jaimebondy@rogers.com"
+},
+{
+    "Customer": "Global Packaging Corp",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Global Packaging Corp",
+    "Email": "shipping@alternativedc.com"
+},
+{
+    "Customer": "Global Printing",
+    "Email": "jaimebondy@rogers.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "angelo@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "ann@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "annmarie@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "arron.brailsford@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "caitlyn@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "daniel@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "danielw@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "guy@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "jeff@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "john@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "johnburt@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "kary@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "katie@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "katrina@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "layla@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "mark@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "markaysa@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "megan@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "michael@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "nicole@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "phil@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "robert@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "ryan@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "sara@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "steve@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "tammy@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "therese.keating@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "todd@godinproductions.com"
+},
+{
+    "Customer": "Godin Productions",
+    "Email": "ujala@godinproductions.com"
+},
+{
+    "Customer": "Graphic results group",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Graphic results group",
+    "Email": "david@graphicresultsgroup.ca"
+},
+{
+    "Customer": "Graphic results group",
+    "Email": "dburtch.dimensional@rogers.com"
+},
+{
+    "Customer": "Graphic results group",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Gravity Print",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "Greater Print Ltd.",
+    "Email": "luch@greaterprint.com"
+},
+{
+    "Customer": "GTA Imaging",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Hammond Paper",
+    "Email": "clavell@hammondpaper.com"
+},
+{
+    "Customer": "Hammond Paper",
+    "Email": "cmead@hammondpaper.com"
+},
+{
+    "Customer": "Hammond Paper",
+    "Email": "dcampbell@hammondpaper.com"
+},
+{
+    "Customer": "Hammond Paper",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "harbour",
+    "Email": "CHoliday@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": " emedina@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "ACandelora@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "choliday@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "emedina@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "emidina@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "grhodes@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "jangliss@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "john@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "JViscomi@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "KBernardi@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "kholiday@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "ratkinson@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "rmoore@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "sabel@harbourprinting.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "shipping@alternativedc.com"
+},
+{
+    "Customer": "Harbour Printing",
+    "Email": "wrong email"
+},
+{
+    "Customer": "HDS Graphics Group Inc",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "HGL Marketing",
+    "Email": "mike@hglmarketing.com"
+},
+{
+    "Customer": "Holland & Crosby Limited",
+    "Email": "brigit@hollandandcrosby.com"
+},
+{
+    "Customer": "Holland & Crosby Limited",
+    "Email": "davep@hollandandcrosby.com"
+},
+{
+    "Customer": "Holland & Crosby Limited",
+    "Email": "kristina@hollandandcrosby.com"
+},
+{
+    "Customer": "Hume Media Inc.",
+    "Email": "bob@humemediainc.com"
+},
+{
+    "Customer": "Hume Media Inc.",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "IBrand print.com",
+    "Email": "ed@ibrandprint.com"
+},
+{
+    "Customer": "IBrand print.com",
+    "Email": "mario@ibrandprint.com"
+},
+{
+    "Customer": "IBrand print.com",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "ICON Print Communications Inc.",
+    "Email": "jez.metcalfe@icondigital.com"
+},
+{
+    "Customer": "ICON Print Communications Inc.",
+    "Email": "Steve.Ballantyne@icondigital.com"
+},
+{
+    "Customer": "Ideal Printing Company",
+    "Email": " rob@alternativedc.com"
+},
+{
+    "Customer": "Ideal Printing Company",
+    "Email": "elimiller@idealprinting.com"
+},
+{
+    "Customer": "Ideal Printing Company",
+    "Email": "smiller@idealprinting.com"
+},
+{
+    "Customer": "Ideal Printing Company Limited",
+    "Email": "smiller@idealprinting.com"
+},
+{
+    "Customer": "Image4 inc",
+    "Email": "kim@imagefour.com"
+},
+{
+    "Customer": "Image4 inc",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Imaging Excellence",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Imaging Excellence",
+    "Email": "jennifer@imagingexcellence.com"
+},
+{
+    "Customer": "Imaging Excellence",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Imaging Excellence",
+    "Email": "sbrockie@imagingexcellence.com"
+},
+{
+    "Customer": "Incredible Printing Co. Inc",
+    "Email": "Aimee@incredibleprinting.com"
+},
+{
+    "Customer": "Incredible Printing Co. Inc",
+    "Email": "anie@incredibleprinting.com"
+},
+{
+    "Customer": "Incredible Printing Co. Inc",
+    "Email": "brenda@incredibleprinting.com"
+},
+{
+    "Customer": "Incredible Printing Co. Inc",
+    "Email": "jeff@incredibleprinting.com"
+},
+{
+    "Customer": "Incredible Printing Co. Inc",
+    "Email": "mendl@incredibleprinting.com"
+},
+{
+    "Customer": "Incredible Printing Co. Inc",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Incredible Printing Co. Inc",
+    "Email": "sarah@incredibleprinting.com"
+},
+{
+    "Customer": "Incredible Printing Co. Inc",
+    "Email": "zev@incredibleprinting.com"
+},
+{
+    "Customer": "InnerCIRCLE Group",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "InnerCIRCLE Group",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "InnerCIRCLE Group",
+    "Email": "vickyz@print-tech.net"
+},
+{
+    "Customer": "Inter Label Systems",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Inter Label Systems",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Inter Label Systems",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Inter Label Systems",
+    "Email": "vbrown@advertekprinting.com"
+},
+{
+    "Customer": "IOP Graphics",
+    "Email": "dean@iopgraphics.com"
+},
+{
+    "Customer": "IOP Graphics",
+    "Email": "derek@iopgraphics.com"
+},
+{
+    "Customer": "IOP Graphics",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "IPS Studio",
+    "Email": "aldo@alternativedc.com"
+},
+{
+    "Customer": "IPS Studio",
+    "Email": "chris@ipsstudio.com"
+},
+{
+    "Customer": "IPS Studio",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "J. Allen Mounting & Finishing Limited",
+    "Email": "ron@allenmounting.com"
+},
+{
+    "Customer": "J.F. Moore Lithographers Inc.",
+    "Email": "c.manduca@jfmoorecommunications.com"
+},
+{
+    "Customer": "J.F. Moore Lithographers Inc.",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "J.F. Moore Lithographers Inc.",
+    "Email": "r.patterson@jfmoorecommunications.com"
+},
+{
+    "Customer": "J.F. Moore Lithographers Inc.",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "J.F. Moore Lithographers Inc.",
+    "Email": "Steve.taalman@jfmoorelitho.com"
+},
+{
+    "Customer": "JB Printing Limited",
+    "Email": "craig@jbprint.ca"
+},
+{
+    "Customer": "JB Printing Limited",
+    "Email": "gary@jbprint.ca"
+},
+{
+    "Customer": "JB Printing Limited",
+    "Email": "kevin@jbprint.ca"
+},
+{
+    "Customer": "JB Printing Limited",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "JB Printing Limited",
+    "Email": "sabine@jbprint.ca"
+},
+{
+    "Customer": "JBS Graphic Communications ",
+    "Email": "Lance@jbsgraphic.com"
+},
+{
+    "Customer": "JBS Graphic Communications ",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "KMB Productions",
+    "Email": "donna@kmb.ca"
+},
+{
+    "Customer": "KMB Productions",
+    "Email": "sharon@kmb.ca"
+},
+{
+    "Customer": "LCS Imaging Inc",
+    "Email": "craig@lcsimaging.com"
+},
+{
+    "Customer": "LCS Imaging Inc",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Lithocolor",
+    "Email": "barb@lithoclr.com"
+},
+{
+    "Customer": "Lithocolor",
+    "Email": "carlo@lithoclr.com"
+},
+{
+    "Customer": "Lithocolor",
+    "Email": "casey@lithoclr.com"
+},
+{
+    "Customer": "Lithocolor",
+    "Email": "davidt@lithoclr.com"
+},
+{
+    "Customer": "Lithocolor",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "Lithocolor",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Lithocolor",
+    "Email": "rob.hilton@lithoclr.com"
+},
+{
+    "Customer": "Lithocolor",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Lithocolor",
+    "Email": "rosanne.uy@lithoclr.com"
+},
+{
+    "Customer": "Lithocolor",
+    "Email": "shannon.stinson@lithoclr.com"
+},
+{
+    "Customer": "Lithocolor",
+    "Email": "sonia.sangoi@lithoclr.com"
+},
+{
+    "Customer": "Lively Luxe Correspondences Inc.",
+    "Email": "judy.livelyluxe@gmail.com"
+},
+{
+    "Customer": "Lowe-Martin Group",
+    "Email": "brian.vuong@lmgroup.com"
+},
+{
+    "Customer": "Lowe-Martin Group",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Lowe-Martin Group",
+    "Email": "dave.blumberg@lmgroup.com"
+},
+{
+    "Customer": "Lowe-Martin Group",
+    "Email": "ed.shields@lmgroup.com"
+},
+{
+    "Customer": "Lowe-Martin Group",
+    "Email": "faz@rpgraphics.com"
+},
+{
+    "Customer": "Lowe-Martin Group",
+    "Email": "john.ciufo@lmgroup.com"
+},
+{
+    "Customer": "Lowe-Martin Group",
+    "Email": "keri.scott@lmgroup.com"
+},
+{
+    "Customer": "Lowe-Martin Group",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Lowe-Martin Group",
+    "Email": "scott.hately@lmgroup.com"
+},
+{
+    "Customer": "Lowes printing",
+    "Email": "candy@lowesprint.com"
+},
+{
+    "Customer": "Lowes printing",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Lowes printing",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "Lowes printing",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Lowes printing",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Lowes printing",
+    "Email": "todd@lowesprint.com"
+},
+{
+    "Customer": "LP Graphics",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "LP Graphics",
+    "Email": "john-lloyd@lpgraphics"
+},
+{
+    "Customer": "LP Graphics",
+    "Email": "on.ca"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "angela.rumleski@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "brian.marshall@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "brittany.krueger@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "bryon.holmes@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "carolyn.mooney@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "darrell.holmes@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "derek.mitchell@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "heather.mooney@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "jana.mahoney@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "karen.church@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "kate.simpson@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "lance.holmes@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "nathan.church@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "nathan.price@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "pauline.cecile@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "pete.tran02@gmail.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "rhonda.mooney@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "rhonda@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "richard.stedman@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "rick.simpson@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "shannon.mitchell@mainst-group.com"
+},
+{
+    "Customer": "Main St Packaging",
+    "Email": "troy.holmes@mainst-group.com"
+},
+{
+    "Customer": "Manufakt",
+    "Email": "jeff@manufakt.co"
+},
+{
+    "Customer": "Marcam Printers",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Marcam Printers",
+    "Email": "VCox@marcamxmedia.com"
+},
+{
+    "Customer": "McLaren Press Graphics Ltd",
+    "Email": "charlene@mclarenpress.com"
+},
+{
+    "Customer": "McLaren Press Graphics Ltd",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Mef Graphics",
+    "Email": "erica@mefgraphics.com"
+},
+{
+    "Customer": "Metagraphic Network Inc.",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Metagraphic Network Inc.",
+    "Email": "christa@metagraphicnetwork.com"
+},
+{
+    "Customer": "Metagraphic Network Inc.",
+    "Email": "fabio@metagraphicnetwork.com"
+},
+{
+    "Customer": "Metagraphic Network Inc.",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Mi5 Print & Digital Communications",
+    "Email": "brenda.cahill@mi5print.com"
+},
+{
+    "Customer": "Mi5 Print & Digital Communications",
+    "Email": "clarmer@bpggraphics.com"
+},
+{
+    "Customer": "Mi5 Print & Digital Communications",
+    "Email": "Kim@mi5print.com"
+},
+{
+    "Customer": "Mi5 Print & Digital Communications",
+    "Email": "lou@mi5print.com"
+},
+{
+    "Customer": "Mi5 Print & Digital Communications",
+    "Email": "mary@mi5print.com"
+},
+{
+    "Customer": "Mi5 Print & Digital Communications",
+    "Email": "Parry@mi5print.com"
+},
+{
+    "Customer": "Mi5 Print & Digital Communications",
+    "Email": "paul.bourgon@bpggraphics.com"
+},
+{
+    "Customer": "Mi5 Print & Digital Communications",
+    "Email": "ramr@mi5print.com"
+},
+{
+    "Customer": "Mi5 Print & Digital Communications",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Mi5 Print & Digital Communications",
+    "Email": "rosa@mi5print.com"
+},
+{
+    "Customer": "Mi5 Print & Digital Communications",
+    "Email": "seth@mi5print.com"
+},
+{
+    "Customer": "Mi5 Print & Digital Communications",
+    "Email": "sigrid@mi5print.com"
+},
+{
+    "Customer": "Mi5 Print & Digital Communications",
+    "Email": "wendy@mi5print.com"
+},
+{
+    "Customer": "Middleton Group",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Middleton Group",
+    "Email": "robstratton@middletongroup.ca"
+},
+{
+    "Customer": "Millenium printing",
+    "Email": "ajit@mpiprint.com"
+},
+{
+    "Customer": "Millenium printing",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Millenium printing",
+    "Email": "peter@mpiprint.com"
+},
+{
+    "Customer": "Millenium printing",
+    "Email": "production@mpiprint.com"
+},
+{
+    "Customer": "Millenium printing",
+    "Email": "snr@mpiprint.com"
+},
+{
+    "Customer": "Mormark Print Productions inc",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Mormark Print Productions inc",
+    "Email": "shipping@mormarkonline.com"
+},
+{
+    "Customer": "Moveable",
+    "Email": "amy@moveable.com"
+},
+{
+    "Customer": "Moveable",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Moveable",
+    "Email": "liisa@moveable.com"
+},
+{
+    "Customer": "Multi Packaging Solutions",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Multi Packaging Solutions",
+    "Email": "jackie.bray@westrock-mps.com"
+},
+{
+    "Customer": "Multi Packaging Solutions",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Mundy Brothers ltd",
+    "Email": "estimating@mundybrothers.com"
+},
+{
+    "Customer": "Naka Press",
+    "Email": "peter@nakapress.ca"
+},
+{
+    "Customer": "New Era Print Solutions",
+    "Email": "info@neps.ca"
+},
+{
+    "Customer": "New Era Print Solutions",
+    "Email": "richard@alternarivedc.com"
+},
+{
+    "Customer": "New Era Print Solutions",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "New Era Print Solutions",
+    "Email": "vinny@neps.ca"
+},
+{
+    "Customer": "Oakgrove Press",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Option-8",
+    "Email": "option8@rogers.com"
+},
+{
+    "Customer": "PaperWorks",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Pareto Corporation",
+    "Email": "azafarano@pareto.ca"
+},
+{
+    "Customer": "Pareto Corporation",
+    "Email": "DHarris@pareto.ca"
+},
+{
+    "Customer": "Pareto Corporation",
+    "Email": "HSeidl@pareto.ca"
+},
+{
+    "Customer": "Pareto Corporation",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Pareto Corporation",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Pareto Corporation",
+    "Email": "VFuentes-Castro@pareto.ca"
+},
+{
+    "Customer": "Parfield Printing",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Parker Pad & Printing Ltd",
+    "Email": "cathy@parkerpad.com"
+},
+{
+    "Customer": "Parker Pad & Printing Ltd",
+    "Email": "helen@specialtiesgraphics.com"
+},
+{
+    "Customer": "Parker Pad & Printing Ltd",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "Parker Pad & Printing Ltd",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "ParPrint Group Inc.",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "PBI Inc",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "PBI Inc",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "PBI Inc.",
+    "Email": "chuck_farkas@pbiinc.ca"
+},
+{
+    "Customer": "Pearson Printing Inc.",
+    "Email": "pearsonprint@gmail.com"
+},
+{
+    "Customer": "Peel Graphics Inc.",
+    "Email": "Dpatel@peelgraphics.com"
+},
+{
+    "Customer": "Peel Graphics Inc.",
+    "Email": "ffarahani@peelgraphics.com"
+},
+{
+    "Customer": "Peel Graphics Inc.",
+    "Email": "jmcgillivray@peelgraphics.com"
+},
+{
+    "Customer": "Peel Graphics Inc.",
+    "Email": "jvagg@peelgraphics.com "
+},
+{
+    "Customer": "Peel Graphics Inc.",
+    "Email": "kpinto@peelgraphics.com"
+},
+{
+    "Customer": "Peel Graphics Inc.",
+    "Email": "mprevost@peelgraphics.com"
+},
+{
+    "Customer": "Peel Graphics Inc.",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Platinum Printing Group Inc",
+    "Email": "mike@platinumprintinggroup.com"
+},
+{
+    "Customer": "Platinum Printing Group Inc",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "PNP Canada Enterprise",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "PNP Enterprise",
+    "Email": "khprintpak@Gmail.com"
+},
+{
+    "Customer": "PNP Enterprise",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Point One",
+    "Email": "chris@point-one.com"
+},
+{
+    "Customer": "Point One",
+    "Email": "doug@point-one.com"
+},
+{
+    "Customer": "Point One",
+    "Email": "tanyalow@point-one.com"
+},
+{
+    "Customer": "Point One Graphics Inc",
+    "Email": "Blair@point-one.com"
+},
+{
+    "Customer": "Point One Graphics Inc",
+    "Email": "brendan@point-one.com"
+},
+{
+    "Customer": "Point One Graphics Inc",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Point One Graphics Inc",
+    "Email": "chris@point-one.com"
+},
+{
+    "Customer": "Point One Graphics Inc",
+    "Email": "cmacdonald@formcor.com"
+},
+{
+    "Customer": "Point One Graphics Inc",
+    "Email": "james@point-one.com"
+},
+{
+    "Customer": "Point One Graphics Inc",
+    "Email": "jeff@secondaveprinting.com"
+},
+{
+    "Customer": "Point One Graphics Inc",
+    "Email": "keith@point-one.com"
+},
+{
+    "Customer": "Point One Graphics Inc",
+    "Email": "maarten@point-one.com"
+},
+{
+    "Customer": "Point One Graphics Inc",
+    "Email": "matt@point-one.com"
+},
+{
+    "Customer": "Point One Graphics Inc",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Point One Graphics Inc",
+    "Email": "tom@point-one.com"
+},
+{
+    "Customer": "PPG",
+    "Email": "peter@printwithppg.com"
+},
+{
+    "Customer": "PPG",
+    "Email": "ralph@printwithppg.com"
+},
+{
+    "Customer": "Precision Print Management",
+    "Email": "ppmc@telus.blackberry.net"
+},
+{
+    "Customer": "Premier Impressions Inc.",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Prima-Pack Inc",
+    "Email": "hani@prima-pack.com"
+},
+{
+    "Customer": "Prima-Pack Inc",
+    "Email": "iman@prima-pack.com"
+},
+{
+    "Customer": "Prima-Pack Inc",
+    "Email": "nermine@prima-pack.com"
+},
+{
+    "Customer": "Prime Data",
+    "Email": "jcordick@primedata.ca"
+},
+{
+    "Customer": "Prime Data",
+    "Email": "jhisey@primedata.ca "
+},
+{
+    "Customer": "Prime Data",
+    "Email": "jmaiuri@primedata.ca"
+},
+{
+    "Customer": "Prime Data",
+    "Email": "richard@alternativedc.com "
+},
+{
+    "Customer": "Print Dot Com Incorporated",
+    "Email": "printdotcom@rogers.com "
+},
+{
+    "Customer": "Print Dot Com Incorporated",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Print On Time",
+    "Email": "george@printontime.com"
+},
+{
+    "Customer": "Print Packaging",
+    "Email": "scott@printpackagingltd.com"
+},
+{
+    "Customer": "Print Three Digital",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Print-tech",
+    "Email": "jcarinci@print-tech.net"
+},
+{
+    "Customer": "Printers Helper",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Prodigy graphics",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Prodigy graphics",
+    "Email": "email.najib@gmail.com"
+},
+{
+    "Customer": "Prodigy graphics",
+    "Email": "emilie@prodigygraphics.com"
+},
+{
+    "Customer": "Prodigy graphics",
+    "Email": "frankp@alternativedc.com"
+},
+{
+    "Customer": "Prodigy graphics",
+    "Email": "gordon@prodigygraphics.com"
+},
+{
+    "Customer": "Prodigy graphics",
+    "Email": "joe@twobears.ca"
+},
+{
+    "Customer": "Prodigy graphics",
+    "Email": "le@prodigygraphics.com"
+},
+{
+    "Customer": "Prodigy graphics",
+    "Email": "najib@prodigygraphics.com"
+},
+{
+    "Customer": "Prodigy graphics",
+    "Email": "patrick@prodigygraphics.com"
+},
+{
+    "Customer": "Prodigy graphics",
+    "Email": "richard@alternativedc.com "
+},
+{
+    "Customer": "Prodigy graphics",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Prodigy graphics",
+    "Email": "roberta@prodigygraphics.com"
+},
+{
+    "Customer": "Prodigy graphics",
+    "Email": "romy@acornprintproduction.com"
+},
+{
+    "Customer": "Progress Luv2Pak international Ltd",
+    "Email": "collins@luv2pak.com"
+},
+{
+    "Customer": "Prominent Printing Corp.",
+    "Email": "luch@prominentprintingcorp.ca"
+},
+{
+    "Customer": "Prominent Printing Corp.",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Promotion Alternatives",
+    "Email": "lesfyfe@bellnet.ca"
+},
+{
+    "Customer": "Promotional Print and Packaging",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Pronto Reproductions ltd",
+    "Email": "jason@prontoinc.com"
+},
+{
+    "Customer": "Pronto Reproductions ltd",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Pronto Reproductions ltd",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Pronto Reproductions ltd",
+    "Email": "this is the quote for Cameron Stephens"
+},
+{
+    "Customer": "Pronto Reproductions ltd",
+    "Email": "thomas@prontoinc.com"
+},
+{
+    "Customer": "Pronto Reproductions ltd",
+    "Email": "wayne@prontoinc.com"
+},
+{
+    "Customer": "Pulsar Printing Ltd.",
+    "Email": "pulsarprinting@rogers.com"
+},
+{
+    "Customer": "Pulsar Printing Ltd.",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Pyxalis Inc.",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Pyxalis Inc.",
+    "Email": "dkemp@pyxalis.ca"
+},
+{
+    "Customer": "Quality Web",
+    "Email": "<nooreen@a1-delivery.com"
+},
+{
+    "Customer": "Quality Web",
+    "Email": "addaymond@cogeco.ca"
+},
+{
+    "Customer": "Quality Web",
+    "Email": "mohamed@west-star.com"
+},
+{
+    "Customer": "Quality Web",
+    "Email": "nooreen@a1-delivery.com"
+},
+{
+    "Customer": "Quality Web",
+    "Email": "nooreen@a7-delivery.com"
+},
+{
+    "Customer": "Quality Web",
+    "Email": "projects@a1-delivery.com"
+},
+{
+    "Customer": "Quality Web",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Quality Web",
+    "Email": "webprintguy@yahoo.ca"
+},
+{
+    "Customer": "R S Superior Bindery",
+    "Email": " as discussed I have approx 17 "
+},
+{
+    "Customer": "R S Superior Bindery",
+    "Email": "000 pcs."
+},
+{
+    "Customer": "R S Superior Bindery",
+    "Email": "000 sheets that need diecutting\/creas..."
+},
+{
+    "Customer": "R S Superior Bindery",
+    "Email": "Kevin Leggat\t\tAttachments10:24 AM (2 hours ago) Richard"
+},
+{
+    "Customer": "R S Superior Bindery",
+    "Email": "kevin@rssuperior.com"
+},
+{
+    "Customer": "R S Superior Bindery",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "R S Superior Bindery",
+    "Email": "see price for 3up 11"
+},
+{
+    "Customer": "Rayment & Collins",
+    "Email": "mary.lou.stirling@raymentcollins.com"
+},
+{
+    "Customer": "Record Jacket Corp",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Record Jacket Corp",
+    "Email": "emmanuel@recordjacketcor"
+},
+{
+    "Customer": "Record Jacket Corp",
+    "Email": "emmanuel@recordjacketcorp.com"
+},
+{
+    "Customer": "Record Jacket Corp",
+    "Email": "jessi@recordjacketcorp.com"
+},
+{
+    "Customer": "Record Jacket Corp",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Record Jacket Corp",
+    "Email": "shipping@alternativedc.com"
+},
+{
+    "Customer": "Record Jacket Corporation",
+    "Email": "jessi@recordjacketcorp.com"
+},
+{
+    "Customer": "Record Jacket Corporation",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Regal Press",
+    "Email": "marzi@regalpresscanada.com"
+},
+{
+    "Customer": "Regal Press",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Regency Printing",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "Regency Printing",
+    "Email": "regencyprinting@bellnet.ca"
+},
+{
+    "Customer": "Relay Graphics",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Reverb Litho & Design",
+    "Email": "dpella@reverbgroup.com"
+},
+{
+    "Customer": "Rexdale printers",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Rhino Print Solutions",
+    "Email": "pdas@rhinoprintsolutions.com"
+},
+{
+    "Customer": "Rhino Print Solutions",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Rhino Print Solutions",
+    "Email": "stu@rhinoprintsolutions.com"
+},
+{
+    "Customer": "Rhino Print Solutions",
+    "Email": "vcox@rhinoprintsolutions.com"
+},
+{
+    "Customer": "RJ Multi Litho",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "RJ Multi Litho",
+    "Email": "margo@vibrantgraphics.ca"
+},
+{
+    "Customer": "RJ Multi Litho",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "RJ Multi Litho",
+    "Email": "sturkenboom@xplornet.com"
+},
+{
+    "Customer": "RJ Multi Litho",
+    "Email": "susan@rjmultilitho.com"
+},
+{
+    "Customer": "Robertson Litho",
+    "Email": "keith@robertsonlitho.ca"
+},
+{
+    "Customer": "Robertson Litho",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "RP Graphics Group",
+    "Email": "faz@rpgraphics.com"
+},
+{
+    "Customer": "RP Graphics Group",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "adrian.j.dale@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "aiko.m.miyazawa@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "albert.i.saimon@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "beverlyjo.conklin@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "bonnie.coole@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "carrie.bartolomucci@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "corrie.l.ellis@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "daniel.j.hance@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "dean.a.persaud@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "everything is the same  ok"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "florina.stan@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "francine.l.leung@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "frankp@alternativedc.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "glenda.king@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "gus.petsalis@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "jai.gossai@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "ken.forshee@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "ken.r.campbell@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "kevin.transonic@bellnet.ca"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "ladda.x.kan@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "myron.peniak@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "PO56623 see line 9"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "robert.bollman@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "robin.dsouza@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "robyn.s.darmanin@dfsco.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "scott.robertson@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "sean.h.smith@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "sent it to bonnie"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "sharleen.gray@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "shipping@alternativedc.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "shipping@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "stefan.p.slawek@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "steve.s.fiotakis@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "Tina.Szeto@rrd.com"
+},
+{
+    "Customer": "RR Donnelley MIL",
+    "Email": "zelia.nguyen@rrd.com"
+},
+{
+    "Customer": "S. K . Graphic Communication",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "S. K . Graphic Communication",
+    "Email": "skgraphics@rogers.com"
+},
+{
+    "Customer": "Safari Marketing Inc.",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Sherwood Printers",
+    "Email": "jeff@manufakt.co"
+},
+{
+    "Customer": "Sherwood Printers",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "Sherwood Printers",
+    "Email": "quote@sherwoodprinters.com"
+},
+{
+    "Customer": "Sherwood Printers",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Sherwood Printers",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Sherwood Printers",
+    "Email": "shipping@alternativedc.com"
+},
+{
+    "Customer": "Shipmaster Containers Ltd",
+    "Email": "accounting@shipmaster.com"
+},
+{
+    "Customer": "Shipmaster Containers Ltd",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Shipmaster Containers Ltd",
+    "Email": "jcarroll@shipmaster.com"
+},
+{
+    "Customer": "Shipmaster Containers Ltd",
+    "Email": "JLie@shipmaster.com"
+},
+{
+    "Customer": "Shipmaster Containers Ltd",
+    "Email": "pborges@shipmaster.com"
+},
+{
+    "Customer": "Shipmaster Containers Ltd",
+    "Email": "psweet@shipmaster.com"
+},
+{
+    "Customer": "Shipmaster Containers Ltd",
+    "Email": "racheson@shipmaster.com"
+},
+{
+    "Customer": "Shipmaster Containers Ltd",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Signature Bindery",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Simpson Print",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "SK Global",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "SK Graphic Communication",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "SK Graphic Communication",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "SK Graphic Communication",
+    "Email": "skgraphics@rogers.com"
+},
+{
+    "Customer": "SLG group",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "SNR Printing",
+    "Email": "nancy@snrprinting.com"
+},
+{
+    "Customer": "Somerset Graphics",
+    "Email": "alison@somersetgraphics.com"
+},
+{
+    "Customer": "Somerset Graphics",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Somerset Graphics",
+    "Email": "Corey@somersetgraphics.com"
+},
+{
+    "Customer": "Somerset Graphics",
+    "Email": "danny@somersetgraphics.com"
+},
+{
+    "Customer": "Somerset Graphics",
+    "Email": "ibudge@somersetgraphics.com"
+},
+{
+    "Customer": "Somerset Graphics",
+    "Email": "jay@somersetgraphics.com"
+},
+{
+    "Customer": "Somerset Graphics",
+    "Email": "jeff@somersetgraphics.com"
+},
+{
+    "Customer": "Somerset Graphics",
+    "Email": "production@somersetgraphics.com"
+},
+{
+    "Customer": "Somerset Graphics",
+    "Email": "Rick@somersetgraphics.com"
+},
+{
+    "Customer": "Somerset Graphics",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Somerset Graphics",
+    "Email": "scott@somersetgraphics.com"
+},
+{
+    "Customer": "Specialties Graphic Finishers",
+    "Email": "carol@sgfteam.ca"
+},
+{
+    "Customer": "Specialties Graphic Finishers",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Spectracolor Printing",
+    "Email": "ramr@spectracolorprinting.com"
+},
+{
+    "Customer": "spongezz",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "spongezz",
+    "Email": "spitsolis@spongezz.com"
+},
+{
+    "Customer": "Sportswood Printing",
+    "Email": "pspiering@sportswood.on.ca"
+},
+{
+    "Customer": "Sportswood Printing",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "St. Joseph Communications",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "St. Joseph Communications",
+    "Email": "phil.hayes@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Communications",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "alicia.bobbato@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "alim.khan@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "anthony.crispo@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "anthony.so@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "bonnie.armstrong@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "brad.moye@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "bruce.harding@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "david.campoli@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "deborah.mazzucato@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "DHarris@pareto.ca"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "frankp@alternativedc.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "gabe.kapolnas@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "graham.livingstone@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "guy.gagliano@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "irene.carter@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "isa.brewster@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "jesse.gagliano@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "jim.coleman@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "jim.gedney@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "karey.martin@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "lisa.brewster@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "maria.fracassi@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "mary.budgell@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "mathieu.rehayem@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "mehdi.abdulrahim@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "melanie.davidson@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "michael.wong@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "michelle.merolle@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "morgan.chan@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "peter.lomascolo@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "phil.hayes@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "pierino.deiana@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "reggie.winata@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "rob.bollman@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "robs@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "sally.duong@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "sandy.watson@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "shipping@alternativedc.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "shipping@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "stephen.trinh@stjoseph.com"
+},
+{
+    "Customer": "St. Joseph Print",
+    "Email": "vincent.kan@stjoseph.com"
+},
+{
+    "Customer": "Stilwell Printing ",
+    "Email": "larrystilwell@hotmail.com"
+},
+{
+    "Customer": "Superior Bindery",
+    "Email": "dean@rssuperior.com"
+},
+{
+    "Customer": "Supply and Demand",
+    "Email": "bobby@supplyanddemand.ca"
+},
+{
+    "Customer": "Supply and Demand",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "Altin.Rrumbullaku@supremex.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "Bev.Beagan@supremex.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "brian.burek@supremex.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "Christina.Phan@supremex.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "Connie.McIlwrath@supremex.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "margaret.thompson@supremex.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "Misty.Knapman@supremex.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "Nick.Cugliari@supremex.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "Paul.Iskander@supremex.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "Peter.Mousseau@supremex.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "Rajinder.Kaur@supremex.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "Rebecca.Aziza@supremex.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "shipping@alternativedc.com"
+},
+{
+    "Customer": "SupremeX",
+    "Email": "Vivek.Patel@supremex.com"
+},
+{
+    "Customer": "Swan Alt",
+    "Email": "ajay@swanprinting.ca"
+},
+{
+    "Customer": "Swan Alt",
+    "Email": "skumar@swanprinting.ca"
+},
+{
+    "Customer": "Swan Printing",
+    "Email": "ajay@swanprinting.ca"
+},
+{
+    "Customer": "Swan Printing",
+    "Email": "forward to kashmir"
+},
+{
+    "Customer": "Swan Printing",
+    "Email": "frankp@alternativedc.com"
+},
+{
+    "Customer": "Swan Printing",
+    "Email": "info@swanprinting.ca"
+},
+{
+    "Customer": "Swan Printing",
+    "Email": "palak@swanprinting.ca"
+},
+{
+    "Customer": "Swan Printing",
+    "Email": "price for boxes"
+},
+{
+    "Customer": "Swan Printing",
+    "Email": "r"
+},
+{
+    "Customer": "Swan Printing",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Swan Printing",
+    "Email": "row"
+},
+{
+    "Customer": "Swan Printing",
+    "Email": "rowena@swanprinting.ca"
+},
+{
+    "Customer": "Swan Printing",
+    "Email": "skumar@swanprinting.ca"
+},
+{
+    "Customer": "Swan Printing",
+    "Email": "your folderfs are ready also 5 boxes"
+},
+{
+    "Customer": "Swiss Print & Graphics",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "TCP Direct",
+    "Email": "ataylor@tcpdirect.com"
+},
+{
+    "Customer": "The Central Group",
+    "Email": "BlakeE@centralgrp.com"
+},
+{
+    "Customer": "The Helicopter Group Inc",
+    "Email": "print@thehelicoptergroup.com"
+},
+{
+    "Customer": "The Helicopter Group Inc",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "The printing Klub",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "The UPS store 287",
+    "Email": "frankp@alternativedc.com"
+},
+{
+    "Customer": "The UPS store 287",
+    "Email": "store287@theupsstore.ca"
+},
+{
+    "Customer": "Think ink",
+    "Email": "aldo@alternativedc.com"
+},
+{
+    "Customer": "Think ink",
+    "Email": "benjie@thinkinkprinting.ca"
+},
+{
+    "Customer": "Think ink",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Thistle Printing",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Thompson Printing",
+    "Email": "jamie@thompsonprint.com"
+},
+{
+    "Customer": "Thompson Printing",
+    "Email": "kari@thompsonprint.com"
+},
+{
+    "Customer": "Thompson Printing",
+    "Email": "nancy@thompsonprint.com"
+},
+{
+    "Customer": "Thompson Printing",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "aburuiana@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "afraser@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "aso@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "azakarian@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "bhelliwell@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "clau@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "dabebe@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "dcerit@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "ealbright@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "gburmaster@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "jciufo@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "jdisanto@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "jyamazaki-lai@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "mgallo@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "mjunco@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "mlim@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "mpierce@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "nmiyada@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "osinnott@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "pdas@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "phowe@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "rdelossantos@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "rhenry@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "sawan@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "scarvalho@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "swhite@tigroup.ca"
+},
+{
+    "Customer": "TI group inc.",
+    "Email": "wrawji@tigroup.ca"
+},
+{
+    "Customer": "Trade Graphics By Design Inc",
+    "Email": "adrian@tgbydesign.com"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "angelo.morra@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "annemarie.mele@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "damien.pietrzyk@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "dan.oda@tc.tc "
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "dave.hubert@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "dave.richardson@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "david.eastcott@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "gary.pettit@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "Isabelle.Chartrand@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "jennifer.sewpersaud@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "liana.durston@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "Lisa.Todman@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "marietta.frederickson@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "mark@alternativedc.com"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "matthew.macmillan@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "mike.harrison@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "pete.tran02@gmail.com"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "ray.mckean@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "ricky.tang@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "sandy.randle@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "Tim.Kuboniwa@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "tracey.jakym@tc.tc"
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "William.Liu@tc.tc "
+},
+{
+    "Customer": "Transcontinental Printing Inc.",
+    "Email": "zeena.yassi@tc.tc"
+},
+{
+    "Customer": "Trico Evolution",
+    "Email": "mhothi@tricoevolution.com"
+},
+{
+    "Customer": "TS Imaging",
+    "Email": "sirage@tsimaging.ca"
+},
+{
+    "Customer": "Turn-Key Merchandising Solutions",
+    "Email": "acook@advertekprinting.com"
+},
+{
+    "Customer": "Turn-Key Merchandising Solutions",
+    "Email": "craigh@turn-keymerch.com"
+},
+{
+    "Customer": "Typo-Press Printers Ltd",
+    "Email": "info@typopress.ca"
+},
+{
+    "Customer": "UPS",
+    "Email": "store287@theupsstore.ca"
+},
+{
+    "Customer": "Versa Graphics",
+    "Email": "carlo@versagraphics.net"
+},
+{
+    "Customer": "Versa Graphics",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Warrens waterless printing inc.",
+    "Email": "gwarren@warrenswaterless.com"
+},
+{
+    "Customer": "Wellington Printworks",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "West Star Printing",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "WestRock Packaging Company",
+    "Email": "angie.oppedisano@westrock.com"
+},
+{
+    "Customer": "WestRock Packaging Company",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "WestRock Packaging Company",
+    "Email": "melinda.bandi@westrock.com"
+},
+{
+    "Customer": "WestRock Packaging Company",
+    "Email": "richard@alternativedc.com "
+},
+{
+    "Customer": "WestRock Packaging Company",
+    "Email": "sharon.lattapaterson@westrock-mps.com"
+},
+{
+    "Customer": "WestRock Packaging Company",
+    "Email": "t.gaspar@westrock.com"
+},
+{
+    "Customer": "Willow Printing Group Ltd.",
+    "Email": "                roy@willowprint.com                                                 "
+},
+{
+    "Customer": "Wonderland Printing",
+    "Email": "mark.vickers@andrusdirect.com"
+},
+{
+    "Customer": "Wonderland Printing",
+    "Email": "mdibacco@wonderlandprinting.com"
+},
+{
+    "Customer": "Wonderland Printing",
+    "Email": "richard@alternativedc.com"
+},
+{
+    "Customer": "Wonderland Printing",
+    "Email": "rob@alternativedc.com"
+},
+{
+    "Customer": "Wonderland Printing",
+    "Email": "terry.nelson@wonderlandprinting.com"
+},
+{
+    "Customer": "Wonderland Printing",
+    "Email": "terrynelson@wonderlandprinting.com"
+},
+{
+    "Customer": "Woohoo communications inc",
+    "Email": "carmine@alternativedc.com"
+},
+{
+    "Customer": "Woohoo communications inc",
+    "Email": "woohoo@interlog.com"
+},
+{
+    "Customer": "Xerox Corporation",
+    "Email": "richard@alternativedc.com"
+}
+]
+
+}

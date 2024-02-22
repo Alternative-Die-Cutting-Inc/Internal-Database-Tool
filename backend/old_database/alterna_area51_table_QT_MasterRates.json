@@ -1,0 +1,20 @@
+,{
+    "type": "table",
+    "name": "QT_MasterRates",
+    "database": "alterna_area51",
+    "data": 
+[
+{
+    "strip_per_hour": "65",
+    "die_per_hour": "157",
+    "cutter_per_hour": "68",
+    "handwork_per_hour": "62",
+    "pickup_first_skid": "40",
+    "pickup_per_skid": "40",
+    "delivery_first_skid": "15",
+    "delivery_per_skid": "15",
+    "global_premium": "1.1"
+}
+]
+
+}

@@ -1,0 +1,44 @@
+,{
+    "type": "table",
+    "name": "QT_Stock",
+    "database": "alterna_area51",
+    "data": 
+[
+{
+    "stock_id": "1",
+    "name": "100 lb text",
+    "visible": "1"
+},
+{
+    "stock_id": "2",
+    "name": "14-16pt",
+    "visible": "1"
+},
+{
+    "stock_id": "3",
+    "name": "17-20pt",
+    "visible": "1"
+},
+{
+    "stock_id": "4",
+    "name": "7pt",
+    "visible": "1"
+},
+{
+    "stock_id": "5",
+    "name": "8-12",
+    "visible": "1"
+},
+{
+    "stock_id": "6",
+    "name": "80 lb text",
+    "visible": "1"
+},
+{
+    "stock_id": "7",
+    "name": "N Flute",
+    "visible": "1"
+}
+]
+
+}

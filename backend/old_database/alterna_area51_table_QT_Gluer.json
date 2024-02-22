@@ -1,0 +1,39 @@
+,{
+    "type": "table",
+    "name": "QT_Gluer",
+    "database": "alterna_area51",
+    "data": 
+[
+{
+    "gluer_id": "1",
+    "name": "Fuego",
+    "rate": "157",
+    "visible": "1"
+},
+{
+    "gluer_id": "2",
+    "name": "Media",
+    "rate": "157",
+    "visible": "1"
+},
+{
+    "gluer_id": "3",
+    "name": "Folder",
+    "rate": "95",
+    "visible": "1"
+},
+{
+    "gluer_id": "4",
+    "name": "Shrink Wrap",
+    "rate": "68",
+    "visible": "1"
+},
+{
+    "gluer_id": "5",
+    "name": "Dtape",
+    "rate": "100",
+    "visible": "1"
+}
+]
+
+}

@@ -179,13 +179,13 @@ const DocketSchema = new mongoose.Schema({
   },
 });
 
-DocketSchema.pre('validate', function (next) {
-  if (!this.isNew) {
-    next();
-    return;
-  }
-  autoIncrementModelID('docketNumber', this, next);
-});
+// DocketSchema.pre('validate', function (next) {
+//   if (!this.isNew) {
+//     next();
+//     return;
+//   }
+//   autoIncrementModelID('docketNumber', this, next);
+// });
 
 const DocketModel = mongoose.model('Docket', DocketSchema);
 

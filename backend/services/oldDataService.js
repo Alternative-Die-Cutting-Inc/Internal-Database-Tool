@@ -1,4 +1,4 @@
-const oldData = require('../alterna_area51.json');
+// const oldData = require('../alterna_area51.json');
 const CustomerModel = require('../models/CustomerModel');
 const DocketModel = require('../models/DocketModel');
 const { CounterModel } = require('../models/CounterModel');

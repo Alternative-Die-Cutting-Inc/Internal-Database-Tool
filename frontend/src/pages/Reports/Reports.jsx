@@ -2,24 +2,25 @@ import { useEffect, useMemo, useState } from "react";
 import "./Reports.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  docketSelector,
-  docketsSelector,
+  docketsSelector, searchDocketsSelector,
 } from "../../state/dockets/docketSlice";
 import {
   deleteDocket,
-  searchDockets,
+searchDockets,
   updateDocket,
 } from "../../state/dockets/saga";
-import { quotesSelector } from "../../state/quotes/quoteSlice";
+import { quotesSelector, searchedQuotesSelector } from "../../state/quotes/quoteSlice";
 import { searchQuotes } from "../../state/quotes/saga";
 import PropTypes from "prop-types";
 import {
   useReactTable,
   getCoreRowModel,
+  getPaginationRowModel,
   flexRender,
   createColumnHelper,
 } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
+import { PaginationControls } from "../../components/PaginationControls/PaginationControls";
 
 const PageReports = () => {
   const [planning, setPlanning] = useState(true);
@@ -99,52 +100,51 @@ const PageReports = () => {
 };
 
 const PlanningReport = () => {
-  const { dockets } = useSelector(docketsSelector);
-  const { docket } = useSelector(docketSelector);
+  const { dockets, loading } = useSelector(docketsSelector);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(
-      searchDockets({
-        query: {
-          "status.value": "Open",
-        },
-        filters: {
-          docketNumber: 1,
-          "customer.name": 1,
-          jobName: 1,
-          closeDate: 1,
-          status: 1,
-          soldFor: 1,
-          numOfUnits: 1,
-          "extraCharges.cost": 1,
-          bill: 1,
-        },
-      })
-    );
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(
+  //     searchDockets({
+  //       query: {
+  //         "status.value": "Open",
+  //       },
+  //       filters: {
+  //         docketNumber: 1,
+  //         "customer.name": 1,
+  //         jobName: 1,
+  //         closeDate: 1,
+  //         status: 1,
+  //         soldFor: 1,
+  //         numOfUnits: 1,
+  //         "extraCharges.cost": 1,
+  //         bill: 1,
+  //       },
+  //     })
+  //   );
+  // }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(
-      searchDockets({
-        query: {
-          "status.value": "Open",
-        },
-        filters: {
-          docketNumber: 1,
-          "customer.name": 1,
-          jobName: 1,
-          closeDate: 1,
-          status: 1,
-          soldFor: 1,
-          numOfUnits: 1,
-          "extraCharges.cost": 1,
-          bill: 1,
-        },
-      })
-    );
-  }, [dispatch, docket]);
+  // useEffect(() => {
+  //   dispatch(
+  //     searchDockets({
+  //       query: {
+  //         "status.value": "Open",
+  //       },
+  //       filters: {
+  //         docketNumber: 1,
+  //         "customer.name": 1,
+  //         jobName: 1,
+  //         closeDate: 1,
+  //         status: 1,
+  //         soldFor: 1,
+  //         numOfUnits: 1,
+  //         "extraCharges.cost": 1,
+  //         bill: 1,
+  //       },
+  //     })
+  //   );
+  // }, [dispatch, docket]);
 
   const data = useMemo(() => dockets, [dockets]);
 
@@ -263,11 +263,21 @@ const PlanningReport = () => {
     }),
   ];
 
-  const { getHeaderGroups, getRowModel } = useReactTable({
-    columns,
-    data: data || [],
-    getCoreRowModel: getCoreRowModel(),
-  });
+  const { getHeaderGroups,
+    getRowModel,
+    getCanPreviousPage,
+    getCanNextPage,
+    previousPage,
+    nextPage,
+    getPageCount,
+    setPageIndex,
+    setPageSize,
+    getState, } = useReactTable({
+      columns,
+      data: data || [],
+      getCoreRowModel: getCoreRowModel(),
+      getPaginationRowModel: getPaginationRowModel(),
+    });
 
   if (!data?.length)
     return (
@@ -278,48 +288,62 @@ const PlanningReport = () => {
 
   return (
     <div className="planning-container">
-      <table>
-        <thead>
-          {getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <th key={header.id} colSpan={header.colSpan}>
-                    {header.isPlaceholder ? null : (
-                      <div>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </div>
-                    )}
-                  </th>
-                );
-              })}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {getRowModel().rows.map((row) => {
-            return (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
+      {loading ? <div className="data-loading">
+        <h1>Data is loading</h1><div className="dot-flashing"></div>
+      </div> :
+        <table>
+          <thead>
+            {getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <th key={header.id} colSpan={header.colSpan}>
+                      {header.isPlaceholder ? null : (
+                        <div>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </div>
+                      )}
+                    </th>
+                  );
+                })}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody>
+            {getRowModel().rows.map((row) => {
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>}
+      <PaginationControls
+        getCanPreviousPage={getCanPreviousPage}
+        getCanNextPage={getCanNextPage}
+        previousPage={previousPage}
+        nextPage={nextPage}
+        getPageCount={getPageCount}
+        setPageIndex={setPageIndex}
+        setPageSize={setPageSize}
+        getState={getState}
+      />
     </div>
   );
 };
 
 const SnapshotReport = ({ dateRange }) => {
-  const { dockets } = useSelector(docketsSelector);
-  const { quotes } = useSelector(quotesSelector);
+  const { searchedDockets } = useSelector(searchDocketsSelector);
+  const { searchedQuotes} = useSelector(searchedQuotesSelector);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -399,6 +423,7 @@ const SnapshotReport = ({ dateRange }) => {
     const endDate = new Date(dateRange.endDate);
     endDate.setDate(endDate.getDate());
     const diffDays = Math.round(Math.abs((startDate - endDate) / oneDay));
+    console.log(searchedDockets.length)
 
     return [...Array(diffDays)].map((_, index) => {
       const day = new Date(startDate);
@@ -410,8 +435,8 @@ const SnapshotReport = ({ dateRange }) => {
       let docketsOpened = 0;
       let docketsClosed = 0;
 
-      if (quotes?.length) {
-        quotes.forEach((quote) => {
+      if (searchedQuotes?.length) {
+        searchedQuotes.forEach((quote) => {
           if (
             new Date(quote.creationDate).toLocaleDateString() ===
             day.toLocaleDateString()
@@ -422,8 +447,8 @@ const SnapshotReport = ({ dateRange }) => {
         });
       }
 
-      if (dockets?.length) {
-        dockets.forEach((docket) => {
+      if (searchedDockets?.length) {
+        searchedDockets.forEach((docket) => {
           if (
             new Date(docket.creationDate).toLocaleDateString() ===
             day.toISOString().split("T")[0]
@@ -435,7 +460,7 @@ const SnapshotReport = ({ dateRange }) => {
           if (
             docket?.closeDate &&
             new Date(docket?.closeDate).toISOString().split("T")[0] ==
-              day.toISOString().split("T")[0]
+            day.toISOString().split("T")[0]
           ) {
             docketsClosed += docket?.soldFor || 0;
           }
@@ -451,7 +476,7 @@ const SnapshotReport = ({ dateRange }) => {
         docketsClosed,
       };
     });
-  }, [dateRange, quotes, dockets]);
+  }, [dateRange, searchedQuotes, searchedDockets]);
 
   const columns = useMemo(
     () => [
@@ -500,49 +525,76 @@ const SnapshotReport = ({ dateRange }) => {
     []
   );
 
-  const { getHeaderGroups, getRowModel } = useReactTable({
-    columns,
-    data,
-    getCoreRowModel: getCoreRowModel(),
-  });
-
+  const { getHeaderGroups,
+    getRowModel,
+    getCanPreviousPage,
+    getCanNextPage,
+    previousPage,
+    nextPage,
+    getPageCount,
+    setPageIndex,
+    setPageSize,
+    getState, } = useReactTable({
+      columns,
+      data,
+      initialState: {
+        pagination: {
+          pageSize: 31
+        }
+      },
+      getCoreRowModel: getCoreRowModel(),
+      getPaginationRowModel: getPaginationRowModel(),
+    });
   return (
     <div className="snapshot-container">
-      <table id="report-table">
-        <thead>
-          {getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <th key={header.id} colSpan={header.colSpan}>
-                    {header.isPlaceholder ? null : (
-                      <div>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </div>
-                    )}
-                  </th>
-                );
-              })}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {getRowModel().rows.map((row) => {
-            return (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
+      <div className="report-table-container">
+        <table id="report-table">
+          <thead>
+            {getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <th key={header.id} colSpan={header.colSpan}>
+                      {header.isPlaceholder ? null : (
+                        <div>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </div>
+                      )}
+                    </th>
+                  );
+                })}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody>
+            {getRowModel().rows.map((row) => {
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <PaginationControls
+          getCanPreviousPage={getCanPreviousPage}
+          getCanNextPage={getCanNextPage}
+          previousPage={previousPage}
+          nextPage={nextPage}
+          getPageCount={getPageCount}
+          setPageIndex={setPageIndex}
+          setPageSize={setPageSize}
+          getState={getState}
+        />
+      </div>
+
       <table id="summary-table">
         <thead>
           {getHeaderGroups().map((headerGroup) => (
@@ -573,13 +625,13 @@ const SnapshotReport = ({ dateRange }) => {
             <td>
               {(
                 data.reduce((total, item) => total + item.quotesInDay, 0) /
-                  data.length || 0
+                data.length || 0
               ).toFixed(2)}
             </td>
             <td>
               {(
                 data.reduce((total, item) => total + item.quoted, 0) /
-                  data.length || 0
+                data.length || 0
               ).toLocaleString("en-CA", {
                 style: "currency",
                 currency: "CAD",
@@ -588,13 +640,13 @@ const SnapshotReport = ({ dateRange }) => {
             <td>
               {(
                 data.reduce((total, item) => total + item.docketsInDay, 0) /
-                  data.length || 0
+                data.length || 0
               ).toFixed(2)}
             </td>
             <td>
               {(
                 data.reduce((total, item) => total + item.docketsOpened, 0) /
-                  data.length || 0
+                data.length || 0
               ).toLocaleString("en-CA", {
                 style: "currency",
                 currency: "CAD",
@@ -603,7 +655,7 @@ const SnapshotReport = ({ dateRange }) => {
             <td>
               {(
                 data.reduce((total, item) => total + item.docketsClosed, 0) /
-                  data.length || 0
+                data.length || 0
               ).toLocaleString("en-CA", {
                 style: "currency",
                 currency: "CAD",
@@ -646,7 +698,7 @@ const SnapshotReport = ({ dateRange }) => {
           <tr>
             <td colSpan={2}>All Open Dockets</td>
             <td>
-              {dockets?.reduce((open, docket) => {
+              {searchedDockets?.reduce((open, docket) => {
                 if (docket.status.some((status) => status.label === "Open")) {
                   return open + 1;
                 }
@@ -655,7 +707,7 @@ const SnapshotReport = ({ dateRange }) => {
             </td>
             <td>Dockets On Floor</td>
             <td>
-              {dockets
+              {searchedDockets
                 ?.reduce((open, docket) => {
                   if (
                     docket.status.some(
@@ -680,7 +732,7 @@ const SnapshotReport = ({ dateRange }) => {
             <td></td>
             <td>Billable</td>
             <td>
-              {dockets
+              {searchedDockets
                 ?.reduce((prev, curr) => {
                   if (
                     curr.bill &&
@@ -702,14 +754,14 @@ const SnapshotReport = ({ dateRange }) => {
               {(
                 (data.reduce((total, item) => total + item.docketsInDay, 0) /
                   data.reduce((total, item) => total + item.quotesInDay, 0)) *
-                  100 || 0
+                100 || 0
               ).toFixed(2) + "%"}
             </td>
             <td></td>
             <td>Projected Billing</td>
             <td>
               {(
-                dockets?.reduce((prev, curr) => {
+                searchedDockets?.reduce((prev, curr) => {
                   if (
                     curr.bill &&
                     curr.status.every((status) => status.label !== "Closed")
@@ -718,7 +770,7 @@ const SnapshotReport = ({ dateRange }) => {
                   }
                   return prev;
                 }, 0) +
-                  data.reduce((total, item) => total + item.docketsClosed, 0) ||
+                data.reduce((total, item) => total + item.docketsClosed, 0) ||
                 0
               ).toLocaleString("en-CA", {
                 style: "currency",

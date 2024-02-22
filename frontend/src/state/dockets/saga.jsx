@@ -15,6 +15,10 @@ import {
   updateDocketFailure,
   updateDocketSuccess,
   updateDocketStart,
+  deleteDocketSuccess,
+  searchDocketsStart,
+  searchDocketsSuccess,
+  searchDocketsFailure,
 } from "./docketSlice";
 
 export const getDockets = createAction("getDocketsSaga");
@@ -77,14 +81,14 @@ export const searchDockets = createAction("searchDocketsSaga");
 export function* searchDocketsSaga({ payload: { query, filters } }) {
   const { axios } = useAxios();
   try {
-    yield put(getDocketsStart());
+    yield put(searchDocketsStart());
     const response = yield call(axios.post, `/dockets/search`, {
       query,
       filters,
     });
-    yield put(getDocketsSuccess(response.data?.dockets));
+    yield put(searchDocketsSuccess(response.data?.dockets));
   } catch (error) {
-    yield put(getDocketsFailure(error));
+    yield put(searchDocketsFailure(error));
   }
 }
 
@@ -93,9 +97,8 @@ export const deleteDocket = createAction("deleteDocketSaga");
 export function* deleteDocketSaga({ payload: { id } }) {
   const { axios } = useAxios();
   try {
-    yield put(updateDocketStart());
     const response = yield call(axios.delete, `/dockets/${id}`);
-    yield put(updateDocketSuccess(response.data?.docket));
+    yield put(deleteDocketSuccess(response.data?.docket));
   } catch (error) {
     yield put(updateDocketFailure(error));
   }

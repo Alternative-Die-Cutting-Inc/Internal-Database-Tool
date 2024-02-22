@@ -104,49 +104,10 @@ const PlanningReport = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(
-      searchDockets({
-        query: {
-          "status.value": "Open",
-        },
-        filters: {
-          docketNumber: 1,
-          "customer.name": 1,
-          jobName: 1,
-          closeDate: 1,
-          status: 1,
-          soldFor: 1,
-          numOfUnits: 1,
-          "extraCharges.cost": 1,
-          bill: 1,
-        },
-      })
-    );
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(
-      searchDockets({
-        query: {
-          "status.value": "Open",
-        },
-        filters: {
-          docketNumber: 1,
-          "customer.name": 1,
-          jobName: 1,
-          closeDate: 1,
-          status: 1,
-          soldFor: 1,
-          numOfUnits: 1,
-          "extraCharges.cost": 1,
-          bill: 1,
-        },
-      })
-    );
-  }, [dispatch, docket]);
-
-  const data = useMemo(() => dockets, [dockets]);
+  // filter out closed dockets
+  const data = useMemo(() => dockets.filter((docket) => {
+    return docket.status.every((stat) => stat.label.toLowerCase() != "closed")
+  }), [dockets]);
 
   const columnHelper = createColumnHelper();
 
@@ -175,7 +136,7 @@ const PlanningReport = () => {
               setValue(e.target.value);
               tableMeta?.updateData(row.index, column.id, e.target.value);
               let statusArray = row.original.status.filter((status) => {
-                return status.label !== "Open";
+                return status.label.toLowerCase() !== "open";
               });
               statusArray.push({ label: "Closed", value: "Closed" });
 
@@ -318,8 +279,9 @@ const PlanningReport = () => {
 };
 
 const SnapshotReport = ({ dateRange }) => {
-  const { dockets } = useSelector(docketsSelector);
-  const { quotes } = useSelector(quotesSelector);
+  const { searchedDockets } = useSelector(searchDocketsSelector);
+  const { searchedQuotes } = useSelector(searchedQuotesSelector);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

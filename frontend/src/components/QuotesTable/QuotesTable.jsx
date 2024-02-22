@@ -8,7 +8,7 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
 } from "@tanstack/react-table";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import "../../scssStyles/tableStyle.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +20,6 @@ import { PropTypes } from "prop-types";
  * @returns a table of quotes
  */
 const QuotesTable = () => {
-  const dispatch = useDispatch();
 
 
   const { quotes, loading } = useSelector(quotesSelector);
@@ -29,6 +28,7 @@ const QuotesTable = () => {
     () => [
       {
         header: "Quote Number",
+        id: "quoteNumber",
         accessorFn: (row) => row.quoteNumber?.toString(),
         // eslint-disable-next-line react/prop-types
         cell: (value) => (
@@ -167,9 +167,9 @@ const QuotesTable = () => {
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                         {header.column.getCanFilter() ? (
                           <div>
                             <TableFilter column={header.column} />

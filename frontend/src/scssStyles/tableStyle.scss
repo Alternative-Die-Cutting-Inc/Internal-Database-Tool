@@ -78,3 +78,64 @@ tbody {
     }
   }
 }
+
+.data-loading{
+  background-color: var(--dark-grey);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  padding: 10vh 0;
+}
+/**
+ * ==============================================
+ * Dot Flashing
+ * ==============================================
+ */
+ .dot-flashing {
+  position: relative;
+  margin-left: 2vw;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color:  var(--white);
+  color:  var(--white);
+  animation: dot-flashing 1s infinite linear alternate;
+  animation-delay: 0.5s;
+}
+.dot-flashing::before, .dot-flashing::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+.dot-flashing::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color:  var(--white);
+  color:  var(--white);
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 0s;
+}
+.dot-flashing::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color:  var(--white);
+  color:  var(--white);
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 1s;
+}
+
+@keyframes dot-flashing {
+  0% {
+    background-color:  var(--white);
+  }
+  50%, 100% {
+    background-color: rgba(146, 146, 146, 0.865);
+  }
+}

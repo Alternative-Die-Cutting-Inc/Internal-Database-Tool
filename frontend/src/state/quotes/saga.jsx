@@ -21,6 +21,9 @@ import {
   getRatesFailure,
   getRatesSuccess,
   getRatesStart,
+  searchQuotesStart,
+  searchQuotesSuccess,
+  searchQuotesFailure,
 } from "./quoteSlice";
 
 export const getQuotes = createAction("getQuotesSaga");
@@ -144,14 +147,14 @@ export const searchQuotes = createAction("searchQuotesSaga");
 export function* searchQuotesSaga({ payload: { query, filters } }) {
   const { axios } = useAxios();
   try {
-    yield put(getQuotesStart());
+    yield put(searchQuotesStart());
     const response = yield call(axios.post, `/quotes/search`, {
       query,
       filters,
     });
-    yield put(getQuotesSuccess(response.data?.quotes));
+    yield put(searchQuotesSuccess(response.data?.quotes));
   } catch (error) {
-    yield put(getQuotesFailure(error.response.data?.errorMessage));
+    yield put(searchQuotesFailure(error.response.data?.errorMessage));
   }
 }
 

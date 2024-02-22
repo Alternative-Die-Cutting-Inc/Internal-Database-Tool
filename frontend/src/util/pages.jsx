@@ -27,11 +27,11 @@ export const pages = {
     path: "/login",
   },
   main: [
-    //{
-    //  label: "Reports",
-    //  component: <PageReports />,
-    //  path: "/reports",
-    //},
+    {
+     label: "Reports",
+     component: <PageReports />,
+     path: "/reports",
+    },
     {
       label: "Admin",
       component: <PageAdmin />,

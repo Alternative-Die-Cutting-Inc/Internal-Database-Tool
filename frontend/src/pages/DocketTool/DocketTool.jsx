@@ -6,7 +6,7 @@ import { getDocket, updateDocket } from "../../state/dockets/saga";
 import { docketSelector } from "../../state/dockets/docketSlice";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
-import { getCustomerNames, clearEmail } from "../../state/customers/saga";
+import { clearEmail } from "../../state/customers/saga";
 import { customerNamesSelector } from "../../state/customers/customerSlice";
 import { getQuote } from "../../state/quotes/saga";
 import { quoteSelector } from "../../state/quotes/quoteSlice";
@@ -33,7 +33,7 @@ const PageDocketTool = () => {
   }, [dispatch]);
 
   const saveDocket = (fields) => {
-    if (editingDocket) {
+    if (editingDocket !== null) {
       if (fields) dispatch(updateDocket({ id: editingDocket?._id, fields }));
       else
         dispatch(
@@ -109,10 +109,10 @@ const PageDocketTool = () => {
       numOfUnits: docket?.numOfUnits
         ? docket.numOfUnits
         : docket?.forms?.reduce(
-            (totalQuantity, form) =>
-              parseInt(totalQuantity) + parseInt(form.quantity),
-            0
-          ),
+          (totalQuantity, form) =>
+            parseInt(totalQuantity) + parseInt(form.quantity),
+          0
+        ),
     });
   }, [docket]);
 
@@ -321,10 +321,10 @@ const PageDocketTool = () => {
                   value={
                     editingDocket?.soldFor
                       ? editingDocket?.soldFor.toLocaleString("en-CA", {
-                          style: "currency",
-                          currency: "CAD",
-                          currencyDisplay: "symbol",
-                        })
+                        style: "currency",
+                        currency: "CAD",
+                        currencyDisplay: "symbol",
+                      })
                       : "" || ""
                   }
                   onBlur={() => {
@@ -409,9 +409,9 @@ const PageDocketTool = () => {
                           style={
                             editingDocket?.die?.standing
                               ? {
-                                  backgroundColor: "var(--light-grey)",
-                                  color: "black",
-                                }
+                                backgroundColor: "var(--light-grey)",
+                                color: "black",
+                              }
                               : {}
                           }
                           onClick={() => {
@@ -431,9 +431,9 @@ const PageDocketTool = () => {
                           style={
                             !editingDocket?.die?.standing
                               ? {
-                                  backgroundColor: "var(--light-grey)",
-                                  color: "black",
-                                }
+                                backgroundColor: "var(--light-grey)",
+                                color: "black",
+                              }
                               : {}
                           }
                           onClick={() => {
@@ -1082,13 +1082,11 @@ const PageDocketTool = () => {
             </h2>
             <h2>{editingDocket?.jobName}</h2>
             <h3>
-              {`${editingDocket?.die?.standing ? "Standing" : "New"} ${
-                editingDocket?.die?.dieType
-              }${
-                editingDocket?.die?.standing
+              {`${editingDocket?.die?.standing ? "Standing" : "New"} ${editingDocket?.die?.dieType
+                }${editingDocket?.die?.standing
                   ? " #" + editingDocket?.die?.dieID
                   : ""
-              }, ` +
+                }, ` +
                 editingDocket?.finishing?.reduce(
                   (a, b) => b.label + ", " + a,
                   ""
@@ -1100,14 +1098,11 @@ const PageDocketTool = () => {
                 console.log(event);
                 saveDocket();
                 navigator.clipboard.writeText(
-                  `${editingDocket?.customer?.name} #${
-                    editingDocket?.docketNumber
-                  }\n${editingDocket?.jobName}\n${
-                    editingDocket?.die.standing ? "Standing" : "New"
-                  } ${editingDocket?.die.dieType}${
-                    editingDocket?.die.standing
-                      ? " #" + editingDocket?.die.dieID
-                      : ""
+                  `${editingDocket?.customer?.name} #${editingDocket?.docketNumber
+                  }\n${editingDocket?.jobName}\n${editingDocket?.die.standing ? "Standing" : "New"
+                  } ${editingDocket?.die.dieType}${editingDocket?.die.standing
+                    ? " #" + editingDocket?.die.dieID
+                    : ""
                   }, ${editingDocket?.finishing.reduce(
                     (a, b) => b.label + ", " + a,
                     ""

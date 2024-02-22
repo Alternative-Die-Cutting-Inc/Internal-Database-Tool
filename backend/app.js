@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const compression = require('compression');
 
 const app = express();
 
@@ -11,5 +12,10 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
-
+app.use(
+  compression({
+    level: 9,
+    threshold: 1000*1000
+  }),
+);
 module.exports = app;

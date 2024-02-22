@@ -70,6 +70,7 @@
 }
 
 .planning-container {
+  width: 100%;
   .not-found {
     padding: 1vh;
   }
@@ -115,7 +116,7 @@
       background-color: #a5a5a5;
     }
   }
-  #report-table {
+  .report-table-container{
     width: 100%;
   }
 }

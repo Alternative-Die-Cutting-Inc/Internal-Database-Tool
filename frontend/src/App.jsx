@@ -31,13 +31,14 @@ import { userSelector } from "./state/user/userSlice";
 import { getDockets } from "./state/dockets/saga";
 import { getQuotes } from "./state/quotes/saga";
 import { getCustomerNames } from "./state/customers/saga";
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserInfo());
-    dispatch(getDockets());
     dispatch(getQuotes());
     dispatch(getCustomerNames());
+    dispatch(getDockets());
   }, [dispatch]);
 
   return (
@@ -96,7 +97,7 @@ const TransitionRoutes = () => {
             path="/"
             element={
               loading ? (
-                <></>
+                null
               ) : (
                 <div
                   className="content-container"
@@ -116,7 +117,7 @@ const TransitionRoutes = () => {
             }
           />
         )}
-        {loading ? <></> : <Route path="*" element={pages["404"].component} />}
+        {loading ? null : <Route path="*" element={pages["404"].component} />}
       </Routes>
     </TransitionGroup>
   );

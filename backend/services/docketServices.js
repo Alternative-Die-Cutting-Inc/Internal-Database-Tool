@@ -26,6 +26,7 @@ const docketServices = {
       );
     } else {
       return DocketModel.find({})
+        .select('-quoteJob -jobType -die -forms -extraCharges -requoteMemo -closeDate -bill')
         .sort({ docketNumber: -1 })
         .then(
           (dockets) => dockets,

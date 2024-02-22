@@ -4,8 +4,9 @@ import { createSelector } from "reselect";
 export const initialState = {
   loading: false,
   error: null,
-  dockets: null,
+  dockets: [],
   docket: null,
+  searchedDockets: [],
 };
 
 const docketSlice = createSlice({
@@ -47,6 +48,7 @@ const docketSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.docket = docket;
+      state.dockets.unshift(docket);
     },
     createDocketFailure: (state, { payload: error }) => {
       state.loading = false;
@@ -60,10 +62,34 @@ const docketSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.docket = docket;
+      let index = state.dockets.findIndex(listDocket => listDocket._id === docket._id);
+      if (index !== -1) {
+        state.dockets[index] = docket;
+      } else state.dockets.unshift(docket)
+
     },
     updateDocketFailure: (state, { payload: error }) => {
       state.loading = false;
       state.error = error;
+    },
+    deleteDocketSuccess: (state, { payload: docket }) => {
+      state.dockets = state.dockets.filter((listDocket) => {
+        return listDocket._id !== docket._id
+      })
+    },
+    searchDocketsStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    searchDocketsSuccess: (state, { payload: dockets }) => {
+      state.loading = false;
+      state.error = null;
+      state.searchedDockets = dockets;
+    },
+    searchDocketsFailure: (state, { payload: error }) => {
+      state.loading = false;
+      state.error = error;
+      state.searchedDockets = [];
     },
   },
 });
@@ -81,6 +107,10 @@ export const {
   updateDocketFailure,
   updateDocketSuccess,
   updateDocketStart,
+  deleteDocketSuccess,
+  searchDocketsStart,
+  searchDocketsSuccess,
+  searchDocketsFailure,
 } = docketSlice.actions;
 
 export default docketSlice.reducer;
@@ -94,4 +124,9 @@ export const docketsSelector = createSelector(
 export const docketSelector = createSelector(
   docketReducerSelector,
   ({ docket, loading, error }) => ({ docket, loading, error })
+);
+
+export const searchDocketsSelector = createSelector(
+  docketReducerSelector,
+  ({ searchedDockets, loading, error }) => ({ searchedDockets, loading, error })
 );

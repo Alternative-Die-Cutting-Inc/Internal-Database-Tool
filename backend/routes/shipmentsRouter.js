@@ -47,6 +47,25 @@ router.get('/:id', async (req, res, next) => {
 });
 
 /**
+ * @description get shipments for a docket
+ * @route GET /shipments/docket/:docketNumber
+ * @returns {[Shipment]} array of shipments
+ */
+router.get('/docket/:docketNumber', async (req, res, next) => {
+  try {
+    const docketNumber = req.params.docketNumber;
+    const responseShipments = await shipmentServices.getDocketShipments(docketNumber);
+    if (!responseShipments) {
+      res.status(404).send({ message: 'No shipments found' });
+    } else {
+      res.status(200).send(responseShipments);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
  * @description create shipment
  * @route POST /shipments
  * @returns {Shipment} shipment object

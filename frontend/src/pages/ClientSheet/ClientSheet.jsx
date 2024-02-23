@@ -182,9 +182,7 @@ const ClientSheet = ({ quote, user }) => {
                 >
                   {quote.customer.name}
                 </Text>
-                {" By " +
-                  user.firstName +
-                  " on " +
+                {" On " +
                   new Date().toLocaleDateString("en-CA", {
                     month: "short",
                     day: "numeric",

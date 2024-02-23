@@ -562,7 +562,7 @@ const PageQuoteTool = () => {
                               value={
                                 parseFloat(
                                   job.dieRunM *
-                                    (job.units / job.perSheet / 1000)
+                                  (job.units / job.perSheet / 1000)
                                 ).toFixed(2) || 0
                               }
                             />
@@ -1193,31 +1193,6 @@ const PageQuoteTool = () => {
                 </div>
                 <div className="job-notes">
                   <textarea
-                    name="clientNotes"
-                    id="1"
-                    value={job.clientNotes || ""}
-                    placeholder="Notes for the client"
-                    onBlur={() => {
-                      saveJob(job._id, {
-                        clientNotes: job.clientNotes,
-                      });
-                    }}
-                    onChange={(event) => {
-                      setEditingQuote({
-                        ...editingQuote,
-                        quoteJobs: editingQuote.quoteJobs.map((j, i) => {
-                          if (i === jobIndex) {
-                            return {
-                              ...j,
-                              clientNotes: event.target.value,
-                            };
-                          }
-                          return j;
-                        }),
-                      });
-                    }}
-                  />
-                  <textarea
                     name="privateNotes"
                     id="2"
                     placeholder="Notes for internal review"
@@ -1242,6 +1217,32 @@ const PageQuoteTool = () => {
                       });
                     }}
                   />
+                  <textarea
+                    name="clientNotes"
+                    id="1"
+                    value={job.clientNotes || ""}
+                    placeholder="Notes for the client"
+                    onBlur={() => {
+                      saveJob(job._id, {
+                        clientNotes: job.clientNotes,
+                      });
+                    }}
+                    onChange={(event) => {
+                      setEditingQuote({
+                        ...editingQuote,
+                        quoteJobs: editingQuote.quoteJobs.map((j, i) => {
+                          if (i === jobIndex) {
+                            return {
+                              ...j,
+                              clientNotes: event.target.value,
+                            };
+                          }
+                          return j;
+                        }),
+                      });
+                    }}
+                  />
+
                 </div>
               </div>
             ))}

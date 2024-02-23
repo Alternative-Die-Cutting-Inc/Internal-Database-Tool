@@ -190,8 +190,8 @@ const PageShipments = () => {
   };
 
   useEffect(() => {
-    dispatch(updateShipment({ shipment: {} }))
-  },[])
+    dispatch(updateShipment({ shipment: null }))
+  }, [])
 
 
   useEffect(() => {
@@ -216,12 +216,13 @@ const PageShipments = () => {
       forms: [],
       docketNumber: docket.docketNumber,
       labelDate: new Date(),
+      _id: undefined,
     });
   }, [dispatch, customer]);
 
   return (
     <div className="shipment-tool-container">
-      {shipment.address && <>
+      {shipment?.address && <>
         <div className="label-column" id="col1">
           <div className="label-row" id="row1">
             <div className="info-row-item label-production-info">
@@ -542,7 +543,7 @@ const PageShipments = () => {
                       </td>
                       <td>
                         <select
-                          defaultValue={docket.forms[0]?.name}
+                          defaultValue="other"
                           onChange={(event) => {
                             saveShipment({
                               forms: shipment.forms.map((item, i) => {
@@ -550,6 +551,7 @@ const PageShipments = () => {
                                   return {
                                     ...item,
                                     name: event.target.value,
+                                    docketFormID: event.target.selectedOptions[0].id,
                                   };
                                 }
                                 return item;
@@ -557,7 +559,8 @@ const PageShipments = () => {
                             });
                           }}
                         >
-                          {docket.forms.map((form) => <option value={form.name}>{form.name}</option>)}
+                          <option value="other">Other</option>
+                          {docket.forms.map((form) => <option key={form._id} id={form._id} value={form.name}>{form.name}</option>)}
                         </select>
                       </td>
                       <td>
@@ -627,7 +630,7 @@ const PageShipments = () => {
               className="add-shipments-form-button"
               onClick={() => {
                 saveShipment({
-                  forms: [...shipment.forms, {}],
+                  forms: [...shipment.forms, { type: 'cartons' }],
                 });
               }}
             >

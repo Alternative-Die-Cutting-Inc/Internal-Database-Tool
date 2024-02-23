@@ -34,6 +34,21 @@ const shipmentServices = {
   },
 
   /**
+   * @description Get all shipments for a docket
+   * @param {Number} docketNumber
+   * @returns {[Shipment]}
+   */
+  async getDocketShipments(docketNumber) {
+    return ShipmentModel.find({ docketNumber }).then(
+      (shipments) => shipments,
+      (error) => {
+        throw new Error('UNABLE_TO_GET_SHIPMENTS', { cause: error });
+      },
+    );
+
+  },
+
+  /**
    * @description Create shipment
    * @param {Shipment} shipment the object containing shipment fields
    * @returns {Shipment}

@@ -10,6 +10,8 @@ import { clearEmail } from "../../state/customers/saga";
 import { customerNamesSelector } from "../../state/customers/customerSlice";
 import { getQuote } from "../../state/quotes/saga";
 import { quoteSelector } from "../../state/quotes/quoteSlice";
+import { shipmentsSelector } from "../../state/shipments/shipmentsSlice";
+import { getDocketShipments } from "../../state/shipments/saga";
 
 function useQuery() {
   const { search } = useLocation();
@@ -20,13 +22,16 @@ const PageDocketTool = () => {
   let query = useQuery();
   const dispatch = useDispatch();
   const { docket } = useSelector(docketSelector);
+  const { docketShipments } = useSelector(shipmentsSelector)
   const { quote } = useSelector(quoteSelector);
   const { customerNames } = useSelector(customerNamesSelector);
   const [editingDocket, setEditingDocket] = useState();
 
   useEffect(() => {
     dispatch(getDocket({ id: query.get("docketNumber") }));
+    dispatch(getDocketShipments({ docketNumber: query.get("docketNumber") }));
   }, [dispatch, query]);
+
 
   useEffect(() => {
     dispatch(clearEmail());
@@ -273,10 +278,6 @@ const PageDocketTool = () => {
                   className="docket-info-input"
                   value={editingDocket?.quoteNumber || ""}
                   onBlur={() => {
-                    console.log(
-                      editingDocket?.quoteNumber,
-                      docket?.quoteNumber
-                    );
                     if (
                       docket.quoteNumber !==
                       parseInt(editingDocket?.quoteNumber)
@@ -807,9 +808,9 @@ const PageDocketTool = () => {
                       <input
                         type="text"
                         value={
-                          form.lastShipment
-                            ? form.lastShipment.toLocaleDateString("en-CA")
-                            : "No Shipments" || ""
+                          form.lastShipmentDate
+                            ? new Date(form.lastShipmentDate).toLocaleDateString("en-CA")
+                            : "No Shipments"
                         }
                         readOnly
                       />
@@ -879,6 +880,40 @@ const PageDocketTool = () => {
             >
               +
             </button>
+          </div>
+          <div className="docket-shipping-history">
+            <h2 className="docket-header">Shipment History:</h2>
+            <table className="docket-info-table" id="shipment-history-table">
+              <thead>
+                <tr>
+                  <th>Shipment Date:</th>
+                  <th>Forms:</th>
+                  <th>Quantity:</th>
+                  <th>Notes:</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* Add History */}
+                {docketShipments?.map((shipment) => {
+                  return <tr>
+                    <td>
+                      <div>
+                        {new Date(shipment.labelDate).toLocaleDateString("en-CA")}
+                      </div>
+                    </td>
+                    <td>{shipment.forms.map((shippedForm) => {
+                      return <div>{shippedForm.name}</div>
+                    })}</td>
+                    <td>{shipment.forms.map((shippedForm) => {
+                      return <div>{shippedForm.name == "other" ? "-" : shippedForm.type == "cartons" ? (shippedForm.quantity * shippedForm.cartonQuantity + shippedForm.partialCartonQuantity || 0) : (shippedForm.quantity || 0)}</div>
+                    })}</td>
+                    <td>{shipment.forms.map((shippedForm) => {
+                      return <div>{shippedForm.notes || "-"}</div>
+                    })}</td>
+                  </tr>
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
         <div className="docket-input-column" id="column2">
@@ -1095,7 +1130,6 @@ const PageDocketTool = () => {
             <h3>{editingDocket?.specialInstructions}</h3>
             <button
               onClick={(event) => {
-                console.log(event);
                 saveDocket();
                 navigator.clipboard.writeText(
                   `${editingDocket?.customer?.name} #${editingDocket?.docketNumber
@@ -1172,7 +1206,6 @@ const PageDocketTool = () => {
                     });
                   }}
                   onChange={(event) => {
-                    console.log(event.target.value);
                     setEditingDocket({
                       ...editingDocket,
                       closeDate: event.target.value,

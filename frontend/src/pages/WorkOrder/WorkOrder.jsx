@@ -111,7 +111,7 @@ const PageWorkOrder = () => {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      border: "1px solid #000",
+      // border: "1px solid #000",
       padding: "0.25cm",
       marginBottom: "0.25cm",
       width: "100%",
@@ -137,7 +137,7 @@ const PageWorkOrder = () => {
     row: {
       display: "flex",
       flexDirection: "row",
-      borderTop: "1px solid #EEE",
+      borderTop: "1px solid #000",
       paddingTop: 8,
       paddingBottom: 8,
       fontSize: "14px",
@@ -151,44 +151,49 @@ const PageWorkOrder = () => {
     },
     row0: {
       width: "5%",
+      height: "100%",
       textAlign: "center",
       fontSize: "14px",
+      borderRight: "1px solid #000",
+
     },
     row1: {
-      width: "20%",
-      textAlign: "center",
+      width: "45%",
+      textAlign: "left",
+      paddingLeft: "5px",
       fontSize: "14px",
+      borderRight: "1px solid #000",
+
     },
     row2: {
       width: "20%",
       textAlign: "center",
       fontSize: "14px",
+      borderRight: "1px solid #000",
+
     },
     row3: {
+      width: "15%",
+      textAlign: "center",
+      fontSize: "14px",
+      borderRight: "1px solid #000",
+
+    },
+    row4: {
       width: "20%",
       textAlign: "center",
       fontSize: "14px",
+
     },
-    row4: {
-      width: "35%",
-      textAlign: "center",
-      fontSize: "14px",
-    },
-    machines: {
+    line: {
+      width: "100%",
+      borderBottom: "1px solid #000",
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "flex-start",
-      marginBottom: "0.25cm",
-      width: "100%",
-    },
-    machine: {
-      border: "1px solid #000",
-      borderBottom: "none",
-      width: "32%",
-      display: "flex",
-      flexDirection: "column",
-    },
+      margin: "15px 0",
+    }
   });
 
   const WorkOrder = () => (
@@ -247,7 +252,7 @@ const PageWorkOrder = () => {
           <View style={{ width: "100%" }}>
             <Text
               style={{
-                fontSize: "18px",
+                fontSize: "36px",
                 alignSelf: "center",
                 fontFamily: "Times-Bold",
               }}
@@ -265,6 +270,7 @@ const PageWorkOrder = () => {
             <Text
               style={{
                 fontSize: "16px",
+                padding: "20px 0"
               }}
             >
               {docket?.finishing?.reduce((a, b) => b.label + ", " + a, "") ||
@@ -281,6 +287,8 @@ const PageWorkOrder = () => {
             <Text
               style={{
                 fontSize: "16px",
+                padding: "20px 0"
+
               }}
             >
               {docket?.specialInstructions || "N/A"}
@@ -307,7 +315,7 @@ const PageWorkOrder = () => {
                 {form.quantity.toLocaleString("en-CA")}
               </Text>
               <Text style={styles.row3}>{form.notes}</Text>
-              <Text style={styles.row4}>{}</Text>
+              <Text style={styles.row4}>{ }</Text>
             </View>
           ))}
         </View>
@@ -317,12 +325,13 @@ const PageWorkOrder = () => {
               width: "100%",
               borderBottom: "1px solid #000",
               display: "flex",
+              padding: "0.25cm 0",
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "flex-start",
             }}
           >
-            <Text style={{ fontSize: "14px" }}>{"Press:"}</Text>
+            <Text style={{ fontSize: "14px", }}>{"Press:"}</Text>
             <Text style={{ fontSize: "14px" }}>{"Operator:"}</Text>
             <Text style={{ fontSize: "14px" }}>{"Die:"}</Text>
             <Text style={{ fontSize: "14px", paddingRight: "3cm" }}>
@@ -337,604 +346,13 @@ const PageWorkOrder = () => {
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "flex-start",
-              margin: "7px 0",
+              margin: "15px 0",
             }}
           >
             <Text style={{ fontSize: "14px" }}>{"Notes:"}</Text>
           </View>
-          <View
-            style={{
-              width: "100%",
-              borderBottom: "1px solid #000",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-              margin: "7px 0",
-            }}
-          />
-        </View>
-        <View style={styles.machines}>
-          <View style={styles.machine}>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                borderBottom: "1px solid #000",
-                padding: "0.15cm",
-              }}
-            >
-              <Text style={{ fontSize: "16px", fontFamily: "Times-Bold" }}>
-                {"Press"}
-              </Text>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Setup"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {quote.quoteJobs.reduce((pressSetup, job) => {
-                    if (job._id == docket.quoteJob.id) {
-                      return job.dieSetup;
-                    }
-                    return pressSetup;
-                  }, 0)}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Speed"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {quote.quoteJobs.reduce((pressSpeed, job) => {
-                    if (job._id == docket.quoteJob.id) {
-                      return job.dieRunSpeed;
-                    }
-                    return pressSpeed;
-                  }, 0)}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Hours"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {quote.quoteJobs.reduce((pressHours, job) => {
-                    if (job._id == docket.quoteJob.id) {
-                      return (
-                        job.units /
-                        job.perSheet /
-                        job.dieRunSpeed
-                      ).toFixed(2); //quote_info.sheets / quote_info.press_runspeed
-                    }
-                    return pressHours;
-                  }, 0)}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Setup"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>{}</Text>
-              </View>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Speed"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>{}</Text>
-              </View>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Hours"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>{}</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.machine}>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                borderBottom: "1px solid #000",
-                padding: "0.15cm",
-              }}
-            >
-              <Text style={{ fontSize: "16px", fontFamily: "Times-Bold" }}>
-                {"Gluing"}
-              </Text>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Setup"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {quote.quoteJobs.reduce((gluerSetup, job) => {
-                    if (job._id == docket.quoteJob.id) {
-                      return job.gluerSetupHours;
-                    }
-                    return gluerSetup;
-                  }, 0)}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Speed"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {quote.quoteJobs.reduce((gluerSpeed, job) => {
-                    if (job._id == docket.quoteJob.id) {
-                      return job.gluerRunSpeed;
-                    }
-                    return gluerSpeed;
-                  }, 0)}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Hours"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {quote.quoteJobs.reduce((gluerSpeed, job) => {
-                    if (job._id == docket.quoteJob.id) {
-                      return (job.units / job.gluerRunSpeed).toFixed(2);
-                    }
-                    return gluerSpeed;
-                  }, 0)}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Setup"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>{}</Text>
-              </View>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Speed"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>{}</Text>
-              </View>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Hours"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>{}</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.machine}>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                borderBottom: "1px solid #000",
-                padding: "0.15cm",
-              }}
-            >
-              <Text style={{ fontSize: "16px", fontFamily: "Times-Bold" }}>
-                {"Stripping"}
-              </Text>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Speed"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {"1000"}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Hours"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>
-                  {quote.quoteJobs.reduce((gluerSpeed, job) => {
-                    if (job._id == docket.quoteJob.id) {
-                      return (job.units / job.stripRunSpeed).toFixed(2);
-                    }
-                    return gluerSpeed;
-                  }, 0)}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #000",
-              }}
-            >
-              <View
-                style={{
-                  borderRight: "1px solid #000",
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: "14px",
-                    fontFamily: "Times-Bold",
-                    padding: "0.1cm",
-                  }}
-                >
-                  {"Hours"}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text style={{ fontSize: "14px", padding: "0.1cm" }}>{}</Text>
-              </View>
-            </View>
-          </View>
+          <View style={styles.line} />
+          <View style={styles.line} />
         </View>
       </Page>
     </Document>

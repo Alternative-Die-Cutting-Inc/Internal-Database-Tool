@@ -32,6 +32,7 @@ import { getDocket, updateDocket } from "../../state/dockets/saga";
 import { getQuote } from "../../state/quotes/saga";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
+import { createShipment } from "../../state/shipments/saga";
 
 function useQuery() {
   const { search } = useLocation();
@@ -104,6 +105,40 @@ const PageDeliverySlip = () => {
   useEffect(() => {
     dispatch(getDocket({ id: query.get("docketNumber") }));
   }, [dispatch, query]);
+
+  useEffect(() => {
+    dispatch(createShipment(shipment));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (shipment._id) {
+      const fromQuantities = shipment?.forms.reduce((prev, currF) => {
+        if (currF.type == 'cartons') {
+          prev[currF.docketFormID] = currF.quantity * currF.cartonQuantity + currF.partialCartonQuantity
+        } else {
+          prev[currF.docketFormID] = currF.quantity
+        }
+        return prev
+      }, {});
+      dispatch(
+        updateDocket({
+          id: docket._id,
+          fields: {
+            forms: docket.forms.map((f) => {
+              if (Object.keys(fromQuantities).includes(f._id)) {
+                return {
+                  ...f,
+                  quantityShipped: f.quantityShipped + fromQuantities[f._id],
+                  lastShipmentDate: new Date()
+                };
+              }
+              return f;
+            }),
+          },
+        })
+      );
+    }
+  }, [dispatch, shipment])
 
   const styles = StyleSheet.create({
     page: {
@@ -184,10 +219,10 @@ const PageDeliverySlip = () => {
       width: "15%",
       textAlign: "center",
     },
-    row4: {
-      width: "15%",
-      textAlign: "center",
-    },
+    // row4: {
+    //   width: "15%",
+    //   textAlign: "center",
+    // },
     row5: {
       width: "27%",
       textAlign: "center",
@@ -210,7 +245,7 @@ const PageDeliverySlip = () => {
       <Page size="LETTER" style={styles.page}>
         <View style={styles.internalInfo}>
           <View style={{ flexDirection: "column" }}>
-            <Image source={Logo} style={styles.logo} />
+            {shipment.address.show.adc && <Image source={Logo} style={styles.logo} />}
             <View>
               <Text
                 style={{
@@ -218,21 +253,15 @@ const PageDeliverySlip = () => {
                   fontWeight: "light",
                 }}
               >
-                {shipment?.address.show.adc
-                  ? AltDieIncInfo.address +
+                {shipment.address.show.adc
+                  && (AltDieIncInfo.address +
                     `\n` +
                     AltDieIncInfo.postalCode +
                     `\n` +
                     "Tel: " +
                     AltDieIncInfo.tel +
                     `\n` +
-                    AltDieIncInfo.website +
-                    `\n`
-                  : "Tel: " +
-                    AltDieIncInfo.tel +
-                    `\n` +
-                    AltDieIncInfo.website +
-                    `\n`}
+                    AltDieIncInfo.website)}
               </Text>
             </View>
           </View>
@@ -308,11 +337,9 @@ const PageDeliverySlip = () => {
                     fontSize: "12px",
                   }}
                 >
-                  {`${shipment?.address.line1 || ""}\n${
-                    shipment?.address.line2 || ""
-                  }\n${shipment?.address.city || ""}\n${
-                    shipment?.address.province || ""
-                  }\n${shipment?.address.postalCode || ""}`}
+                  {`${shipment?.address.line1 || ""}\n${shipment?.address.line2 || ""
+                    }\n${shipment?.address.city || ""}\n${shipment?.address.province || ""
+                    }\n${shipment?.address.postalCode || ""}`}
                 </Text>
               </>
             ) : null}
@@ -352,11 +379,10 @@ const PageDeliverySlip = () => {
             <Text style={styles.row1}>{"Form"}</Text>
             <Text style={styles.row2}>{"Quantity"}</Text>
             <Text style={styles.row3}>{"Number of Skids"}</Text>
-            <Text style={styles.row4}>{"Cost Per Thousand"}</Text>
             <Text style={styles.row5}>{"Total"}</Text>
             <Text
               style={{
-                width: "25%",
+                width: "30%",
                 fontFamily: "Times-Bold",
                 textAlign: "center",
               }}
@@ -377,27 +403,26 @@ const PageDeliverySlip = () => {
                 <Text style={styles.row1}>{form.name}</Text>
                 <Text style={styles.row2}>
                   {form.type === "cartons"
-                    ? form.quantity +
-                      " " +
-                      form.type +
-                      `\n` +
-                      form.cartonQuantity +
-                      " pieces per carton and partial of " +
-                      form.partialCartonQuantity +
-                      " pieces"
-                    : form.quantity + " " + form.type}
+                    ? (form.quantity || 0) +
+                    " " +
+                    form.type +
+                    `\n` +
+                    (form.cartonQuantity || 0) +
+                    " pieces per carton and partial of " +
+                    (form.partialCartonQuantity || 0) +
+                    " pieces"
+                    : (form.quantity || 0) + " " + form.type}
                 </Text>
                 <Text style={styles.row3}>{form.skids}</Text>
-                <Text style={styles.row4}>{form.name}</Text>
                 <Text style={[styles.row5, styles.bold]}>
                   {form.type === "cartons"
-                    ? form.quantity * form.cartonQuantity +
-                      form.partialCartonQuantity
+                    ? (form.quantity * form.cartonQuantity +
+                      form.partialCartonQuantity || 0)
                     : form.quantity}
                 </Text>
                 <Text
                   style={{
-                    width: "25%",
+                    width: "30%",
                     textAlign: "center",
                   }}
                 >

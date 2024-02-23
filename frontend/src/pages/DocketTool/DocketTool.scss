@@ -137,6 +137,38 @@
   flex-direction: column;
 }
 
+.docket-shipping-history {
+  width: 100%;
+  border-radius: 15px;
+  padding: 1vh 0.25vw;
+  background-color: var(--dark-grey);
+  margin: 0.5vh 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#shipment-history-table{
+  th {
+    background-color: unset;
+    color: var(--light-accent);
+    font-weight: 300;
+    padding: 0.75vh 0;
+  }
+  tbody{
+    tr{
+      border-bottom: 2px solid var(--light-accent);
+    }
+  }
+  td {
+    padding: 1vh 0;
+    text-align: center;
+    vertical-align: middle;
+    div { 
+      padding: 1vh 0;
+    }
+  }
+}
+
 .docket-column-container {
   display: flex;
   flex-direction: row;

@@ -24,10 +24,10 @@ import {
   getCustomer,
   sendToCustomer,
 } from "../../state/customers/saga";
-import { getDocket } from "../../state/dockets/saga";
 import { getQuote } from "../../state/quotes/saga";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
+import { shipmentsSelector } from "../../state/shipments/shipmentsSlice";
 
 function useQuery() {
   const { search } = useLocation();
@@ -42,6 +42,7 @@ const PageBillingReport = () => {
   const { customerNames } = useSelector(customerNamesSelector);
   const { customer } = useSelector(customerSelector);
   const { docket } = useSelector(docketSelector);
+  const { docketShipments } = useSelector(shipmentsSelector)
   const { quote } = useSelector(quoteSelector);
   const { user } = useSelector(userSelector);
   const { email, error, loading } = useSelector(emailSelector);
@@ -63,20 +64,18 @@ const PageBillingReport = () => {
     dispatch(sendToCustomer({ formData }));
   };
 
-  useEffect(() => {
-    dispatch(getDocket({ id: query.get("docketNumber") }));
-  }, [dispatch, query]);
+  // useEffect(() => {
+  //   dispatch(getDocket({ id: query.get("docketNumber") }));
+  // }, [dispatch, query]);
 
   useEffect(() => {
     if (docket && docket.quoteNumber)
       dispatch(getQuote({ id: docket.quoteNumber }));
-    if (docket) {
-      setCustomerSelected({
-        value: docket.customer.customerID,
-        label: docket.customer.name,
-      });
-      dispatch(getCustomer({ id: docket.customer.customerID }));
-    }
+    setCustomerSelected({
+      value: docket.customer.customerID,
+      label: docket.customer.name,
+    });
+    dispatch(getCustomer({ id: docket.customer.customerID }));
   }, [dispatch, docket]);
 
   useEffect(() => {
@@ -141,7 +140,7 @@ const PageBillingReport = () => {
     row: {
       display: "flex",
       flexDirection: "row",
-      borderTop: "1px solid #EEE",
+      borderTop: "1px solid #000",
       paddingTop: 8,
       paddingBottom: 8,
     },
@@ -377,6 +376,47 @@ const PageBillingReport = () => {
             </Text>
           </View>
         </View>
+        {docket?.extraCharges.length > 0 ?
+          <>
+            <Text
+              style={{
+                fontSize: "16px",
+                alignSelf: "flex-start",
+                fontFamily: "Times-Bold",
+                padding: "0.25cm 0",
+              }}
+            >
+              {"Extra Charges"}
+            </Text>
+            <View style={styles.table}>
+              <View style={[styles.row, styles.bold, styles.header]}>
+                <Text style={{ width: "10%" }} />
+                <Text style={styles.row1}>{"Charge"}</Text>
+                <Text style={styles.row2}>{"Cost"}</Text>
+                <Text style={styles.row3}>{"Notes"}</Text>
+              </View>
+              {docket?.extraCharges?.map((charge, index) => (
+                <View
+                  key={index}
+                  style={[styles.row, { fontSize: "12px" }]}
+                  wrap={false}
+                >
+                  <Text style={{ width: "10%", textAlign: "center" }}>
+                    {index + 1}
+                  </Text>
+                  <Text style={styles.row1}>{charge.name}</Text>
+                  <Text style={styles.row2}>
+                    {charge.cost.toLocaleString("en-CA", {
+                      style: "currency",
+                      currency: "CAD",
+                    })}
+                  </Text>
+                  <Text style={styles.row3}>{charge.notes}</Text>
+                </View>
+              ))}
+            </View>
+          </> : null
+        }
         <Text
           style={{
             fontSize: "16px",
@@ -385,16 +425,17 @@ const PageBillingReport = () => {
             padding: "0.25cm 0",
           }}
         >
-          {"Extra Charges"}
+          {"Shipments"}
         </Text>
         <View style={styles.table}>
           <View style={[styles.row, styles.bold, styles.header]}>
             <Text style={{ width: "10%" }} />
-            <Text style={styles.row1}>{"Charge"}</Text>
-            <Text style={styles.row2}>{"Cost"}</Text>
+            <Text style={styles.row1}>{"Shipment Date"}</Text>
+            <Text style={styles.row2}>{"Forms"}</Text>
+            <Text style={styles.row3}>{"Quantity"}</Text>
             <Text style={styles.row3}>{"Notes"}</Text>
           </View>
-          {docket?.extraCharges?.map((charge, index) => (
+          {docketShipments?.map((shipment, index) => (
             <View
               key={index}
               style={[styles.row, { fontSize: "12px" }]}
@@ -403,14 +444,16 @@ const PageBillingReport = () => {
               <Text style={{ width: "10%", textAlign: "center" }}>
                 {index + 1}
               </Text>
-              <Text style={styles.row1}>{charge.name}</Text>
-              <Text style={styles.row2}>
-                {charge.cost.toLocaleString("en-CA", {
-                  style: "currency",
-                  currency: "CAD",
-                })}
-              </Text>
-              <Text style={styles.row3}>{charge.notes}</Text>
+              <Text style={styles.row1}>{new Date(shipment.labelDate).toLocaleDateString("en-CA")}</Text>
+              <Text style={styles.row2}>{shipment.forms.map((shippedForm) => {
+                return <Text>{shippedForm.name + "\n"}</Text>
+              })}</Text>
+              <Text style={styles.row3}>{shipment.forms.map((shippedForm) => {
+                return <Text>{(shippedForm.name == "other" ? "-" : shippedForm.type == "cartons" ? (shippedForm.quantity * shippedForm.cartonQuantity + shippedForm.partialCartonQuantity || 0) : (shippedForm.quantity || 0)) + "\n"}</Text>
+              })}</Text>
+              <Text style={styles.row3}>{shipment.forms.map((shippedForm) => {
+                return <Text>{(shippedForm.notes || "-") + "\n"}</Text>
+              })}</Text>
             </View>
           ))}
         </View>

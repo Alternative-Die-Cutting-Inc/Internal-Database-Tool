@@ -3,9 +3,9 @@ import { createAction } from "@reduxjs/toolkit";
 import { put, call, takeLeading } from "redux-saga/effects";
 import useAxios from "../../hooks/useAxios";
 import {
-  getShipmentsStart,
-  getShipmentsSuccess,
-  getShipmentsFailure,
+  getDocketShipmentsStart,
+  getDocketShipmentsSuccess,
+  getDocketShipmentsFailure,
   getShipmentStart,
   getShipmentSuccess,
   getShipmentFailure,
@@ -17,17 +17,16 @@ import {
   updateShipmentFailure,
 } from "./shipmentsSlice";
 
-export const getShipments = createAction("getShipmentsSaga");
+export const getDocketShipments = createAction("getDocketShipmentsSaga");
 
-export function* getShipmentsSaga() {
+export function* getDocketShipmentsSaga({ payload: { docketNumber } }) {
   const { axios } = useAxios();
-
   try {
-    yield put(getShipmentsStart());
-    const response = yield call(axios.get, "/shipments");
-    yield put(getShipmentsSuccess(response?.data?.shipments));
+    yield put(getDocketShipmentsStart());
+    const response = yield call(axios.get, `/shipments/docket/${docketNumber}`);
+    yield put(getDocketShipmentsSuccess(response?.data));
   } catch (error) {
-    yield put(getShipmentsFailure(error.response?.data?.errorMessage));
+    yield put(getDocketShipmentsFailure(error.response?.data?.errorMessage));
   }
 }
 
@@ -39,7 +38,7 @@ export function* getShipmentSaga({ payload: { id } }) {
   try {
     yield put(getShipmentStart());
     const response = yield call(axios.get, `/shipments/${id}`);
-    yield put(getShipmentSuccess(response?.data?.shipment));
+    yield put(getShipmentSuccess(response?.data?.shipments));
   } catch (error) {
     yield put(getShipmentFailure(error.response?.data?.errorMessage));
   }
@@ -72,7 +71,7 @@ export function* updateShipmentSaga({ payload: { shipment } }) {
 }
 
 export default function* shipmentsSaga() {
-  yield takeLeading(getShipments.type, getShipmentsSaga);
+  yield takeLeading(getDocketShipments.type, getDocketShipmentsSaga);
   yield takeLeading(getShipment.type, getShipmentSaga);
   yield takeLeading(createShipment.type, createShipmentSaga);
   yield takeLeading(updateShipment.type, updateShipmentSaga);

@@ -4,7 +4,7 @@ import { createSelector } from "reselect";
 export const initialState = {
   loading: false,
   error: null,
-  shipments: [],
+  docketShipments: [],
   shipment: {},
 };
 
@@ -12,16 +12,16 @@ const shipmentsSlice = createSlice({
   name: "shipmentsReducer",
   initialState,
   reducers: {
-    getShipmentsStart: (state) => {
+    getDocketShipmentsStart: (state) => {
       state.loading = true;
       state.error = null;
     },
-    getShipmentsSuccess: (state, { payload: shipments }) => {
+    getDocketShipmentsSuccess: (state, { payload: shipments }) => {
       state.loading = false;
       state.error = null;
-      state.shipments = shipments;
+      state.docketShipments = shipments;
     },
-    getShipmentsFailure: (state, { payload: error }) => {
+    getDocketShipmentsFailure: (state, { payload: error }) => {
       state.loading = false;
       state.error = error;
     },
@@ -68,9 +68,9 @@ const shipmentsSlice = createSlice({
 });
 
 export const {
-  getShipmentsStart,
-  getShipmentsSuccess,
-  getShipmentsFailure,
+  getDocketShipmentsStart,
+  getDocketShipmentsSuccess,
+  getDocketShipmentsFailure,
   getShipmentStart,
   getShipmentSuccess,
   getShipmentFailure,
@@ -88,7 +88,7 @@ export const shipmentsReducerSelector = (state) => state[shipmentsSlice.name];
 
 export const shipmentsSelector = createSelector(
   shipmentsReducerSelector,
-  ({ shipments, error, loading }) => ({ shipments, error, loading })
+  ({ docketShipments, error, loading }) => ({ docketShipments, error, loading })
 );
 
 export const shipmentSelector = createSelector(

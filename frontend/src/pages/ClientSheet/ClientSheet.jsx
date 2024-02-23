@@ -182,9 +182,7 @@ const ClientSheet = ({ quote, user }) => {
                 >
                   {quote.customer.name}
                 </Text>
-                {" By " +
-                  user.firstName +
-                  " on " +
+                {" On " +
                   new Date().toLocaleDateString("en-CA", {
                     month: "short",
                     day: "numeric",
@@ -254,10 +252,10 @@ const ClientSheet = ({ quote, user }) => {
                     <Text style={styles.row4}>
                       {isNaN(sheets)
                         ? 0
-                        : (job.total / sheets).toLocaleString("en-CA", {
-                            style: "currency",
-                            currency: "CAD",
-                          })}
+                        : (job.total / job.units).toLocaleString("en-CA", {
+                          style: "currency",
+                          currency: "CAD",
+                        })}
                     </Text>
                     <Text style={[styles.row5, styles.bold]}>
                       {job.total.toLocaleString("en-CA", {

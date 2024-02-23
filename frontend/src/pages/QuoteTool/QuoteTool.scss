@@ -207,7 +207,6 @@
   td {
     padding: 0.5rem 0.5rem;
     text-align: left;
-    height: 5vh;
     input {
       width: 100%;
       font-size: 1.1vw;
@@ -216,7 +215,6 @@
     textarea {
       width: 100%;
       border-radius: 5px;
-      max-height: 5vh;
       padding: 5px;
       font-size: 1.1vw;
       resize: none;
@@ -231,12 +229,10 @@
 
 .status-select__control {
   min-height: unset !important;
-  max-height: 5vh;
 }
 
 .status-select__value-container {
-  max-height: 4.5vh;
-  overflow-y: scroll !important;
+                        overflow-y: scroll !important;
   align-items: baseline !important;
 }
 

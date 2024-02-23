@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const formSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: false,
+    required: true,
+    default: "other"
   },
   skids: {
     type: Number,
@@ -33,6 +34,10 @@ const formSchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
+  docketFormID: {
+    type: String,
+    required: false
+  }
 });
 
 const ShipmentSchema = new mongoose.Schema({

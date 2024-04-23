@@ -19,6 +19,7 @@ import {
 } from "../../state/customers/saga";
 import { getQuote } from "../../state/quotes/saga";
 import CreatableSelect from "react-select/creatable";
+
 const WorkSheet = ({ quote, user }) => {
   const calculateTotal = (job) => {
     let Subtotal = 0,
@@ -51,6 +52,7 @@ const WorkSheet = ({ quote, user }) => {
     if (isNaN(PerM)) PerM = 0;
     return { Subtotal, Premium, PerM, Total };
   };
+
   const styles = StyleSheet.create({
     page: {
       backgroundColor: "#fff",
@@ -141,7 +143,7 @@ const WorkSheet = ({ quote, user }) => {
       fontSize: "12px",
       display: "flex",
       flexDirection: "column",
-      justifyContent: "flext-start",
+      justifyContent: "flex-start",
       textAlign: "left",
     },
   });
@@ -201,13 +203,12 @@ const WorkSheet = ({ quote, user }) => {
     >
       <Page size="LETTER" style={styles.page}>
         <View style={styles.section}>
-          <View style={{ paddingRight: "20px" }}>
+          <View style={{ width:"50%" }}>
             <Text style={styles.info}>{"#" + quote.quoteNumber}</Text>
             <Text style={styles.info}>
               {"Customer: " + quote.customer.name}
             </Text>
-            <Text style={styles.info}>{"Attn: " + quote.attention}</Text>
-            <Text style={styles.info}>{"By: " + user.firstName}</Text>
+            <Text style={styles.info}>{"Attn: " + quote.attention}</Text> 
             <Text style={styles.info}>
               {"On: " +
                 new Date().toLocaleDateString("en-CA", {
@@ -217,7 +218,7 @@ const WorkSheet = ({ quote, user }) => {
                 })}
             </Text>
           </View>
-          <View>
+          <View style={{ width:"50%" }}>
             <Text style={styles.info}>{"Job Name: " + quote.jobName}</Text>
             <Text
               style={{
@@ -272,10 +273,10 @@ const WorkSheet = ({ quote, user }) => {
                     })}
                   </Text>
                   <Text style={tableStyles.colMedium}>Setup:</Text>
-                  <Text style={tableStyles.colMedium}>{job.dieHours}</Text>
+                  <Text style={tableStyles.colMedium}>{job.gluerSetupHours}</Text>
                   <Text style={tableStyles.colSmall}></Text>
                   <Text style={tableStyles.colLarge}>
-                    {(job.dieHours * job.rates.die).toLocaleString("en-CA", {
+                    {(job.gluerSetupHours * job.rates.gluer).toLocaleString("en-CA", {
                       style: "currency",
                       currency: "CAD",
                     })}
@@ -293,11 +294,11 @@ const WorkSheet = ({ quote, user }) => {
                     })}
                   </Text>
                   <Text style={tableStyles.colMedium}>Gluer:</Text>
-                  <Text style={tableStyles.colMedium}>{job.dieRunSpeed}</Text>
-                  <Text style={tableStyles.colSmall}>{job.dieRunM}</Text>
+                  <Text style={tableStyles.colMedium}>{job.gluerRunSpeed}</Text>
+                  <Text style={tableStyles.colSmall}>{job.gluerRunM}</Text>
                   <Text style={tableStyles.colLarge}>
                     {(
-                      (job.dieRunM * (job.units / job.perSheet)) /
+                      (job.gluerRunM * (job.units / job.perSheet)) /
                       1000
                     ).toLocaleString("en-CA", {
                       style: "currency",
@@ -320,11 +321,11 @@ const WorkSheet = ({ quote, user }) => {
                     })}
                   </Text>
                   <Text style={tableStyles.colMedium}>Strip:</Text>
-                  <Text style={tableStyles.colMedium}>{job.dieRunSpeed}</Text>
-                  <Text style={tableStyles.colSmall}>{job.dieRunM}</Text>
+                  <Text style={tableStyles.colMedium}>{job.stripRunSpeed}</Text>
+                  <Text style={tableStyles.colSmall}>{job.stripRunM}</Text>
                   <Text style={tableStyles.colLarge}>
                     {(
-                      (job.dieRunM * (job.units / job.perSheet)) /
+                      (job.stripRunM * (job.units / job.perSheet)) /
                       1000
                     ).toLocaleString("en-CA", {
                       style: "currency",

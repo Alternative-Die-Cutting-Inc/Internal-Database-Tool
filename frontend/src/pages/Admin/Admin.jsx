@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./Admin.scss";
-import { Fragment, useEffect, useState } from "react";
-import { usersSelector } from "../../state/user/userSlice";
-import { getUsers, signUp } from "../../state/user/saga";
+import { Fragment, useEffect, useState, useContext } from "react";
+import { userSelector, usersSelector } from "../../state/user/userSlice";
+import { getUsers, signUp, deleteUser } from "../../state/user/saga";
 import { customersSelector } from "../../state/customers/customerSlice";
 import {
   createCustomer,
@@ -11,10 +11,12 @@ import {
 } from "../../state/customers/saga";
 import { changeRates, getRates } from "../../state/quotes/saga";
 import { ratesSelector } from "../../state/quotes/quoteSlice";
+import { SnackbarContext } from "../../util/SnackbarProvider";
 
 export const PageAdmin = () => {
+  const { setSnackbar } = useContext(SnackbarContext);
   const tabs = [
-    { name: "Users", component: <UserTab /> },
+    { name: "Users", component: <UserTab setSnackbar={setSnackbar} /> },
     { name: "Customers", component: <CustomerTab /> },
     { name: "Rates", component: <RatesTab /> },
   ];
@@ -31,8 +33,8 @@ export const PageAdmin = () => {
               index == 0
                 ? { borderRadius: "15px 0px 0px 0px" }
                 : index == tabs.length - 1
-                ? { borderRadius: "0px 15px 0px 0px" }
-                : null
+                  ? { borderRadius: "0px 15px 0px 0px" }
+                  : null
             }
             onClick={() => setActiveTab(index)}
           >
@@ -51,52 +53,133 @@ export const PageAdmin = () => {
   );
 };
 
-const UserTab = () => {
+const UserTab = ({ setSnackbar }) => {
   const dispatch = useDispatch();
-  const { users } = useSelector(usersSelector);
+  const { users, loading } = useSelector(usersSelector);
+  const { user } = useSelector(userSelector);
+  const [newUser, setNewUser] = useState({
+    username: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: ""
+  })
 
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
 
+  const handleChange = (event) => {
+    const field = event.target.name;
+    const value = event.target.value;
+    setNewUser(values => ({ ...values, [field]: value }))
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(signUp({ newUser, setSnackbar, setNewUser }));
+
+  }
+
   return (
     <div className="user-tab-container">
       <div className="new-user">
+        <header  >
+          <h2>New User</h2>
+        </header>
         <form
           className="new-user-form"
-          onSubmit={(event) => {
-            event.preventDefault();
-            const newUser = {
-              username: event.target[0].value,
-              email: event.target[1].value,
-              password: event.target[2].value,
-            };
-            dispatch(signUp({ newUser }));
-          }}
+          onSubmit={handleSubmit}
         >
-          <input type="username" placeholder="Username" required />
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={newUser.username || ""}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            value={newUser.firstName || ""}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            value={newUser.lastName || ""}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={newUser.email || ""}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={newUser.password || ""}
+            onChange={handleChange}
+            required
+          />
           <input type="submit" value={"Create User"} />
+          {loading && "loading..."}
         </form>
       </div>
       <div className="users-list">
         <header>
           <h2>Users</h2>
         </header>
-        {users.length &&
-          users.map((user, index) => (
-            <div key={index} className="user-list-item">
-              <label htmlFor="">
-                Username
-                <input type="username" value={user.username} readOnly />
-              </label>
-              <label htmlFor="">
-                Email
-                <input type="email" value={user.email} readOnly />
-              </label>
-            </div>
-          ))}
+        {users.length && (
+          <table >
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((listUser, index) => (
+                <tr key={index}  >
+                  <td>{listUser.username}</td>
+                  <td>{listUser.firstName}</td>
+                  <td>{listUser.lastName}</td>
+                  <td>{listUser.email}</td>
+                  <td
+                    style={{
+                      alignItems: "center"
+                    }}
+                  >
+                    <button
+                      style={{
+                        width: "2vw",
+                        backgroundColor: "var(--red-error)",
+                      }}
+                      onClick={() => {
+                        const id = listUser._id;
+                        dispatch(deleteUser({ id, setSnackbar }));
+                      }}
+                      disabled={user._id == listUser._id}
+                    >
+                      X
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );
@@ -496,3 +579,5 @@ const RatesTab = () => {
     </div>
   );
 };
+
+

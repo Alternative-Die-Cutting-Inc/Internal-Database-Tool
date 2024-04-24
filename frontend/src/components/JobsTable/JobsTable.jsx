@@ -49,16 +49,16 @@ const JobsTable = () => {
         accessorFn: (row) => row.customer.name,
       },
       {
+        header: "Job Name",
+        accessorKey: "jobName",
+      },
+      {
         header: "Customer PO",
         accessorKey: "customerPO",
       },
       {
         header: "Production Person",
         accessorKey: "productionPerson",
-      },
-      {
-        header: "Job Name",
-        accessorKey: "jobName",
       },
       {
         header: "Finishing",

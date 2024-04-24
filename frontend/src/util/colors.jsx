@@ -9,4 +9,8 @@ export const colors = {
   "--text-black": ["#000", "#000"],
   "--white": ["#FFF", "#78d3d3"],
   "--black": ["#000", "#78d3d3"],
+  '--red-error': ['#dd4343', '#dd4343'],
+  '--red-error-light': ['#ffacac', '#ffacac'],
+  '--green-success': ['#aad0a3', '#aad0a3'],
+  '--green-success-dark': ['#56964b', '#56964b'],
 };

@@ -34,7 +34,7 @@ const ClientSheet = ({ quote, user }) => {
     page: {
       backgroundColor: "#fff",
       padding: "1cm",
-      fontFamily: "Times-Roman",
+      fontFamily: "Helvetica",
     },
     internalInfo: {
       flexDirection: "row",
@@ -45,7 +45,7 @@ const ClientSheet = ({ quote, user }) => {
     quoteInfo: {
       flexDirection: "column",
       justifyContent: "flex-start",
-      alignItems: "flex-end",
+      alignItems: "flex-start",
     },
     section: {
       flexDirection: "column",
@@ -73,10 +73,10 @@ const ClientSheet = ({ quote, user }) => {
     },
     header: {
       borderTop: "none",
-      fontSize: "12px",
+      fontSize: "14px",
     },
     bold: {
-      fontFamily: "Times-Bold",
+      fontFamily: "Helvetica-Bold",
     },
     row1: {
       width: "15%",
@@ -123,7 +123,7 @@ const ClientSheet = ({ quote, user }) => {
                 <View>
                   <Text
                     style={{
-                      fontSize: "12px",
+                      fontSize: "14px",
                       fontWeight: "light",
                     }}
                   >
@@ -143,10 +143,10 @@ const ClientSheet = ({ quote, user }) => {
                 <Text
                   style={{
                     fontSize: "20px",
-                    fontFamily: "Times-Bold",
+                    fontFamily: "Helvetica-Bold",
                   }}
                 >
-                  {"#" + quote.quoteNumber}
+                  {"QUOTE #" + quote.quoteNumber}
                 </Text>
                 <Text
                   style={{
@@ -169,15 +169,15 @@ const ClientSheet = ({ quote, user }) => {
             <View style={styles.section}>
               <Text
                 style={{
-                  fontSize: "12px",
+                  fontSize: "14px",
                   marginBottom: "15px",
                 }}
               >
                 {"Quote for "}
                 <Text
                   style={{
-                    fontSize: "12px",
-                    fontFamily: "Times-Bold",
+                    fontSize: "14px",
+                    fontFamily: "Helvetica-Bold",
                   }}
                 >
                   {quote.customer.name}
@@ -192,7 +192,7 @@ const ClientSheet = ({ quote, user }) => {
               <Text
                 style={{
                   fontSize: "16px",
-                  fontFamily: "Times-Bold",
+                  fontFamily: "Helvetica-Bold",
                   marginBottom: "15px",
                 }}
               >
@@ -200,7 +200,7 @@ const ClientSheet = ({ quote, user }) => {
               </Text>
               <Text
                 style={{
-                  fontSize: "12px",
+                  fontSize: "14px",
                   marginBottom: "10px",
                 }}
               >
@@ -208,7 +208,7 @@ const ClientSheet = ({ quote, user }) => {
               </Text>
               <Text
                 style={{
-                  fontSize: "12px",
+                  fontSize: "14px",
                   marginBottom: "10px",
                 }}
               >
@@ -226,7 +226,7 @@ const ClientSheet = ({ quote, user }) => {
                 <Text
                   style={{
                     width: "25%",
-                    fontFamily: "Times-Bold",
+                    fontFamily: "Helvetica-Bold",
                     textAlign: "center",
                   }}
                 >
@@ -238,16 +238,16 @@ const ClientSheet = ({ quote, user }) => {
                 return (
                   <View
                     key={index}
-                    style={[styles.row, { fontSize: "12px" }]}
+                    style={[styles.row, { fontSize: "14px" }]}
                     wrap={false}
                   >
                     <Text style={{ width: "5%", textAlign: "center" }}>
                       {index + 1}
                     </Text>
-                    <Text style={styles.row1}>{job.units}</Text>
+                    <Text style={styles.row1}>{job.units.toLocaleString("en-CA")}</Text>
                     <Text style={styles.row2}>{job.perSheet}</Text>
                     <Text style={styles.row3}>
-                      {isNaN(sheets) ? 0 : sheets}
+                      {isNaN(sheets) ? 0 : sheets.toLocaleString("en-CA")}
                     </Text>
                     <Text style={styles.row4}>
                       {isNaN(sheets)
@@ -267,6 +267,7 @@ const ClientSheet = ({ quote, user }) => {
                       style={{
                         width: "25%",
                         textAlign: "center",
+                        paddingRight: "5px"
                       }}
                     >
                       {job.clientNotes}

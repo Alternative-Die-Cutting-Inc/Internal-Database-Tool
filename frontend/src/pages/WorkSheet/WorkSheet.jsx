@@ -152,8 +152,7 @@ const WorkSheet = ({ quote, user }) => {
     table: {
       width: "100%",
       height: "100%",
-      borderRight: "1px solid #000",
-      fontSize: "12px",
+      fontSize: "16px",
     },
     row: {
       display: "flex",
@@ -185,10 +184,10 @@ const WorkSheet = ({ quote, user }) => {
       width: "27%",
     },
     colSmall: {
-      width: "9.5%",
+      width: "5%",
     },
     colMedium: {
-      width: "12%",
+      width: "20%",
     },
     colLarge: {
       width: "20%",
@@ -243,7 +242,7 @@ const WorkSheet = ({ quote, user }) => {
           return (
             <View wrap={false}>
               {/* Units */}
-              <View style={{ ...styles.row, justifyContent: "space-around", borderLeft: "1px solid #000" }}>
+              <View style={{ ...styles.row, justifyContent: "space-around", borderLeft: "1px solid #000", borderRight: "1px solid #000" }}>
                 <Text>{"Units:"}</Text>
                 <Text>{job.units.toLocaleString("en-CA")}</Text>
                 <Text>{"Per Sheet:"}</Text>
@@ -359,9 +358,9 @@ const WorkSheet = ({ quote, user }) => {
                     return (
                       <View key={index} style={tableStyles.row}>
                         <Text style={tableStyles.colSmall}>{6 + index + 1}</Text>
-                        <Text style={tableStyles.colMedium}>{"Extra Charge:"}</Text>
                         <Text style={tableStyles.colMedium}>{extra.name}</Text>
-                        <Text style={tableStyles.colMedium}>{extra.perM}</Text>
+                        <Text style={tableStyles.colMedium}></Text>
+                        <Text style={tableStyles.colSmall}>{extra.perM}</Text>
                         <Text style={tableStyles.colLarge}>
                           {extra.cost.toLocaleString("en-CA", {
                             style: "currency",

@@ -71,6 +71,12 @@ const userSlice = createSlice({
       state.user = user;
       state.loggedIn = true;
     },
+    deleteUserSuccess: (state, { payload: user }) => {
+      state.users = state.users.filter((listUser) => {
+        return listUser._id !== user._id
+      })
+      state.loading = false;
+    },
   },
 });
 
@@ -89,6 +95,7 @@ export const {
   signupFail,
   setUserInfo,
   setLoading,
+  deleteUserSuccess
 } = userSlice.actions;
 
 export default userSlice.reducer;

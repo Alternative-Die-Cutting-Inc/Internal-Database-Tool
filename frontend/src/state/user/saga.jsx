@@ -17,6 +17,7 @@ import {
   signupFail,
   setUserInfo,
   setLoading,
+  deleteUserSuccess
 } from "./userSlice";
 
 export const getUsers = createAction("getUsersSaga");
@@ -34,13 +35,16 @@ export function* getUsersSaga() {
 
 export const signUp = createAction("createUserSaga");
 
-export function* createUserSaga({ payload: { newUser } }) {
+export function* createUserSaga({ payload: { newUser, setSnackbar, setNewUser } }) {
   try {
     const { axios } = useAxios();
     yield put(signupStart());
     const result = yield call(axios.post, "/user/signup", { user: newUser });
     yield put(signupSuccess(result.data.users));
+    setSnackbar('Successfully Created!');
+    setNewUser({});
   } catch (error) {
+    setSnackbar(error?.response?.data?.errorMessage, true);
     yield put(signupFail(error.response.data));
   }
 }
@@ -92,10 +96,27 @@ export function* getUserInfoSaga({ payload: navigate }) {
   }
 }
 
+export const deleteUser = createAction("deleteUserSaga");
+
+export function* deleteUserSaga({ payload: { id, setSnackbar } }) {
+  const { axios } = useAxios();
+  try {
+    yield put(getUsersStart());
+    const response = yield call(axios.delete, `/user/${id}`);
+    yield put(deleteUserSuccess(response.data?.user));
+    setSnackbar('Successfully Deleted!');
+  } catch (error) {
+    yield put(signupFail(error.response.data));
+    setSnackbar(error.response.data.errorMessage, true);
+  }
+}
+
 export default function* usersSaga() {
   yield takeLeading(signin.type, signinSaga);
   yield takeLeading(signUp.type, createUserSaga);
   yield takeLeading(logout.type, logoutSaga);
   yield takeLeading(getUserInfo.type, getUserInfoSaga);
   yield takeLeading(getUsers.type, getUsersSaga);
+  yield takeLeading(deleteUser.type, deleteUserSaga);
+
 }

@@ -65,6 +65,25 @@ const userServices = {
     const users = await UserModel.find({});
     return users;
   },
+
+  /**
+   * @description Delete user
+   * @param {String} id user _id
+   * @returns {User}
+   */
+  async delete(id) {
+    let responseUser = null;
+    responseUser = UserModel.findOneAndDelete({ _id: id }).then(
+      (user) => {
+        if (!user) throw new Error('USER_NOT_FOUND');
+        return user;
+      },
+      (error) => {
+        throw new Error('UNABLE_TO_DELETE_USER', { cause: error });
+      },
+    );
+    return responseUser;
+  },
 };
 
 module.exports = userServices;

@@ -67,46 +67,6 @@ const PageDocketTool = () => {
     else saveDocket(fields);
   };
 
-  const handleCheckbox = (event) => {
-    if (
-      event.target.checked &&
-      !editingDocket?.finishing
-        .map((value) => value.value)
-        .includes(event.target.id)
-    ) {
-      setEditingDocket({
-        ...editingDocket,
-        finishing: [
-          ...editingDocket.finishing,
-          { value: event.target.id, label: event.target.name },
-        ],
-      });
-      saveDocket({
-        finishing: [
-          ...editingDocket.finishing,
-          { value: event.target.id, label: event.target.name },
-        ],
-      });
-    }
-    if (
-      !event.target.checked &&
-      editingDocket?.finishing
-        .map((value) => value.value)
-        .includes(event.target.id)
-    ) {
-      setEditingDocket({
-        ...editingDocket,
-        finishing: editingDocket?.finishing.filter(
-          (f) => f.value !== event.target.id
-        ),
-      });
-      saveDocket({
-        finishing: editingDocket?.finishing.filter(
-          (f) => f.value !== event.target.id
-        ),
-      });
-    }
-  };
 
   useEffect(() => {
     setEditingDocket({
@@ -513,201 +473,24 @@ const PageDocketTool = () => {
                 </tbody>
               </table>
             </div>
-            <div className="die-options">
-              <table className="docket-info-table" id="finishing-option-table">
-                <tbody>
-                  <tr>
-                    <td>
-                      <label htmlFor="diecut">
-                        <input
-                          type="checkbox"
-                          name="Die Cut"
-                          id="diecut"
-                          checked={
-                            editingDocket?.finishing
-                              ?.map((value) => value.value)
-                              .includes("diecut") || false
-                          }
-                          onChange={handleCheckbox}
-                        />{" "}
-                        Die Cut
-                      </label>
-                    </td>
-                    <td>
-                      <label htmlFor="strip">
-                        <input
-                          checked={
-                            editingDocket?.finishing
-                              ?.map((value) => value.value)
-                              .includes("strip") || false
-                          }
-                          onChange={handleCheckbox}
-                          type="checkbox"
-                          name="Strip"
-                          id="strip"
-                        />{" "}
-                        Strip
-                      </label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <label htmlFor="foldAndGlue">
-                        <input
-                          checked={
-                            editingDocket?.finishing
-                              ?.map((value) => value.value)
-                              .includes("foldAndGlue") || false
-                          }
-                          onChange={handleCheckbox}
-                          type="checkbox"
-                          name="Fold & Glue"
-                          id="foldAndGlue"
-                        />{" "}
-                        Fold & Glue
-                      </label>
-                    </td>
-                    <td>
-                      <label htmlFor="score">
-                        <input
-                          checked={
-                            editingDocket?.finishing
-                              ?.map((value) => value.value)
-                              .includes("score") || false
-                          }
-                          onChange={handleCheckbox}
-                          type="checkbox"
-                          name="Score"
-                          id="score"
-                        />{" "}
-                        Score
-                      </label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <label htmlFor="crease">
-                        <input
-                          checked={
-                            editingDocket?.finishing
-                              ?.map((value) => value.value)
-                              .includes("crease") || false
-                          }
-                          onChange={handleCheckbox}
-                          type="checkbox"
-                          name="Crease"
-                          id="crease"
-                        />{" "}
-                        Crease
-                      </label>
-                    </td>
-                    <td>
-                      <label htmlFor="carton">
-                        <input
-                          checked={
-                            editingDocket?.finishing
-                              ?.map((value) => value.value)
-                              .includes("carton") || false
-                          }
-                          onChange={handleCheckbox}
-                          type="checkbox"
-                          name="Carton"
-                          id="carton"
-                        />{" "}
-                        Carton
-                      </label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <label htmlFor="stripHole">
-                        <input
-                          checked={
-                            editingDocket?.finishing
-                              ?.map((value) => value.value)
-                              .includes("stripHole") || false
-                          }
-                          onChange={handleCheckbox}
-                          type="checkbox"
-                          name="Strip Hole"
-                          id="stripHole"
-                        />{" "}
-                        Strip Hole
-                      </label>
-                    </td>
-                    <td>
-                      <label htmlFor="skidFlat">
-                        <input
-                          checked={
-                            editingDocket?.finishing
-                              ?.map((value) => value.value)
-                              .includes("skidFlat") || false
-                          }
-                          onChange={handleCheckbox}
-                          type="checkbox"
-                          name="Skid Flat"
-                          id="skidFlat"
-                        />{" "}
-                        Skid Flat
-                      </label>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
             <div className="finishing-notes">
-              <CreatableSelect
-                className="finishing-select"
-                classNamePrefix="finishing-select"
-                isMulti
-                closeMenuOnSelect={false}
+              <textarea
+                name="finishing"
+                id=""
+                className="finishing-textarea"
+                placeholder="Finishing"
                 value={editingDocket?.finishing || ""}
                 onBlur={() => {
                   handleBlur({
                     finishing: editingDocket?.finishing,
                   });
                 }}
-                isClearable={false}
-                onChange={(options) => {
+                onChange={(event) => {
                   setEditingDocket({
                     ...editingDocket,
-                    finishing: options,
+                    finishing: event.target.value,
                   });
                 }}
-                options={[
-                  {
-                    value: "diecut",
-                    label: "Die Cut",
-                  },
-                  {
-                    value: "strip",
-                    label: "Strip",
-                  },
-                  {
-                    value: "foldAndGlue",
-                    label: "Fold & Glue",
-                  },
-                  {
-                    value: "score",
-                    label: "Score",
-                  },
-                  {
-                    value: "crease",
-                    label: "Crease",
-                  },
-                  {
-                    value: "carton",
-                    label: "Carton",
-                  },
-                  {
-                    value: "stripHole",
-                    label: "Strip Hole",
-                  },
-                  {
-                    value: "skidFlat",
-                    label: "Skid Flat",
-                  },
-                ]}
               />
             </div>
           </div>
@@ -1122,10 +905,7 @@ const PageDocketTool = () => {
                   ? " #" + editingDocket?.die?.dieID
                   : ""
                 }, ` +
-                editingDocket?.finishing?.reduce(
-                  (a, b) => b.label + ", " + a,
-                  ""
-                )}
+                editingDocket?.finishing || ""}
             </h3>
             <h3>{editingDocket?.specialInstructions}</h3>
             <button

@@ -1,5 +1,6 @@
 export const colors = {
   // Base Colors
+  "--background": ["#051B4B", "#051B4B"],
   "--dark-blue": ["#0032A0", "#0032A0"],
   "--dark-grey": ["#3B3939", "#3B3939"],
   "--light-grey": ["#EEEEEE", "#737373"],

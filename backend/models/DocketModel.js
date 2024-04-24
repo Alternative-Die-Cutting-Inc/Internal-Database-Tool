@@ -121,18 +121,7 @@ const DocketSchema = new mongoose.Schema({
     required: false,
   },
   finishing: {
-    type: [
-      {
-        value: {
-          type: String,
-          required: true,
-        },
-        label: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
+    type: String,
     required: false,
   },
   specialInstructions: {

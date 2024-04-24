@@ -96,4 +96,19 @@ router.get('/info', checkLoggedIn, async (req, res, next) => {
   res.status(200).send({ user: user });
 });
 
+/**
+ * @description delete user
+ * @route DELETE /user/:id
+ * @returns {User} deleted user object
+ */
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const responseUser = await userServices.delete(id);
+    res.status(200).send({ user: responseUser });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

@@ -273,7 +273,7 @@ const PageWorkOrder = () => {
                 padding: "20px 0"
               }}
             >
-              {docket?.finishing?.reduce((a, b) => b.label + ", " + a, "") ||
+              {docket?.finishing ||
                 "N/A"}
             </Text>
             <Text

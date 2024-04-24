@@ -62,8 +62,7 @@ const JobsTable = () => {
       },
       {
         header: "Finishing",
-        accessorFn: (row) =>
-          row.finishing?.reduce((a, b) => b.label + ", " + a, ""),
+        accessorKey: "finishing",
       },
       {
         header: "Special Instructions",

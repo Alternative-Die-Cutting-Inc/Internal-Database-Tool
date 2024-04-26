@@ -1,2 +1,14 @@
 .sass-cache/
+Resources/Backend/loginHelper.php
+node_modules
 
+.env
+
+Database
+
+backend/.nyc_output
+backend/coverage
+
+yarn-error.log
+
+dist

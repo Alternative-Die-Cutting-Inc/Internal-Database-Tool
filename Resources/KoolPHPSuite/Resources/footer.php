@@ -1,1 +1,0 @@
-Copyright 2008-2012 © KoolPHP. All right reserved. <a href="http://www.koolphp.net/?mod=company&amp;act=term">Term of Use</a> | <a href="http://www.koolphp.net/?mod=company&amp;act=privacy">Privacy Policy</a> | <a href="http://www.koolphp.net/?mod=company&amp;act=contact">Contact Us</a>

@@ -77,7 +77,6 @@ const UserTab = ({ setSnackbar }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(signUp({ newUser, setSnackbar, setNewUser }));
-
   }
 
   return (
@@ -202,13 +201,19 @@ const CustomerTab = () => {
   useEffect(() => {
     if (!customers.length) dispatch(getCustomers());
   });
+  const handleChange = (event) => {
+    const field = event.target.name;
+    const value = event.target.value;
+    setNewCustomer(values => ({ ...values, [field]: value }))
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(createCustomer({ customer: newCustomer }));
+  }
   return (
     <div className="customers-tab-container">
       <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          dispatch(createCustomer({ customer: newCustomer }));
-        }}
+        onSubmit={handleSubmit}
         className="new-customer-form"
       >
         <header>
@@ -230,7 +235,7 @@ const CustomerTab = () => {
             <input
               type="number"
               placeholder="Premium"
-              step={0.001}
+              step={0.01}
               required
               onChange={(event) => {
                 setNewCustomer({
@@ -440,96 +445,69 @@ const CustomerTab = () => {
         <header>
           <h2>Customers</h2>
         </header>
-        {customers.length &&
-          customers.map((customer, index) => (
-            <div key={index} className="customer-list-item">
-              <div className="form-column" id="customer-form-column1">
-                <input type="text" value={customer.name} readOnly />
-                <input type="number" value={customer.premium} readOnly />
-                <input type="text" value={customer.memo} readOnly />
-                <select name="type" id="type" value={customer.type} readOnly>
-                  <option value="customer">Customer</option>
-                  <option value="supplier">Supplier</option>
-                  <option value="perspective">Perspective</option>
-                  <option value="client">Client</option>
-                </select>
-              </div>
-              <div className="form-column" id="customer-form-column2">
-                {/* <button>Add Contact</button> */}
-                {customer.contacts.map((contact, index) => (
-                  <div key={index} className="customer-form-contact">
-                    <select name="type" id="type" value={contact.type} readOnly>
-                      <option value="phone">Phone</option>
-                      <option value="email">Email</option>
-                      <option value="fax">Fax</option>
-                    </select>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Premium</th>
+              <th>Memo</th>
+              <th>Type</th>
+              <th>Contact Type</th>
+              <th>Contact Label</th>
+              <th>Contact Info</th>
+              <th>Address Line 1</th>
+              <th>Address Line 2</th>
+              <th>City</th>
+              <th>Province</th>
+              <th>Postal Code</th>
+              <th>Notes</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {customers.length > 0 &&
+              customers.map((customer, index) => (
+                <tr key={index}>
+                  <td>{customer.name}</td>
+                  <td>{customer.premium}</td>
+                  <td>{customer.memo}</td>
+                  <td>{customer.type}</td>
+                  <td>
+                    {customer.contacts.map((contact, index) => (
+                      <div key={index}>{contact.type}</div>
+                    ))}
+                  </td>
+                  <td>
+                    {customer.contacts.map((contact, index) => (
+                      <div key={index}>{contact.label}</div>
+                    ))}
+                  </td>
+                  <td>
+                    {customer.contacts.map((contact, index) => (
+                      <div key={index}>{contact.info}</div>
+                    ))}
+                  </td>
+                  <td>{customer?.address?.line1 || ""}</td>
+                  <td>{customer?.address?.line2 || ""}</td>
+                  <td>{customer?.address?.city || ""}</td>
+                  <td>{customer?.address?.province || ""}</td>
+                  <td>{customer?.address?.postalCode || ""}</td>
+                  <td>{customer?.address?.notes || ""}</td>
+                  <td>
                     <input
-                      type="text"
-                      placeholder="Label"
-                      value={contact.label}
-                      readOnly
+                      type="submit"
+                      value={"X"}
+                      style={{ backgroundColor: "red" }}
+                      onClick={() => {
+                        dispatch(deleteCustomer({ id: customer._id }));
+                      }}
                     />
-                    <input
-                      type="text"
-                      placeholder="Info"
-                      value={contact.info}
-                      readOnly
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="form-column" id="customer-form-column3">
-                <input
-                  type="text"
-                  placeholder="Address Line 1"
-                  value={customer?.address?.line1 || ""}
-                  readOnly
-                />
-                <input
-                  type="text"
-                  placeholder="Address Line 2"
-                  value={customer?.address?.line2 || ""}
-                  readOnly
-                />
-                <input
-                  type="text"
-                  placeholder="City"
-                  value={customer?.address?.city || ""}
-                  readOnly
-                />
-              </div>
-              <div className="form-column" id="customer-form-column4">
-                <input
-                  type="text"
-                  placeholder="Province"
-                  value={customer?.address?.province || ""}
-                  readOnly
-                />
-                <input
-                  type="text"
-                  placeholder="Postal Code"
-                  value={customer?.address?.postalCode || ""}
-                  readOnly
-                />
-                <input
-                  type="text"
-                  placeholder="Notes"
-                  value={customer?.address?.notes || ""}
-                  readOnly
-                />
-              </div>
-              <div className="form-column">
-                <input
-                  type="submit"
-                  value={"Delete Customer"}
-                  style={{ backgroundColor: "red" }}
-                  onClick={() => {
-                    dispatch(deleteCustomer({ id: customer._id }));
-                  }}
-                />
-              </div>
-            </div>
-          ))}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+
       </div>
     </div>
   );

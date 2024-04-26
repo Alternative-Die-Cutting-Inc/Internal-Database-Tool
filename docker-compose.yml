@@ -45,7 +45,7 @@ services:
       - API_BASE_URL=$API_BASE_URL
       - USER_SESSION_SECRET=$USER_SESSION_SECRET
     ports:
-      - "8080:8080"
+      - "8180:8180"
     volumes:
       - ./backend:/backend/
       - /backend/node_modules/
